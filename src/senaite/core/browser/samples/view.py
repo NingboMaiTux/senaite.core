@@ -590,7 +590,12 @@ class SamplesView(ListingView):
         due_date = obj.getDueDate
         if due_date and due_date < (obj.getDatePublished or DateTime()):
             due_date_str = self.ulocalized_time(due_date)
-            img_title = "{}: {}".format(t(_("Late Analyses")), due_date_str)
+            if isinstance(due_date_str, unicode):
+                due_date_str = due_date_str.encode("utf-8")
+            img_title = t(_("Late Analyses"))
+            if isinstance(img_title, unicode):
+                img_title = img_title.encode("utf-8")
+            img_title = "{}: {}".format(img_title, due_date_str)
             after_icons += get_image("late.png", title=img_title)
 
         if obj.getSamplingDate and obj.getSamplingDate > DateTime():
