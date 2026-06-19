@@ -1015,7 +1015,8 @@ class AnalysesView(ListingView):
         due_date = analysis_brain.getDueDate
         if not due_date:
             return None
-        due_date_str = self.ulocalized_time(due_date, long_format=0)
+        due_date_str = safe_unicode(
+            self.ulocalized_time(due_date, long_format=0))
         item['DueDate'] = due_date_str
 
         # If the Analysis is late/overdue, display an icon
@@ -1025,7 +1026,8 @@ class AnalysesView(ListingView):
             # The analysis is late or overdue
             img = get_image('late.png', title=t(_("Late Analysis")),
                             width='16px', height='16px')
-            item['replace']['DueDate'] = '{} {}'.format(due_date_str, img)
+            item['replace']['DueDate'] = u'{} {}'.format(
+                due_date_str, safe_unicode(img))
 
     def _folder_item_result(self, analysis_brain, item):
         """Set the analysis' result to the item passed in.
@@ -1162,10 +1164,11 @@ class AnalysesView(ListingView):
         item["replace"]["Calculation"] = calculation_link or _("Manual")
 
         if is_editable and calculation:
-            url = analysis_brain.getURL()
+            url = safe_unicode(analysis_brain.getURL())
+            recalculate_url = u"{}/action/recalculate".format(url)
             item["after"]["Result"] = item["after"].get("Result") or u""
             item["after"]["Result"] += get_link(
-                "{}/action/recalculate".format(url),
+                recalculate_url,
                 value="<i class='small text-secondary fas fa-sync'></i>",
                 title=t(_("Recalculate")), css_class="listing-ajax-action")
 
@@ -1792,7 +1795,7 @@ class AnalysesView(ListingView):
             if condition.get("type") == "file" and api.is_uid(value):
                 att = self.get_object(value)
                 value = self.get_attachment_link(att)
-            return ": ".join([title, str(value)])
+            return u": ".join([safe_unicode(title), safe_unicode(value)])
 
         # Display the conditions properly formatted
         conditions = "<br/>".join([to_str(cond) for cond in conditions])
