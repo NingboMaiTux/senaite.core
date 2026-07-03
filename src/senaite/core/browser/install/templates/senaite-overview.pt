@@ -31,7 +31,7 @@
               <img src="senaite-logo.png"
                    height="30"
                    tal:attributes="src string:${context/absolute_url}/++plone++senaite.core.static/images/senaite.svg" />
-              <small class="lead">Enterprise Open Source Laboratory System</small>
+              <small class="lead">Enterprise Laboratory System</small>
             </h1>
             <hr/>
 
@@ -75,7 +75,7 @@
                 </tal:one>
 
                 <tal:many tal:condition="python:len(sites) &gt; 1">
-                  <h2 id="multiple-sites" i18n:translate=""> You have multiple SENAITE sites:</h2>
+                  <h2 id="multiple-sites" i18n:translate=""> You have multiple LIMS sites:</h2>
                   <ul class="list-group">
                     <li class="list-group-item" tal:repeat="site sites">
                       <span class="prominent">
@@ -117,50 +117,33 @@
               </tal:block>
 
               <li class="list-group-item">
-                <!-- No SENAITE site added yet -->
+                <!-- No LIMS site added yet -->
                 <span i18n:translate="" tal:condition="not:sites">
-                  Your SENAITE site has not been added yet:
+                  Your LIMS site has not been added yet:
                 </span>
                 <span i18n:translate="" tal:condition="sites">
-                  You can add another SENAITE site:
+                  You can add another LIMS site:
                 </span>
                 <form id="add-plone-site"
                       method="get"
                       action="#"
                       tal:define="site_number python: '' if not sites else len(sites) + 1"
                       tal:attributes="action string:${context/absolute_url}/@@senaite-addsite">
-                  <input type="hidden" name="site_id" value="senaite${site_number}" />
-                  <input type="hidden" name="site_title" value="SENAITE LIMS" />
+                  <input type="hidden" name="site_id" value="lims${site_number}" />
+                  <input type="hidden" name="site_title" value="MATUX LIMS" />
                   <input type="submit"
                          class="btn btn-success"
                          i18n:attributes="value;"
-                         value="Create a new SENAITE site" />
+                         value="Create a new LIMS site" />
                   <a class="btn btn-outline-secondary"
                      i18n:translate=""
-                     tal:attributes="href string:${context/absolute_url}/@@senaite-addsite?site_id=senaite${site_number}&site_title=SENAITE LIMS&amp;advanced=1">
+                     tal:attributes="href string:${context/absolute_url}/@@senaite-addsite?site_id=lims${site_number}&site_title=MATUX LIMS&amp;advanced=1">
                     Advanced
                   </a>
                 </form>
               </li>
 
             </ul>
-          </div>
-
-          <!-- Community Links -->
-          <div class="row">
-            <div class="col-sm-12">
-              <hr/>
-              <div i18n:translate="" class="lead">
-                Meet the community, browse the code and get support on
-              </div>
-              <ul class="list-inline flex-column flex-sm-row">
-                <li class="list-inline-item"><a class="btn btn-outline-secondary" href="https://www.senaite.com" title="Website" target="_blank">Website</a></li>
-                <li class="list-inline-item"><a class="btn btn-outline-secondary" href="https://community.senaite.com" title="SENAITE community" target="_blank">Community Site</a></li>
-                <li class="list-inline-item"><a class="btn btn-outline-secondary" href="https://gitter.im/senaite/Lobby" title="Gitter Chat" target="_blank">Gitter Chat</a></li>
-                <li class="list-inline-item"><a class="btn btn-outline-secondary" href="https://github.com/senaite" title="GitHub" target="_blank">GitHub</a></li>
-                <li class="list-inline-item"><a class="btn btn-outline-secondary" href="https://twitter.com/senaitelims" title="Twitter" target="_blank">Twitter</a></li>
-              </ul>
-            </div>
           </div>
 
         </div>

@@ -211,7 +211,7 @@
 
                 <div class="formControls mt-2">
                   <input type="hidden" name="form.submitted:boolean" value="True" />
-                  <input type="submit" name="submit" value="Create SENAITE Site"
+                  <input type="submit" name="submit" value="Create LIMS Site"
                          class="btn btn-primary"
                          i18n:attributes="value;" />
                 </div>

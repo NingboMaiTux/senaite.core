@@ -6753,8 +6753,8 @@ msgid "You do not have sufficient privileges to view the worksheet ${worksheet_t
 msgstr "您没有足够的权限查看工作表${worksheet_title}。"
 
 #: senaite/core/browser/install/templates/senaite-overview.pt:78
-msgid "You have multiple SENAITE sites:"
-msgstr "您有多个SENAITE网站:"
+msgid "You have multiple LIMS sites:"
+msgstr "您有多个LIMS网站:"
 
 #: bika/lims/browser/worksheet/views/export.py:33
 msgid "You must select an instrument"
