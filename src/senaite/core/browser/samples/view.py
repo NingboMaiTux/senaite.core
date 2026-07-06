@@ -97,7 +97,7 @@ class SamplesView(ListingView):
         # across all folderitem calls within a single render.
         self._hazard_cache = {}
 
-        self.title = self.context.translate(_("Samples"))
+        self.title = "样品"
         self.description = ""
 
         self.show_select_column = True
@@ -119,7 +119,7 @@ class SamplesView(ListingView):
                 "index": "getPrioritySortkey",
                 "sortable": True, }),
             ("Progress", {
-                "title": _("Progress"),
+                "title": "进度",
                 "index": "getProgress",
                 "sortable": True,
                 "toggle": True}),
@@ -227,8 +227,8 @@ class SamplesView(ListingView):
                 "sortable": False,
                 "toggle": False}),
             ("getAnalysesNum", {
-                "title": _("Number of Analyses"),
-                "alt": _("Open / To be verified / Verified / Total"),
+                "title": "检验数量",
+                "alt": "开放 / 待复核 / 已复核 / 总数",
                 "sortable": True,
                 "index": "getAnalysesNum",
                 "toggle": False}),
@@ -243,7 +243,7 @@ class SamplesView(ListingView):
                 "index": "getPrinted",
                 "toggle": False}),
             ("state_title", {
-                "title": _("State"),
+                "title": "状态",
                 "sortable": True,
                 "index": "review_state"}),
         ))
@@ -251,14 +251,14 @@ class SamplesView(ListingView):
         # custom print transition
         print_stickers = {
             "id": "print_stickers",
-            "title": _("Print stickers"),
+            "title": "打印标签",
             "url": "{}/workflow_action?action=print_stickers".format(self.url)
         }
 
         self.review_states = [
             {
                 "id": "default",
-                "title": _("Active"),
+                "title": "进行中",
                 "contentFilter": {
                     "review_state": (
                         "sample_registered",
@@ -277,7 +277,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_sampled",
-                "title": _("To Be Sampled"),
+                "title": "待取样",
                 "contentFilter": {
                     "review_state": ("to_be_sampled",),
                     "sort_on": "created",
@@ -286,7 +286,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys()
             }, {
                 "id": "to_be_preserved",
-                "title": _("To Be Preserved"),
+                "title": "待保存",
                 "contentFilter": {
                     "review_state": ("to_be_preserved",),
                     "sort_on": "created",
@@ -296,7 +296,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "scheduled_sampling",
-                "title": _("Scheduled sampling"),
+                "title": "已排采样",
                 "contentFilter": {
                     "review_state": ("scheduled_sampling",),
                     "sort_on": "created",
@@ -306,7 +306,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "sample_due",
-                "title": _("Due"),
+                "title": "待接收",
                 "contentFilter": {
                     "review_state": (
                         "to_be_sampled",
@@ -318,7 +318,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "sample_received",
-                "title": _("Received"),
+                "title": "已接收",
                 "contentFilter": {
                     "review_state": "sample_received",
                     "sort_on": "created",
@@ -328,7 +328,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_verified",
-                "title": _("To be verified"),
+                "title": "待复核",
                 "contentFilter": {
                     "review_state": "to_be_verified",
                     "sort_on": "created",
@@ -338,7 +338,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "verified",
-                "title": _("Verified"),
+                "title": "已复核",
                 "contentFilter": {
                     "review_state": "verified",
                     "sort_on": "created",
@@ -348,7 +348,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "published",
-                "title": _("Published"),
+                "title": "已发布",
                 "contentFilter": {
                     "review_state": ("published"),
                     "sort_on": "created",
@@ -358,7 +358,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "dispatched",
-                "title": _("Dispatched"),
+                "title": "已派送",
                 "flat_listing": True,
                 "confirm_transitions": ["restore"],
                 "contentFilter": {
@@ -370,7 +370,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "cancelled",
-                "title": _("Cancelled"),
+                "title": "已取消",
                 "contentFilter": {
                     "review_state": "cancelled",
                     "sort_on": "created",
@@ -380,7 +380,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "invalid",
-                "title": _("Invalid"),
+                "title": "无效",
                 "contentFilter": {
                     "review_state": "invalid",
                     "sort_on": "created",
@@ -390,7 +390,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "all",
-                "title": _("All"),
+                "title": "全部",
                 "contentFilter": {
                     "sort_on": "created",
                     "sort_order": "descending",
@@ -399,7 +399,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "rejected",
-                "title": _("Rejected"),
+                "title": "已拒收",
                 "contentFilter": {
                     "review_state": "rejected",
                     "sort_on": "created",
@@ -410,7 +410,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "assigned",
                 "title": get_image("assigned.png",
-                                   title=t(_("Assigned"))),
+                                   title="已分配"),
                 "contentFilter": {
                     "assigned_state": "assigned",
                     "review_state": ("sample_received",),
@@ -422,7 +422,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "unassigned",
                 "title": get_image("unassigned.png",
-                                   title=t(_("Unsassigned"))),
+                                   title="未分配"),
                 "contentFilter": {
                     "assigned_state": "unassigned",
                     "review_state": (
@@ -436,7 +436,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "late",
                 "title": get_image("late.png",
-                                   title=t(_("Late"))),
+                                   title="超期"),
                 "contentFilter": {
                     # Query only for unpublished ARs that are late
                     "review_state": (
@@ -518,13 +518,13 @@ class SamplesView(ListingView):
         if analysesnum:
             numbers = {
                 "verified": analysesnum[0],
-                "verified_title": t(_("Verified")),
+                "verified_title": "已复核",
                 "total": analysesnum[1],
                 "total_title": t(_("Total")),
                 "not_submitted": analysesnum[2],
-                "not_submitted_title": t(_("Open")),
+                "not_submitted_title": "开放",
                 "to_be_verified": analysesnum[3],
-                "to_be_verified_title": t(_("To be verified")),
+                "to_be_verified_title": "待复核",
             }
             item["getAnalysesNum"] = ANALYSES_NUM_TPL.safe_substitute(numbers)
             item["replace"]["getAnalysesNum"] = \

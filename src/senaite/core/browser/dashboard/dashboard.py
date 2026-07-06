@@ -78,23 +78,23 @@ PERIODICITY_DAYS = {
 # Status cards: (permission, title, portal_type,
 #                review_state, catalog, url, icon)
 STATUS_CARD_DEFS = [
-    (TransitionReceiveSample, "Samples to Receive",
+    (TransitionReceiveSample, "待接收样品",
      "AnalysisRequest", "sample_due", SAMPLE_CATALOG,
      "samples?samples_review_state=sample_due",
      "fa-inbox"),
-    (ViewResults, "Results Pending",
+    (ViewResults, "待结果录入",
      "AnalysisRequest", "sample_received", SAMPLE_CATALOG,
      "samples?samples_review_state=sample_received",
      "fa-flask"),
-    (TransitionVerify, "To be Verified",
+    (TransitionVerify, "待复核",
      "AnalysisRequest", "to_be_verified", SAMPLE_CATALOG,
      "samples?samples_review_state=to_be_verified",
      "fa-check-circle"),
-    (TransitionPublishResults, "To be Published",
+    (TransitionPublishResults, "待发布",
      "AnalysisRequest", "verified", SAMPLE_CATALOG,
      "samples?samples_review_state=verified",
      "fa-paper-plane"),
-    (EditResults, "Open Worksheets",
+    (EditResults, "开放工作表",
      "Worksheet", "open", WORKSHEET_CATALOG,
      "worksheets?list_review_state=open",
      "fa-th-list"),
@@ -102,50 +102,50 @@ STATUS_CARD_DEFS = [
 
 # Quick action links: (permission, title, url, icon)
 QUICK_LINK_DEFS = [
-    (AddAnalysisRequest, "Register Samples",
+    (AddAnalysisRequest, "样品登记",
      "samples", "fa-plus-circle"),
-    (EditResults, "Worksheets",
+    (EditResults, "工作表",
      "worksheets", "fa-th-list"),
-    (TransitionVerify, "Verify Results",
+    (TransitionVerify, "结果复核",
      "samples?samples_review_state=to_be_verified",
      "fa-check-double"),
-    (TransitionPublishResults, "Publish Reports",
+    (TransitionPublishResults, "发布报告",
      "samples?samples_review_state=verified",
      "fa-paper-plane"),
-    (ManageBika, "SENAITE Setup",
+    (ManageBika, "LIMS 设置",
      "setup", "fa-cog"),
 ]
 
 # State labels for evolution charts
 ANALYSIS_STATES = collections.OrderedDict([
-    ("registered", _("Registered")),
-    ("unassigned", _("Assignment pending")),
-    ("assigned", _("Results pending")),
-    ("to_be_verified", _("To be verified")),
-    ("rejected", _("Rejected")),
-    ("retracted", _("Retracted")),
-    ("verified", _("Verified")),
-    ("published", _("Published")),
+    ("registered", "已登记"),
+    ("unassigned", "等待分配"),
+    ("assigned", "等待结果"),
+    ("to_be_verified", "待复核"),
+    ("rejected", "拒收"),
+    ("retracted", "已撤回"),
+    ("verified", "已复核"),
+    ("published", "已发布"),
 ])
 
 SAMPLE_STATES = collections.OrderedDict([
-    ("to_be_sampled", _("To be sampled")),
-    ("to_be_preserved", _("To be preserved")),
-    ("scheduled_sampling", _("Sampling scheduled")),
-    ("sample_due", _("Reception pending")),
-    ("rejected", _("Rejected")),
-    ("invalid", _("Invalid")),
-    ("sample_received", _("Results pending")),
-    ("assigned", _("Results pending")),
-    ("to_be_verified", _("To be verified")),
-    ("verified", _("Verified")),
-    ("published", _("Published")),
+    ("to_be_sampled", "待取样"),
+    ("to_be_preserved", "待保存"),
+    ("scheduled_sampling", "采样计划"),
+    ("sample_due", "待接收"),
+    ("rejected", "拒收"),
+    ("invalid", "无效"),
+    ("sample_received", "等待结果"),
+    ("assigned", "等待结果"),
+    ("to_be_verified", "待复核"),
+    ("verified", "已复核"),
+    ("published", "已发布"),
 ])
 
 WORKSHEET_STATES = collections.OrderedDict([
-    ("open", _("Results pending")),
-    ("to_be_verified", _("To be verified")),
-    ("verified", _("Verified")),
+    ("open", "等待结果"),
+    ("to_be_verified", "待复核"),
+    ("verified", "已复核"),
 ])
 
 STATES_MAP = {
@@ -154,7 +154,7 @@ STATES_MAP = {
     "Worksheet": WORKSHEET_STATES,
 }
 
-OTHER_STATE_LABEL = _("Other status")
+OTHER_STATE_LABEL = "其他状态"
 
 # Colors aligned with base.scss $state-*-color variables
 STATE_COLORS = {
@@ -360,32 +360,32 @@ class DashboardView(BrowserView):
         if bika_setup.getSamplingWorkflowEnabled():
             panels += [
                 self._panel(
-                    _("To be sampled"), "to_be_sampled",
+                    "待取样", "to_be_sampled",
                     "samples", catalog, query, total),
                 self._panel(
-                    _("To be preserved"), "to_be_preserved",
+                    "待保存", "to_be_preserved",
                     "samples", catalog, query, total),
                 self._panel(
-                    _("Sampling scheduled"),
+                    "采样计划",
                     "scheduled_sampling",
                     "samples", catalog, query, total),
             ]
 
         panels += [
             self._panel(
-                _("Reception pending"), "sample_due",
+                "待接收", "sample_due",
                 "samples", catalog, query, total),
             self._panel(
-                _("Results pending"), "sample_received",
+                "等待结果", "sample_received",
                 "samples", catalog, query, total),
             self._panel(
-                _("To be verified"), "to_be_verified",
+                "待复核", "to_be_verified",
                 "samples", catalog, query, total),
             self._panel(
-                _("Verified"), "verified",
+                "已复核", "verified",
                 "samples", catalog, query, total),
             self._panel(
-                _("Published"), "published",
+                "已发布", "published",
                 "samples", catalog, query, total),
         ]
 
@@ -395,7 +395,7 @@ class DashboardView(BrowserView):
             count = self._cached_count(q, catalog.id)
             panels.append({
                 "type": "simple-panel",
-                "description": _("To be printed"),
+                "description": "待打印",
                 "number": count,
                 "percentage": self._pct(count, total),
                 "legend": self._legend(count, total),
@@ -404,11 +404,11 @@ class DashboardView(BrowserView):
             })
 
         panels.append(self._chart_panel(
-            _("Evolution of Samples"), catalog, query))
+            "样本趋势", catalog, query))
 
         return {
             "id": "analysisrequests",
-            "title": _("Samples"),
+            "title": "样本",
             "panels": panels,
         }
 
@@ -425,7 +425,7 @@ class DashboardView(BrowserView):
 
         panels = [
             self._panel(
-                _("Assignment pending"), "unassigned",
+                "等待分配", "unassigned",
                 None, catalog, query, total),
         ]
 
@@ -435,7 +435,7 @@ class DashboardView(BrowserView):
         count = self._cached_count(q, catalog.id)
         panels.append({
             "type": "simple-panel",
-            "description": _("Results pending"),
+            "description": "等待结果",
             "number": count,
             "percentage": self._pct(count, total),
             "legend": self._legend(count, total),
@@ -444,19 +444,19 @@ class DashboardView(BrowserView):
 
         panels += [
             self._panel(
-                _("To be verified"), "to_be_verified",
+                "待复核", "to_be_verified",
                 None, catalog, query, total),
             self._panel(
-                _("Verified"), "verified",
+                "已复核", "verified",
                 None, catalog, query, total),
         ]
 
         panels.append(self._chart_panel(
-            _("Evolution of Analyses"), catalog, query))
+            "检验项目趋势", catalog, query))
 
         return {
             "id": "analyses",
-            "title": _("Analyses"),
+            "title": "检验项目",
             "panels": panels,
         }
 
@@ -470,23 +470,23 @@ class DashboardView(BrowserView):
 
         panels = [
             self._panel(
-                _("Results pending"), "open",
+                "等待结果", "open",
                 "worksheets", catalog, query, total),
             self._panel(
-                _("To be verified"), "to_be_verified",
+                "待复核", "to_be_verified",
                 "worksheets", catalog, query, total),
             self._panel(
-                _("Verified"), "verified",
+                "已复核", "verified",
                 "worksheets", catalog, query, total),
         ]
 
         panels.append(self._chart_panel(
-            _("Evolution of Worksheets"),
+            "工作表趋势",
             catalog, query))
 
         return {
             "id": "worksheets",
-            "title": _("Worksheets"),
+            "title": "工作表",
             "panels": panels,
         }
 
@@ -540,8 +540,8 @@ class DashboardView(BrowserView):
 
     def _legend(self, count, total):
         pct = self._pct(count, total)
-        return "%s %s (%s%%)" % (
-            _("of"), total, pct)
+        return "共 %s (%s%%)" % (
+            total, pct)
 
     # --- Cookie filter ---
 

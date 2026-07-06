@@ -54,7 +54,7 @@ class FolderView(ListingView):
             "sort_order": "reverse"
         }
 
-        self.title = self.context.translate(_("Worksheets"))
+        self.title = "工作表"
         self.description = ""
 
         self.icon = "{}/{}".format(
@@ -63,7 +63,7 @@ class FolderView(ListingView):
         )
 
         self.context_actions = {
-            _("Add"): {
+            "新增": {
                 "url": "worksheet_add",
                 "icon": "++resource++bika.lims.images/add.png",
                 "class": "worksheet_add",
@@ -92,34 +92,34 @@ class FolderView(ListingView):
 
         self.columns = collections.OrderedDict((
             ("getProgressPercentage", {
-               "title": _("Progress")}),
+               "title": "进度"}),
             ("Title", {
-                "title": _("Worksheet"),
+                "title": "工作表",
                 "index": "getId"}),
             ("Analyst", {
-                "title": _("Analyst"),
+                "title": "分析员",
                 "index": "getAnalyst"}),
             ("getWorksheetTemplateTitle", {
-                "title": _("Template"),
+                "title": "模板",
                 "replace_url": "getWorksheetTemplateURL"}),
             ("getNumberOfRegularSamples", {
-                "title": _("Samples")}),
+                "title": "样品"}),
             ("getNumberOfQCAnalyses", {
-                "title": _("QC Analyses")}),
+                "title": "质控检验"}),
             ("getNumberOfRegularAnalyses", {
-                "title": _("Routine Analyses")}),
+                "title": "常规检验"}),
             ("CreationDate", {
-                "title": _("Created"),
+                "title": "创建时间",
                 "index": "created"}),
             ("state_title", {
-                "title": _("State"),
+                "title": "状态",
                 "index": "review_state",
                 "attr": "state_title"}),
         ))
         self.review_states = [
             {
                 "id": "default",
-                "title": _("Active"),
+                "title": "进行中",
                 "contentFilter": {
                     "review_state": [
                         "open",
@@ -132,7 +132,7 @@ class FolderView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "open",
-                "title": _("Open"),
+                "title": "开放",
                 "contentFilter": {
                     "review_state": "open",
                     "sort_on": "created",
@@ -142,7 +142,7 @@ class FolderView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_verified",
-                "title": _("To be verified"),
+                "title": "待复核",
                 "contentFilter": {
                     "review_state": "to_be_verified",
                     "sort_on": "created",
@@ -152,7 +152,7 @@ class FolderView(ListingView):
                 "columns": self.columns.keys()
             }, {
                 "id": "verified",
-                "title": _("Verified"),
+                "title": "已复核",
                 "contentFilter": {
                     "review_state": "verified",
                     "sort_on": "created",
@@ -163,7 +163,7 @@ class FolderView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "all",
-                "title": _("All"),
+                "title": "全部",
                 "contentFilter": {
                     "review_state": [
                         "open",
@@ -180,7 +180,7 @@ class FolderView(ListingView):
                 # getAuthenticatedMember does not work in __init__ so "mine" is
                 # configured further in "folderitems" below.
                 "id": "mine",
-                "title": _("Mine"),
+                "title": "我的",
                 "contentFilter": {
                     "review_state": [
                         "open",

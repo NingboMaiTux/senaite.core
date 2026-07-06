@@ -67,9 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
       icon.className = "fas fa-info-circle mr-2";
       msg.appendChild(icon);
       msg.appendChild(document.createTextNode(
-        "No actions available. Please contact your "
-        + "laboratory manager to get permissions "
-        + "assigned."));
+        "当前无可用操作，请联系实验室管理员"
+        + "分配相应权限。"));
       el.appendChild(msg);
       return;
     }
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var heading = document.createElement("h2");
       heading.className = "h6 text-uppercase text-muted "
         + "font-weight-bold mb-3";
-      heading.textContent = "Status";
+      heading.textContent = "状态";
       el.appendChild(heading);
 
       var wrap = document.createElement("div");
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var heading2 = document.createElement("h2");
       heading2.className = "h6 text-uppercase text-muted "
         + "font-weight-bold mb-3";
-      heading2.textContent = "Quick Actions";
+      heading2.textContent = "快捷操作";
       el.appendChild(heading2);
 
       var linkWrap = document.createElement("div");
@@ -190,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
       btnIcon.className = "fas fa-chart-bar mr-1";
       btn.appendChild(btnIcon);
       btn.appendChild(
-        document.createTextNode("Show/hide timeline"));
+        document.createTextNode("显示/隐藏趋势图"));
       btnWrap.appendChild(btn);
       container.appendChild(btnWrap);
 
@@ -206,8 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var legendDiv = document.createElement("div");
       legendDiv.className = "h2-legend mb-3";
-      legendDiv.textContent = "From " + dateFrom
-        + " to " + dateTo + " (updated every 2 hours)";
+      legendDiv.textContent = "从 " + dateFrom
+        + " 到 " + dateTo + "（每 2 小时更新一次）";
       period.appendChild(legendDiv);
 
       period.appendChild(buildNavPills());
@@ -223,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var noData = document.createElement("div");
       noData.className = "bar-chart-no-data";
       noData.textContent =
-        "No data for the selected period";
+        "所选时间段暂无数据";
       chartDiv.appendChild(noData);
       container.appendChild(chartDiv);
     });
@@ -296,12 +295,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function buildNavPills() {
     var pills = [
-      { label: "Daily", value: "d" },
-      { label: "Weekly", value: "w" },
-      { label: "Monthly", value: "m" },
-      { label: "Quarterly", value: "q" },
-      { label: "Biannual", value: "b" },
-      { label: "Yearly", value: "y" }
+      { label: "日", value: "d" },
+      { label: "周", value: "w" },
+      { label: "月", value: "m" },
+      { label: "季度", value: "q" },
+      { label: "半年", value: "b" },
+      { label: "年", value: "y" }
     ];
     var ul = document.createElement("ul");
     ul.className = "nav nav-pills nav-pills-sm mb-3";

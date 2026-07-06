@@ -341,6 +341,56 @@ class WorksheetImporter(object):
         else:
             return brains[0].getObject()
 
+    def get_client(self, client_name):
+        """Resolve a client by name with a unicode-safe fallback.
+
+        Old Py2/ZCatalog setups can raise ``UnicodeDecodeError`` when querying
+        the ``getName`` index with non-ASCII values. In that case, or when the
+        catalog misses the record, fall back to walking the clients folder.
+        """
+        if not client_name:
+            return None
+
+        client_name = u(client_name)
+        catalog = api.get_tool(CLIENT_CATALOG)
+        brains = []
+
+        try:
+            brains = catalog(portal_type="Client", getName=client_name)
+        except UnicodeDecodeError as exc:
+            logger.warn(
+                "Client lookup via catalog failed for {!r}: {}"
+                .format(client_name, exc))
+
+        if len(brains) == 1:
+            return brains[0].getObject()
+        if len(brains) > 1:
+            logger.info("More than one client found for '%s'" % client_name)
+            return None
+
+        matches = []
+        for client in self.context.clients.objectValues():
+            if api.get_portal_type(client) != "Client":
+                continue
+            tokens = [api.get_id(client), api.get_title(client)]
+            try:
+                tokens.append(client.getName())
+            except Exception:
+                pass
+            tokens = filter(None, map(u, tokens))
+            if client_name in tokens:
+                matches.append(client)
+
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1:
+            logger.info("More than one client matched fallback for '%s'"
+                        % client_name)
+            return None
+
+        logger.info("No client found for '%s'" % client_name)
+        return None
+
 
 class Sub_Groups(WorksheetImporter):
 
@@ -615,16 +665,14 @@ class Clients(WorksheetImporter):
 class Client_Contacts(WorksheetImporter):
 
     def Import(self):
-        cat = api.get_tool(CLIENT_CATALOG)
         for row in self.get_rows(3):
-            client = cat(portal_type="Client", getName=row["Client_title"])
-            if len(client) == 0:
+            client = self.get_client(row["Client_title"])
+            if not client:
                 client_contact = "%(Firstname)s %(Surname)s" % row
                 error = "Client invalid: '%s'. " \
                         "The Client Contact %s will not be uploaded."
                 logger.error(error, row["Client_title"], client_contact)
                 continue
-            client = client[0].getObject()
 
             def u_row_get(name):
                 return api.safe_unicode(row.get(name, ""))
@@ -1218,18 +1266,17 @@ class Sample_Points(WorksheetImporter):
     def Import(self):
         setup_folder = self.context.setup.samplepoints
         bsc = getToolByName(self.context, SETUP_CATALOG)
-        cat = api.get_tool(CLIENT_CATALOG)
         for row in self.get_rows(3):
             if not row['title']:
                 continue
             if row['Client_title']:
                 client_title = row['Client_title']
-                client = cat(portal_type="Client", getName=client_title)
-                if len(client) == 0:
+                client = self.get_client(client_title)
+                if not client:
                     error = "Sample Point %s: Client invalid: '%s'. The Sample point will not be uploaded."
                     logger.error(error, row['title'], client_title)
                     continue
-                folder = client[0].getObject()
+                folder = client
             else:
                 folder = setup_folder
 
@@ -1742,7 +1789,6 @@ class Analysis_Specifications(WorksheetImporter):
 
     def Import(self):
         bucket = {}
-        client_catalog = getToolByName(self.context, CLIENT_CATALOG)
         setup_catalog = getToolByName(self.context, SETUP_CATALOG)
         # collect up all values into the bucket
         for row in self.get_rows(3):
@@ -1770,9 +1816,11 @@ class Analysis_Specifications(WorksheetImporter):
                 if parent == "lab":
                     folder = self.context.bika_setup.bika_analysisspecs
                 else:
-                    proxy = client_catalog(
-                        portal_type="Client", getName=safe_unicode(parent))[0]
-                    folder = proxy.getObject()
+                    folder = self.get_client(parent)
+                    if not folder:
+                        raise Exception(
+                            "Analysis Specification %s: Client invalid: '%s'"
+                            % (title, parent))
                 st = bucket[parent][title]["sampletype"]
                 resultsrange = bucket[parent][title]["resultsrange"]
                 if st:
@@ -2371,14 +2419,15 @@ class Analysis_Requests(WorksheetImporter):
         analysis.setInterimFields(interims)
 
     def Import(self):
-        client_cat = api.get_tool(CLIENT_CATALOG)
         contact_cat = api.get_tool(CONTACT_CATALOG)
         setup_cat = api.get_tool(SETUP_CATALOG)
         for row in self.get_rows(3):
             if not row['id']:
                 continue
-            client = client_cat(portal_type="Client",
-                                getName=row['Client_title'])[0].getObject()
+            client = self.get_client(row['Client_title'])
+            if not client:
+                raise Exception("Analysis Request %s: Client invalid: '%s'" % (
+                    row['id'], row['Client_title']))
             obj = _createObjectByType("AnalysisRequest", client, row['id'])
             contact = contact_cat(portal_type="Contact",
                                   getFullname=row['Contact_Fullname'])[0].getObject()
