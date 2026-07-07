@@ -195,9 +195,9 @@ def render_pictogram_img(picto, css_class=DEFAULT_PICTOGRAM_CLASS):
     :param picto: View-model dict from one of the `get_pictograms_*`
                   helpers
     :param css_class: CSS class for the rendered `<img>` element
-    :returns: HTML `<img>` tag as a utf-8 encoded byte string,
-              suitable for direct insertion into a listing column
-    :rtype: bytes
+    :returns: HTML `<img>` tag as unicode, suitable for direct
+              insertion into a listing column
+    :rtype: unicode
     """
     attrs = render_html_attributes(
         src=picto["url"],

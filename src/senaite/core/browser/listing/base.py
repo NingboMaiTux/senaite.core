@@ -77,8 +77,8 @@ class ListingView(BaseListingView):
             u'</a>'
         ).format(url=edit_url, title=title, edit_view=edit_view)
         # Prepend to any existing "after" content (e.g. accredited icons).
-        # Wrap with safe_unicode: get_image() returns byte strings that would
-        # cause UnicodeDecodeError when concatenated with the unicode icon.
+        # Wrap with safe_unicode to normalize any legacy byte strings that may
+        # still come from downstream helpers before concatenating unicode HTML.
         existing = safe_unicode(item.get("after", {}).get(col, u""))
         item["after"][col] = icon + existing
         return item

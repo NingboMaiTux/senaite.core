@@ -693,11 +693,12 @@ def get_link(href, value=None, csrf=True, **kwargs):
     """
     if not href:
         return ""
+    href = safe_unicode(href)
     anchor_value = value and u(value) or href
     attr = render_html_attributes(**kwargs)
     # Add a CSRF token
     if csrf and href.startswith("http"):
-        href = addTokenToUrl(href)
+        href = safe_unicode(addTokenToUrl(href))
     return u'<a href="{}" {}>{}</a>'.format(href, attr, anchor_value)
 
 
@@ -758,10 +759,11 @@ def get_image(name, **kwargs):
     if basename in theme.icons():
         if "width" not in kwargs:
             kwargs["width"] = "16"
-        return theme.icon_tag(basename, **kwargs)
-    portal_url = api.get_url(portal)
+        return safe_unicode(theme.icon_tag(basename, **kwargs))
+    portal_url = safe_unicode(api.get_url(portal))
+    name = safe_unicode(name)
     attr = render_html_attributes(**kwargs)
-    html = '<img src="{}/++resource++bika.lims.images/{}" {}/>'
+    html = u'<img src="{}/++resource++bika.lims.images/{}" {}/>'
     return html.format(portal_url, name, attr)
 
 
@@ -777,21 +779,19 @@ def render_html_attributes(**kwargs):
     """Returns a string representation of attributes for html entities
 
     Values are normalized to unicode internally so callers can safely
-    pass translated strings (e.g. hazard pictogram titles) without
-    hitting an implicit ASCII codec. The result is then encoded back
-    to utf-8 bytes to preserve the legacy return type that downstream
-    consumers (e.g. `bytes += get_image(...)` accumulators) rely on.
+    pass translated strings without hitting an implicit ASCII codec.
+    Returning unicode keeps the output safe to combine with other
+    translated HTML fragments in Python 2.
 
     :param kwargs: attributes and values
-    :return: a well-formed utf-8 encoded string of attributes
-    :rtype: bytes
+    :return: a well-formed unicode string of attributes
+    :rtype: unicode
     """
     if not kwargs:
-        return ""
+        return u""
     attr = [u'{}="{}"'.format(key, safe_unicode(val))
             for key, val in kwargs.items()]
-    result = u" ".join(attr).replace(u"css_class", u"class")
-    return result.encode("utf-8")
+    return u" ".join(attr).replace(u"css_class", u"class")
 
 
 def get_registry_value(key, default=None):
@@ -983,4 +983,4 @@ def get_fas_ico(icon_id, **attrs):
     if not icon_id.startswith("fa-"):
         icon_id = "fa-%s" % icon_id
     attrs["css_class"] = " ".join([css_class, "fas", icon_id]).strip()
-    return "<i %s/>" % render_html_attributes(**attrs)
+    return u"<i {}/>".format(render_html_attributes(**attrs))
