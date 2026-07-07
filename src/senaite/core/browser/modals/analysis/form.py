@@ -24,6 +24,7 @@ import json
 from bika.lims import api
 from bika.lims.config import LDL
 from bika.lims.config import UDL
+from bika.lims.interfaces import IAnalysis
 from plone.autoform.form import AutoExtensibleForm
 from Products.Archetypes.event import ObjectEditedEvent
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -54,7 +55,10 @@ class EditAnalysisForm(AutoExtensibleForm, form.Form):
     def __init__(self, context, request):
         super(EditAnalysisForm, self).__init__(context, request)
         uid = request.get("uid") or request.form.get("uid")
-        self._analysis = api.get_object_by_uid(uid)
+        analysis = api.get_object_by_uid(uid, default=None)
+        if analysis is None and IAnalysis.providedBy(context):
+            analysis = context
+        self._analysis = analysis
         self.context = self.analysis
 
     def __call__(self):
@@ -240,7 +244,11 @@ class EditAnalysisForm(AutoExtensibleForm, form.Form):
         result = []
         for instrument in instruments:
             uid = api.get_uid(instrument)
-            title = api.get_title(instrument)
+            # Normalize titles to unicode so Py2 does not try an implicit
+            # ASCII decode when composing labels for non-ASCII instruments.
+            title = api.safe_unicode(
+                api.get_title(instrument) or ""
+            )
             if instrument.isValid():
                 result.append({
                     "uid": uid,
@@ -261,7 +269,11 @@ class EditAnalysisForm(AutoExtensibleForm, form.Form):
                         title),
                     "disabled": False,
                 })
-        result.sort(key=lambda x: x["title"].lower())
+        result.sort(
+            key=lambda x: api.safe_unicode(
+                x["title"] or ""
+            ).lower()
+        )
         return result
 
     def get_method_instrument_mapping(self):

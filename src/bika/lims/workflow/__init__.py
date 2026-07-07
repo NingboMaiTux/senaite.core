@@ -104,7 +104,7 @@ def doActionFor(instance, action_id):
         workflow.doActionFor(instance, action_id)
         succeed = True
     except WorkflowException as e:
-        message = str(e)
+        message = normalize_workflow_error_message(e, action_id)
         curr_state = getCurrentState(instance)
         clazz_name = instance.__class__.__name__
         logger.warning(
@@ -113,6 +113,16 @@ def doActionFor(instance, action_id):
         logger.error(message)
 
     return succeed, message
+
+
+def normalize_workflow_error_message(error, action_id):
+    """Normalize workflow errors for readable logs.
+
+    Some workflow exceptions still contain the literal ``${action_id}``
+    placeholder. Replace it here so callers always log the actual action.
+    """
+    message = str(error)
+    return message.replace("${action_id}", action_id)
 
 
 def call_workflow_event(instance, event, after=True):

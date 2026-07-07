@@ -23,10 +23,12 @@
         permission="zope.Public"
     />
 
-    <!-- Worksheet: "reassign" analyst -->
+    <!-- Worksheet: "reassign" analyst
+         Applies wide because the action is triggered from worksheet listings,
+         whose request context is not the worksheet object itself. -->
     <adapter
         name="workflow_action_reassign"
-        for="senaite.core.interfaces.IWorksheet
+        for="*
              zope.publisher.interfaces.browser.IBrowserRequest"
         factory=".worksheet.WorkflowActionReassignAdapter"
         provides="bika.lims.interfaces.IWorkflowActionAdapter"
