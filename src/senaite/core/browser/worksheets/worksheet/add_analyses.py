@@ -20,6 +20,8 @@
 
 import collections
 
+import six
+
 from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.memoize import view
@@ -158,6 +160,7 @@ class AddAnalysesView(ListingView):
         ]
 
     def __call__(self):
+        self._normalize_request_form()
         super(AddAnalysesView, self).__call__()
 
         # Handle form submission
@@ -186,6 +189,30 @@ class AddAnalysesView(ListingView):
             return self.handle_subpath()
 
         return self.template()
+
+    def _to_safe_unicode(self, data):
+        """Recursively normalize request data for Python 2 catalog queries."""
+        if isinstance(data, six.text_type):
+            return data
+        if isinstance(data, list):
+            return [self._to_safe_unicode(item) for item in data]
+        if isinstance(data, tuple):
+            return tuple(self._to_safe_unicode(item) for item in data)
+        if isinstance(data, dict):
+            return {
+                self._to_safe_unicode(key): self._to_safe_unicode(value)
+                for key, value in six.iteritems(data)
+            }
+        if api.is_string(data):
+            return api.safe_unicode(data)
+        return data
+
+    def _normalize_request_form(self):
+        """Ensure search/filter parameters reach the catalog as unicode."""
+        for key in list(self.request.form.keys()):
+            self.request.form[key] = self._to_safe_unicode(
+                self.request.form.get(key)
+            )
 
     def update(self):
         """Update hook
