@@ -100,7 +100,7 @@ msgstr "登出"
 
 #: senaite/core/skins/senaite_templates/senaite_widgets/recordswidget.pt:275
 msgid "More"
-msgstr ""
+msgstr "更多"
 
 #: senaite/core/browser/portlets/templates/edit-manager-macros.pt:79
 msgid "Move down"
@@ -128,7 +128,7 @@ msgstr "开"
 
 #: senaite/core/profiles/default/registry.xml
 msgid "Relative URL for the SENAITE toolbar logo"
-msgstr "SENAITE工具栏标志的相关URL"
+msgstr "MAITUX工具栏标志的相关URL"
 
 #: senaite/core/browser/sharing/templates/client_sharing.pt:67
 msgid "Search for user or group"

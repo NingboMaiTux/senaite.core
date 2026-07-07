@@ -7174,7 +7174,7 @@ msgstr "设置向所选收件人发送结果报告时默认使用的邮件正文
 #. Default: "E-mail to use as the 'From' address for outgoing e-mails when publishing results reports. This address overrides the value set at portal's 'Mail settings'."
 #: bika/lims/content/bikasetup.py:805
 msgid "description_bikasetup_email_from_sample_publication"
-msgstr "发布结果报告时外发邮件使用的发件人地址。此地址会覆盖门户"邮件设置"中的值。"
+msgstr "发布结果报告时外发邮件使用的发件人地址。此地址会覆盖门户\"邮件设置\"中的值。"
 
 #. e.g. to enter field results immediately, or lab results, when the automatic
 #. sample reception is activated."
