@@ -1887,7 +1887,7 @@ msgstr "折扣%"
 #: senaite/core/browser/samples/templates/dispatch_samples.pt:78
 #: senaite/core/profiles/default/workflows/senaite_sample_workflow/definition.xml
 msgid "Dispatch"
-msgstr "发送"
+msgstr "派送"
 
 #: senaite/core/browser/samples/templates/dispatch_samples.pt:15
 msgid "Dispatch samples"
@@ -4995,7 +4995,7 @@ msgstr "样本 %s 需要填采样日期"
 
 #: senaite/core/profiles/default/workflows/senaite_sample_workflow/definition.xml
 msgid "Sample due"
-msgstr "样本逾期"
+msgstr "已登记"
 
 #: senaite/core/browser/samples/rejection/templates/rejection_report.pt:111
 msgid "Sample type"
