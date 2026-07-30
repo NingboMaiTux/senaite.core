@@ -18,7 +18,6 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
-import string
 from datetime import timedelta
 
 import six
@@ -50,9 +49,7 @@ from zope import schema
 from zope.component import getUtility
 from zope.deprecation import deprecate
 from zope.interface import Interface
-from zope.interface import Invalid
 from zope.interface import implementer
-from zope.interface import invariant
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 
@@ -153,7 +150,7 @@ DEFAULT_ID_FORMATTING = [
         "form": "{parent_ar_id}-P{partition_count:02d}",
         "portal_type": "AnalysisRequestPartition",
         "prefix": "analysisrequestpartition",
-        "sequence_type": "generated",
+        "sequence_type": "",
         "context": "",
         "counter_type": "",
         "counter_reference": "",
@@ -163,7 +160,7 @@ DEFAULT_ID_FORMATTING = [
         "form": "{parent_base_id}-R{retest_count:02d}",
         "portal_type": "AnalysisRequestRetest",
         "prefix": "analysisrequestretest",
-        "sequence_type": "generated",
+        "sequence_type": "",
         "context": "",
         "counter_type": "",
         "counter_reference": "",
@@ -173,29 +170,13 @@ DEFAULT_ID_FORMATTING = [
         "form": "{parent_ar_id}-S{secondary_count:02d}",
         "portal_type": "AnalysisRequestSecondary",
         "prefix": "analysisrequestsecondary",
-        "sequence_type": "generated",
+        "sequence_type": "",
         "context": "",
         "counter_type": "",
         "counter_reference": "",
         "split_length": 1
     },
 ]
-
-
-def _record_get(record, key, default=None):
-    """Resolve a value from a DataGrid record, which may expose its
-    fields either as attributes (RecordsRecord) or as dict items.
-    """
-    try:
-        value = getattr(record, key)
-    except AttributeError:
-        value = None
-    if value is None:
-        try:
-            value = record[key]
-        except (KeyError, TypeError):
-            value = default
-    return value
 
 
 class IIDFormattingRecordSchema(Interface):
@@ -796,46 +777,6 @@ class ISetupSchema(model.Schema):
         default=10,
     )
 
-    sampleview_analysis_columns_order = schema.Tuple(
-        title=_(
-            u"title_senaitesetup_sampleview_columns_order",
-            default=u"Sample view analysis columns"
-        ),
-        description=_(
-            u"description_senaitesetup_sampleview_columns_order",
-            default=u"Select which columns to display in "
-                    u"sample analysis listings. The order "
-                    u"of selection determines the display "
-                    u"order. Unselected columns are hidden. "
-                    u"Leave empty to show all columns in "
-                    u"default order."
-        ),
-        value_type=schema.Choice(
-            vocabulary=("senaite.core.vocabularies.analysis_columns")
-        ),
-        required=False,
-    )
-
-    worksheetview_analysis_columns_order = schema.Tuple(
-        title=_(
-            u"title_senaitesetup_wsview_columns_order",
-            default=u"Worksheet view analysis columns"
-        ),
-        description=_(
-            u"description_senaitesetup_wsview_columns_order",
-            default=u"Select which columns to display in "
-                    u"worksheet analysis listings. The "
-                    u"order of selection determines the "
-                    u"display order. Unselected columns "
-                    u"are hidden. Leave empty to show all "
-                    u"columns in default order."
-        ),
-        value_type=schema.Choice(
-            vocabulary=("senaite.core.vocabularies.worksheet_analysis_columns")
-        ),
-        required=False,
-    )
-
     # Appearance
     worksheet_layout = schema.Choice(
         title=_(
@@ -960,21 +901,6 @@ class ISetupSchema(model.Schema):
     )
 
     # Sampling
-    sample_duplicate_enabled = schema.Bool(
-        title=_(
-            u"title_senaitesetup_sample_duplicate_enabled",
-            default=u"Allow sample duplication"
-        ),
-        description=_(
-            u"description_senaitesetup_sample_duplicate_enabled",
-            default=u"If enabled, users with sufficient privileges can "
-                    u"create a sibling sample directly from an existing "
-                    u"one via the 'Duplicate' action in the samples "
-                    u"listing. Enabled by default."
-        ),
-        default=True,
-    )
-
     printing_workflow_enabled = schema.Bool(
         title=_(u"Enable the Results Report Printing workflow"),
         description=_(
@@ -1117,43 +1043,39 @@ class ISetupSchema(model.Schema):
         vocabulary=schema.vocabulary.SimpleVocabulary([
             schema.vocabulary.SimpleTerm("None", "None", _(u"None")),
             schema.vocabulary.SimpleTerm("register", "register",
-                                         _(u"Register")),
+                                          _(u"Register")),
             schema.vocabulary.SimpleTerm("receive", "receive", _(u"Receive")),
         ]),
         required=False,
         default="None",
     )
 
-    auto_sticker_template = schema.Choice(
+    auto_sticker_template = schema.TextLine(
         title=_(u"Default Sticker Template"),
         description=_(
             u"Select the default sticker template used for automatic printing."
         ),
-        vocabulary="senaite.core.vocabularies.stickers",
-        default=u"Code_128_1x48mm.pt",
         required=False,
     )
 
-    small_sticker_template = schema.Choice(
+    small_sticker_template = schema.TextLine(
         title=_(u"Small Sticker Template"),
         description=_(
             u"Choose the default template for 'small' stickers. Note: "
             u"Sample-specific 'small' stickers are configured based on their "
             u"sample type."
         ),
-        vocabulary="senaite.core.vocabularies.stickers",
         default=u"Code_128_1x48mm.pt",
         required=False,
     )
 
-    large_sticker_template = schema.Choice(
+    large_sticker_template = schema.TextLine(
         title=_(u"Large Sticker Template"),
         description=_(
             u"Choose the default template for 'large' stickers. Note: "
             u"Sample-specific 'large' stickers are configured based on their "
             u"sample type."
         ),
-        vocabulary="senaite.core.vocabularies.stickers",
         default=u"Code_128_1x72mm.pt",
         required=False,
     )
@@ -1181,76 +1103,58 @@ class ISetupSchema(model.Schema):
         description=_(
             u"<p>The ID Server provides unique sequential IDs for objects "
             u"such as Samples and Worksheets etc, based on a format "
-            u"specified for each content type. The format is constructed "
-            u"similarly to the Python format syntax, e.g. "
-            u"<code>WS-{seq:03d}</code> produces <code>WS-001</code>, "
-            u"<code>WS-002</code>, <code>WS-003</code> etc.</p>"
-            u"<p>The current persistent counter values are managed in the "
-            u"<a href='ng'>Number Generator view</a>.</p>"
-            u"<details class='id-server-cheatsheet'>"
-            u"<summary>Available variables</summary>"
-            u"<table class='table table-sm'>"
-            u"<thead><tr><th style='width:30%'>Variable</th>"
-            u"<th>Description</th></tr></thead>"
-            u"<tbody>"
-            u"<tr><td><code>{seq}</code> / <code>{seq:04d}</code></td>"
-            u"<td>Numeric sequence number, optionally zero-padded.</td></tr>"
-            u"<tr><td><code>{alpha:NaNd}</code></td>"
-            u"<td>Alphanumeric counter, e.g. <code>{alpha:2a3d}</code> "
-            u"yields AA001, AA002, ..., AB001, ...</td></tr>"
-            u"<tr><td><code>{year}</code></td>"
-            u"<td>Two-digit current year (e.g. <code>26</code>).</td></tr>"
-            u"<tr><td><code>{yymmdd}</code></td>"
-            u"<td>Current date as <code>yymmdd</code>.</td></tr>"
-            u"<tr><td><code>{clientId}</code></td>"
-            u"<td>Client ID (samples only).</td></tr>"
-            u"<tr><td><code>{sampleType}</code></td>"
-            u"<td>Sample type prefix.</td></tr>"
-            u"<tr><td><code>{samplingDate}</code> / "
-            u"<code>{dateSampled}</code></td>"
-            u"<td>Sample dates (Python <code>strftime</code> specs apply).</td></tr>"
-            u"<tr><td><code>{parent_ar_id}</code> / "
-            u"<code>{parent_base_id}</code></td>"
-            u"<td>For partitions/retests/secondaries: the parent sample ID.</td></tr>"
-            u"<tr><td><code>{partition_count}</code></td>"
-            u"<td>Per-parent partition counter.</td></tr>"
-            u"<tr><td><code>{retest_count}</code> / "
-            u"<code>{secondary_count}</code> / "
-            u"<code>{test_count}</code></td>"
-            u"<td>Counters for retests, secondaries, and total tests.</td></tr>"
-            u"</tbody></table>"
-            u"</details>"
-            u"<details class='id-server-cheatsheet'>"
-            u"<summary>Configuration fields</summary>"
+            u"specified for each content type.</p>"
+            u"<p>The format is constructed similarly to the Python format "
+            u"syntax, using predefined variables per content type, and "
+            u"advancing the IDs through a sequence number, 'seq' and its "
+            u"padding as a number of digits, e.g. '03d' for a sequence of "
+            u"IDs from 001 to 999.</p>"
+            u"<p>Alphanumeric prefixes for IDs are included as is in the "
+            u"formats, e.g. WS for Worksheet in WS-{seq:03d} produces "
+            u"sequential Worksheet IDs: WS-001, WS-002, WS-003 etc.</p>"
+            u"<p>For dynamic generation of alphanumeric and sequential IDs, "
+            u"the wildcard {alpha} can be used. E.g WS-{alpha:2a3d} produces "
+            u"WS-AA001, WS-AA002, WS-AB034, etc.</p>"
+            u"<p>Variables that can be used include:"
+            u"<table>"
+            u"<tr>"
+            u"<th style='width:150px'>Content Type</th><th>Variables</th>"
+            u"</tr>"
+            u"<tr><td>Client ID</td><td>{clientId}</td></tr>"
+            u"<tr><td>Year</td><td>{year}</td></tr>"
+            u"<tr><td>Sample ID</td><td>{sampleId}</td></tr>"
+            u"<tr><td>Sample Type</td><td>{sampleType}</td></tr>"
+            u"<tr><td>Sampling Date</td><td>{samplingDate}</td></tr>"
+            u"<tr><td>Date Sampled</td><td>{dateSampled}</td></tr>"
+            u"</table>"
+            u"</p>"
+            u"<p>Configuration Settings:"
             u"<ul>"
-            u"<li><strong>Format</strong>: the ID template.</li>"
-            u"<li><strong>Seq Type</strong>: "
-            u"<code>generated</code> uses the persistent number counter; "
-            u"<code>counter</code> uses the count of related objects.</li>"
-            u"<li><strong>Context</strong>: only used by <code>counter</code> "
-            u"type; the named context the counter applies to.</li>"
-            u"<li><strong>Counter Type</strong>: "
-            u"<code>backreference</code> (deprecated) or "
-            u"<code>contained</code>.</li>"
-            u"<li><strong>Counter Ref</strong>: relationship name "
-            u"(backreference) or meta type (contained).</li>"
-            u"<li><strong>Prefix</strong>: default prefix if none in the "
-            u"format.</li>"
-            u"<li><strong>Split Length</strong>: how many segments of the "
-            u"format become the storage key prefix. Determines how the "
-            u"counter is partitioned (e.g. per year, per sample type).</li>"
-            u"</ul>"
-            u"</details>"
-            u"<style>"
-            u".id-server-cheatsheet { margin: 0.5em 0; }"
-            u".id-server-cheatsheet > summary { cursor: pointer; "
-            u"font-weight: 600; padding: 0.25em 0; }"
-            u".id-server-cheatsheet table { margin-top: 0.5em; }"
-            u"</style>"
+            u"<li>format:"
+            u"<ul><li>a python format string constructed from predefined "
+            u"variables like sampleId, clientId, sampleType.</li>"
+            u"<li>special variable 'seq' must be positioned last in the "
+            u"format string</li></ul></li>"
+            u"<li>sequence type: [generated|counter]</li>"
+            u"<li>context: if type counter, provides context the counting "
+            u"function</li>"
+            u"<li>counter type: [backreference|contained]</li>"
+            u"<li>counter reference: a parameter to the counting function</li>"
+            u"<li>prefix: default prefix if none provided in format string</li>"
+            u"<li>split length: the number of parts to be included in the "
+            u"prefix</li>"
+            u"</ul></p>"
         ),
         value_type=DataGridRow(schema=IIDFormattingRecordSchema),
         required=False,
         default=DEFAULT_ID_FORMATTING,
+    )
+
+    id_server_values = schema.Text(
+        title=_(u"ID Server Values"),
+        description=_(u"Current ID server counter values"),
+        required=False,
+        readonly=True,
     )
 
     ###
@@ -1312,8 +1216,6 @@ class ISetupSchema(model.Schema):
             "rejection_reasons",
             "default_number_of_ars_to_add",
             "max_number_of_samples_add",
-            "sampleview_analysis_columns_order",
-            "worksheetview_analysis_columns_order",
         ]
     )
 
@@ -1322,6 +1224,8 @@ class ISetupSchema(model.Schema):
         label=_(u"Appearance"),
         fields=[
             "worksheet_layout",
+            "dashboard_by_default",
+            "landing_page",
             "show_partitions",
             "site_logo",
             "site_logo_css",
@@ -1336,7 +1240,6 @@ class ISetupSchema(model.Schema):
         "sampling",
         label=_(u"Sampling"),
         fields=[
-            "sample_duplicate_enabled",
             "printing_workflow_enabled",
             "sampling_workflow_enabled",
             "schedule_sampling_enabled",
@@ -1380,45 +1283,9 @@ class ISetupSchema(model.Schema):
         label=_(u"ID Server"),
         fields=[
             "id_formatting",
+            "id_server_values",
         ]
     )
-
-    @invariant
-    def validate_id_formatting(data):  # noqa: pylint:disable=no-self-argument
-        """Validate the IDFormatting entries.
-
-        Note: ``@invariant`` functions take the form data wrapper, not
-        a regular ``self``; the parameter name follows the
-        zope.interface convention.
-
-        - Each `form` value must parse as a Python format string.
-        - No duplicate `portal_type` entries (the second one would be
-          shadowed by the first at lookup time).
-        """
-        records = getattr(data, "id_formatting", None) or []
-        seen_types = {}
-        for idx, record in enumerate(records, start=1):
-            portal_type = (_record_get(record, "portal_type") or "").strip()
-            form_str = _record_get(record, "form") or ""
-            if portal_type:
-                conflict = seen_types.get(portal_type)
-                if conflict:
-                    raise Invalid(_(
-                        u"Duplicate ID format for portal type "
-                        u"'${pt}' (rows ${a} and ${b}). Only the first "
-                        u"row is used; remove or merge the duplicate.",
-                        mapping={"pt": portal_type, "a": conflict,
-                                 "b": idx}))
-                seen_types[portal_type] = idx
-            if form_str:
-                try:
-                    list(string.Formatter().parse(form_str))
-                except (ValueError, IndexError) as exc:
-                    raise Invalid(_(
-                        u"Invalid ID format on row ${i} "
-                        u"('${pt}'): ${err}",
-                        mapping={"i": idx, "pt": portal_type or "",
-                                 "err": str(exc)}))
 
 
 @implementer(ISetup, ISetupSchema, IHideActionsMenu)
@@ -1709,7 +1576,20 @@ class Setup(Container):
         """Set restrict worksheet users access setting
         """
         mutator = self.mutator("restrict_worksheet_users_access")
-        return mutator(self, value)
+        result = mutator(self, value)
+
+        enabled = value
+        if isinstance(value, six.string_types):
+            # 兼容表单提交时可能传入的字符串布尔值，避免 "true"/"1" 这类值判断失真。
+            enabled = value.strip().lower() in ("1", "true", "yes", "on")
+        enabled = bool(enabled)
+
+        if enabled and not self.getRestrictWorksheetManagement():
+            # 双保险中的第一层：只要开启“仅允许已分配分析员访问 worksheet”，
+            # 就在持久化层强制同步开启“仅实验室经理可管理 worksheet”。
+            self.setRestrictWorksheetManagement(True)
+
+        return result
 
     @security.protected(permissions.View)
     def getAllowToSubmitNotAssigned(self):
@@ -2125,42 +2005,6 @@ class Setup(Container):
         return mutator(self, value)
 
     @security.protected(permissions.View)
-    def getSampleviewAnalysisColumnsOrder(self):
-        """Returns the sample view analysis columns order
-        """
-        accessor = self.accessor(
-            "sampleview_analysis_columns_order"
-        )
-        return accessor(self) or ()
-
-    @security.protected(permissions.ManagePortal)
-    def setSampleviewAnalysisColumnsOrder(self, value):
-        """Set the sample view analysis columns order
-        """
-        mutator = self.mutator(
-            "sampleview_analysis_columns_order"
-        )
-        return mutator(self, value)
-
-    @security.protected(permissions.View)
-    def getWorksheetviewAnalysisColumnsOrder(self):
-        """Returns the worksheet view analysis columns order
-        """
-        accessor = self.accessor(
-            "worksheetview_analysis_columns_order"
-        )
-        return accessor(self) or ()
-
-    @security.protected(permissions.ManagePortal)
-    def setWorksheetviewAnalysisColumnsOrder(self, value):
-        """Set the worksheet view analysis columns order
-        """
-        mutator = self.mutator(
-            "worksheetview_analysis_columns_order"
-        )
-        return mutator(self, value)
-
-    @security.protected(permissions.View)
     def getWorksheetLayout(self):
         """Get worksheet layout
         """
@@ -2175,6 +2019,34 @@ class Setup(Container):
         return mutator(self, value)
 
     @security.protected(permissions.View)
+    def getDashboardByDefault(self):
+        """Get dashboard by default setting
+        """
+        accessor = self.accessor("dashboard_by_default")
+        return accessor(self)
+
+    @security.protected(permissions.ModifyPortalContent)
+    def setDashboardByDefault(self, value):
+        """Set dashboard by default setting
+        """
+        mutator = self.mutator("dashboard_by_default")
+        return mutator(self, value)
+
+    @security.protected(permissions.View)
+    def getLandingPage(self):
+        """Get landing page
+        """
+        accessor = self.accessor("landing_page")
+        return accessor(self)
+
+    @security.protected(permissions.ModifyPortalContent)
+    def setLandingPage(self, value):
+        """Set landing page
+        """
+        mutator = self.mutator("landing_page")
+        return mutator(self, value)
+
+    @security.protected(permissions.View)
     def getShowPartitions(self):
         """Get show partitions setting
         """
@@ -2186,20 +2058,6 @@ class Setup(Container):
         """Set show partitions setting
         """
         mutator = self.mutator("show_partitions")
-        return mutator(self, value)
-
-    @security.protected(permissions.View)
-    def getSampleDuplicateEnabled(self):
-        """Get allow sample duplicate setting
-        """
-        accessor = self.accessor("sample_duplicate_enabled")
-        return accessor(self)
-
-    @security.protected(permissions.ModifyPortalContent)
-    def setSampleDuplicateEnabled(self, value):
-        """Set allow sample duplicate setting
-        """
-        mutator = self.mutator("sample_duplicate_enabled")
         return mutator(self, value)
 
     @security.protected(permissions.View)
@@ -2497,9 +2355,9 @@ class Setup(Container):
                     if normalized_row.get(key) is None:
                         normalized_row[key] = ""
                 # Ensure split_length is an int
-                split_length = normalized_row.get("split_length")
-                split_length_int = api.to_int(split_length, default=1)
-                normalized_row["split_length"] = max(split_length_int, 1)
+                if normalized_row.get("split_length"):
+                    normalized_row["split_length"] = api.to_int(
+                        normalized_row["split_length"], default=1)
                 normalized.append(normalized_row)
             value = normalized
 
@@ -2532,3 +2390,16 @@ class Setup(Container):
         """Return true if the rejection workflow is enabled
         """
         return self.getEnableRejectionWorkflow()
+
+    @property
+    def laboratory(self):
+        """Get the laboratory object via acquisition
+        The laboratory is stored in bika_setup which is in the portal root
+        """
+        bika_setup = api.get_bika_setup()
+        if bika_setup:
+            return bika_setup.laboratory
+        # when we finally migrated it...
+        elif "laboratory" in self.objectIds():
+            return self["laboratry"]
+        return None

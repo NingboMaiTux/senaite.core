@@ -24,6 +24,8 @@ from bika.lims import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.controlpanel.browser.usergroups_usersoverview import \
     UsersOverviewControlPanel as BaseView
+from senaite.core.browser.user.account_status import is_account_disabled
+from senaite.core.browser.user.account_status import set_account_disabled
 from senaite.core import logger
 from senaite.core.catalog import CLIENT_CATALOG
 from senaite.core.config.roles import HIDDEN_ROLES
@@ -33,6 +35,16 @@ from zExceptions import Forbidden
 class UsersOverviewControlPanel(BaseView):
     """Custom userprefs controlpanel
     """
+
+    @staticmethod
+    def _as_list(value):
+        """统一将 request.form 的值归一化为列表
+        """
+        if value is None:
+            return []
+        if isinstance(value, (list, tuple)):
+            return list(value)
+        return [value]
 
     @property
     def portal_roles(self):
@@ -48,6 +60,11 @@ class UsersOverviewControlPanel(BaseView):
         query = {"portal_type": "Client"}
         clients = api.search(query, CLIENT_CATALOG)
         return list(map(api.get_object, clients))
+
+    def is_user_disabled(self, user_id):
+        """返回用户当前是否处于禁用状态
+        """
+        return is_account_disabled(user_id)
 
     def clear_user_groups(self, user):
         """Clear all assigned groups of the user
@@ -136,3 +153,22 @@ class UsersOverviewControlPanel(BaseView):
         # XXX: Maybe we could index local role assignments in the future?
         for client in self.get_clients():
             mtool.deleteLocalRoles(client, member_ids, reindex=0, recursive=0)
+
+    def manageUser(self, users=[], resetpassword=[], delete=[]):
+        """接管保存逻辑，忽略物理删除，仅维护禁用状态
+        """
+        # 中文注释：Plone 基类对 records 的解析并不保证会把我们新增的
+        # users.disabled:records 合并进 users 列表，所以这里直接读取原始
+        # request.form，避免勾选了 Disable 但状态没有真正落库。
+        form = getattr(self.request, "form", {})
+        user_ids = self._as_list(form.get("users.id:records"))
+        disabled_ids = set(self._as_list(form.get("users.disabled:records")))
+
+        # 即使有人手工伪造 delete:list 提交，也不再执行物理删除。
+        for user_id in user_ids:
+            if not user_id:
+                continue
+            set_account_disabled(user_id, user_id in disabled_ids)
+
+        return super(UsersOverviewControlPanel, self).manageUser(
+            users, resetpassword, [])

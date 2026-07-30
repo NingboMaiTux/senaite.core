@@ -51,6 +51,12 @@
          senaite.core.events.attachments.IAttachmentsDeletedEvent"
     handler=".client.on_attachments_deleted"/>
 
+  <!-- 请求前统一踢出已禁用账号，避免旧会话继续访问系统 -->
+  <subscriber
+    for="zope.component.interfaces.ISite
+         zope.traversing.interfaces.IBeforeTraverseEvent"
+    handler=".account.logout_disabled_user"/>
+
   <!-- Senaite Setup *modified* event handler -->
   <subscriber
     for="senaite.core.interfaces.ISetup
