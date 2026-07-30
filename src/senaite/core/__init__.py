@@ -25,6 +25,8 @@ logger = logging.getLogger("senaite.core")
 
 # Message factory for generic texts (e.g. "Title" for schema fields, etc.)
 PloneMessageFactory = zope.i18nmessageid.MessageFactory('plone')
+# 中文注释：禁用账号拦截改为登录表单入口处理，避免在包初始化时
+# 全局 monkey patch PAS 认证链，防止把原生“错误密码失败”行为带坏。
 
 
 def initialize(context):

@@ -22,15 +22,12 @@ import json
 import Missing
 
 from bika.lims import api
-from bika.lims.api.security import check_permission
-from senaite.core.permissions import ViewNavigation
 from plone.app.viewletmanager.manager import OrderedViewletManager
 from plone.memoize.instance import memoize
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core import logger
 from senaite.core.catalog import get_catalogs_by_type
-from senaite.core.i18n import translate
 from senaite.core.interfaces.catalog import ISenaiteCatalogObject
 from zope.component import getMultiAdapter
 
@@ -55,10 +52,8 @@ class SidebarViewletManager(OrderedViewletManager):
 
     def available(self):
         """Check if sidebar should be shown"""
-        if self.portal_state.anonymous():
-            return False
-        portal = self.portal_state.portal()
-        return check_permission(ViewNavigation, portal)
+        is_anonymous = self.portal_state.anonymous()
+        return not is_anonymous
 
     @property
     @memoize
@@ -107,6 +102,23 @@ class SidebarNavigationAPI(BrowserView):
         if self._setup is None:
             self._setup = api.get_senaite_setup()
         return self._setup
+
+    @property
+    def member(self):
+        """Cached authenticated member"""
+        return self.portal_state.member()
+
+    def is_privileged_user(self):
+        """Return whether the current user can see all worksheets"""
+        privileged = ["Manager", "LabManager", "RegulatoryInspector"]
+        user_roles = self.member.getRoles()
+        return bool(set(privileged).intersection(user_roles))
+
+    def show_only_mine_for_worksheets(self):
+        """Mirror the worksheet listing restriction for sidebar items"""
+        if self.is_privileged_user():
+            return False
+        return bool(self.setup and self.setup.getRestrictWorksheetUsersAccess())
 
     def get_navigation_root(self):
         """Return the navigation root
@@ -289,15 +301,24 @@ class SidebarNavigationAPI(BrowserView):
         :returns: Dict with item data or None if brain is invalid
         """
         try:
+            try:
+                obj = brain.getObject()
+            except Exception:
+                logger.warning(
+                    "Skipping stale navigation brain at %s",
+                    getattr(brain, "getPath", lambda: "<unknown>")(),
+                )
+                return None
+
             item = {
-                "id": api.get_id(brain),
-                "Title": api.get_title(brain),
-                "Description": api.get_description(brain),
-                "getURL": api.get_url(brain),
-                "portal_type": api.get_portal_type(brain),
-                "path": api.get_path(brain),
+                "id": api.get_id(obj),
+                "Title": api.get_title(obj),
+                "Description": api.get_description(obj),
+                "getURL": api.get_url(obj),
+                "portal_type": api.get_portal_type(obj),
+                "path": api.get_path(obj),
                 "depth": depth,
-                "review_state": api.get_review_status(brain),
+                "review_state": api.get_review_status(obj),
                 "show_children": True,
                 "item": brain,
                 "children": []
@@ -354,6 +375,12 @@ class SidebarNavigationAPI(BrowserView):
                 "sort_on": "sortable_title",
                 "sort_order": "ascending",
             })
+
+        # 中文注释：当启用“仅允许分析员查看自己 Worksheet”时，
+        # 左侧导航需要与右侧列表保持一致，只显示当前分析员自己的单据。
+        if (self.show_only_mine_for_worksheets() and
+                catalog.id == "senaite_catalog_worksheet"):
+            query["getAnalyst"] = self.member.getId()
 
         logger.info("Query catalog %s for children of %s at depth %d: %s" % (
             catalog.id, parent_path, current_depth, str(query)))
@@ -468,9 +495,8 @@ class SidebarNavigationAPI(BrowserView):
 
         item = {
             "id": node.get("id", ""),
-            "title": translate(node.get("Title", ""), to_utf8=False),
-            "description": translate(
-                node.get("Description", ""), to_utf8=False),
+            "title": node.get("Title", ""),
+            "description": node.get("Description", ""),
             "url": item_url,
             "icon": icon,
             "review_state": node.get("review_state", ""),

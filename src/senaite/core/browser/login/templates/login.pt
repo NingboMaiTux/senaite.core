@@ -10,6 +10,20 @@
     <metal:main fill-slot="main">
       <metal:main-macro define-macro="main">
 
+        <style type="text/css">
+          /* 中文注释：禁用账号被拦回登录页时，主模板仍可能残留侧栏容器。
+             登录页这里直接强制隐藏侧栏相关区域，避免出现左侧菜单残影。 */
+          #sidebar,
+          #sidebar-header {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            max-width: 0 !important;
+            overflow: hidden !important;
+          }
+        </style>
+
         <div class="col-sm-4 offset-sm-4">
           <div id="login-form" class="card my-4">
 

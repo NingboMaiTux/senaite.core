@@ -110,8 +110,13 @@ Auto Log Off:
 
 Restrict Worksheet Users Access:
 
+    验证服务端联动兜底：当前者开启时，后者会被自动强制设为 True。
+
     >>> senaite_setup.setRestrictWorksheetUsersAccess(True)
     >>> senaite_setup.getRestrictWorksheetUsersAccess()
+    True
+
+    >>> senaite_setup.getRestrictWorksheetManagement()
     True
 
     >>> bikasetup.getRestrictWorksheetUsersAccess() == senaite_setup.getRestrictWorksheetUsersAccess()
@@ -607,6 +612,32 @@ Worksheet Layout:
     u'modern'
 
     >>> bikasetup.getWorksheetLayout() == senaite_setup.getWorksheetLayout()
+    True
+
+Dashboard By Default:
+
+    >>> senaite_setup.setDashboardByDefault(True)
+    >>> senaite_setup.getDashboardByDefault()
+    True
+
+    >>> bikasetup.getDashboardByDefault() == senaite_setup.getDashboardByDefault()
+    True
+
+    >>> bikasetup.setDashboardByDefault(False)
+    >>> bikasetup.getDashboardByDefault()
+    False
+
+    >>> bikasetup.getDashboardByDefault() == senaite_setup.getDashboardByDefault()
+    True
+
+Landing Page:
+
+    >>> senaite_setup.setLandingPage(u"samples")
+    >>> bikasetup.getLandingPage() == senaite_setup.getLandingPage()
+    True
+
+    >>> bikasetup.setLandingPage(u"batches")
+    >>> bikasetup.getLandingPage() == senaite_setup.getLandingPage()
     True
 
 Show Partitions:
