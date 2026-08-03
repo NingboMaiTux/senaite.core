@@ -41,7 +41,13 @@ def update_worksheets_permissions(senaite_setup):
         # LabManagers, Analysts and LabClerks can create and manage worksheets
         roles.extend(["Analyst", "LabClerk"])
 
-    worksheets = api.get_portal().worksheets
+    portal = api.get_portal()
+    worksheets = getattr(portal, "worksheets", None)
+    if worksheets is None:
+        # 中文注释：安装/建站早期当前站点可能还是 RequestContainer，
+        # 此时 worksheets 容器尚未创建，跳过本次权限重算，等待后续正常事件再处理。
+        return
+
     worksheets.manage_permission(AddWorksheet, roles, acquire=1)
     worksheets.manage_permission(ManageWorksheets, roles, acquire=1)
     worksheets.manage_permission(EditWorksheet, roles, acquire=1)
