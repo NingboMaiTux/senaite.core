@@ -24,6 +24,7 @@ const CONTROLLER_MAP = {
 
   // Setup
   ".portaltype-bikasetup.template-base_edit": ["BikaSetupEditView"],
+  "body.portaltype-setup.template-edit, .portaltype-setup.template-edit": ["SenaiteSetupEditView"],
 
   // Clients
   ".portaltype-client.template-base_edit": ["ClientEditView"],

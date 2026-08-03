@@ -22,13 +22,16 @@ import json
 import Missing
 
 from bika.lims import api
+from bika.lims.api.security import check_permission
 from plone.app.viewletmanager.manager import OrderedViewletManager
 from plone.memoize.instance import memoize
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core import logger
 from senaite.core.catalog import get_catalogs_by_type
+from senaite.core.i18n import translate
 from senaite.core.interfaces.catalog import ISenaiteCatalogObject
+from senaite.core.permissions import ViewNavigation
 from zope.component import getMultiAdapter
 
 PORTAL_CATALOG = "portal_catalog"
@@ -52,8 +55,10 @@ class SidebarViewletManager(OrderedViewletManager):
 
     def available(self):
         """Check if sidebar should be shown"""
-        is_anonymous = self.portal_state.anonymous()
-        return not is_anonymous
+        if self.portal_state.anonymous():
+            return False
+        portal = self.portal_state.portal()
+        return check_permission(ViewNavigation, portal)
 
     @property
     @memoize
@@ -301,24 +306,15 @@ class SidebarNavigationAPI(BrowserView):
         :returns: Dict with item data or None if brain is invalid
         """
         try:
-            try:
-                obj = brain.getObject()
-            except Exception:
-                logger.warning(
-                    "Skipping stale navigation brain at %s",
-                    getattr(brain, "getPath", lambda: "<unknown>")(),
-                )
-                return None
-
             item = {
-                "id": api.get_id(obj),
-                "Title": api.get_title(obj),
-                "Description": api.get_description(obj),
-                "getURL": api.get_url(obj),
-                "portal_type": api.get_portal_type(obj),
-                "path": api.get_path(obj),
+                "id": api.get_id(brain),
+                "Title": api.get_title(brain),
+                "Description": api.get_description(brain),
+                "getURL": api.get_url(brain),
+                "portal_type": api.get_portal_type(brain),
+                "path": api.get_path(brain),
                 "depth": depth,
-                "review_state": api.get_review_status(obj),
+                "review_state": api.get_review_status(brain),
                 "show_children": True,
                 "item": brain,
                 "children": []
@@ -495,8 +491,9 @@ class SidebarNavigationAPI(BrowserView):
 
         item = {
             "id": node.get("id", ""),
-            "title": node.get("Title", ""),
-            "description": node.get("Description", ""),
+            "title": translate(node.get("Title", ""), to_utf8=False),
+            "description": translate(
+                node.get("Description", ""), to_utf8=False),
             "url": item_url,
             "icon": icon,
             "review_state": node.get("review_state", ""),

@@ -21,11 +21,32 @@
 from senaite.core.browser.form.adapters import EditFormAdapterBase
 
 _FIELD_PREFIX = "form.widgets."
+_MANAGEMENT_FIELD = _FIELD_PREFIX + "restrict_worksheet_management"
+_MANAGEMENT_CHECKBOX_SELECTOR = (
+    "input[type='checkbox'][name^='{}']".format(_MANAGEMENT_FIELD)
+)
 
 
 class EditForm(EditFormAdapterBase):
     """Edit form adapter for SenaiteSetup
     """
+
+    def _as_bool(self, value):
+        """将表单值统一转换为布尔值，兼容字符串布尔输入"""
+        if isinstance(value, basestring):
+            return value.strip().lower() in ("1", "true", "yes", "on")
+        return bool(value)
+
+    def _set_management_checked_state(self, checked):
+        """同步更新管理权限复选框的值与勾选外观"""
+        self.add_update_field(_MANAGEMENT_FIELD, checked)
+        # 中文注释：部分前端逻辑只更新字段值，不会同步刷新 checkbox
+        # 的勾选外观，因此这里显式补充 checked 属性。
+        self.add_attribute(
+            _MANAGEMENT_CHECKBOX_SELECTOR,
+            "checked",
+            "checked" if checked else False
+        )
 
     def initialized(self, data):
         """Handle form initialization
@@ -43,10 +64,13 @@ class EditForm(EditFormAdapterBase):
         # Check if worksheet access is restricted to assigned analysts
         restrict_users = self.context.getRestrictWorksheetUsersAccess()
 
-        if restrict_users:
+        if self._as_bool(restrict_users):
+            # 中文注释：页面初始化时先把下方字段显式更新为 True，
+            # 再设为只读，避免旧数据为空时前端禁用后提交丢值。
+            self._set_management_checked_state(True)
             # Make restrict_worksheet_management readonly and force it to True
             self.add_readonly_field(
-                _FIELD_PREFIX + "restrict_worksheet_management",
+                _MANAGEMENT_FIELD,
                 message=None
             )
 
@@ -71,21 +95,18 @@ class EditForm(EditFormAdapterBase):
         elif name == _FIELD_PREFIX + "restrict_worksheet_users_access":
             # Handle restrict_worksheet_management based on
             # restrict_worksheet_users_access
-            if value:
-                # Enable restrict_worksheet_management checkbox
-                self.add_update_field(
-                    _FIELD_PREFIX + "restrict_worksheet_management",
-                    True
-                )
+            if self._as_bool(value):
+                self._set_management_checked_state(True)
                 # Make restrict_worksheet_management readonly
                 self.add_readonly_field(
-                    _FIELD_PREFIX + "restrict_worksheet_management",
+                    _MANAGEMENT_FIELD,
                     message=None
                 )
             else:
+                self._set_management_checked_state(False)
                 # Make restrict_worksheet_management editable
                 self.add_editable_field(
-                    _FIELD_PREFIX + "restrict_worksheet_management",
+                    _MANAGEMENT_FIELD,
                     message=None
                 )
 
