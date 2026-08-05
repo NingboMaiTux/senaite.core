@@ -47,6 +47,7 @@ def _set_user_property(user, key, value):
         portal_memberdata.manage_addProperty(key, "", "string")
         logger.info("Registered user property {}".format(key))
 
+    saved = False
     acl_users = portal_memberdata.acl_users
     for _plugin_id, plugin in acl_users.plugins.listPlugins(IPropertiesPlugin):
         sheet = plugin.getPropertiesForUser(user)
@@ -59,10 +60,38 @@ def _set_user_property(user, key, value):
         if not has(key):
             continue
         setter(user, key, value)
-        return True
+        saved = True
+        break
 
-    logger.warn("No mutable properties plugin accepted '{}'".format(key))
-    return False
+    member_setter = getattr(user, "setMemberProperties", None)
+    if callable(member_setter):
+        try:
+            # 中文注释：部分现场环境里 plugin 路径可真实落库，但当前请求
+            # 的 memberdata 视图缓存不会立刻同步；这里补一次标准接口调用，
+            # 兼容回显与不同用户源实现。
+            member_setter({key: value})
+            saved = True
+        except Exception as exc:
+            logger.warn(
+                "setMemberProperties failed for '{}': {}".format(key, exc))
+
+    properties_setter = getattr(user, "setProperties", None)
+    if callable(properties_setter):
+        try:
+            # 中文注释：再补一层 kwargs/properties 双兼容写法，尽量覆盖
+            # 不同 MemberData/User 对象的实现差异。
+            try:
+                properties_setter(**{key: value})
+            except TypeError:
+                properties_setter(properties={key: value})
+            saved = True
+        except Exception as exc:
+            logger.warn(
+                "setProperties failed for '{}': {}".format(key, exc))
+
+    if not saved:
+        logger.warn("No writable path accepted '{}'".format(key))
+    return saved
 
 
 def is_account_disabled(user_or_username):
