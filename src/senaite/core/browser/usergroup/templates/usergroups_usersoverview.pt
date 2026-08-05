@@ -180,8 +180,7 @@
                                name="users.disabled:records"
                                value=""
                                tal:attributes="value userid;
-                                               checked python:view.is_user_disabled(userid) and 'checked' or nothing;
-                                               disabled python:user['can_delete'] and default or 'disabled'" />
+                                               checked python:view.is_user_disabled(userid) and 'checked' or nothing" />
                       </td>
 
                     </tr>
