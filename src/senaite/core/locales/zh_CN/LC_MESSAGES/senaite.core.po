@@ -1300,7 +1300,7 @@ msgstr "考虑"
 #: senaite/core/browser/samples/view.py:197
 #: senaite/core/profiles/default/types/Contact.xml
 msgid "Contact"
-msgstr "联系方式"
+msgstr "客户联系人"
 
 #: bika/lims/browser/analysisrequest/add2.py:2066
 msgid "Contact does not belong to the selected client"
@@ -1314,7 +1314,7 @@ msgstr "联系人已停用。 用户无法取消关联。"
 #: senaite/core/profiles/default/types/Contacts.xml
 #: senaite/core/profiles/default/types/Supplier.xml
 msgid "Contacts"
-msgstr "联系方式"
+msgstr "客户联系人"
 
 #: bika/lims/browser/templates/analysisreport_info.pt:72
 msgid "Contained Samples"
@@ -3044,7 +3044,7 @@ msgstr "实验室联系人"
 #: bika/lims/controlpanel/bika_labcontacts.py:65
 #: bika/lims/profiles/default/types/LabContacts.xml
 msgid "Lab Contacts"
-msgstr "联系方式"
+msgstr "实验室联系人"
 
 #: senaite/core/browser/controlpanel/departments/view.py:57
 msgid "Lab Departments"
@@ -6886,7 +6886,7 @@ msgstr "每天"
 #. ${b} ${d}, ${Y} ${I}:${M} ${p}
 #: ./TranslationServiceTool.py
 msgid "date_format_long"
-msgstr "长日期格式"
+msgstr "${Y}-${m}-${d} ${H}:${M}"
 
 #. Default: "${Y}-${m}-${d}"
 #. The variables used here are the same as used in the strftime formating.
@@ -6897,7 +6897,7 @@ msgstr "长日期格式"
 #. ${b} ${d}, ${Y}
 #: ./TranslationServiceTool.py
 msgid "date_format_short"
-msgstr "短日期格式"
+msgstr "${Y}-${m}-${d}"
 
 #. Date format used with the datepicker jqueryui plugin.
 #. Please only use 'dd', 'mm', 'yy', '-', '/', '.' in this string.
@@ -7906,7 +7906,7 @@ msgstr "'样品 count' when users click 'ADD' button to create new 样品s"
 #. Default: "E-mail to use as the 'From' address for outgoing e-mails when publishing results reports. This address overrides the value set at portal's 'Mail settings'."
 #: senaite/core/content/senaitesetup.py:260
 msgid "description_senaitesetup_email_from_sample_publication"
-msgstr "E-mail to use as the 'From' address for outgoing e-mails when publishing 结果报告. This address overrides the 值 set at portal's 'Mail settings'."
+msgstr "发布结果报告时，发送邮件所使用的'发件人'地址。该设置会覆盖门户'邮件设置'中配置的地址。"
 
 #. analysis in results entry view"
 #. Default: "If enabled, a free text field will be displayed close to each analysis in results entry view"
@@ -7917,7 +7917,7 @@ msgstr "如果启用，a free text field will be displayed close to each 检验 
 #. Default: "Analysis specifications which are edited directly on the Sample."
 #: senaite/core/content/senaitesetup.py:612
 msgid "description_senaitesetup_enable_ar_specs"
-msgstr "分析规格 which are edited directly on the 样品."
+msgstr "可直接在样品上编辑的分析规格。"
 
 #. 'Reject' option will be displayed in the actions menu."
 #. Default: "Select this to activate the rejection workflow for Samples. A 'Reject' option will be displayed in the actions menu."
@@ -7930,7 +7930,7 @@ msgstr "选择此项以启用the rejection 工作流 for 样品s. A 'Reject' opt
 #. Default: "Result values with at least this number of significant digits are displayed in scientific notation using the letter 'e' to indicate the exponent. The precision can be configured in individual Analysis Services."
 #: senaite/core/content/senaitesetup.py:625
 msgid "description_senaitesetup_exponential_format_threshold"
-msgstr "结果 值s with at least this significant digits are displayed in scientific notation using the letter 'e' to indicate the exponent. The precision can be configured in individual 分析服务."
+msgstr "有效数字位数达到或超过该值的结果，将以科学计数法显示（用字母 e 表示指数）。精度可在各检验项目服务中单独配置。"
 
 #. e.g. to enter field results immediately, or lab results, when the automatic
 #. sample reception is activated."
@@ -7945,28 +7945,28 @@ msgstr "描述 Maitux设置立即输入结果"
 #. Default: "Specify whether providing a reason is mandatory when invalidating a sample. If enabled, the '$reason' placeholder in the sample invalidation notification email body will be replaced with the entered reason."
 #: senaite/core/content/senaitesetup.py:411
 msgid "description_senaitesetup_invalidation_reason_required"
-msgstr "指定是否providing a reason is mandatory when invalidating a 样品. 如果启用，the '$reason' placeholder in the 样品 invalidation notification 邮件 body will be replaced with the entered reason."
+msgstr "指定作废样品时是否必须填写原因。启用后，样品作废通知邮件正文中的 '$reason' 占位符将被替换为所填写的原因。"
 
 #. Dashboard is not selected as the default front page. If no landing page is
 #. selected, the default frontpage is displayed."
 #. Default: "The landing page is shown for non-authenticated users if the Dashboard is not selected as the default front page. If no landing page is selected, the default frontpage is displayed."
 #: senaite/core/content/senaitesetup.py:874
 msgid "description_senaitesetup_landing_page"
-msgstr "The 着陆页 is shown for non-authenticated users if the 仪表盘 is not selected as the 默认 首页. If no 着陆页 is selected, the 默认 frontpage is displayed."
+msgstr "当未将仪表盘设为默认首页时，系统会向未登录用户显示该着陆页。如果未选择着陆页，则显示默认首页。"
 
 #. the value set for the field 'Number of samples' on the sample registration
 #. form"
 #. Default: "Maximum number of samples that can be created in accordance with the value set for the field 'Number of samples' on the sample registration form"
 #: senaite/core/content/senaitesetup.py:373
 msgid "description_senaitesetup_maxnumberofsamplesadd"
-msgstr "Maximum 样品 that can be created in accordance with the 值 set for the field 'Number of 样品' on the 样品 registration form"
+msgstr "样品登记表单中'样品数量'字段可设置的最大样品数"
 
 #. for clients flagged as 'members', normally co-operative members or
 #. associates deserving of this discount"
 #. Default: "The discount percentage entered here, is applied to the prices for clients flagged as 'members', normally co-operative members or associates deserving of this discount"
 #: senaite/core/content/senaitesetup.py:524
 msgid "description_senaitesetup_member_discount"
-msgstr "The discount percentage entered here, is applied to the prices for 客户 flagged as 'members', normally co-operative members or associates deserving of this discount"
+msgstr "此处填写的折扣百分比，将应用于被标记为'会员'的客户（通常是享有此折扣的合作社成员或联营方）的价格"
 
 #. acceptable minimum number of results before QC statistics will be
 #. calculated and plotted"
@@ -7994,7 +7994,7 @@ msgstr "说明 Maitux设置发布电子邮件文本"
 #. Default: "Enter the predefined rejection reasons that users can select when rejecting a sample."
 #: senaite/core/content/senaitesetup.py:773
 msgid "description_senaitesetup_rejection_reasons"
-msgstr "Enter the predefined rejection reasons that users can select when rejecting a 样品."
+msgstr "输入预设的拒收原因，供用户在拒收样品时选择。"
 
 #. When disabled, analysts and lab clerks can also manage worksheets. Note:
 #. This setting is automatically enabled and locked when worksheet access is
@@ -8002,13 +8002,13 @@ msgstr "Enter the predefined rejection reasons that users can select when reject
 #. Default: "When enabled, only lab managers can create and manage worksheets. When disabled, analysts and lab clerks can also manage worksheets. Note: This setting is automatically enabled and locked when worksheet access is restricted to assigned analysts."
 #: senaite/core/content/senaitesetup.py:471
 msgid "description_senaitesetup_restrict_worksheet_management"
-msgstr "启用后，only 实验室经理 can create and manage 工作表. 禁用后，analysts and 实验室clerks can also manage 工作表. 注意：This setting is automatically enabled and locked when 工作表 access is restricted to assigned analysts."
+msgstr "启用后，只有实验室经理可以创建和管理工作表；禁用后，检验人员和实验室文员也可以管理工作表。注意：当'仅允许已分配的检验人员访问工作表'启用时，该设置会被自动启用并锁定。"
 
 #. are assigned. When disabled, analysts have access to all worksheets."
 #. Default: "When enabled, analysts can only access worksheets to which they are assigned. When disabled, analysts have access to all worksheets."
 #: senaite/core/content/senaitesetup.py:441
 msgid "description_senaitesetup_restrict_worksheet_users_access"
-msgstr "启用后，analysts can only access 工作表 to which they are assigned. 禁用后，analysts have access to all 工作表."
+msgstr "启用后，检验人员只能访问被分配给自己的工作表；禁用后，检验人员可以访问所有工作表。"
 
 #. Default: "Preferred decimal mark for results"
 #: senaite/core/content/senaitesetup.py:718
@@ -8020,7 +8020,7 @@ msgstr "Preferred 小数点符号 for 结果"
 #. Default: "If enabled, users with sufficient privileges can create a sibling sample directly from an existing one via the 'Duplicate' action in the samples listing. Enabled by default."
 #: senaite/core/content/senaitesetup.py:968
 msgid "description_senaitesetup_sample_duplicate_enabled"
-msgstr "如果启用，users with sufficient privileges can create a sibling 样品 directly from an existing one via the 'Duplicate' action in the 样品 listing. Enabled by 默认."
+msgstr "启用后，具有相应权限的用户可以在样品列表中通过'复制样品'操作，基于已有样品直接创建一个同级新样品。默认启用。"
 
 #. Default: "Analyses are required for sample registration"
 #: senaite/core/content/senaitesetup.py:350
@@ -8032,7 +8032,7 @@ msgstr "Analyses are 必填 for 样品 registration"
 #. Default: "Select which columns to display in sample analysis listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in default order."
 #: senaite/core/content/senaitesetup.py:804
 msgid "description_senaitesetup_sampleview_columns_order"
-msgstr "选择which columns to display in 样品 检验 listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in 默认 order."
+msgstr "选择要在样品分析列表中显示的列。选择的先后顺序即为显示顺序，未选中的列将被隐藏。留空则按默认顺序显示所有列。"
 
 #. Default: "Preferred scientific notation format for reports"
 #: senaite/core/content/senaitesetup.py:570
@@ -8051,20 +8051,20 @@ msgstr "Preferred scientific notation format for 结果"
 #. Default: "If enabled, a user who submitted a result will also be able to verify it. This setting only take effect for those users with a role assigned that allows them to verify results (by default, managers, labmanagers and verifiers). This setting can be overrided for a given Analysis in Analysis Service edit view. By default, disabled."
 #: senaite/core/content/senaitesetup.py:669
 msgid "description_senaitesetup_self_verification_enabled"
-msgstr "如果启用，a user who submitted a 结果 will also be able to verify it. This setting only take effect for those users with a role assigned that allows them to verify 结果 (by 默认, 经理s, lab经理s and verifiers). This setting can be overrided for a given 检验 in 分析服务 edit view. By 默认, disabled."
+msgstr "启用后，提交结果的用户也可以对该结果进行复核。此设置仅对具有结果复核权限角色的用户生效（默认包括管理员、实验室经理和复核人员）。该设置可以在检验项目服务的编辑视图中针对具体检验项进行覆盖。默认禁用。"
 
 #. page, above the access credentials."
 #. Default: "When selected, the laboratory name will be displayedin the login page, above the access credentials."
 #: senaite/core/content/senaitesetup.py:399
 msgid "description_senaitesetup_show_lab_name_in_login"
-msgstr "When selected, the 实验室 name will be displayedin the login page, above the access credentials."
+msgstr "选中后，将在登录页面的账号密码输入框上方显示实验室名称。"
 
 #. deactivated, partitions won't be included in listings and no info message
 #. with links to the primary sample will be displayed to client contacts."
 #. Default: "Select to show sample partitions to client contacts. If deactivated, partitions won't be included in listings and no info message with links to the primary sample will be displayed to client contacts."
 #: senaite/core/content/senaitesetup.py:898
 msgid "description_senaitesetup_show_partitions"
-msgstr "选择to show 样品 partitions to 客户 联系人. If deactivated, partitions won't be included in listings and no info message with links to the 主要 样品 will be displayed to 客户 联系人."
+msgstr "选中后，客户联系人可以看到样品分装。若禁用，分装样品将不会出现在列表中，客户联系人也不会看到指向原始样品的提示信息及链接。"
 
 #. navigation. The order of selection determines the display order in the
 #. sidebar. If none are selected, all folders will be shown in the default
@@ -8072,7 +8072,7 @@ msgstr "选择to show 样品 partitions to 客户 联系人. If deactivated, par
 #. Default: "Select which top-level folders should be displayed in the sidebar navigation. The order of selection determines the display order in the sidebar. If none are selected, all folders will be shown in the default order."
 #: senaite/core/content/senaitesetup.py:913
 msgid "description_senaitesetup_sidebar_folders"
-msgstr "选择which top-level 文件夹s should be displayed in the sidebar navigation. The order of selection determines the display order in the sidebar. If none are selected, all 文件夹s will be shown in the 默认 order."
+msgstr "选择要在侧边栏导航中显示的顶级文件夹。选择的先后顺序即为侧边栏中的显示顺序。如果未选择任何文件夹，则按默认顺序显示全部文件夹。"
 
 #. top-level folders, level 2 includes their children, and so on."
 #. Default: "Maximum depth of the sidebar navigation tree. Level 1 shows only top-level folders, level 2 includes their children, and so on."
@@ -8084,7 +8084,7 @@ msgstr "Maximum depth of the sidebar navigation tree. Level 1 shows only top-lev
 #. Default: "Select which content types should be excluded from the sidebar navigation. If none are selected, all content types will be shown."
 #: senaite/core/content/senaitesetup.py:949
 msgid "description_senaitesetup_sidebar_skip_types"
-msgstr "选择which content types should be excluded from the sidebar navigation. If none are selected, all content types will be shown."
+msgstr "选择要从侧边栏导航中排除的内容类型。如果未选择任何类型，则显示全部内容类型。"
 
 #. setting can enable/disable verifying/consecutively verifying more than once
 #. for the same user."
@@ -8105,21 +8105,21 @@ msgstr "Enter percentage 值 eg. 14.0. This percentage is applied system wide bu
 #. Default: "Preferred layout of the results entry table in the Worksheet view. Classic layout displays the Samples in rows and the analyses in columns. Transposed layout displays the Samples in columns and the analyses in rows."
 #: senaite/core/content/senaitesetup.py:845
 msgid "description_senaitesetup_worksheet_layout"
-msgstr "Preferred layout of the 结果 entry table in the 工作表 view. Classic layout displays the 样品s in rows and the analyses in columns. Transposed layout displays the 样品s in columns and the analyses in rows."
+msgstr "工作表视图中结果录入表格的首选布局。经典布局将样品显示为行、检验项显示为列；转置布局将样品显示为列、检验项显示为行。"
 
 #. The order of selection determines the display order. Unselected columns are
 #. hidden. Leave empty to show all columns in default order."
 #. Default: "Select which columns to display in worksheet analysis listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in default order."
 #: senaite/core/content/senaitesetup.py:824
 msgid "description_senaitesetup_wsview_columns_order"
-msgstr "选择which columns to display in 工作表 检验 listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in 默认 order."
+msgstr "选择要在工作表分析列表中显示的列。选择的先后顺序即为显示顺序，未选中的列将被隐藏。留空则按默认顺序显示所有列。"
 
 #. Dashboard is not selected as the default front page. If no landing page is
 #. selected, the default frontpage is displayed."
 #. Default: "The landing page is shown for non-authenticated users if the Dashboard is not selected as the default front page. If no landing page is selected, the default frontpage is displayed."
 #: bika/lims/content/bikasetup.py:616
 msgid "description_setup_landingpage"
-msgstr "The 着陆页 is shown for non-authenticated users if the 仪表盘 is not selected as the 默认 首页. If no 着陆页 is selected, the 默认 frontpage is displayed."
+msgstr "当未将仪表盘设为默认首页时，系统会向未登录用户显示该着陆页。如果未选择着陆页，则显示默认首页。"
 
 #. Default: "Code for the location"
 #: senaite/core/content/storagelocation.py:106
@@ -8175,7 +8175,7 @@ msgstr "Title of the site"
 #. Default: "Float value from 0.0 - 1000.0 indicating the sort order. Duplicate values are ordered alphabetically."
 #: senaite/core/content/subgroup.py:60
 msgid "description_subgroup_sort_key"
-msgstr "Float 值 from 0.0 - 1000.0 indicating the sort order. Duplicate 值s are ordered alphabetically."
+msgstr "0.0 到 1000.0 之间的浮点数，用于指定排序顺序。数值相同时按字母顺序排列。"
 
 #. Default: "International Bank Account Number"
 #: senaite/core/content/supplier.py:100
@@ -8203,7 +8203,7 @@ msgstr "选择preferred 仪器"
 #. Default: "Restrict the available analysis services and instruments to those with the selected method.<br/>In order to apply this change to the services list, you should save the change first."
 #: senaite/core/content/worksheettemplate.py:240
 msgid "description_worksheettemplate_restrict_to_method"
-msgstr "Restrict the 可用 分析服务 and 仪器s to those with the selected method.<br/>In order to apply this change to the services list, you should save the change first."
+msgstr "将可用的检验项目服务和仪器限制为使用所选方法的项目。<br/>若要将此更改应用到服务列表，请先保存该更改。"
 
 #. Default: "Select which Analyses should be included on the Worksheet"
 #: senaite/core/content/worksheettemplate.py:350
@@ -8217,7 +8217,7 @@ msgstr "选择which Analyses should be included on the 工作表"
 #. Default: "Specify the size of the Worksheet, e.g. corresponding to a specific instrument's tray size. Then select an Analysis 'type' per Worksheet position. Where QC samples are selected, also select which Reference Sample should be used. If a duplicate analysis is selected, indicate which sample position it should be a duplicate of"
 #: senaite/core/content/worksheettemplate.py:315
 msgid "description_worksheettemplate_template_layout"
-msgstr "指定size of the 工作表, 例如 corresponding to a specific 仪器's tray size. Then select an 检验 'type' per 工作表 position. Where QC 样品 are selected, also select which Reference 样品 should be used. If a duplicate 检验 is selected, indicate which 样品 position it should be a duplicate of"
+msgstr "指定工作表的大小，例如与特定仪器的样品盘容量相对应。然后为工作表的每个位置选择检验项'类型'。选择质控样品时，还需选择要使用的参考样品。如果选择的是重复检验，请指明该检验对应重复的是哪个样品位置。"
 
 #. Default: "Not found Analysis position for duplicate."
 #: senaite/core/browser/form/adapters/worksheettemplate.py:114
@@ -8239,7 +8239,7 @@ msgstr "Contents of the 文件"
 #. Default: "The number of samples to create for the record 'Sample ${record_index}' (${num_samples}) is above ${max_num_samples}"
 #: bika/lims/browser/analysisrequest/add2.py:2081
 msgid "error_analyssirequest_numsamples_above_max"
-msgstr "The 样品 to create for the record '样品 ${record_index}' (${num_样品}) is above ${max_num_样品}"
+msgstr "记录 '样品 ${record_index}'（${num_samples}）要创建的样品数量超过了 ${max_num_samples}"
 
 #. Default: "${name} is after ${max_date}, please correct."
 #: senaite/core/browser/fields/datetime.py:120
@@ -8577,7 +8577,7 @@ msgstr "部门"
 #. Default: "The Lower Limit of Detection (LLOD) is the lowest concentration of a parameter that can be reliably detected by a specified testing methodology with a defined level of confidence. Results below this threshold are typically reported as '< LLOD' (or 'Not Detected'), indicating that the parameter's concentration, if present, is below the detection capability of the method at a reliable level."
 #: bika/lims/content/abstractbaseanalysis.py:207
 msgid "label_analysis_lower_limit_of_detection_description"
-msgstr "The Lower Limit of Detection (LLOD) is the lowest concentration of a parameter that can be reliably detected by a specified testing methodology with a defined level of confidence. 结果s below this threshold are typically reported as '< LLOD' (or 'Not Detected'), indicating that the parameter's concentration, if present, is below the detection capability of the method at a reliable level."
+msgstr "检出限下限（LLOD）是指在规定的置信水平下，某一特定检测方法能够可靠检出的参数最低浓度。低于该阈值的结果通常报告为 '< LLOD'（或'未检出'），表示该参数即使存在，其浓度也低于该方法可靠检测的能力范围。"
 
 #. Default: "Lower Limit of Detection (LLOD)"
 #: bika/lims/content/abstractbaseanalysis.py:203
@@ -8593,7 +8593,7 @@ msgstr "Lower Limit of Detection (LLOD)"
 #. Default: "The Lower Limit of Quantification (LLOQ) is the lowest concentration of a parameter that can be reliably and accurately measured using the specified testing methodology, with acceptable levels of precision and accuracy. Results below this value cannot be quantified with confidence and are typically reported as '< LOQ' (or 'Detected but < LOQ'), indicating that while the parameter may be present, its exact concentration cannot be determined reliably."
 #: bika/lims/content/abstractbaseanalysis.py:231
 msgid "label_analysis_lower_limit_of_quantification_description"
-msgstr "The Lower Limit of Quantification (LLOQ) is the lowest concentration of a parameter that can be reliably and accurately measured using the specified testing methodology, with acceptable levels of precision and accuracy. 结果s below this 值 cannot be quantified with confidence and are typically reported as '< LOQ' (or 'Detected but < LOQ'), indicating that while the parameter may be present, its exact concentration cannot be determined reliably."
+msgstr "定量限下限（LLOQ）是指使用指定检测方法、在可接受的精密度和准确度范围内，能够可靠且准确测定的参数最低浓度。低于该数值的结果无法被可靠定量，通常报告为 '< LOQ'（或'检出但低于定量限'），表示该参数虽然可能存在，但无法可靠确定其准确浓度。"
 
 #. Default: "Lower Limit Of Quantification (LLOQ)"
 #: bika/lims/content/abstractbaseanalysis.py:227
@@ -8629,7 +8629,7 @@ msgstr "Units for Selection"
 #. Default: "The Upper Limit of Detection (ULOD) is the highest concentration of a parameter that can be reliably measured using a specified testing methodology. Beyond this limit, results may no longer be accurate or valid due to instrument saturation or methodological limitations. Results exceeding this threshold are typically reported as '> ULOD', indicating that the parameter's concentration is above the reliable detection range of the method."
 #: bika/lims/content/abstractbaseanalysis.py:277
 msgid "label_analysis_upper_limit_of_detection_description"
-msgstr "The Upper Limit of Detection (ULOD) is the highest concentration of a parameter that can be reliably measured using a specified testing methodology. Beyond this limit, 结果 may no longer be accurate or valid due to 仪器 saturation or methodological limitations. 结果s exceeding this threshold are typically reported as '> ULOD', indicating that the parameter's concentration is above the reliable detection range of the method."
+msgstr "检出限上限（ULOD）是指使用指定检测方法能够可靠测定的参数最高浓度。超过该限值后，由于仪器饱和或方法本身的局限性，结果可能不再准确或有效。超过该阈值的结果通常报告为 '> ULOD'，表示该参数的浓度已超出该方法可靠检测的范围。"
 
 #. Default: "Upper Limit of Detection (ULOD)"
 #: bika/lims/content/abstractbaseanalysis.py:274
@@ -8644,7 +8644,7 @@ msgstr "Upper Limit of Detection (ULOD)"
 #. Default: "The Upper Limit of Quantification (ULOQ) is the highest concentration of a parameter that can be reliably and accurately measured using the specified testing methodology, with acceptable levels of precision and accuracy. Results above this value cannot be quantified with confidence and are typically reported as '> ULOQ', indicating that its exact concentration cannot be determined reliably."
 #: bika/lims/content/abstractbaseanalysis.py:255
 msgid "label_analysis_upper_limit_of_quantification_description"
-msgstr "The Upper Limit of Quantification (ULOQ) is the highest concentration of a parameter that can be reliably and accurately measured using the specified testing methodology, with acceptable levels of precision and accuracy. 结果s above this 值 cannot be quantified with confidence and are typically reported as '> ULOQ', indicating that its exact concentration cannot be determined reliably."
+msgstr "定量限上限（ULOQ）是指使用指定检测方法、在可接受的精密度和准确度范围内，能够可靠且准确测定的参数最高浓度。高于该数值的结果无法被可靠定量，通常报告为 '> ULOQ'，表示无法可靠确定其准确浓度。"
 
 #. Default: "Upper Limit Of Quantification (ULOQ)"
 #: bika/lims/content/abstractbaseanalysis.py:252
@@ -8880,7 +8880,7 @@ msgstr "Manager"
 #. Default: "You are editing the default view of a container. If you wanted to edit the container itself, ${go_here}."
 #: senaite/core/skins/senaite_templates/bikasetup_edit.pt:28
 msgid "label_edit_default_view_container"
-msgstr "You are editing the 默认 view of a container. If you wanted to edit the container itself, ${go_here}."
+msgstr "您正在编辑容器的默认视图。如果想编辑容器本身，请 ${go_here}。"
 
 #. Default: "go here"
 #: senaite/core/skins/senaite_templates/bikasetup_edit.pt:28
@@ -10913,7 +10913,7 @@ msgstr "'${field_name}' is 必填"
 #. Default: "Layout view '${view}' not found. Set '${default}' as layout view."
 #: senaite/core/browser/worksheets/worksheet/manage_results.py:66
 msgid "not_found_worksheet_layout_message"
-msgstr "Layout view '${view}' not found. Set '${默认}' as layout view."
+msgstr "未找到布局视图 '${view}'，已将 '${default}' 设为布局视图。"
 
 #. Default: "Set"
 #: senaite/core/browser/form/adapters/worksheettemplate.py:239
@@ -11014,7 +11014,7 @@ msgstr "该样品已由"
 #. ${I}:${M} ${p}
 #: ./TranslationServiceTool.py
 msgid "time_format"
-msgstr "时间格式"
+msgstr "${H}:${M}"
 
 #. Default: "Accreditation"
 #: senaite/core/content/laboratory.py:170
@@ -12024,7 +12024,7 @@ msgstr "The Lower Limit of Quantification (LLOQ) cannot be greater than or equal
 #. Default: "The Reference Sample ID cannot be changed because it is already associated with other objects, such as QC analyses."
 #: bika/lims/validators.py:1586
 msgid "validator_referencesample_id_children"
-msgstr "The Reference 样品 ID cannot be changed because it is already associated with other objects, such as QC analyses."
+msgstr "该参考样品编号已关联其他对象（如质控检验），无法更改。"
 
 #. Default: "A Reference Sample with the ID '%s' already exists."
 #: bika/lims/validators.py:1601
@@ -12036,7 +12036,7 @@ msgstr "A Reference 样品 with the ID '%s' already exists."
 #. Default: "The Reference Sample ID is invalid. Ensure it contains only letters, numbers, underscores ('_'), or hyphens ('-'), and verify that no other Reference Sample with the same ID already exists."
 #: bika/lims/validators.py:1576
 msgid "validator_referencesample_id_invalid"
-msgstr "The Reference 样品 ID is invalid. Ensure it contains only letters, numbers, underscores ('_'), or hyphens ('-'), and verify that no other Reference 样品 with the same ID already exists."
+msgstr "参考样品编号无效。请确保编号仅包含字母、数字、下划线（'_'）或连字符（'-'），并确认不存在其他相同编号的参考样品。"
 
 #. the Upper Limit of Detection (ULOD)."
 #. Default: "The Upper Limit of Quantification (LLOQ) cannot be greater than the Upper Limit of Detection (ULOD)."

@@ -10990,7 +10990,7 @@ msgstr "This 样品 has been dispatched by ${actor} on ${日期}"
 #. ${I}:${M} ${p}
 #: ./TranslationServiceTool.py
 msgid "time_format"
-msgstr "${I}:${M} ${p}"
+msgstr "${H}:${M}"
 
 #. Default: "Accreditation"
 #: senaite/core/content/laboratory.py:170

@@ -1,4 +1,7 @@
 import $ from "jquery";
+import React from "react";
+import ReactDOM from "react-dom";
+import * as ReactDOMClient from "react-dom/client";
 import I18N from "./components/i18n.js";
 import {i18n, _t, _p} from "./i18n-wrapper.js"
 import EditForm from "./components/editform.js"
@@ -7,6 +10,23 @@ import CalculationEditForm from "./components/calculationeditform.js"
 import {initSidebar} from "./sidebar"
 import FormTabbing from "./components/formtabbing.js"
 
+
+// Expose a single shared React/ReactDOM instance for other independently
+// built SENAITE add-on bundles (e.g. senaite.app.spotlight, which loads its
+// own <script> tag and does not bundle React itself) to consume, instead of
+// each add-on shipping a duplicate copy.
+//
+// This must run synchronously at module top-level (NOT inside the
+// DOMContentLoaded handler below): add-on <script> tags are placed later in
+// the document and execute immediately as the parser reaches them, which
+// happens *before* DOMContentLoaded fires for the page as a whole.
+//
+// `ReactDOM` also exposes the `react-dom/client` exports (createRoot,
+// hydrateRoot) merged on, since that's the entrypoint modern React 18+ code
+// is expected to use, while keeping the legacy default export available for
+// any consumer still relying on it.
+window.React = window.React || React;
+window.ReactDOM = window.ReactDOM || Object.assign({}, ReactDOM, ReactDOMClient);
 
 document.addEventListener("DOMContentLoaded", () => {
   console.info("*** SENAITE CORE JS LOADED ***");
