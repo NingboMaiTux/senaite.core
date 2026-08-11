@@ -29,11 +29,18 @@
                          codeclass string:language-${code};
                          current python: selected and 'currentLanguage active dropdown-item' or 'dropdown-item';
                          current_item python: selected and 'text-light' or '';"
-             tal:attributes="class string:${codeclass} ${current}">
+             tal:attributes="class codeclass">
+          <!-- `dropdown-item` must live on the <a>, not this wrapping <div>:
+               Bootstrap's .dropdown-item rule sets display:block;width:100%
+               so the whole row is clickable. Putting it on the <div> instead
+               left the <a> as an inline element sized to its own text, so
+               short labels (e.g. "English") left most of the visible row
+               dead to clicks while long labels (e.g. "简体中文(中国)")
+               happened to fill the row anyway and appeared to work fine. -->
           <a href="#"
              tal:define="name lang/native|lang/name;"
              tal:attributes="href string:${base_url}?${new_params};
-                             class string:${current_item} text-decoration-none;
+                             class string:${current} ${current_item} text-decoration-none;
                              title name">
             <span tal:content="name"/>
           </a>
