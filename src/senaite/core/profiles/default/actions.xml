@@ -137,11 +137,16 @@
       </property>
       <property name="visible">True</property>
     </object>
-    <!-- Spotlight Search View -->
+    <!-- Classic full-page search (Plone's built-in @@search view).
+         Kept separate from the "Search trigger" magnifying-glass icon in
+         toolbar.pt, which opens the newer senaite.app.spotlight modal
+         overlay at /spotlight; that icon is intentionally left as-is.
+         This "Search" portal_tabs entry is the older, non-modal, inline
+         results page (search box + filterable results table). -->
     <object name="spotlight_search" meta_type="CMF Action" i18n:domain="plone">
       <property name="title" i18n:translate="">Search</property>
       <property name="description" i18n:translate=""/>
-      <property name="url_expr">string:${globals_view/navigationRootUrl}/spotlight</property>
+      <property name="url_expr">string:${globals_view/navigationRootUrl}/search</property>
       <property name="link_target"/>
       <property name="icon_expr"/>
       <property name="available_expr"/>

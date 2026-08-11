@@ -3,6 +3,19 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <genericsetup:upgradeStep
+      title="SENAITE.CORE 2.7.0: Repoint 'Search' action at the classic @@search view"
+      description="The 'spotlight_search' portal_tabs action (titled
+                   'Search') pointed at /spotlight, duplicating the
+                   dedicated magnifying-glass icon that also opens the
+                   spotlight modal. Re-import the 'actions' GenericSetup
+                   step so 'Search' opens Plone's classic, non-modal
+                   @@search results page instead."
+      source="2742"
+      destination="2743"
+      handler=".v02_07_000.fix_search_action_url"
+      profile="senaite.core:default"/>
+
+  <genericsetup:upgradeStep
       title="SENAITE.CORE 2.7.0: Remove legacy per-client groups and persisted Owner local roles"
       description="Iterate every Client, remove the per-client group
                    created by the legacy auto-create mechanism, clear

@@ -2463,3 +2463,32 @@ def remove_legacy_client_groups(tool):
         "Legacy client-group cleanup: %s groups removed, "
         "%s local-role grants cleared on %s clients"
         % (removed_groups, cleared_local_roles, total))
+
+
+@upgradestep(product, version)
+def fix_search_action_url(tool):
+    """Point the 'Search' portal_tabs action back at Plone's classic
+    full-page @@search view instead of /spotlight
+
+    The 'spotlight_search' CMF Action (title "Search", one of the
+    entries in the toolbar's "Import / Search / Audit Log" dropdown)
+    has pointed at /spotlight since it was first added in 2020,
+    duplicating the dedicated magnifying-glass "Search trigger" icon
+    in toolbar.pt, which also opens /spotlight.
+
+    senaite.app.spotlight's UI was later redesigned upstream into a
+    modal/overlay command-palette backed by a shared React instance
+    (see the sibling fix exposing window.React/window.ReactDOM in
+    senaite.core.js). Once that modal started working, both toolbar
+    entries opened the exact same overlay, leaving no way to reach the
+    plain, non-modal search results page any more.
+
+    Re-import the 'actions' GenericSetup step so existing sites pick up
+    the corrected url_expr and 'Search' shows the classic inline
+    results page (search box + filterable results table) again, while
+    the magnifying-glass icon keeps opening the newer spotlight modal.
+    """
+    logger.info("Repointing 'Search' action to the classic @@search view ...")
+    tool.runImportStepFromProfile(profile, "actions")
+    logger.info(
+        "Repointing 'Search' action to the classic @@search view [DONE]")
