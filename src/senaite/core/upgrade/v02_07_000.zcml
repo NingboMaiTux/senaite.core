@@ -3,6 +3,18 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <genericsetup:upgradeStep
+      title="SENAITE.CORE 2.7.0: Repoint 'Search' action at @@spotlight-search"
+      description="Supersedes the previous step: Plone's /search only
+                   queries portal_catalog, so SENAITE content indexed in
+                   the dedicated catalogs (samples, worksheets, ...) was
+                   never found. Point 'Search' at spotlight's own
+                   standalone, listing-based full page search instead."
+      source="2743"
+      destination="2744"
+      handler=".v02_07_000.fix_search_action_url_to_spotlight_search"
+      profile="senaite.core:default"/>
+
+  <genericsetup:upgradeStep
       title="SENAITE.CORE 2.7.0: Repoint 'Search' action at the classic @@search view"
       description="The 'spotlight_search' portal_tabs action (titled
                    'Search') pointed at /spotlight, duplicating the

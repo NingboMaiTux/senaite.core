@@ -2492,3 +2492,29 @@ def fix_search_action_url(tool):
     tool.runImportStepFromProfile(profile, "actions")
     logger.info(
         "Repointing 'Search' action to the classic @@search view [DONE]")
+
+
+@upgradestep(product, version)
+def fix_search_action_url_to_spotlight_search(tool):
+    """Point the 'Search' portal_tabs action at @@spotlight-search
+
+    Supersedes fix_search_action_url, which pointed it at Plone's
+    built-in /search. That was wrong: /search only queries
+    portal_catalog, and SENAITE's own content (samples, worksheets,
+    clients, ...) is indexed in dedicated catalogs
+    (senaite_catalog_sample and friends), so searching e.g. a sample ID
+    returned no results at all.
+
+    senaite.app.spotlight ships the right view for this:
+    @@spotlight-search, described in its own configure.zcml as
+    "Standalone full page search (listing based)" -- a non-modal
+    results page that merges hits across the catalogs configured in the
+    spotlight control panel. Its zcml even warns not to register it as
+    "search" because Plone reserves that name.
+
+    Re-import the 'actions' step so existing sites pick up the
+    corrected url_expr.
+    """
+    logger.info("Repointing 'Search' action to @@spotlight-search ...")
+    tool.runImportStepFromProfile(profile, "actions")
+    logger.info("Repointing 'Search' action to @@spotlight-search [DONE]")

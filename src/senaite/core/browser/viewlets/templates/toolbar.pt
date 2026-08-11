@@ -5,7 +5,7 @@
                  global_sections python:view.get_global_sections();
                  language_selector python:view.get_language_selector();
                  personal_bar python:view.get_personal_bar();
-                 is_search_page python:request.get('ACTUAL_URL', '').rstrip('/').split('/')[-1] in ('search', '@@search')"
+                 is_search_page python:request.get('ACTUAL_URL', '').rstrip('/').split('/')[-1].lstrip('@') == 'spotlight-search'"
      i18n:domain="senaite.core">
 
   <!-- Navbar Brand Icon -->
