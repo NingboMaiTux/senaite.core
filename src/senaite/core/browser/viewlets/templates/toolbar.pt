@@ -4,7 +4,8 @@
                  portal_state view/portal_state;
                  global_sections python:view.get_global_sections();
                  language_selector python:view.get_language_selector();
-                 personal_bar python:view.get_personal_bar()"
+                 personal_bar python:view.get_personal_bar();
+                 is_search_page python:request.get('ACTUAL_URL', '').rstrip('/').split('/')[-1] in ('search', '@@search')"
      i18n:domain="senaite.core">
 
   <!-- Navbar Brand Icon -->
@@ -39,12 +40,16 @@
         <div tal:replace="structure language_selector/template"></div>
       </li>
 
-      <!-- Search trigger -->
+      <!-- Search trigger: opens the spotlight modal from anywhere, except
+           while already on the classic @@search results page, where a
+           second, competing search UI on top of the page would be
+           confusing rather than useful. -->
       <li class="nav-item" tal:condition="personal_bar/user_name">
-        <a class="nav-link"
+        <a tal:attributes="class python:'nav-link disabled' if is_search_page else 'nav-link';
+                           href python:None if is_search_page else '%s/spotlight' % portal_state.portal_url();
+                           aria-disabled python:is_search_page and 'true' or None"
            title="Press Ctrl+Space to trigger the Spotlight search"
-           i18n:attributes="title"
-           tal:attributes="href string:${portal_state/portal_url}/spotlight">
+           i18n:attributes="title">
           <i class="fas fa-search"></i>
         </a>
       </li>
