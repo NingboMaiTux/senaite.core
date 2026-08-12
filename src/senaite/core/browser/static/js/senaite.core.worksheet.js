@@ -196,7 +196,7 @@ window.WorksheetManageResultsView = class WorksheetManageResultsView {
 
   on_wideinterims_apply_click(event) {
     event.preventDefault();
-    const analysis = $("#wideinterims_analyses").val();
+    const analysis_title = $("#wideinterims_analyses option:selected").text().trim();
     const interim = $("#wideinterims_interims").val();
     const value = $("#wideinterims_value").val();
     const empty_only = $("#wideinterims_empty").is(":checked");
@@ -206,6 +206,17 @@ window.WorksheetManageResultsView = class WorksheetManageResultsView {
       input.dispatchEvent(new Event("input", { bubbles: true }));
     };
     $(`tr td input[column_key='${interim}']`).each(function () {
+      const row = this.closest("tr");
+      if (!row) {
+        return;
+      }
+      // 中文注释：仅对当前下拉框选中的 Analysis Service 所在行应用宽填充，
+      // 避免相同 interim keyword 跨服务被一起覆盖。
+      const service_cell = row.querySelector("td.contentcell.Service, td.Service, td:first-child");
+      const service_text = service_cell ? service_cell.textContent.trim() : "";
+      if (service_text !== analysis_title) {
+        return;
+      }
       if (empty_only) {
         const val = $(this).val();
         if (!val || val === "0") {

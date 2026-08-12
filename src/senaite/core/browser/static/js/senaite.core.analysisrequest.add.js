@@ -426,6 +426,9 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
     // manually deselected references
     // => keep track to avoid setting these fields with the default values
     this.deselected_uids = {};
+    // 中文注释：记住“模板自动带出但被用户手工取消”的分析项，
+    // 避免后续重算时又被模板自动勾回。
+    this.template_service_deselections = {};
     // flag that indicates that form already has been submitted once
     this.form_submission_flag = false;
     // number of recalculate_records ajax calls currently in flight
@@ -746,6 +749,9 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
     });
     // set all values for one record (a single column in the AR Add form)
     return $.each(records, function(arnum, record) {
+      // 中文注释：仅保留当前模板仍然相关的手工取消记录，
+      // 避免切换模板后旧状态污染当前列。
+      me.prune_template_service_deselections(arnum, Object.keys(record.template_metadata || {}));
       // Apply the values generically
       $.each(record, function(name, metadata) {
         if (!name.endsWith("_metadata")) {
@@ -766,6 +772,11 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
           if (indexOf.call(record.beyond_holding_time, uid) < 0) {
             lock.show();
           }
+        }
+        // 中文注释：模板自动带出的服务若已被用户手工取消，
+        // 则后续快照更新时不要再自动勾回。
+        if (!me.should_select_service_from_snapshot(arnum, record, uid)) {
+          return;
         }
         // select the service
         return me.set_service(arnum, uid, true);
@@ -1176,6 +1187,116 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
     record = this.records_snapshot[arnum] || {};
     metadata_key = `${field_name}_metadata`.toLowerCase();
     return record[metadata_key] || {};
+  }
+
+  get_template_service_deselection_key(arnum, template_uid) {
+    return `${arnum}:${template_uid}`;
+  }
+
+  get_template_service_deselections(arnum, template_uid) {
+    var key;
+    if (this.template_service_deselections == null) {
+      this.template_service_deselections = {};
+    }
+    key = this.get_template_service_deselection_key(arnum, template_uid);
+    return this.template_service_deselections[key] || [];
+  }
+
+  remember_template_service_deselection(arnum, template_uid, service_uid) {
+    var deselections, key;
+    if (!(template_uid && service_uid)) {
+      return;
+    }
+    if (this.template_service_deselections == null) {
+      this.template_service_deselections = {};
+    }
+    key = this.get_template_service_deselection_key(arnum, template_uid);
+    deselections = this.template_service_deselections[key] || [];
+    if (indexOf.call(deselections, service_uid) < 0) {
+      deselections = deselections.concat(service_uid);
+    }
+    this.template_service_deselections[key] = deselections;
+    return deselections;
+  }
+
+  forget_template_service_deselection(arnum, template_uid, service_uid) {
+    var deselections, key;
+    if (!(template_uid && service_uid)) {
+      return;
+    }
+    if (this.template_service_deselections == null) {
+      this.template_service_deselections = {};
+    }
+    key = this.get_template_service_deselection_key(arnum, template_uid);
+    deselections = this.template_service_deselections[key] || [];
+    this.template_service_deselections[key] = deselections.filter(function(uid) {
+      return uid !== service_uid;
+    });
+    return this.template_service_deselections[key];
+  }
+
+  is_template_service_manually_deselected(arnum, template_uid, service_uid) {
+    var deselections;
+    deselections = this.get_template_service_deselections(arnum, template_uid);
+    return indexOf.call(deselections, service_uid) >= 0;
+  }
+
+  clear_template_service_deselections(arnum, template_uid = null) {
+    var key, prefix;
+    if (this.template_service_deselections == null) {
+      this.template_service_deselections = {};
+    }
+    prefix = `${arnum}:`;
+    if (template_uid) {
+      key = this.get_template_service_deselection_key(arnum, template_uid);
+      delete this.template_service_deselections[key];
+      return;
+    }
+    for (key in this.template_service_deselections) {
+      if (!hasProp.call(this.template_service_deselections, key)) continue;
+      if (key.indexOf(prefix) === 0) {
+        delete this.template_service_deselections[key];
+      }
+    }
+  }
+
+  prune_template_service_deselections(arnum, template_uids = []) {
+    var active, key, prefix, template_uid;
+    if (this.template_service_deselections == null) {
+      this.template_service_deselections = {};
+    }
+    active = {};
+    template_uids.forEach(function(template_uid) {
+      if (template_uid) {
+        return active[template_uid] = true;
+      }
+    });
+    prefix = `${arnum}:`;
+    for (key in this.template_service_deselections) {
+      if (!hasProp.call(this.template_service_deselections, key)) continue;
+      if (key.indexOf(prefix) !== 0) {
+        continue;
+      }
+      template_uid = key.substring(prefix.length);
+      if (!active[template_uid]) {
+        delete this.template_service_deselections[key];
+      }
+    }
+  }
+
+  should_select_service_from_snapshot(arnum, record, service_uid) {
+    var i, len, template_uid, template_uids;
+    template_uids = ((record != null ? record.service_to_templates : void 0) != null ? record.service_to_templates[service_uid] : void 0) || [];
+    if (!(template_uids.length > 0)) {
+      return true;
+    }
+    for (i = 0, len = template_uids.length; i < len; i++) {
+      template_uid = template_uids[i];
+      if (!this.is_template_service_manually_deselected(arnum, template_uid, service_uid)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   set_template(arnum, template) {
@@ -1797,6 +1918,8 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
       return services.push(record.service_metadata[uid]);
     });
     this.applied_templates[arnum] = null;
+    // 中文注释：模板已被移除时，同时清理当前列里该模板对应的手工取消记录。
+    this.clear_template_service_deselections(arnum, template_uid);
     dialog = this.template_dialog("template-remove-template", context);
     dialog.on("yes", function() {
       // deselect the services
@@ -1865,13 +1988,25 @@ window.AnalysisRequestAdd = class AnalysisRequestAdd {
   }
 
   on_analysis_checkbox_click(event) {
-    var $el, checked, el, me, uid;
+    var $el, arnum, checked, el, me, record, template_uids, uid;
     me = this;
     el = event.currentTarget;
     checked = el.checked;
     $el = $(el);
     uid = $el.val();
+    arnum = $el.closest("[arnum]").attr("arnum");
+    record = this.records_snapshot[arnum] || {};
+    template_uids = ((record != null ? record.service_to_templates : void 0) != null ? record.service_to_templates[uid] : void 0) || [];
     console.debug(`°°° on_analysis_click::UID=${uid} checked=${checked}°°°`);
+    // 中文注释：用户手工取消模板带出的服务后，后续重算不应再自动勾回；
+    // 若用户重新勾选，则同步清除对应的取消记录。
+    $.each(template_uids, (index, template_uid) => {
+      if (checked) {
+        return this.forget_template_service_deselection(arnum, template_uid, uid);
+      } else {
+        return this.remember_template_service_deselection(arnum, template_uid, uid);
+      }
+    });
     // show/hide the service conditions for this analysis
     me.set_service_conditions($el);
     // trigger form:changed event
