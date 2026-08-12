@@ -29,6 +29,9 @@ class window.AnalysisRequestAdd
     # manually deselected references
     # => keep track to avoid setting these fields with the default values
     @deselected_uids = {}
+    # 中文注释：记住“模板自动带出但被用户手工取消”的分析项，
+    # 避免后续重算时又被模板自动勾回。
+    @template_service_deselections = {}
 
     # flag that indicates that form already has been submitted once
     @form_submission_flag = no
@@ -408,6 +411,9 @@ class window.AnalysisRequestAdd
 
     # set all values for one record (a single column in the AR Add form)
     $.each records, (arnum, record) ->
+      # 中文注释：仅保留当前模板仍然相关的手工取消记录，
+      # 避免切换模板后旧状态污染当前列。
+      me.prune_template_service_deselections arnum, Object.keys(record.template_metadata or {})
 
       # Apply the values generically
       $.each record, (name, metadata) ->
@@ -426,6 +432,11 @@ class window.AnalysisRequestAdd
           # do not display the lock button if beyond holding time
           if uid not in record.beyond_holding_time
             lock.show()
+
+        # 中文注释：模板自动带出的服务若已被用户手工取消，
+        # 则后续快照更新时不要再自动勾回。
+        if not me.should_select_service_from_snapshot(arnum, record, uid)
+          return
 
         # select the service
         me.set_service arnum, uid, yes
@@ -850,6 +861,77 @@ class window.AnalysisRequestAdd
     record = @records_snapshot[arnum] or {}
     metadata_key = "#{field_name}_metadata".toLowerCase()
     return record[metadata_key] or {}
+
+
+  get_template_service_deselection_key: (arnum, template_uid) ->
+    return "#{arnum}:#{template_uid}"
+
+
+  get_template_service_deselections: (arnum, template_uid) ->
+    @template_service_deselections ?= {}
+    key = @get_template_service_deselection_key(arnum, template_uid)
+    return @template_service_deselections[key] or []
+
+
+  remember_template_service_deselection: (arnum, template_uid, service_uid) ->
+    return unless template_uid and service_uid
+    @template_service_deselections ?= {}
+    key = @get_template_service_deselection_key(arnum, template_uid)
+    deselections = @template_service_deselections[key] or []
+    if service_uid not in deselections
+      deselections = deselections.concat service_uid
+    @template_service_deselections[key] = deselections
+    return deselections
+
+
+  forget_template_service_deselection: (arnum, template_uid, service_uid) ->
+    return unless template_uid and service_uid
+    @template_service_deselections ?= {}
+    key = @get_template_service_deselection_key(arnum, template_uid)
+    deselections = @template_service_deselections[key] or []
+    @template_service_deselections[key] = deselections.filter (uid) ->
+      uid isnt service_uid
+    return @template_service_deselections[key]
+
+
+  is_template_service_manually_deselected: (arnum, template_uid, service_uid) ->
+    deselections = @get_template_service_deselections arnum, template_uid
+    return service_uid in deselections
+
+
+  clear_template_service_deselections: (arnum, template_uid=null) ->
+    @template_service_deselections ?= {}
+    prefix = "#{arnum}:"
+    if template_uid
+      key = @get_template_service_deselection_key(arnum, template_uid)
+      delete @template_service_deselections[key]
+      return
+    for own key of @template_service_deselections
+      if key.indexOf(prefix) is 0
+        delete @template_service_deselections[key]
+
+
+  prune_template_service_deselections: (arnum, template_uids=[]) ->
+    @template_service_deselections ?= {}
+    active = {}
+    template_uids.forEach (template_uid) ->
+      if template_uid
+        active[template_uid] = yes
+    prefix = "#{arnum}:"
+    for own key of @template_service_deselections
+      continue if key.indexOf(prefix) isnt 0
+      template_uid = key.substring(prefix.length)
+      if not active[template_uid]
+        delete @template_service_deselections[key]
+
+
+  should_select_service_from_snapshot: (arnum, record, service_uid) ->
+    template_uids = record?.service_to_templates?[service_uid] or []
+    return yes unless template_uids.length > 0
+    for template_uid in template_uids
+      if not @is_template_service_manually_deselected(arnum, template_uid, service_uid)
+        return yes
+    return no
 
 
   ###*
@@ -1575,6 +1657,8 @@ class window.AnalysisRequestAdd
       services.push record.service_metadata[uid]
 
     @applied_templates[arnum] = null
+    # 中文注释：模板已被移除时，同时清理当前列里该模板对应的手工取消记录。
+    @clear_template_service_deselections arnum, template_uid
 
     dialog = @template_dialog "template-remove-template", context
     dialog.on "yes", ->
@@ -1663,8 +1747,19 @@ class window.AnalysisRequestAdd
     checked = el.checked
     $el = $(el)
     uid = $el.val()
+    arnum = $el.closest("[arnum]").attr "arnum"
+    record = @records_snapshot[arnum] or {}
+    template_uids = record?.service_to_templates?[uid] or []
 
     console.debug "°°° on_analysis_click::UID=#{uid} checked=#{checked}°°°"
+
+    # 中文注释：用户手工取消模板带出的服务后，后续重算不应再自动勾回；
+    # 若用户重新勾选，则同步清除对应的取消记录。
+    $.each template_uids, (index, template_uid) =>
+      if checked
+        @forget_template_service_deselection arnum, template_uid, uid
+      else
+        @remember_template_service_deselection arnum, template_uid, uid
 
     # show/hide the service conditions for this analysis
     me.set_service_conditions $el
