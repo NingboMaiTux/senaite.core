@@ -36,16 +36,6 @@ class UsersOverviewControlPanel(BaseView):
     """Custom userprefs controlpanel
     """
 
-    @staticmethod
-    def _as_list(value):
-        """统一将 request.form 的值归一化为列表
-        """
-        if value is None:
-            return []
-        if isinstance(value, (list, tuple)):
-            return list(value)
-        return [value]
-
     @property
     def portal_roles(self):
         """Return only SENAITE Roles
@@ -157,18 +147,19 @@ class UsersOverviewControlPanel(BaseView):
     def manageUser(self, users=[], resetpassword=[], delete=[]):
         """接管保存逻辑，忽略物理删除，仅维护禁用状态
         """
-        # 中文注释：Plone 基类对 records 的解析并不保证会把我们新增的
-        # users.disabled:records 合并进 users 列表，所以这里直接读取原始
-        # request.form，避免勾选了 Disable 但状态没有真正落库。
-        form = getattr(self.request, "form", {})
-        user_ids = self._as_list(form.get("users.id:records"))
-        disabled_ids = set(self._as_list(form.get("users.disabled:records")))
-
-        # 即使有人手工伪造 delete:list 提交，也不再执行物理删除。
-        for user_id in user_ids:
+        # 中文注释：基类 __call__ 会把表单中所有 users.*:records 字段解析成
+        # request.form['users'] 下的 record 对象列表（Zope 的 records 类型会
+        # 剥掉 :records 后缀并按点号分组，users.disabled:records 会作为
+        # disabled 属性挂到同一条 users.id:records 记录上）。因此不能再用
+        # form.get("users.disabled:records") 这种带后缀的键读取（真实请求中
+        # 永远取不到），直接遍历基类传入的 users 参数，取记录的 id / disabled
+        # 属性即可。
+        for user in (users or []):
+            user_id = getattr(user, "id", None)
             if not user_id:
                 continue
-            set_account_disabled(user_id, user_id in disabled_ids)
+            set_account_disabled(user_id, bool(getattr(user, "disabled", None)))
 
+        # 即使有人手工伪造 delete:list 提交，也不再执行物理删除。
         return super(UsersOverviewControlPanel, self).manageUser(
             users, resetpassword, [])
