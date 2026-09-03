@@ -22,9 +22,6 @@ from senaite.core.browser.form.adapters import EditFormAdapterBase
 
 _FIELD_PREFIX = "form.widgets."
 _MANAGEMENT_FIELD = _FIELD_PREFIX + "restrict_worksheet_management"
-_MANAGEMENT_CHECKBOX_SELECTOR = (
-    "input[type='checkbox'][name^='{}']".format(_MANAGEMENT_FIELD)
-)
 
 
 class EditForm(EditFormAdapterBase):
@@ -37,16 +34,29 @@ class EditForm(EditFormAdapterBase):
             return value.strip().lower() in ("1", "true", "yes", "on")
         return bool(value)
 
-    def _set_management_checked_state(self, checked):
-        """同步更新管理权限复选框的值与勾选外观"""
+    def _lock_management_field(self):
+        """锁定「仅实验室经理可管理工作表」为只读
+
+        中文注释：这里**只能**设为只读，绝不能再附带一个值更新。
+        `set_field_readonly` 已经把复选框换成了一个隐藏域，并把控件自己的
+        token（"selected"）写了进去；而 `update_form` 里 readonly 的处理排在
+        updates 之前，随后的值更新会命中那个隐藏域，把 token 覆写成裸的
+        "true"。z3c.form 的 SingleCheckBoxWidget 只认 "selected"，token 对不
+        上时 `SequenceWidget.extract()` 返回 NO_VALUE，这个必填字段就报
+        「缺少必需的输入」—— 而且因为 fieldset 底下是同一个表单，它会连带
+        让设置页**所有**标签页都保存不了，不只是「安全」这一页。
+        """
+        self.add_readonly_field(_MANAGEMENT_FIELD, message=None)
+
+    def _unlock_management_field(self, checked):
+        """解除只读，并把复选框恢复到给定的勾选状态
+
+        这条路径可以安全地附带值更新：`set_field_editable` 会先把真实的
+        复选框换回来，随后的更新落在复选框本身上，走的是 `field.checked`
+        赋值，不经过 token。
+        """
+        self.add_editable_field(_MANAGEMENT_FIELD, message=None)
         self.add_update_field(_MANAGEMENT_FIELD, checked)
-        # 中文注释：部分前端逻辑只更新字段值，不会同步刷新 checkbox
-        # 的勾选外观，因此这里显式补充 checked 属性。
-        self.add_attribute(
-            _MANAGEMENT_CHECKBOX_SELECTOR,
-            "checked",
-            "checked" if checked else False
-        )
 
     def initialized(self, data):
         """Handle form initialization
@@ -65,14 +75,10 @@ class EditForm(EditFormAdapterBase):
         restrict_users = self.context.getRestrictWorksheetUsersAccess()
 
         if self._as_bool(restrict_users):
-            # 中文注释：页面初始化时先把下方字段显式更新为 True，
-            # 再设为只读，避免旧数据为空时前端禁用后提交丢值。
-            self._set_management_checked_state(True)
-            # Make restrict_worksheet_management readonly and force it to True
-            self.add_readonly_field(
-                _MANAGEMENT_FIELD,
-                message=None
-            )
+            # Make restrict_worksheet_management readonly. The read-only
+            # handling already submits the field as checked, see
+            # `_lock_management_field`.
+            self._lock_management_field()
 
         return self.data
 
@@ -96,18 +102,10 @@ class EditForm(EditFormAdapterBase):
             # Handle restrict_worksheet_management based on
             # restrict_worksheet_users_access
             if self._as_bool(value):
-                self._set_management_checked_state(True)
-                # Make restrict_worksheet_management readonly
-                self.add_readonly_field(
-                    _MANAGEMENT_FIELD,
-                    message=None
-                )
+                # Make restrict_worksheet_management readonly (and checked)
+                self._lock_management_field()
             else:
-                self._set_management_checked_state(False)
-                # Make restrict_worksheet_management editable
-                self.add_editable_field(
-                    _MANAGEMENT_FIELD,
-                    message=None
-                )
+                # Make restrict_worksheet_management editable and unchecked
+                self._unlock_management_field(False)
 
         return self.data

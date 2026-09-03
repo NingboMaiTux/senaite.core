@@ -523,7 +523,10 @@ class EditForm {
       if (value === null) {
         el.removeAttribute(name);
       } else {
-        el.addAttribute(name, value);
+        // NOTE: `addAttribute` is not a DOM method. Calling it threw a
+        // TypeError that aborted the rest of `update_form`, taking the
+        // callback registration and the submit toggle below down with it.
+        el.setAttribute(name, value);
       }
     }
 

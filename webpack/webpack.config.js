@@ -186,6 +186,7 @@ module.exports = {
           "../src/senaite/core/browser/static/js/senaite.core.loader.js",
           "../src/senaite/core/browser/static/js/senaite.core.partitionmagic.js",
           "../src/senaite/core/browser/static/js/senaite.core.referencesample.js",
+          "../src/senaite/core/browser/static/js/senaite.core.senaitesetup.js",
           "../src/senaite/core/browser/static/js/senaite.core.setupview.js",
           "../src/senaite/core/browser/static/js/senaite.core.site.js",
           "../src/senaite/core/browser/static/js/senaite.core.utils.attachments.js",
