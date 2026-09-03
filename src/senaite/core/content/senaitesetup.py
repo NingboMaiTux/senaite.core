@@ -1618,8 +1618,18 @@ class Setup(Container):
         session = acl.get("session")
         if session:
             session.timeout = value
-        mutator = self.mutator("auto_log_off")
-        return mutator(self, value // 60)
+
+    # The session plugin's `timeout` is the single source of truth for this
+    # setting: it is what actually expires the ticket, and what `getAutoLogOff`
+    # reports to the `data-auto-logoff` body attribute.
+    #
+    # Route the schema field through the accessors instead of storing a second
+    # copy on the setup object. z3c.form's AttributeField data manager reads
+    # and writes fields with plain getattr/setattr, so without this a save from
+    # the setup form would only ever set an attribute nobody reads, and the
+    # timeout would never change. A property is a data descriptor, so it wins
+    # over both the instance dict and Dexterity's schema-default `__getattr__`.
+    auto_log_off = property(getAutoLogOff, setAutoLogOff)
 
     # Security fields
     @security.protected(permissions.View)

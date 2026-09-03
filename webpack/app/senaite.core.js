@@ -9,6 +9,7 @@ import Site from "./components/site.js"
 import CalculationEditForm from "./components/calculationeditform.js"
 import {initSidebar} from "./sidebar"
 import FormTabbing from "./components/formtabbing.js"
+import {installSessionGuard} from "./session-guard.js"
 
 
 // Expose a single shared React/ReactDOM instance for other independently
@@ -27,6 +28,12 @@ import FormTabbing from "./components/formtabbing.js"
 // any consumer still relying on it.
 window.React = window.React || React;
 window.ReactDOM = window.ReactDOM || Object.assign({}, ReactDOM, ReactDOMClient);
+
+// Send the browser to the login form when the session has timed out, instead
+// of letting every AJAX caller choke on the login page's HTML in
+// `response.json()`. Installed here at module top-level so that the guard is
+// in place before any other bundle on the page gets a chance to call `fetch`.
+installSessionGuard();
 
 document.addEventListener("DOMContentLoaded", () => {
   console.info("*** SENAITE CORE JS LOADED ***");
