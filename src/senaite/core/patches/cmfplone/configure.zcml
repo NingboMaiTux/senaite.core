@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="senaite.core">
+
+  <!-- Patch `Products.CMFPlone.exportimport.controlpanel.ControlPanelXMLAdapter._initConfiglets` -->
+  <monkey:patch
+      description="Pass the configlet title to Message as text, so translated
+                   control panel entries do not abort the controlpanel import
+                   step with UnicodeEncodeError"
+      class="Products.CMFPlone.exportimport.controlpanel.ControlPanelXMLAdapter"
+      original="_initConfiglets"
+      replacement=".controlpanel._initConfiglets"
+      />
+
+</configure>

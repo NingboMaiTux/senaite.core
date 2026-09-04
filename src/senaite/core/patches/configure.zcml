@@ -6,6 +6,7 @@
   <!-- Package includes -->
   <include package=".archetypes" />
   <include package=".cmfcore" />
+  <include package=".cmfplone" />
   <include package=".dexterity" />
 
 </configure>

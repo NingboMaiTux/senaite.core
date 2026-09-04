@@ -3,6 +3,33 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <genericsetup:upgradeStep
+      title="SENAITE.CORE 2.7.0: Clear the unsatisfiable site_rss_items record"
+      description="Plone defaults this registry record to '/news/aggregator',
+                   a path its own Choice vocabulary does not offer in a
+                   SENAITE site. Nothing reads the default, but re-importing
+                   an exported registry validates default and value, and
+                   aborts the plone.app.registry import step."
+      source="2745"
+      destination="2746"
+      handler=".v02_07_000.fix_invalid_syndication_registry_record"
+      profile="senaite.core:default"/>
+
+  <genericsetup:upgradeStep
+      title="SENAITE.CORE 2.7.0: Initialize portal_atct properties"
+      description="ATContentTypes registers the tool in its base
+                   profile but assigns the five properties it declares
+                   only in default, which senaite.core does not depend
+                   on. ATCTTool carries no class defaults for them
+                   either, so getProperty() falls through acquisition
+                   and raises AttributeError on the request container.
+                   That aborts the atcttool export step, and with it
+                   every full export run from portal_setup."
+      source="2744"
+      destination="2745"
+      handler=".v02_07_000.init_atct_tool_properties"
+      profile="senaite.core:default"/>
+
+  <genericsetup:upgradeStep
       title="SENAITE.CORE 2.7.0: Repoint 'Search' action at @@spotlight-search"
       description="Supersedes the previous step: Plone's /search only
                    queries portal_catalog, so SENAITE content indexed in

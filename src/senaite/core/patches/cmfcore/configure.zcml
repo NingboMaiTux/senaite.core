@@ -43,4 +43,14 @@
     original="_reindexWorkflowVariables"
     replacement=".workflowtool._reindexWorkflowVariables"/>
 
+  <!-- Patch `Products.CMFCore.exportimport.content.FolderishDAVAwareFileAdapter.export` -->
+  <monkey:patch
+      description="Raise the MethodNotAllowed that CMFCore actually catches,
+                   so Archetypes folders fall back to .properties instead of
+                   aborting the whole content export step"
+      class="Products.CMFCore.exportimport.content.FolderishDAVAwareFileAdapter"
+      original="export"
+      replacement=".exportimport_content.export"
+      />
+
 </configure>

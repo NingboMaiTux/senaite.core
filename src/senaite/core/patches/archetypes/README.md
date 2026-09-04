@@ -90,3 +90,35 @@ Provide a similar methods for AT contents as for DX contents.
 **getLabels**: Get SENAITE labels (dynamically extended fields)
 
 **isTemporary**: Checks if an object contains a temporary ID to avoid further indexing/processing
+
+
+## RFC822 Marshaller
+
+The module `marshall` contains a patch for the class
+`Products.Archetypes.Marshall.RFC822Marshaller`, the marshaller
+`manage_FTPget` uses to serialize an Archetypes object as an RFC822 document.
+
+### Patches
+
+The following methods are patched:
+
+- `marshall`
+
+### Reason
+
+The original calls `str()` on every field value. Under Python 2 that is an
+implicit `encode("ascii")` for unicode, so a single field holding translated
+text raises `UnicodeEncodeError`. The GenericSetup `content` export step walks
+every Archetypes object through `manage_FTPget`, so one such value aborts the
+whole step -- and with it every full export run from portal_setup.
+
+The patch routes field values through a `to_str` helper that encodes text as
+UTF-8 and leaves everything else to `str()`.
+
+### Notes
+
+Archetypes only: Dexterity content is serialized by
+`plone.dexterity.exportimport` and never reaches this marshaller. Byte strings
+are the native storage of AT fields, so the UTF-8 written here round-trips on
+import into the representation the objects already hold. RFC822 headers carry
+no charset declaration, so the file is interpretable as UTF-8 by convention.

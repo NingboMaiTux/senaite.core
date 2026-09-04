@@ -32,6 +32,7 @@ from DateTime import DateTime
 from plone.app.blob.interfaces import IBlobField
 from plone.app.dexterity.behaviors.metadata import default_language
 from plone.app.textfield.interfaces import IRichText
+from plone.app.textfield.interfaces import IRichTextValue
 from plone.dexterity.interfaces import IDexterityContent
 from plone.namedfile.interfaces import INamedField
 from Products.Archetypes.interfaces import IBaseObject
@@ -468,6 +469,25 @@ class DXRichTextFieldNodeAdapter(DXFieldNodeAdapter):
     """
     implements(IFieldNode)
     adapts(IDexterityContent, IRichText, ISetupEnviron)
+
+    def set_field_value(self, value, **kw):
+        """Set the field value
+
+        `get_field_value` exports `value.raw`, a plain string. Storing that
+        string back unchanged leaves the field holding text where the schema
+        promises an `IRichTextValue`, and everything that later reaches for
+        `.raw` or `.output` breaks -- `plone.app.textfield`'s marshaler among
+        them, which is what makes a *subsequent* export of the site structure
+        fail with:
+
+            AttributeError: 'unicode' object has no attribute 'raw'
+
+        Rebuild the value with the field's own mime types, so that a
+        round-trip returns the object to the state it was exported from.
+        """
+        if value and not IRichTextValue.providedBy(value):
+            value = self.field.fromUnicode(safe_unicode(value))
+        super(DXRichTextFieldNodeAdapter, self).set_field_value(value, **kw)
 
     def get_field_value(self):
         """Get the field value

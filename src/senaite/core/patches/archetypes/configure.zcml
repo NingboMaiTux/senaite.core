@@ -67,4 +67,15 @@
       replacement=".referenceable._uncatalogUID"
       />
 
+  <!-- Patch AT RFC822Marshaller.marshall -->
+  <monkey:patch
+      description="Patch `Products.Archetypes.Marshall.RFC822Marshaller.marshall`
+                   to encode non-ASCII field values as UTF-8 instead of letting
+                   str() raise UnicodeEncodeError, which aborts the GenericSetup
+                   content export step"
+      class="Products.Archetypes.Marshall.RFC822Marshaller"
+      original="marshall"
+      replacement=".marshall.marshall"
+      />
+
 </configure>
