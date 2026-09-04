@@ -12094,3 +12094,23 @@ msgstr "{} (已超时)"
 #: bika/lims/controlpanel/bika_instruments.py:173
 msgid "{} weeks and {} day(s)"
 msgstr "{} 周和 {} 天"
+
+#: webpack/app/session-timeout.js
+msgid "Log out now"
+msgstr "立即退出"
+
+#: webpack/app/session-timeout.js
+msgid "Session about to expire"
+msgstr "会话即将过期"
+
+#: webpack/app/session-timeout.js
+msgid "Stay signed in"
+msgstr "继续操作"
+
+#: webpack/app/session-timeout.js
+msgid "You will be logged out in ${seconds} seconds because of inactivity."
+msgstr "由于长时间无操作，您将在 ${seconds} 秒后被自动注销。"
+
+#: webpack/app/session-timeout.js
+msgid "Your session expired after a period of inactivity. Please log in again."
+msgstr "由于长时间无操作，您的会话已过期，请重新登录。"
