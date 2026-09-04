@@ -30,6 +30,9 @@ const LOGIN_PATHS = [
 // the same page do not each fire their own reload.
 var redirecting = false;
 
+// The unwrapped `fetch`, kept for callers that must not trip the guard below.
+var native_fetch = null;
+
 
 /**
  * Check whether a response is the login form served after a session timeout
@@ -61,7 +64,7 @@ export function installSessionGuard() {
     return;
   }
 
-  const native_fetch = window.fetch.bind(window);
+  native_fetch = window.fetch.bind(window);
 
   const guarded_fetch = (...args) => {
     return native_fetch(...args).then((response) => {
@@ -85,4 +88,20 @@ export function installSessionGuard() {
   guarded_fetch.senaite_session_guard = true;
 
   window.fetch = guarded_fetch;
+}
+
+
+/**
+ * Fetch without the guard above
+ *
+ * Session handling talks to endpoints (logout, in particular) that answer with
+ * exactly the redirect the guard watches for. Going through the guard there
+ * would start a reload racing the navigation we are already performing.
+ *
+ * @param {...*} args The arguments of a regular `fetch` call
+ * @returns {Promise}
+ */
+export function nativeFetch(...args) {
+  const impl = native_fetch || window.fetch.bind(window);
+  return impl(...args);
 }

@@ -10,6 +10,7 @@ import CalculationEditForm from "./components/calculationeditform.js"
 import {initSidebar} from "./sidebar"
 import FormTabbing from "./components/formtabbing.js"
 import {installSessionGuard} from "./session-guard.js"
+import {initSessionTimeout} from "./session-timeout.js"
 
 
 // Expose a single shared React/ReactDOM instance for other independently
@@ -52,6 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize SENAITE core namespace
   window.senaite = window.senaite || {};
   window.senaite.core = window.senaite.core || {};
+
+  // Idle session timeout: renew on activity, warn, then log out.
+  // Runs here rather than at module level because it needs `document.body`
+  // (for `data-auto-logoff`) and the i18n catalogs initialized above.
+  window.senaite.core.session_timeout = initSessionTimeout();
 
   // Initialize React Sidebar
   window.senaite.core.sidebar = initSidebar();
