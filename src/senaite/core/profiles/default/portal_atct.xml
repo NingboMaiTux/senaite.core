@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+  Initialise the properties of the `portal_atct` tool.
+
+  Products.ATContentTypes splits its setup across two profiles: `base`
+  registers the tool in `toolset.xml`, while `default` ships the
+  `portal_atct.xml` that assigns the five properties declared by
+  `ATCTTool._properties`. senaite.core depends on `base` only (see
+  `metadata.xml`); pulling in `default` is not an option, as it would also
+  re-register the whole Archetypes content type set SENAITE has migrated
+  away from. The tool therefore ends up with `image_types`, `folder_types`,
+  `album_batch_size`, `album_image_scale` and `single_image_scale` declared
+  but never assigned, and `ATCTTool` provides no class-level defaults for
+  them either.
+
+  `getProperty()` then passes the `hasProperty()` check and does a plain
+  `getattr`, which finds nothing on the tool and follows acquisition all the
+  way up to the request container:
+
+      AttributeError: 'RequestContainer' object has no attribute 'image_types'
+
+  Everything that walks the property map dies on that: the ZMI 'Properties'
+  tab of the tool, and the `atcttool` GenericSetup export step, which is what
+  makes "Export all steps" in portal_setup fail before it ever reaches the
+  SENAITE steps.
+
+  The two type lists are deliberately left empty: upstream fills them with
+  'Image' and 'News Item', Archetypes types that no longer exist here.
+-->
+<atcttool>
+ <property name="image_types"/>
+ <property name="folder_types"/>
+ <property name="album_batch_size">30</property>
+ <property name="album_image_scale">thumb</property>
+ <property name="single_image_scale">preview</property>
+</atcttool>

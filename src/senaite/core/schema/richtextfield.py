@@ -18,6 +18,7 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+import six
 from bika.lims import api
 from plone.app.textfield import RichText
 from senaite.core.schema.fields import BaseField
@@ -39,6 +40,16 @@ class RichTextField(RichText, BaseField):
         # always ensure unicode
         if isinstance(value, str):
             value = api.safe_unicode(value)
+        if value and isinstance(value, six.text_type):
+            # The schema promises an `IRichTextValue`, and readers reach for
+            # `.raw` or `.output` accordingly. Plain text still arrives here
+            # from paths that never build one: the legacy AT proxy mutators on
+            # `bika_setup`, GenericSetup imports, setup data importers. Storing
+            # it unchanged leaves the object holding text where an object is
+            # expected, and the next reader breaks -- exporting the site
+            # structure, for one, dies on
+            #     AttributeError: 'unicode' object has no attribute 'raw'
+            value = self.fromUnicode(value)
         super(RichTextField, self).set(object, value)
 
     def get(self, object):

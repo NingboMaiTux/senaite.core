@@ -24,8 +24,25 @@ PORTAL_CATALOG = "portal_catalog"
 
 
 def index_in_portal_catalog(obj):
+    portal_type = api.get_portal_type(obj)
+    if not portal_type:
+        # `manage_renameObject` detaches the object from its container for the
+        # duration of the rename, so acquisition cannot resolve `portal_type`
+        # and it reads as None. The indexing queue is flushed inside that
+        # window by anything that issues a catalog search -- plone.app.
+        # discussion looks for 'Discussion Item' on every ObjectMovedEvent --
+        # and the object then arrives here with no type at all.
+        #
+        # Nothing useful can be indexed in that state: `get_catalogs_for`
+        # raises an APIError on the missing type, and letting it through
+        # instead only moves the failure downstream, where building the
+        # catalog metadata needs the schema that the type would have named.
+        # Skip it. `manage_renameObject` re-adds the object to its container
+        # afterwards, which queues a fresh index request with the type back
+        # in place.
+        return False
     portal_catalog = api.get_tool(PORTAL_CATALOG)
-    catalogs = api.get_catalogs_for(obj)
+    catalogs = api.get_catalogs_for(portal_type)
     if portal_catalog not in catalogs:
         return False
     return True

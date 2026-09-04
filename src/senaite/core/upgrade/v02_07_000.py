@@ -2518,3 +2518,81 @@ def fix_search_action_url_to_spotlight_search(tool):
     logger.info("Repointing 'Search' action to @@spotlight-search ...")
     tool.runImportStepFromProfile(profile, "actions")
     logger.info("Repointing 'Search' action to @@spotlight-search [DONE]")
+
+
+@upgradestep(product, version)
+def init_atct_tool_properties(tool):
+    """Assign the properties declared by `portal_atct`
+
+    The tool is created by `Products.ATContentTypes:base` (`toolset.xml`),
+    but the values of the five properties it declares live in that product's
+    `default` profile, which senaite.core does not depend on. They are also
+    absent from `ATCTTool` as class attributes, so `getProperty()` passes
+    `hasProperty()` and then falls through acquisition to the request
+    container, raising
+
+        AttributeError: 'RequestContainer' object has no attribute 'image_types'
+
+    on the `atcttool` export step -- which aborts "Export all steps" in
+    portal_setup before any SENAITE step runs.
+
+    senaite.core now ships its own `portal_atct.xml`; re-import the step so
+    existing sites pick it up.
+    """
+    logger.info("Initializing portal_atct properties ...")
+    tool.runImportStepFromProfile(profile, "atcttool")
+    logger.info("Initializing portal_atct properties [DONE]")
+
+
+@upgradestep(product, version)
+def fix_invalid_syndication_registry_record(tool):
+    """Clear the unsatisfiable `site_rss_items` registry record
+
+    Plone ships `ISiteSyndicationSettings.site_rss_items` as a Tuple whose
+    `value_type` is a Choice over the `SyndicatableFeedItems` vocabulary, with
+    `('/news/aggregator',)` as both the field default and, once the control
+    panel has been touched, the stored value. That path only exists in a site
+    built from Plone's own default content; SENAITE has no news folder, so the
+    vocabulary does not offer it and the record holds data its own field
+    rejects.
+
+    Nothing reads it, so the site runs fine -- until the registry is exported
+    and imported again. `plone.supermodel` assigns the default back while
+    rebuilding the field, and `plone.app.registry` assigns the value back
+    afterwards; both validate, and both raise
+
+        WrongContainedType: ([ConstraintNotSatisfied('/news/aggregator', '')], ...)
+
+    which aborts the `plone.app.registry` import step. Clear whichever of the
+    two is invalid, so the record is self-consistent and survives a
+    round-trip. Valid data is left untouched.
+    """
+    from plone.registry.interfaces import IRegistry
+    from zope.component import getUtility
+
+    name = ("Products.CMFPlone.interfaces.syndication."
+            "ISiteSyndicationSettings.site_rss_items")
+    record = getUtility(IRegistry).records.get(name)
+    if record is None:
+        return
+
+    field = record.field
+
+    def is_invalid(value):
+        if not value:
+            return False
+        try:
+            field.validate(value)
+        except Exception:
+            return True
+        return False
+
+    if is_invalid(getattr(field, "default", None)):
+        logger.info("Clearing invalid default of %s: %r"
+                    % (name, field.default))
+        field.default = ()
+        field._p_changed = True
+
+    if is_invalid(record.value):
+        logger.info("Clearing invalid value of %s: %r" % (name, record.value))
+        record.value = ()
