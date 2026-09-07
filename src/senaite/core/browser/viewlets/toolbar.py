@@ -28,6 +28,7 @@ from plone.registry.interfaces import IRegistry
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.browser.viewlets.languageselector import LanguageSelector
 from senaite.core.browser.viewlets.sections import GlobalSectionsViewlet
+from six.moves.urllib.parse import quote
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
@@ -87,8 +88,13 @@ class ToolbarViewletManager(OrderedViewletManager):
         site_logo = setup.getSiteLogo() if setup else None
         if site_logo:
             filename, data = b64decode_file(site_logo)
-            return '{}/@@site-logo/{}'.format(
-                portal_url, filename)
+            # NOTE: the filename is unicode and only decorates the URL, because
+            #       the view looks the logo up in the setup. Encode it to an
+            #       URL-safe value: a filename with non-ASCII characters raises
+            #       an UnicodeEncodeError when interpolated into a native
+            #       string and is no valid URL either
+            filename = quote(api.to_utf8(filename))
+            return "{}/@@site-logo/{}".format(portal_url, filename)
 
         # Check if an URL is given in the registry
         registry = getUtility(IRegistry)
