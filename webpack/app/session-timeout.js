@@ -50,6 +50,26 @@ const EXPIRED_KEY = "senaite.session.expired";
 // not hold a session open on nobody's behalf.
 const ACTIVITY_EVENTS = ["mousedown", "keydown", "wheel", "touchstart"];
 
+// Pages a countdown must never appear on: the login form, and the pages a
+// logout lands on. Being anonymous is not the test -- Plone serves the login
+// form to whoever asks, including someone who still holds a session, so the
+// `userrole-anonymous` check in initSessionTimeout lets the timer start there.
+// A dialog offering to keep a session alive on top of a login form is
+// nonsense, and it opens the moment the form does whenever the shared idle
+// clock is already inside the warning window.
+//
+// Matched against the end of the path, like `session-guard.js` does with its
+// own list -- kept separate from that one on purpose: the guard asks "where
+// did this response end up", this asks "what page am I".
+const NO_TIMEOUT_PATHS = [
+  "/login",
+  "/login_form",
+  "/failsafe_login_form",
+  "/require_login",
+  "/logout",
+  "/logged-out",
+];
+
 
 /**
  * localStorage that tolerates being unavailable
@@ -215,6 +235,20 @@ class SessionTimeout {
 
   /**
    * Drop the credentials and land on the login form
+   *
+   * A navigation rather than a `fetch`, because `logout` is not necessarily
+   * the end of the chain: with single sign-on it answers with a redirect to
+   * the identity provider's own logout endpoint. Fetching that dispatches the
+   * request but leaves the provider unable to act on it -- the provider's
+   * session cookie is `SameSite=Lax`, so it does not ride along on a
+   * cross-site subresource request, and the `Set-Cookie` that would clear it
+   * comes back as a third-party cookie write. The local session would end
+   * while the one at the provider stayed open, and the next visit would be
+   * signed straight back in without anybody being asked.
+   *
+   * `next` is Plone's own parameter for where to go afterwards, so the landing
+   * page stays the login form. `plone.external_logout_url` and SSO add-ons
+   * override it when the logout has to travel further before coming back.
    */
   leave() {
     if (this.leaving) {
@@ -223,16 +257,9 @@ class SessionTimeout {
     this.leaving = true;
     this.stop();
     this.hide_dialog();
-
-    const login_url = `${this.portal_url}/login`;
-    // Log out explicitly first. The ticket has normally expired on its own by
-    // now, but if this tab counted down slightly early the login form would
-    // just bounce a still-authenticated user back where they came from.
-    nativeFetch(`${this.portal_url}/logout`, {
-      credentials: "include", cache: "no-store"
-    })
-      .catch(() => null)
-      .then(() => window.location.replace(login_url));
+    const next = encodeURIComponent(`${this.portal_url}/login`);
+    // `replace`, so that Back does not return to the page we just left.
+    window.location.replace(`${this.portal_url}/logout?next=${next}`);
   }
 
   show_dialog(remaining) {
@@ -331,6 +358,15 @@ const build_dialog = ({seconds, on_stay, on_leave}) => {
 
 
 /**
+ * Is this one of the pages listed in NO_TIMEOUT_PATHS?
+ */
+const is_login_page = () => {
+  const path = window.location.pathname.replace(/\/+$/, "");
+  return NO_TIMEOUT_PATHS.some((name) => path.endsWith(name));
+}
+
+
+/**
  * Say why the user is looking at the login form
  *
  * The reason is carried in localStorage rather than the URL: it survives the
@@ -365,6 +401,13 @@ export function initSessionTimeout() {
   // Always first: the notice belongs on the login form, where no session is
   // running any more.
   render_expired_notice();
+
+  // ... but the countdown does not belong there. Before the role check below,
+  // so that it also covers someone who opens the login form while still
+  // holding a session.
+  if (is_login_page()) {
+    return null;
+  }
 
   const minutes = parseInt(document.body.dataset.autoLogoff, 10);
   // 0, absent or unparseable all mean "automatic log-off is switched off"

@@ -23,7 +23,8 @@ const LOGIN_PATHS = [
   "/login",
   "/login_form",
   "/require_login",
-  "/logged_out",
+  // hyphen: `logged_out` is not a view Plone has
+  "/logged-out",
 ];
 
 // Set once we start navigating away, so that the other in-flight requests of
@@ -94,9 +95,9 @@ export function installSessionGuard() {
 /**
  * Fetch without the guard above
  *
- * Session handling talks to endpoints (logout, in particular) that answer with
- * exactly the redirect the guard watches for. Going through the guard there
- * would start a reload racing the navigation we are already performing.
+ * Once the ticket is gone, the session renewal ping answers with exactly the
+ * redirect the guard watches for. Going through the guard there would start a
+ * reload racing the countdown's own navigation to the logout endpoint.
  *
  * @param {...*} args The arguments of a regular `fetch` call
  * @returns {Promise}
