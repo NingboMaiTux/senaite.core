@@ -24,6 +24,7 @@ from plone.app.users.browser.passwordpanel import PasswordPanel as Base
 from plone.app.users.utils import notifyWidgetActionExecutionError
 from plone.autoform import directives
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from senaite.core.browser.user.passwordpolicy_service import PasswordPolicyService
 from zope import schema
 from zope.interface import Interface
 
@@ -68,6 +69,16 @@ class PasswordPanel(Base):
     template = ViewPageTemplateFile("templates/account-panel.pt")
     schema = IPasswordSchema
 
+    def updateWidgets(self):
+        super(PasswordPanel, self).updateWidgets()
+        summary = PasswordPolicyService().rules_summary()
+        if "new_password" in self.widgets:
+            # 这里只改 widget 展示文案，避免直接修改 schema 字段定义触发类型校验。
+            self.widgets["new_password"].description = summary
+        if "new_password_ctl" in self.widgets:
+            # 这里只改 widget 展示文案，避免直接修改 schema 字段定义触发类型校验。
+            self.widgets["new_password_ctl"].description = summary
+
     def validate_password(self, action, data):
         """Validate new password
 
@@ -86,6 +97,15 @@ class PasswordPanel(Base):
 
             if err_str:
                 # add error to new_password widget
+                notifyWidgetActionExecutionError(action,
+                                                 "new_password", err_str)
+                notifyWidgetActionExecutionError(action,
+                                                 "new_password_ctl", err_str)
+                return
+
+            # 追加管理员在控制面板中配置的自定义密码复杂度规则。
+            errors = PasswordPolicyService().validate(new_password)
+            for err_str in errors:
                 notifyWidgetActionExecutionError(action,
                                                  "new_password", err_str)
                 notifyWidgetActionExecutionError(action,

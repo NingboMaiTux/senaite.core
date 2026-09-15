@@ -18,6 +18,21 @@
     <permission>senaite.core: Manage Bika</permission>
   </configlet>
 
+  <!-- Password Policy -->
+  <configlet
+      title="Password Policy"
+      action_id="senaite.core.passwordpolicy"
+      appId="senaite.core"
+      category="plone-security"
+      condition_expr=""
+      icon_expr="string:++plone++senaite.core.static/assets/icons/locked.svg"
+      url_expr="string:${portal_url}/@@password-policy-controlpanel"
+      visible="True"
+      i18n:domain="senaite.core"
+      i18n:attributes="title">
+    <permission>senaite.core: Manage Bika</permission>
+  </configlet>
+
   <!-- Actions -->
   <configlet title="Actions" action_id="ActionSettings" appId="Plone"
              category="plone-general" condition_expr="" icon_expr=""

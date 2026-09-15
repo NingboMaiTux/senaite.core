@@ -3,6 +3,18 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <genericsetup:upgradeStep
+      title="SENAITE.CORE 2.7.0: Add 'Password Policy' control panel configlet"
+      description="Register the @@password-policy-controlpanel configlet, so
+                   administrators can configure the minimum password length
+                   and the required character classes. The settings are read
+                   by senaite.core.browser.user.passwordpolicy_service on
+                   password change and on user registration."
+      source="2746"
+      destination="2747"
+      handler=".v02_07_000.import_controlpanel"
+      profile="senaite.core:default"/>
+
+  <genericsetup:upgradeStep
       title="SENAITE.CORE 2.7.0: Clear the unsatisfiable site_rss_items record"
       description="Plone defaults this registry record to '/news/aggregator',
                    a path its own Choice vocabulary does not offer in a

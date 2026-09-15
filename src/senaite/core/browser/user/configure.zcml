@@ -62,4 +62,13 @@
       layer="senaite.core.interfaces.ISenaiteCore"
       />
 
+  <!-- Password Policy -->
+  <browser:page
+      name="password-policy-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".passwordpolicy.PasswordPolicyControlPanelView"
+      permission="senaite.core.permissions.ManageBika"
+      layer="senaite.core.interfaces.ISenaiteCore"
+      />
+
 </configure>
