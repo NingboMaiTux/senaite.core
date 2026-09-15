@@ -3998,6 +3998,11 @@ msgstr "已取消的分装"
 msgid "Password"
 msgstr "密码"
 
+#. Default: "Password Policy"
+#: profiles/default/controlpanel.xml:23
+msgid "Password Policy"
+msgstr "密码规则"
+
 #: senaite/core/browser/install/templates/senaite-addsite.pt:50
 msgid "Path identifier"
 msgstr "路径标识符"
@@ -7440,6 +7445,51 @@ msgstr "文档类型，例如用户手册、仪器规格、图片等。"
 msgid "description_multifile_file"
 msgstr "文件上传"
 
+#. Default: "Custom password policy is disabled."
+#: browser/user/passwordpolicy_service.py:95
+msgid "description_password_policy_disabled"
+msgstr "自定义密码规则已关闭。"
+
+#. Default: "include at least one digit"
+#: browser/user/passwordpolicy_service.py
+msgid "description_password_policy_rule_digit"
+msgstr "至少含 1 个数字"
+
+#. Default: "include at least one lowercase letter"
+#: browser/user/passwordpolicy_service.py
+msgid "description_password_policy_rule_lowercase"
+msgstr "至少含 1 个小写字母"
+
+#. Default: "be at least ${count} characters long"
+#: browser/user/passwordpolicy_service.py:99
+msgid "description_password_policy_rule_min_length"
+msgstr "长度至少 ${count} 位"
+
+#. Default: ", "
+#: browser/user/passwordpolicy_service.py:118
+msgid "description_password_policy_rule_separator"
+msgstr "，"
+
+#. Default: "include at least one special character"
+#: browser/user/passwordpolicy_service.py
+msgid "description_password_policy_rule_special"
+msgstr "至少含 1 个特殊字符"
+
+#. Default: "include at least one uppercase letter"
+#: browser/user/passwordpolicy_service.py
+msgid "description_password_policy_rule_uppercase"
+msgstr "至少含 1 个大写字母"
+
+#. Default: "Password policy settings saved."
+#: browser/user/passwordpolicy.py:133
+msgid "description_password_policy_saved"
+msgstr "密码规则设置已保存。"
+
+#. Default: "Password must ${rules}."
+#: browser/user/passwordpolicy_service.py:121
+msgid "description_password_policy_summary"
+msgstr "密码必须${rules}。"
+
 #. Default: "Greeting title eg. Mr, Mrs, Dr"
 #: senaite/core/content/person.py:71
 msgid "description_person_salutation"
@@ -8256,6 +8306,51 @@ msgstr "${name} is before ${min_日期}, please correct."
 msgid "error_load_template_worksheet"
 msgstr "Unable to load the 模板"
 
+#. Default: "Password must contain at least one digit."
+#: browser/user/passwordpolicy_service.py:154
+msgid "error_password_policy_digit"
+msgstr "密码必须至少包含 1 个数字。"
+
+#. Default: "Password must contain at least one lowercase letter."
+#: browser/user/passwordpolicy_service.py:148
+msgid "error_password_policy_lowercase"
+msgstr "密码必须至少包含 1 个小写字母。"
+
+#. Default: "Password must be at least ${count} characters long."
+#: browser/user/passwordpolicy_service.py:136
+msgid "error_password_policy_min_length"
+msgstr "密码长度不能少于 ${count} 位。"
+
+#. Default: "Minimum password length must be an integer."
+#: browser/user/passwordpolicy.py:200
+msgid "error_password_policy_min_length_not_integer"
+msgstr "密码最短长度必须是整数。"
+
+#. Default: "Minimum password length must be greater than 0."
+#: browser/user/passwordpolicy.py:207
+msgid "error_password_policy_min_length_too_small"
+msgstr "密码最短长度必须大于 0。"
+
+#. Default: "Password must contain at least one special character."
+#: browser/user/passwordpolicy_service.py:159
+msgid "error_password_policy_special"
+msgstr "密码必须至少包含 1 个特殊字符。"
+
+#. Default: "Password must contain at least one uppercase letter."
+#: browser/user/passwordpolicy_service.py:142
+msgid "error_password_policy_uppercase"
+msgstr "密码必须至少包含 1 个大写字母。"
+
+#. Default: "Basic Settings"
+#: browser/user/templates/password-policy-controlpanel.pt:22
+msgid "fieldset_password_policy_basic"
+msgstr "基本设置"
+
+#. Default: "Complexity Rules"
+#: browser/user/templates/password-policy-controlpanel.pt:46
+msgid "fieldset_password_policy_complexity"
+msgstr "复杂度规则"
+
 #. Default: "Location"
 #: senaite/core/content/samplepoint.py:48
 msgid "fieldset_samplepoint_location"
@@ -8490,6 +8585,41 @@ msgstr "Enter full name, 例如 John Smith."
 #: senaite/core/browser/user/passwordpanel.py:37
 msgid "help_new_password"
 msgstr "Enter your new password."
+
+#. Default: "Turn the custom password policy on or off."
+#: browser/user/passwordpolicy.py:68
+msgid "help_password_policy_enabled"
+msgstr "打开或关闭自定义密码规则。"
+
+#. Default: "Configure the custom password rules used by the site. These settings are intended for administrator maintenance and will be applied by the password validation logic in the next step."
+#: browser/user/templates/password-policy-controlpanel.pt:11
+msgid "help_password_policy_intro"
+msgstr "配置本站使用的密码规则。这些设置由管理员维护，在下一步的密码校验中实际生效。"
+
+#. Default: "Minimum number of characters required for a password."
+#: browser/user/passwordpolicy.py:77
+msgid "help_password_policy_min_length"
+msgstr "密码至少需要的字符数。"
+
+#. Default: "Password must contain at least one number."
+#: browser/user/passwordpolicy.py:108
+msgid "help_password_policy_require_digit"
+msgstr "密码必须至少包含 1 个数字。"
+
+#. Default: "Password must contain at least one lowercase letter."
+#: browser/user/passwordpolicy.py:98
+msgid "help_password_policy_require_lowercase"
+msgstr "密码必须至少包含 1 个小写字母。"
+
+#. Default: "Password must contain at least one special character."
+#: browser/user/passwordpolicy.py:117
+msgid "help_password_policy_require_special"
+msgstr "密码必须至少包含 1 个特殊字符。"
+
+#. Default: "Password must contain at least one uppercase letter."
+#: browser/user/passwordpolicy.py:88
+msgid "help_password_policy_require_uppercase"
+msgstr "密码必须至少包含 1 个大写字母。"
 
 #. Default: "Your time zone"
 #: senaite/core/browser/user/personalpreferences.py:39
@@ -9051,6 +9181,36 @@ msgstr "Document"
 #: senaite/core/browser/user/passwordpanel.py:36
 msgid "label_new_password"
 msgstr "New password"
+
+#. Default: "Enable password policy"
+#: browser/user/passwordpolicy.py:66
+msgid "label_password_policy_enabled"
+msgstr "启用密码规则"
+
+#. Default: "Minimum password length"
+#: browser/user/passwordpolicy.py:75
+msgid "label_password_policy_min_length"
+msgstr "密码最短长度"
+
+#. Default: "Require at least one digit"
+#: browser/user/passwordpolicy.py:106
+msgid "label_password_policy_require_digit"
+msgstr "要求至少 1 个数字"
+
+#. Default: "Require at least one lowercase letter"
+#: browser/user/passwordpolicy.py:96
+msgid "label_password_policy_require_lowercase"
+msgstr "要求至少 1 个小写字母"
+
+#. Default: "Require at least one special character"
+#: browser/user/passwordpolicy.py:115
+msgid "label_password_policy_require_special"
+msgstr "要求至少 1 个特殊字符"
+
+#. Default: "Require at least one uppercase letter"
+#: browser/user/passwordpolicy.py:86
+msgid "label_password_policy_require_uppercase"
+msgstr "要求至少 1 个大写字母"
 
 #. Default: "Fax (business)"
 #: senaite/core/content/person.py:169
@@ -11406,6 +11566,11 @@ msgstr "增值税 number"
 #: senaite/core/permissions/localroles.py:37
 msgid "title_owner_role"
 msgstr "Owner"
+
+#. Default: "Password Policy"
+#: browser/user/templates/password-policy-controlpanel.pt:10
+msgid "title_password_policy"
+msgstr "密码规则"
 
 #. Default: "Preserver"
 #: senaite/core/permissions/localroles.py:51

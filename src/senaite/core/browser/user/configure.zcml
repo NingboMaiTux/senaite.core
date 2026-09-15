@@ -71,4 +71,13 @@
       layer="senaite.core.interfaces.ISenaiteCore"
       />
 
+  <!-- Password Policy: give already-installed sites the control panel entry.
+       The profile only runs on install / new sites, so without this the
+       feature would work while staying unreachable in Site Setup. Idempotent,
+       runs once per process, never raises. -->
+  <subscriber
+      for="zope.processlifetime.IDatabaseOpenedWithRoot"
+      handler=".passwordpolicy.ensure_configlet_on_startup"
+      />
+
 </configure>
