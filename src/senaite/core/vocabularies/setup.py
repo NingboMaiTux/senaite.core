@@ -210,7 +210,14 @@ class TopLevelFoldersVocabulary(object):
             if api.get_portal_type(obj) in SKIP_NAV_TYPES:
                 continue
             # Get title and id
-            title = api.get_title(obj)
+            # NOTE: Title() is not consistent across the folders in the portal
+            #       root: AT folders and the core DX folders return an utf-8
+            #       encoded string, but folders of add-ons that translate
+            #       their Title() return unicode. Sorting both kinds together
+            #       makes Python 2 decode the byte string as ASCII, which
+            #       raises an UnicodeDecodeError as soon as one of them is not
+            #       ASCII only, e.g. a folder with a Chinese title.
+            title = api.safe_unicode(api.get_title(obj))
             items.append((obj_id, obj_id, title))
 
         # Sort by title
