@@ -21,6 +21,7 @@
 import collections
 import datetime
 import json
+import os
 from calendar import monthrange
 from operator import itemgetter
 from time import time
@@ -38,6 +39,8 @@ from DateTime import DateTime
 from plone.memoize import ram
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from senaite.core.browser.dashboard import sections as section_utils
+from senaite.core.browser.dashboard.interfaces import IDashboardSection
 from senaite.core.catalog import ANALYSIS_CATALOG
 from senaite.core.catalog import SAMPLE_CATALOG
 from senaite.core.catalog import WORKSHEET_CATALOG
@@ -49,8 +52,16 @@ from senaite.core.permissions import TransitionReceiveSample
 from senaite.core.permissions import TransitionVerify
 from senaite.core.permissions import ViewDashboard
 from senaite.core.permissions import ViewResults
+from zope.component import getUtilitiesFor
 
 DASHBOARD_FILTER_COOKIE = "dashboard_filter_cookie"
+
+#: core 自带的统计区块 id，顺序 = 页面上的显示顺序。
+#:
+#: ★ 这个元组是"装/卸 add-on 不影响原有图表"的第一条：core 的区块是
+#:   **写死的常量**，不经过任何 add-on 的注册表 —— 插件区块只是追加在
+#:   它们后面，注册表空了（没装任何 add-on）时页面与改造前逐字一致。
+CORE_SECTION_IDS = ("analysisrequests", "analyses", "worksheets")
 
 # Cache TTL for search counts (5 minutes)
 SEARCH_CACHE_TTL = 60 * 5
@@ -225,6 +236,151 @@ def format_date_label(period, created):
 
 
 # -------------------------------------------------------
+# 插件区块（IDashboardSection）—— 仪表盘的扩展点
+# -------------------------------------------------------
+
+def is_addon_installed(portal, addon):
+    """``addon`` 的 GenericSetup profile 是否**已应用**（= 装在**这个**站点上）
+
+    :param addon: 二选一 ——
+
+        * add-on 名字（默认 profile ``<名字>:default``），例如
+          ``"maitux.stability"``；
+        * 或直接给 profile id（``"my.addon:plone"`` 这种带冒号的）。
+
+    ★★ 为什么用 profile 版本、**不用** ``portal_quickinstaller.
+       isProductInstalled()``（2026-10-14 线上实测踩到，卸载后区块没消失）：
+
+       CMFQuickInstallerTool 4.0.4 的实现是"查同名**子对象**在不在"：
+
+           def isProductInstalled(self, productname):
+               ob = self._getOb(productname, None)
+               return ob is not None and ob.isInstalled()
+
+       而卸载只删**传进来的那个 id**：
+
+           for pid in products:
+               self.manage_delObjects(pid)              # 只删 pid
+               portal_setup.unsetLastVersionForProfile(profile['id'])
+
+       Add-ons 面板传的是 ``<名字>:default``，于是 ``<名字>`` 那个子对象
+       **留在了 portal_quickinstaller 里**，``isProductInstalled("<名字>")``
+       卸载后照样返回 True。实测：卸载后
+
+           isProductInstalled('maitux.stability')         -> True    ← 骗人
+           isProductInstalled('maitux.stability:default') -> False
+           getLastVersionForProfile('…:default')          -> 'unknown' ← 真相
+
+       所以改成读 profile 版本：装过 -> ``('1', '0', '0')`` 这样的版本元组；
+       没装 / 已卸载 -> ``'unknown'``。它由 ``unsetLastVersionForProfile``
+       在卸载时明确清掉，是**跟着安装/卸载一起翻面**的那个量。
+
+    fail-closed：判不出来就当"没装"。宁可少一块（用户看得见、能查），
+    也不能多一块（用户以为这个站点有该功能）。
+    """
+    if not addon:
+        # provider 显式声明"我是全局区块"。这是它的选择，文档里有警告。
+        return True
+
+    profile_ids = [addon] if ":" in addon else ["%s:default" % addon]
+
+    try:
+        setup = getToolByName(portal, "portal_setup")
+    except Exception:
+        logger.exception(
+            "Dashboard: portal_setup unavailable; hiding the section of '%s'",
+            addon)
+        return False
+
+    for profile_id in profile_ids:
+        try:
+            version = setup.getLastVersionForProfile(profile_id)
+        except Exception:
+            logger.exception(
+                "Dashboard: could not read the version of profile '%s'",
+                profile_id)
+            continue
+        if version and version != "unknown":
+            return True
+
+    return False
+
+
+def get_dashboard_section_providers(portal):
+    """当前站点可用的插件区块：``[(注册名, provider), ...]``（按注册名排序）
+
+    任何一步失败都只影响它自己：注册表取不到 -> 返回空列表（core 的三个
+    区块照常渲染）；某个 provider 判定失败 -> 只丢它一个。
+    排序是为了让区块顺序**稳定**（注册顺序在不同进程里不保证一致，
+    不稳定的话页面每次刷新区块位置会跳）。
+    """
+    try:
+        utilities = list(getUtilitiesFor(IDashboardSection))
+    except Exception:
+        logger.exception("Dashboard: could not enumerate IDashboardSection")
+        return []
+
+    providers = sorted(utilities, key=lambda item: item[0])
+    available, unavailable, invalid = section_utils.partition_providers(
+        providers,
+        lambda provider: is_addon_installed(
+            portal, getattr(provider, "addon", None)))
+
+    for name, provider in unavailable:
+        # 正常情况：该 add-on 没装在**这个**站点上。
+        # 记 info（不记 warning）——排查"我装了怎么没出来"时这一行就是答案，
+        # 但它不该和真正的故障长得一样。
+        logger.info(
+            "Dashboard: section provider '%s' hidden — add-on '%s' is not "
+            "installed on this site", name, getattr(provider, "addon", None))
+
+    for name, reason in invalid:
+        logger.warning(
+            "Dashboard: skipping section provider '%s': %s", name, reason)
+
+    return available
+
+
+def get_dashboard_section_provider(portal, section_id):
+    """按 id 取 provider（已经是站点级筛选后的那一份）"""
+    for _name, provider in get_dashboard_section_providers(portal):
+        if getattr(provider, "section_id", None) == section_id:
+            return provider
+    return None
+
+
+def get_section_permission(provider):
+    """provider 声明的权限（默认 ``View Dashboard``）"""
+    return section_utils.get_provider_permission(provider)
+
+
+def get_static_version():
+    """``dashboard.js`` / ``dashboard.css`` 的版本号（= 文件 mtime）
+
+    ★ 为什么需要它（2026-10-14 线上实测踩到）：
+
+      这两个是 ``++resource++`` **静态资源**，浏览器会长期缓存；而页面骨架
+      （HTML）是**动态**的。一旦 HTML 里多出一个区块容器、而浏览器里的 JS
+      还是旧的（不认识这个新 id），那一块就会**永远转圈** —— 现场日志里
+      浏览器连一个 ``?section=stability`` 请求都没发，看起来像服务端坏了。
+
+      给 URL 挂一个随文件变化的 ``?v=`` 后：改文件 / 重建镜像 -> URL 变 ->
+      缓存自然失效，不必指望每个用户都去 Ctrl+F5。
+
+    不缓存这个值（每次渲染一次 ``stat``），否则在不重启进程的情况下改了
+    静态文件，版本号不会跟着变 —— 那正是它要解决的问题。
+    """
+    path = os.path.join(os.path.dirname(__file__),
+                        "static", "js", "dashboard.js")
+    try:
+        return str(int(os.path.getmtime(path)))
+    except Exception:
+        # 取不到 mtime 时退回固定值：行为与改造前一致，不是错误
+        logger.warning("Dashboard: could not stat %s", path)
+        return "1"
+
+
+# -------------------------------------------------------
 # DashboardView
 # -------------------------------------------------------
 
@@ -334,14 +490,94 @@ class DashboardView(BrowserView):
 
     # --- Statistics sections ---
 
+    def get_section_ids(self):
+        """页面骨架用的区块 id 列表（**廉价**：不建数据、不查库）
+
+        骨架只需要知道"要预留几个容器"，绝不能为此把所有区块的数据算一遍
+        （core 的两张图要遍历整个 catalog）。所以这里只读 provider 的
+        **声明式属性** ``section_id`` / ``permission``，
+        :meth:`get_dashboard_section` 只在真正取那一块时才调用。
+        """
+        if not self.can_view_statistics():
+            return []
+
+        ids = list(CORE_SECTION_IDS)
+        sm = getSecurityManager()
+        for _name, provider in get_dashboard_section_providers(self.context):
+            try:
+                section_id = getattr(provider, "section_id", None)
+                if not section_id or section_id in ids:
+                    continue
+                if not sm.checkPermission(
+                        get_section_permission(provider), self.context):
+                    # 没权限就不留容器：留了会一直转圈（JS 拉数据拿 403）
+                    continue
+                ids.append(section_id)
+            except Exception:
+                logger.exception(
+                    "Dashboard: could not add section id of provider %r",
+                    getattr(provider, "section_id", provider))
+        return ids
+
+    def get_section_ids_json(self):
+        """给模板 -> dashboard.js 的 ``data-sections``（JSON 数组）
+
+        JS 里那份写死的 ``["analysisrequests", "analyses", "worksheets"]``
+        改成读它，插件区块才可能被前端取到。
+        """
+        return json.dumps(self.get_section_ids())
+
+    def get_error_text(self):
+        """某一块加载失败时页面上显示的那行字（dashboard.js 读它）
+
+        刻意**不是**"静默留白"：静默失效最难查（R9）。
+        """
+        return _(u"Failed to load this section")
+
+    def get_static_version(self):
+        """静态资源的 ``?v=``（见模块级 :func:`get_static_version`）"""
+        return get_static_version()
+
     def get_sections(self):
         if not self.can_view_statistics():
             return []
-        return [
+
+        sections = [
             self._build_samples_section(),
             self._build_analyses_section(),
             self._build_worksheets_section(),
         ]
+
+        # 插件区块追加在后面。core 的三块**一个字段都没动** ——
+        # 这是"装/卸 add-on 不影响原有图表"最直接的那条保证。
+        for _name, provider in get_dashboard_section_providers(self.context):
+            section = self._build_provider_section(provider)
+            if section is not None:
+                sections.append(section)
+        return sections
+
+    def _build_provider_section(self, provider):
+        """取一个插件区块的数据，**失败只降级这一块**"""
+        section_id = getattr(provider, "section_id", provider)
+        try:
+            raw = provider.get_dashboard_section()
+        except Exception:
+            logger.exception(
+                "Dashboard: section provider '%s' failed", section_id)
+            return None
+
+        section, reason = section_utils.normalize_section(
+            raw, expected_id=getattr(provider, "section_id", None))
+        if section is None:
+            logger.warning(
+                "Dashboard: section provider '%s' returned an unusable "
+                "section: %s", section_id, reason)
+            return None
+        if section.get("dropped_panels"):
+            logger.warning(
+                "Dashboard: section '%s' dropped panels: %s",
+                section["id"], "; ".join(section["dropped_panels"]))
+        return section
 
     def _build_samples_section(self):
         catalog = getToolByName(
@@ -783,6 +1019,11 @@ class DashboardView(BrowserView):
 # DashboardDataView (JSON endpoint)
 # -------------------------------------------------------
 
+#: core 自带区块 id -> 取值方法名。
+#:
+#: ★ 这张表**只列 core 自己的区块**。插件区块（``IDashboardSection``）不写
+#:   在这里、也永远不需要改这张表 —— 那正是"装/卸 add-on 不用动 core"的
+#:   意思（见 :class:`DashboardDataView`）。
 SECTION_HANDLERS = {
     "status_cards": "get_status_cards",
     "quick_links": "get_quick_links",
@@ -797,6 +1038,14 @@ class DashboardDataView(BrowserView):
 
     Accepts a ``section`` parameter and returns the
     corresponding data as JSON.
+
+    两种区块的取数路径：
+
+    * **core 自带**（:data:`SECTION_HANDLERS`）—— 与改造前完全一致；
+    * **插件区块** —— 按 id 现找 provider。找不到 -> 400（与"未知区块"
+      的老行为一致）；provider 抛异常 -> **HTTP 200 + ``error`` 标记**，
+      前端把这一块画成"加载失败"，**其余区块不受影响**（每个区块本来就是
+      各自一次请求，这里只是把失败钉在这一块里）。
     """
 
     def __call__(self):
@@ -811,13 +1060,52 @@ class DashboardDataView(BrowserView):
 
         section = self.request.get("section", "")
         handler_name = SECTION_HANDLERS.get(section)
-        if not handler_name:
+        if handler_name:
+            view = DashboardView(self.context, self.request)
+            view._setup(mtool)
+            data = getattr(view, handler_name)()
+            return json.dumps(data)
+
+        return self.render_plugin_section(section)
+
+    def render_plugin_section(self, section):
+        """插件区块的取数 + 全部失败处置"""
+        provider = get_dashboard_section_provider(self.context, section)
+        if provider is None:
+            # 没装该 add-on 的站点也走这里 —— 注册表是进程级的，
+            # 但 provider 已经过站点级筛选，所以不会"漏"给别的站点。
             self.request.response.setStatus(400)
-            return json.dumps(
-                {"error": "Unknown section"})
+            return json.dumps({"error": "Unknown section"})
 
-        view = DashboardView(self.context, self.request)
-        view._setup(mtool)
+        if not getSecurityManager().checkPermission(
+                get_section_permission(provider), self.context):
+            self.request.response.setStatus(403)
+            return json.dumps({"error": "Unauthorized"})
 
-        data = getattr(view, handler_name)()
-        return json.dumps(data)
+        try:
+            raw = provider.get_dashboard_section()
+        except Exception:
+            logger.exception("Dashboard: section '%s' failed", section)
+            return json.dumps(self._failed_section(section))
+
+        normalized, reason = section_utils.normalize_section(
+            raw, expected_id=section)
+        if normalized is None:
+            logger.warning(
+                "Dashboard: section '%s' is unusable: %s", section, reason)
+            return json.dumps(self._failed_section(section))
+
+        if normalized.get("dropped_panels"):
+            logger.warning(
+                "Dashboard: section '%s' dropped panels: %s",
+                section, "; ".join(normalized["dropped_panels"]))
+        return json.dumps(normalized)
+
+    def _failed_section(self, section):
+        """失败时返回的**空区块**：HTTP 仍是 200，前端显示"加载失败"
+
+        为什么不用 500：dashboard.js 是逐个 section fetch 的，500 会走它
+        的 ``catch``（只在 console 里留一行），页面上要么一直转圈要么空白。
+        给一个带 ``error`` 的空区块，页面能明确说出"这块没加载出来"。
+        """
+        return {"id": section, "title": section, "panels": [], "error": True}
