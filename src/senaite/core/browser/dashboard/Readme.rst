@@ -60,12 +60,80 @@ produce separate cache entries.
 Evolution chart data is cached for 2 hours.
 
 
+Extending the dashboard from an add-on
+--------------------------------------
+
+Add-ons add their own statistics section through
+``senaite.core.browser.dashboard.interfaces.IDashboardSection`` --
+a ZCML-registered **utility**, not a view override::
+
+    <utility
+        factory=".dashboardsection.MyDashboardSection"
+        provides="my.addon.dashboardsection.IDashboardSection"
+        name="my.addon"
+        />
+
+Use ``factory=``, not ``component=``: ``component`` registers the
+class object itself, and calling ``get_dashboard_section()`` on it is
+an unbound-method call under Python 2 (TypeError). ``factory``
+instantiates it.
+
+The provider declares three cheap attributes -- ``section_id``,
+``addon`` and (optionally) ``permission`` -- plus one method,
+``get_dashboard_section()`` that returns the section payload (see the
+interface docstring for the panel contract). Charts carry their own
+buckets and series, so an add-on is not forced into the
+``created`` x workflow-state shape of the core charts.
+
+Two guarantees matter here, and both are enforced in code:
+
+**Installing or uninstalling an add-on never touches the three core
+sections.** ``CORE_SECTION_IDS`` is a plain constant and each core
+section has its own handler in ``SECTION_HANDLERS``; plugin sections
+are only *appended*. With no add-on installed, ``get_section_ids()``
+returns exactly the original three and the page is unchanged.
+
+**A section only appears on sites where its add-on is installed.**
+ZCML registration is process-wide, so "is it registered?" is not the
+question to ask -- ``IDashboardSection.addon`` is resolved against the
+*site's* ``portal_setup`` profile version on every request
+(``<addon>:default`` installed -> a version tuple; never installed or
+uninstalled -> ``unknown``), fail-closed. Uninstall the add-on and the
+section disappears while the rest of the dashboard keeps working.
+
+Do **not** use ``portal_quickinstaller.isProductInstalled(name)`` for
+this: it checks for a child object of that exact name, while the
+Add-ons panel uninstalls by passing ``<name>:default`` -- the
+``<name>`` child survives, so it keeps reporting True after an
+uninstall (hit for real on 2026-10-14).
+
+**One broken section cannot break the others.** Every section is
+fetched by its own request; a provider that raises, returns a bad
+payload or declares an unsupported ``api_version`` degrades to an
+empty section flagged ``error`` (HTTP 200) that the front end renders
+as "failed to load". Core sections are unaffected.
+
+Why a utility instead of overriding ``@@senaite-dashboard``: ZCML
+view registrations are also process-wide, and when two add-ons
+override the same view name the winner depends on the request's
+``__iro__`` order -- one of them silently stops working. Utilities
+are enumerable, so N add-ons never conflict.
+
+
 Files
 -----
 
 ``dashboard.py``
     View classes: ``DashboardView`` (main page) and
     ``DashboardDataView`` (JSON endpoint).
+
+``interfaces.py``
+    ``IDashboardSection`` -- the dashboard extension point.
+
+``sections.py``
+    Pure logic for the extension point (id validation, payload
+    normalisation, provider selection). No Zope imports, so it is
+    unit tested offline (``tests/test_dashboard_sections.py``).
 
 ``templates/dashboard.pt``
     Page template with async JS loading.

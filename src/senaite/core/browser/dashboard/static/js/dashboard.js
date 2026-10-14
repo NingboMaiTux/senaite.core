@@ -17,6 +17,24 @@ document.addEventListener("DOMContentLoaded", function () {
   var dateFrom = config.getAttribute("data-date-from");
   var dateTo = config.getAttribute("data-date-to");
 
+  // 区块 id 列表由服务端输出（core 的三个 + 当前站点可用的插件区块）。
+  // 这里刻意保留一份兜底：这个 .js 是**静态资源**，会被浏览器缓存，
+  // "旧 JS + 新页面"和"新 JS + 旧页面"都得能用。
+  var errorText = config.getAttribute("data-error-text")
+    || "Failed to load this section";
+  var sectionIds = ["analysisrequests", "analyses", "worksheets"];
+  try {
+    var rawSections = config.getAttribute("data-sections");
+    if (rawSections) {
+      var parsed = JSON.parse(rawSections);
+      if (Array.isArray(parsed) && parsed.length) {
+        sectionIds = parsed;
+      }
+    }
+  } catch (err) {
+    console.error("Dashboard: bad data-sections attribute", err);
+  }
+
   // Load overview (cards + links) together
   Promise.all([
     fetchSection("status_cards"),
@@ -27,10 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Load statistics sections
   if (canViewStats) {
-    ["analysisrequests", "analyses", "worksheets"].forEach(
+    sectionIds.forEach(
       function (id) {
         fetchSection(id).then(function (data) {
-          renderStatisticsSection(id, data);
+          // 取数为空（网络/HTTP 失败）时也要有明确交代，
+          // 否则容器里那个 spinner 会一直转下去。
+          renderStatisticsSection(
+            id, data || { id: id, error: true });
         });
       }
     );
@@ -152,6 +173,31 @@ document.addEventListener("DOMContentLoaded", function () {
     var container = document.getElementById(
       "dashboard-section-" + sectionId);
     if (!container || !section) return;
+
+    // 服务端把"这一块取数失败"标成 error（HTTP 仍是 200）：明确画出来，
+    // 不留白、不转圈。★ 只影响这一块 —— 每个区块是各自一次请求，
+    // 别的区块该出什么还是出什么。用 textContent 构造（不用 innerHTML），
+    // 服务端来的 title 不会被当成 HTML 解析。
+    if (section.error) {
+      container.textContent = "";
+      var errHead = document.createElement("div");
+      errHead.className = "dashboard-section-head";
+      var errH2 = document.createElement("h2");
+      errH2.className = "h6 text-uppercase text-muted"
+        + " font-weight-bold border-bottom pb-2";
+      errH2.textContent = section.title || sectionId;
+      errHead.appendChild(errH2);
+      container.appendChild(errHead);
+
+      var errBox = document.createElement("div");
+      errBox.className = "text-muted py-3";
+      var errIcon = document.createElement("i");
+      errIcon.className = "fas fa-exclamation-triangle mr-2";
+      errBox.appendChild(errIcon);
+      errBox.appendChild(document.createTextNode(errorText));
+      container.appendChild(errBox);
+      return;
+    }
 
     var panels = section.panels || [];
     var simplePanels = panels.filter(function (p) {
@@ -382,9 +428,8 @@ document.addEventListener("DOMContentLoaded", function () {
     color.domain(states);
 
     var xAxis = d3.axisBottom(x).ticks(10);
-    var yAxis = d3.axisLeft(y)
-      .tickSize(-width)
-      .tickFormat(d3.format(".2s"));
+    // yAxis 在下面算完 maxTotal 之后才建（纵轴的格式化取决于数值量级，
+    // 见那里的长注释）。这里**不能**提前建，否则拿到的是旧 domain。
 
     var svg = d3.select("#" + id).append("svg")
       .attr("width",
@@ -407,9 +452,36 @@ document.addEventListener("DOMContentLoaded", function () {
     x.domain(data.map(function (d) {
       return d.date;
     }));
-    y.domain([0, d3.max(data, function (d) {
+    /* ★ 纵轴是「个数」—— 必须落在整数刻度上，且**绝不能用 SI 前缀格式化**。
+       每格只有 1~2 个点时 d3 会挑 0.2 这种小数步长，而 `.2s` 把 0.2 印成
+       **"200m"**（m = milli = 千分之一），纵轴读数变成 100m / 200m / …，
+       看起来像"米"或"百万"，跟"个数"毫无关系（2026-10-14 实测报障）。
+       稳定性那边 2026-10-08 踩过同一个坑并已修（见 maitux.stability 的
+       stats_dashboard.pt），这里补上同样的处置。
+
+       量级大时（>= 1000）仍用 `.2s`（"1.2k"），与改造前的观感一致 ——
+       只有小整数域才切成整数刻度。 */
+    var maxTotal = d3.max(data, function (d) {
       return d.total;
-    })]);
+    }) || 0;
+    y.domain([0, maxTotal]);
+
+    var yAxis;
+    if (maxTotal >= 1000) {
+      yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(d3.format(".2s"));
+    } else {
+      var tickStep = Math.max(1, Math.ceil(maxTotal / 5));
+      var tickValues = [];
+      for (var tick = 0; tick <= maxTotal; tick += tickStep) {
+        tickValues.push(tick);
+      }
+      yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickValues(tickValues)
+        .tickFormat(d3.format("d"));
+    }
 
     svg.append("g")
       .attr("class", "x axis")

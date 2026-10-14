@@ -19,16 +19,27 @@
 
   <metal:content-core fill-slot="content-core">
 
+    <!-- ?v= 是必需的：这两个是静态资源、浏览器会长期缓存，而本页 HTML 是
+         动态的。没有它的话，"HTML 里多了一个区块容器、浏览器 JS 还是旧的"
+         会让新容器永远转圈（2026-10-14 实测）。版本号取文件 mtime。 -->
     <link rel="stylesheet"
-          tal:attributes="href string:${portal_url}/++resource++senaite.core.dashboard.css" />
+          tal:attributes="href string:${portal_url}/++resource++senaite.core.dashboard.css?v=${view/get_static_version}" />
 
     <!-- Configuration for dashboard.js -->
+    <!-- data-sections / data-error-text 是本轮新增的两项：
+         · data-sections —— 区块 id 列表由 view 输出。dashboard.js 里过去
+           写死的 ['analysisrequests','analyses','worksheets'] 改成读它，
+           插件区块（IDashboardSection）才可能被前端取到；一个插件都没装时
+           它输出的就是那三个，行为与改造前逐字一致。
+         · data-error-text —— 某一块加载失败时显示的那行字（不静默留白）。 -->
     <div id="dashboard-config"
          style="display:none"
          tal:attributes="data-base-url string:${view/portal_url}/senaite-dashboard-data;
                          data-periodicity view/periodicity;
                          data-can-view-stats python:'true' if view.can_view_statistics() else 'false';
                          data-portal-url view/portal_url;
+                         data-sections view/get_section_ids_json;
+                         data-error-text view/get_error_text;
                          data-date-from python:plone_view.toLocalizedTime(view.date_from);
                          data-date-to python:plone_view.toLocalizedTime(view.date_to)">
     </div>
@@ -42,8 +53,10 @@
     </div>
 
     <!-- Statistics Sections (async, permission-gated) -->
+    <!-- 区块 id 列表来自 view.get_section_ids()：core 的三个 + 当前站点
+         可用的插件区块（没装任何 add-on 时就是原来那三个）。 -->
     <tal:statistics condition="python:view.can_view_statistics()">
-      <div tal:repeat="section_id python:['analysisrequests', 'analyses', 'worksheets']">
+      <div tal:repeat="section_id python:view.get_section_ids()">
         <div tal:attributes="id string:dashboard-section-${section_id}"
              class="dashboard-section">
           <div class="text-muted py-3">
@@ -54,7 +67,30 @@
       </div>
     </tal:statistics>
 
-    <script tal:attributes="src string:${portal_url}/++resource++senaite.core.dashboard.js"></script>
+    <script tal:attributes="src string:${portal_url}/++resource++senaite.core.dashboard.js?v=${view/get_static_version}"></script>
+
+    <!-- 兜底：上面的 JS 仍可能因为别的原因没跑起来（浏览器还捧着旧缓存、
+         JS 报错、资源 404）。那几块容器里的 spinner 就会一直转 —— 静默失效
+         最难查。这段脚本在**页面 HTML 里、不会被缓存**，过一会儿检查一遍：
+         还是 spinner 的容器就明确写成一行提示。
+         新 JS 正常时它什么都不会做（容器早被清空）；就算数据来得慢，
+         真数据到手时 renderStatisticsSection 会整块重写，提示自动消失。 -->
+    <script>
+      (function () {
+        var config = document.getElementById("dashboard-config");
+        var text = (config && config.getAttribute("data-error-text"))
+          || "Failed to load this section";
+        setTimeout(function () {
+          var icons = document.querySelectorAll(
+            ".dashboard-section .fa-spinner");
+          Array.prototype.forEach.call(icons, function (icon) {
+            var box = icon.parentNode;
+            box.className = "text-muted py-3";
+            box.textContent = text;
+          });
+        }, 10000);
+      })();
+    </script>
 
     <input tal:replace="structure context/@@authenticator/authenticator"/>
   </metal:content-core>
