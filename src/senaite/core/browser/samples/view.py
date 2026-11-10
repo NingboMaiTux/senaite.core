@@ -258,7 +258,7 @@ class SamplesView(ListingView):
         self.review_states = [
             {
                 "id": "default",
-                "title": "进行中",
+                "title": _(u"Ongoing"),
                 "contentFilter": {
                     "review_state": (
                         "sample_registered",
@@ -277,7 +277,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_sampled",
-                "title": "待取样",
+                "title": _(u"To Be Sampled"),
                 "contentFilter": {
                     "review_state": ("to_be_sampled",),
                     "sort_on": "created",
@@ -286,7 +286,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys()
             }, {
                 "id": "to_be_preserved",
-                "title": "待保存",
+                "title": _(u"To Be Preserved"),
                 "contentFilter": {
                     "review_state": ("to_be_preserved",),
                     "sort_on": "created",
@@ -296,7 +296,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "scheduled_sampling",
-                "title": "已排采样",
+                "title": _(u"Scheduled sampling"),
                 "contentFilter": {
                     "review_state": ("scheduled_sampling",),
                     "sort_on": "created",
@@ -306,7 +306,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "sample_due",
-                "title": "待接收",
+                "title": _(u"Reception pending"),
                 "contentFilter": {
                     "review_state": (
                         "to_be_sampled",
@@ -318,7 +318,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "sample_received",
-                "title": "已接收",
+                "title": _(u"Received"),
                 "contentFilter": {
                     "review_state": "sample_received",
                     "sort_on": "created",
@@ -328,7 +328,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_verified",
-                "title": "待复核",
+                "title": _(u"To be verified"),
                 "contentFilter": {
                     "review_state": "to_be_verified",
                     "sort_on": "created",
@@ -338,7 +338,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "verified",
-                "title": "已复核",
+                "title": _(u"Verified"),
                 "contentFilter": {
                     "review_state": "verified",
                     "sort_on": "created",
@@ -348,7 +348,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "published",
-                "title": "已发布",
+                "title": _(u"Published"),
                 "contentFilter": {
                     "review_state": ("published"),
                     "sort_on": "created",
@@ -358,7 +358,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "dispatched",
-                "title": "已派送",
+                "title": _(u"Dispatched"),
                 "flat_listing": True,
                 "confirm_transitions": ["restore"],
                 "contentFilter": {
@@ -370,7 +370,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "cancelled",
-                "title": "已取消",
+                "title": _(u"Cancelled"),
                 "contentFilter": {
                     "review_state": "cancelled",
                     "sort_on": "created",
@@ -380,7 +380,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "invalid",
-                "title": "无效",
+                "title": _(u"Invalid"),
                 "contentFilter": {
                     "review_state": "invalid",
                     "sort_on": "created",
@@ -390,7 +390,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "all",
-                "title": "全部",
+                "title": _(u"All"),
                 "contentFilter": {
                     "sort_on": "created",
                     "sort_order": "descending",
@@ -399,7 +399,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "rejected",
-                "title": "已拒收",
+                "title": _(u"Rejected"),
                 "contentFilter": {
                     "review_state": "rejected",
                     "sort_on": "created",
@@ -410,7 +410,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "assigned",
                 "title": get_image("assigned.png",
-                                   title="已分配"),
+                                   title=t(_(u"Assigned"))),
                 "contentFilter": {
                     "assigned_state": "assigned",
                     "review_state": ("sample_received",),
@@ -422,7 +422,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "unassigned",
                 "title": get_image("unassigned.png",
-                                   title="未分配"),
+                                   title=t(_(u"Unassigned"))),
                 "contentFilter": {
                     "assigned_state": "unassigned",
                     "review_state": (
@@ -436,7 +436,7 @@ class SamplesView(ListingView):
             }, {
                 "id": "late",
                 "title": get_image("late.png",
-                                   title="超期"),
+                                   title=t(_(u"Late"))),
                 "contentFilter": {
                     # Query only for unpublished ARs that are late
                     "review_state": (
