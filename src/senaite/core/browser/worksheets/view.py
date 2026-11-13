@@ -60,7 +60,8 @@ class WorksheetsView(ListingView):
         }
 
         self.context_actions = {
-            u"新增": {
+            translate(_(u"listing_worksheets_action_add",
+                        default=u"Add"), to_utf8=False): {
                 "url": "add_worksheet",
                 "icon": "++resource++bika.lims.images/add.png",
                 "class": "worksheet_add",
@@ -68,7 +69,10 @@ class WorksheetsView(ListingView):
             }
         }
 
-        self.title = u"工作表"
+        self.title = translate(_(
+            u"listing_worksheets_title",
+            default=u"Worksheets"
+        ), to_utf8=False)
         self.description = ""
         self.icon = api.get_icon("Worksheets", html_tag=False)
         self.show_select_column = True
@@ -95,35 +99,62 @@ class WorksheetsView(ListingView):
 
         self.columns = collections.OrderedDict((
             ("getProgressPercentage", {
-                "title": u"进度",
+                "title": _(
+                    u"listing_worksheets_column_progress",
+                    default=u"Progress"
+                ),
             }),
             ("Title", {
-                "title": u"工作表",
+                "title": _(
+                    u"listing_worksheets_column_title",
+                    default=u"Worksheet"
+                ),
                 "index": "getId",
             }),
             ("Analyst", {
-                "title": u"分析员",
+                "title": _(
+                    u"listing_worksheets_column_analyst",
+                    default=u"Analyst"
+                ),
                 "index": "getAnalyst",
             }),
             ("getWorksheetTemplateTitle", {
-                "title": u"模板",
+                "title": _(
+                    u"listing_worksheets_column_template_title",
+                    default=u"Template"
+                ),
                 "replace_url": "getWorksheetTemplateURL",
             }),
             ("getNumberOfRegularSamples", {
-                "title": u"样品",
+                "title": _(
+                    u"listing_worksheets_column_number_samples",
+                    default=u"Samples"
+                ),
             }),
             ("getNumberOfQCAnalyses", {
-                "title": u"质控检验",
+                "title": _(
+                    u"listing_worksheets_column_number_qc_analyses",
+                    default=u"QC Analyses"
+                ),
             }),
             ("getNumberOfRegularAnalyses", {
-                "title": u"常规检验",
+                "title": _(
+                    u"listing_worksheets_column_number_analyses",
+                    default=u"Routine Analyses"
+                ),
             }),
             ("CreationDate", {
-                "title": u"创建时间",
+                "title": _(
+                    u"listing_worksheets_column_created",
+                    default=u"Created"
+                ),
                 "index": "created",
             }),
             ("state_title", {
-                "title": u"状态",
+                "title": _(
+                    u"listing_worksheets_column_state_title",
+                    default=u"Status"
+                ),
                 "index": "review_state",
                 "attr": "state_title",
             }),
@@ -131,7 +162,10 @@ class WorksheetsView(ListingView):
         self.review_states = [
             {
                 "id": "default",
-                "title": u"进行中",
+                "title": _(
+                    u"listing_worksheets_state_active",
+                    default=u"Active"
+                ),
                 "contentFilter": {
                     "review_state": [
                         "open",
@@ -145,7 +179,10 @@ class WorksheetsView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "open",
-                "title": u"开放",
+                "title": _(
+                    u"listing_worksheets_state_open",
+                    default=u"Open"
+                ),
                 "contentFilter": {
                     "review_state": "open",
                     "sort_on": "created",
@@ -156,7 +193,10 @@ class WorksheetsView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "to_be_verified",
-                "title": u"待复核",
+                "title": _(
+                    u"listing_worksheets_state_to_be_verified",
+                    default=u"To be verified"
+                ),
                 "contentFilter": {
                     "review_state": "to_be_verified",
                     "sort_on": "created",
@@ -167,7 +207,10 @@ class WorksheetsView(ListingView):
                 "columns": self.columns.keys()
             }, {
                 "id": "verified",
-                "title": u"已复核",
+                "title": _(
+                    u"listing_worksheets_state_verified",
+                    default=u"Verified"
+                ),
                 "contentFilter": {
                     "review_state": "verified",
                     "sort_on": "created",
@@ -178,7 +221,10 @@ class WorksheetsView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "all",
-                "title": u"全部",
+                "title": _(
+                    u"listing_worksheets_state_all",
+                    default=u"All"
+                ),
                 "contentFilter": {
                     "review_state": [
                         "open",
@@ -196,7 +242,10 @@ class WorksheetsView(ListingView):
                 # getAuthenticatedMember does not work in __init__ so "mine" is
                 # configured further in "folderitems" below.
                 "id": "mine",
-                "title": u"我的",
+                "title": _(
+                    u"listing_worksheets_state_mine",
+                    default=u"Mine"
+                ),
                 "contentFilter": {
                     "review_state": [
                         "open",
