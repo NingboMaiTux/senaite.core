@@ -119,7 +119,7 @@ class SamplesView(ListingView):
                 "index": "getPrioritySortkey",
                 "sortable": True, }),
             ("Progress", {
-                "title": "进度",
+                "title": _("Progress"),
                 "index": "getProgress",
                 "sortable": True,
                 "toggle": True}),
@@ -227,8 +227,8 @@ class SamplesView(ListingView):
                 "sortable": False,
                 "toggle": False}),
             ("getAnalysesNum", {
-                "title": "检验数量",
-                "alt": "开放 / 待复核 / 已复核 / 总数",
+                "title": _("Number of Analyses"),
+                "alt": _("Open / To be verified / Verified / Total"),
                 "sortable": True,
                 "index": "getAnalysesNum",
                 "toggle": False}),
@@ -243,7 +243,7 @@ class SamplesView(ListingView):
                 "index": "getPrinted",
                 "toggle": False}),
             ("state_title", {
-                "title": "状态",
+                "title": _("Status"),
                 "sortable": True,
                 "index": "review_state"}),
         ))
@@ -251,7 +251,7 @@ class SamplesView(ListingView):
         # custom print transition
         print_stickers = {
             "id": "print_stickers",
-            "title": "打印标签",
+            "title": _("Print stickers"),
             "url": "{}/workflow_action?action=print_stickers".format(self.url)
         }
 
@@ -518,13 +518,13 @@ class SamplesView(ListingView):
         if analysesnum:
             numbers = {
                 "verified": analysesnum[0],
-                "verified_title": "已复核",
+                "verified_title": t(_("Verified")),
                 "total": analysesnum[1],
                 "total_title": t(_("Total")),
                 "not_submitted": analysesnum[2],
-                "not_submitted_title": "开放",
+                "not_submitted_title": t(_("Open")),
                 "to_be_verified": analysesnum[3],
-                "to_be_verified_title": "待复核",
+                "to_be_verified_title": t(_("To be verified")),
             }
             item["getAnalysesNum"] = ANALYSES_NUM_TPL.safe_substitute(numbers)
             item["replace"]["getAnalysesNum"] = \
