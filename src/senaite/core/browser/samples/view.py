@@ -97,7 +97,7 @@ class SamplesView(ListingView):
         # across all folderitem calls within a single render.
         self._hazard_cache = {}
 
-        self.title = "样品"
+        self.title = t(_(u"Samples"))
         self.description = ""
 
         self.show_select_column = True
