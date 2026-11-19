@@ -44,6 +44,7 @@ from senaite.core.browser.dashboard.interfaces import IDashboardSection
 from senaite.core.catalog import ANALYSIS_CATALOG
 from senaite.core.catalog import SAMPLE_CATALOG
 from senaite.core.catalog import WORKSHEET_CATALOG
+from senaite.core.i18n import translate
 from senaite.core.permissions import AddAnalysisRequest
 from senaite.core.permissions import EditResults
 from senaite.core.permissions import ManageBika
@@ -105,7 +106,7 @@ STATUS_CARD_DEFS = [
      "AnalysisRequest", "verified", SAMPLE_CATALOG,
      "samples?samples_review_state=verified",
      "fa-paper-plane"),
-    (EditResults, "开放工作表",
+    (EditResults, _(u"Open worksheets"),
      "Worksheet", "open", WORKSHEET_CATALOG,
      "worksheets?list_review_state=open",
      "fa-th-list"),
@@ -467,7 +468,7 @@ class DashboardView(BrowserView):
                 "review_state": state,
             }, cat))
             cards.append({
-                "title": title,
+                "title": translate(title, to_utf8=False),
                 "count": count,
                 "url": "%s/%s" % (self.portal_url, url),
                 "icon": icon,
@@ -640,11 +641,11 @@ class DashboardView(BrowserView):
             })
 
         panels.append(self._chart_panel(
-            "样本趋势", catalog, query))
+            translate(_(u"Sample trend"), to_utf8=False), catalog, query))
 
         return {
             "id": "analysisrequests",
-            "title": "样本",
+            "title": translate(_(u"Samples"), to_utf8=False),
             "panels": panels,
         }
 

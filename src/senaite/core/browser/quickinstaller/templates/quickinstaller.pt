@@ -43,26 +43,28 @@
           <section class="portletContent" tal:condition="products">
             <ul class="configlets">
               <tal:products  tal:repeat="product products">
-                <li tal:define="pid product/id;">
+                <li tal:define="pid product/id;
+                                addon_title python:view.addon_text(product['title']);
+                                description python:view.addon_text(product['description']) if product.get('description') else ''">
                   <form action="upgrade_products" method="post" class="float-right">
                     <input type="hidden"
                            name="prefs_reinstallProducts:list"
                            tal:attributes="value pid;" />
                     <input class="standalone"
                            type="submit"
-                           value="Upgrade ${pid}"
+                           value="Upgrade"
                            name="form.submitted"
-                           i18n:attributes="value"
-                           tal:attributes="value string:Upgrade ${pid};"/>
+                           tal:attributes="value python:view.upgrade_label(pid)"/>
                   </form>
                   <h5>
-                    <span tal:replace="product/title" i18n:translate="">
+                    <span tal:replace="addon_title">
                       Add-on Name
                     </span>
                   </h5>
                   <p class="configletDescription discreet">
-                    <tal:span tal:condition="product/description" tal:content="product/description" i18n:translate="">add-on description</tal:span>
-                    <em class="discreet"> – (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
+                    <tal:span tal:condition="python:description and description != addon_title"
+                              tal:content="description">add-on description</tal:span>
+                    <em class="discreet"> (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
                   </p>
                   <ul class="configletDetails p-0 m-0">
                     <li class="text-primary" tal:define="upgrade_info product/upgrade_info">
@@ -124,7 +126,9 @@
           <section class="portletContent">
             <ul class="configlets">
               <li tal:repeat="product products">
-                <tal:product define="pid product/id">
+                <tal:product define="pid product/id;
+                                     addon_title python:view.addon_text(product['title']);
+                                     description python:view.addon_text(product['description']) if product.get('description') else ''">
                   <form action="install_products" method="post" class="float-right">
                     <input type="hidden"
                            name="install_product"
@@ -137,15 +141,14 @@
                   </form>
 
                   <h5>
-                    <span tal:replace="product/title" i18n:translate="">
+                    <span tal:replace="addon_title">
                       Add-on Name
                     </span>
                   </h5>
                   <p class="configletDescription discreet">
-                    <tal:span tal:condition="product/description"
-                              i18n:translate=""
-                              tal:content="product/description">add-on description</tal:span>
-                    <em class="discreet"> – (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
+                    <tal:span tal:condition="python:description and description != addon_title"
+                              tal:content="description">add-on description</tal:span>
+                    <em class="discreet"> (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
                   </p>
                   <dl class="portalMessage warning"
                       role="status"
@@ -168,7 +171,9 @@
           <section class="portletContent">
             <ul class="configlets">
               <li tal:repeat="product products">
-                <tal:product define="pid product/id">
+                <tal:product define="pid product/id;
+                                     addon_title python:view.addon_text(product['title']);
+                                     description python:view.addon_text(product['description']) if product.get('description') else ''">
                   <form action="uninstall_products" method="post" class="float-right">
                     <input type="hidden"
                            name="uninstall_product"
@@ -181,15 +186,14 @@
                            i18n:attributes="value"/>
                   </form>
                   <h5>
-                    <span tal:replace="product/title" i18n:translate="">
+                    <span tal:replace="addon_title">
                       Add-on Name
                     </span>
                   </h5>
                   <p class="configletDescription discreet">
-                    <tal:span tal:condition="product/description"
-                              i18n:translate=""
-                              tal:content="product/description">add-on description</tal:span>
-                    <em class="discreet"> – (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
+                    <tal:span tal:condition="python:description and description != addon_title"
+                              tal:content="description">add-on description</tal:span>
+                    <em class="discreet"> (<span tal:replace="pid">plugin.app.name</span> <span tal:replace="product/version">1.0</span>)</em>
                   </p>
                   <!-- <dl class="portalMessage info"
                        role="status"

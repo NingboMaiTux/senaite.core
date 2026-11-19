@@ -12,6 +12,7 @@
                             target daction/link_target|nothing;
                             title daction/description">
           <img tal:condition="daction/icon"
+                i18n:attributes="alt; title"
                 tal:attributes="src python:daction.get('icon');
                                 alt python:daction.get('title');
                                 title python:daction.get('title')"/>

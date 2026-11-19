@@ -69,6 +69,8 @@
                     <select class="instrument selectpicker"
                             data-style="dropdown-toggle btn-sm btn-light border rounded-0"
                             data-live-search="true"
+                            data-none-selected-text="No instrument selected"
+                            i18n:attributes="data-none-selected-text"
                             tal:define="instrlist view/getInstruments">
                       <tal:options repeat="option instrlist">
                         <option tal:attributes="value python:option;
@@ -123,6 +125,7 @@
                       <input class="btn btn-sm btn-outline-secondary"
                             type="submit"
                             id="resultslayout_button"
+                            i18n:attributes="value"
                             value="Apply"/>
                     </div>
                   </div>

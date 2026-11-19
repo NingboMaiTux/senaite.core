@@ -94,7 +94,8 @@ export const initSidebar = () => {
 
   // Use React 18 createRoot API
   const root = createRoot(sidebarContainer);
-  root.render(<Sidebar />);
+  root.render(<Sidebar expandLabel={sidebarContainer.dataset.expandLabel}
+                       collapseLabel={sidebarContainer.dataset.collapseLabel} />);
 
   return SidebarAPI;
 };

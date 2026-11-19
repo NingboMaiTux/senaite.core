@@ -73,11 +73,11 @@ class ReportsListingView(ListingView):
                 "title": _("Primary Sample"),
                 "index": "sortable_title"},),
             ("Batch", {
-                "title": _("Batch")},),
+                "title": _("label_sample_batch", default="Batch")},),
             ("State", {
                 "title": _("Review State")},),
             ("PDF", {
-                "title": _("Download PDF")},),
+                "title": _("Download report")},),
             ("FileSize", {
                 "title": _("Filesize")},),
             ("Date", {

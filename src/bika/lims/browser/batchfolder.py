@@ -84,7 +84,7 @@ class BatchFolderContentsView(ListingView):
                 "title": _("Client Batch ID"),
                 "index": "getClientBatchID", }),
             ("state_title", {
-                "title": _("State"),
+                "title": _("Status"),
                 "sortable": False, }),
             ("created", {
                 "title": _("Created"),
@@ -96,7 +96,8 @@ class BatchFolderContentsView(ListingView):
             {
                 "id": "default",
                 "contentFilter": {"review_state": "open"},
-                "title": _("Open"),
+                "title": _(u"listing_batches_state_open",
+                           default=self.context.translate(_("Open"))),
                 "transitions": [],
                 "columns": self.columns.keys(),
             }, {

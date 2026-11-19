@@ -29,6 +29,7 @@ from plone.app.textfield import RichTextValue
 from Products.Archetypes.event import ObjectEditedEvent
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import event
+from zope.i18n import translate
 
 
 class ResultsInterpretationViewlet(ViewletBase):
@@ -52,6 +53,13 @@ class ResultsInterpretationViewlet(ViewletBase):
         rendered for the introduction of results interpretations
         """
         return self.context.getDepartments()
+
+    def department_label(self, department):
+        title = api.safe_unicode(department.Title())
+        if (title == u"Analytical Chemistry"
+                and department.getDepartmentID() == "ANACHEM"):
+            return translate(_(u"Analytical Chemistry"), context=self.request)
+        return title
 
     def handle_form_submit(self):
         """Handle form submission

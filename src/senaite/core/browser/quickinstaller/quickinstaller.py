@@ -20,11 +20,28 @@
 
 from Products.CMFPlone.controlpanel.browser.quickinstaller import \
     ManageProductsView as BaseView
+from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
+
+
+addon_message = MessageFactory("senaite.core.addons")
 
 
 class ManageProductsView(BaseView):
     """
     """
+
+    def addon_text(self, message):
+        """Translate profile metadata, falling back to the add-on's own domain."""
+        original = translate(message, domain="plone", context=self.request)
+        # ZCML can preserve indentation inside multiline profile descriptions.
+        msgid = u" ".join(message.split())
+        return translate(msgid, domain="senaite.core.addons",
+                         context=self.request, default=original)
+
+    def upgrade_label(self, product_id):
+        message = addon_message(u"Upgrade ${product}", mapping={"product": product_id})
+        return translate(message, context=self.request)
 
     def get_available(self):
         """Available add-ons

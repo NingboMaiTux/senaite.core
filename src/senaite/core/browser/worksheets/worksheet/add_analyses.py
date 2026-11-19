@@ -32,6 +32,7 @@ from bika.lims import api
 from bika.lims import bikaMessageFactory as _
 from bika.lims.config import PRIORITIES
 from bika.lims.utils import get_display_list
+from senaite.core.browser.worksheets.utility import worksheet_template_title
 from bika.lims.utils import get_image
 from senaite.core.catalog import ANALYSIS_CATALOG
 from senaite.core.catalog import SETUP_CATALOG
@@ -359,4 +360,4 @@ class AddAnalysesView(ListingView):
             "sort_on": "sortable_title",
         }
         brains = api.search(query, SETUP_CATALOG)
-        return get_display_list(brains)
+        return get_display_list(brains, title_getter=worksheet_template_title)

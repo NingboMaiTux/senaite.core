@@ -75,7 +75,7 @@ class AnalysesView(BaseView):
                 "title": _("Position")}),
             ("Service", {
                 "sortable": False,
-                "title": _("Analysis")}),
+                "title": _("label_result_analysis_service", default="Analysis")}),
             ("DetectionLimitOperand", {
                 "title": _("DL"),
                 "sortable": False,
@@ -120,7 +120,7 @@ class AnalysesView(BaseView):
                 "title": _("Due Date")}),
             ("state_title", {
                 "sortable": False,
-                "title": _("State")}),
+                "title": _("Status")}),
         ))
 
         self.review_states = [

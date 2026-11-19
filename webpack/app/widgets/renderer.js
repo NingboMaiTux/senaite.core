@@ -47,7 +47,10 @@ export const render_address_widget = (el) => {
 
 // TinyMCE Widget
 export const render_tinymce_widget = (el) => {
+  const pageLanguage = document.documentElement.lang.toLowerCase().replace(/_/g, "-");
+  const simplifiedChinese = ["zh", "zh-cn", "zh-sg", "zh-hans", "zh-hans-cn", "zh-hans-sg"];
   return tinymce.init({
+    language: simplifiedChinese.includes(pageLanguage) ? "zh-CN" : "en",
     height: 300,
     paste_data_images: true,
     target: el,

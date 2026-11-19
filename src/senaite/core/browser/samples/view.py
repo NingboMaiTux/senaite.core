@@ -255,6 +255,8 @@ class SamplesView(ListingView):
             "url": "{}/workflow_action?action=print_stickers".format(self.url)
         }
 
+        unassigned_title = _(u"listing_samples_state_unassigned",
+                             default=t(_(u"Unassigned"), to_utf8=False))
         self.review_states = [
             {
                 "id": "default",
@@ -318,7 +320,8 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "sample_received",
-                "title": _(u"Received"),
+                "title": self.translate_review_state(
+                    "sample_received", "AnalysisRequest"),
                 "contentFilter": {
                     "review_state": "sample_received",
                     "sort_on": "created",
@@ -421,8 +424,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "unassigned",
-                "title": get_image("unassigned.png",
-                                   title=t(_(u"Unassigned"))),
+                "title": get_image("unassigned.png", title=t(unassigned_title)),
                 "contentFilter": {
                     "assigned_state": "unassigned",
                     "review_state": (
@@ -473,6 +475,15 @@ class SamplesView(ListingView):
 
         # Additional custom transitions
         self.add_custom_transitions()
+
+    @view.memoize
+    def translate_review_state(self, state, portal_type):
+        title = super(SamplesView, self).translate_review_state(
+            state, portal_type)
+        if state == "sample_received":
+            return t(_(u"listing_samples_state_received", default=title),
+                     to_utf8=False)
+        return title
 
     def before_render(self):
         """Before template render hook

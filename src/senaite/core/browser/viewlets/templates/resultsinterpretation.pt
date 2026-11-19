@@ -36,7 +36,7 @@
         <table class="table-borderless w-100"
                tal:define="text python:view.get_text(panel, 'raw')">
           <tr>
-            <th tal:content="panel/Title"/>
+            <th tal:content="python:view.department_label(panel)"/>
           </tr>
           <tr>
             <td tal:content="structure python:text or default"/>
@@ -113,7 +113,7 @@
                  tal:attributes="id panel/Title;
                         href string:#${fieldName}-${panel/UID};
                         data-uid python:fieldName+'-'+panel.UID();"
-                 tal:content="panel/Title"/>
+                 tal:content="python:view.department_label(panel)"/>
             </li>
           </tal:panels>
         </ul>

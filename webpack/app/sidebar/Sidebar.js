@@ -21,7 +21,10 @@ import {SidebarNavigation} from "./components/SidebarNavigation";
  * - Mobile-responsive with overlay and slide-in animation
  * - Body scroll lock when mobile sidebar is open
  */
-export const Sidebar = () => {
+export const Sidebar = ({
+  expandLabel = "Expand sidebar (Ctrl/Cmd+B)",
+  collapseLabel = "Collapse sidebar (Ctrl/Cmd+B)"
+}) => {
   const {isToggled, isMinimized, toggle} = useSidebarState();
   const {width, isResizing, startResize} = useSidebarResize();
   const {navigationData, isLoading, error, showMoreItems} = useNavigation();
@@ -99,6 +102,8 @@ export const Sidebar = () => {
   }, [toggle]);
 
   const showBackdrop = isMobile && isToggled && !isMinimized;
+  const toggleButton = <SidebarHeader isToggled={isToggled} onToggle={handleToggle}
+                                      label={isToggled ? collapseLabel : expandLabel} />;
 
   return (
     <>
@@ -112,14 +117,7 @@ export const Sidebar = () => {
       )}
 
       {/* On mobile, render toggle button outside sidebar via portal */}
-      {isMobile && !isToggled ? (
-        createPortal(
-          <SidebarHeader isToggled={isToggled} onToggle={handleToggle} />,
-          document.body
-        )
-      ) : (
-        <SidebarHeader isToggled={isToggled} onToggle={handleToggle} />
-      )}
+      {isMobile && !isToggled ? createPortal(toggleButton, document.body) : toggleButton}
 
       <SidebarSearch
         onSearch={handleSearch}
