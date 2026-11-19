@@ -71,7 +71,7 @@
                class="tab-pane fade show active"
                role="tabpanel">
 
-            <p class="small" i18n:translate="">
+            <p class="small" i18n:translate="description_import_unmatched_record">
               If the system doesn't find any match (Sample, Reference Analysis
               or Duplicate), it will use the record's identifier to find matches
               for Reference Sample IDs.

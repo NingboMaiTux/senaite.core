@@ -13,7 +13,9 @@
          'Edit SENAITE Setup' -->
     <div metal:define-macro="header">
       <metal:block define-slot="title">
-        <h1 i18n:translate="heading_legacy_setup" class="documentFirstHeading">
+        <h1 class="documentFirstHeading"
+            tal:content="python:context.translate(
+                'heading_legacy_setup', domain='senaite.core', default='Legacy Setup')">
           Legacy Setup
         </h1>
 

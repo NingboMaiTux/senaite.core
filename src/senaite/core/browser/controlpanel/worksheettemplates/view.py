@@ -26,6 +26,7 @@ from bika.lims.utils import get_link_for
 from senaite.core.permissions import AddWorksheetTemplate
 from senaite.core.i18n import translate
 from senaite.core.browser.controlpanel.listing import ControlPanelListingView
+from senaite.core.browser.worksheets.utility import worksheet_template_title
 from senaite.core.catalog import SETUP_CATALOG
 
 
@@ -134,9 +135,9 @@ class WorksheetTemplatesView(ControlPanelListingView):
         :index: current index of the item
         """
         obj = api.get_object(obj)
-        item["Name"] = api.get_title(obj)
+        item["Name"] = worksheet_template_title(obj)
         item["Description"] = api.get_description(obj)
-        item["replace"]["Name"] = get_link_for(obj)
+        item["replace"]["Name"] = get_link_for(obj, value=item["Name"])
 
         instrument = obj.getInstrument()
         if instrument:

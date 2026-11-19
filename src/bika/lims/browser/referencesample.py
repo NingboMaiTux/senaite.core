@@ -368,7 +368,7 @@ class ReferenceSamplesView(ListingView):
                 "index": "getExpiryDate",
                 "toggle": True}),
             ("state_title", {
-                "title": _("State"),
+                "title": _("Status"),
                 "toggle": True}),
         ))
 

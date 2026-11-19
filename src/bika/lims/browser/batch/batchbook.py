@@ -86,7 +86,7 @@ class BatchBookView(ListingView):
                 "sortable": False,
             }),
             ("state_title", {
-                "title": _("State"),
+                "title": _("Status"),
                 "index": "review_state",
                 "sortable": False,
             }),
