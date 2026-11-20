@@ -156,9 +156,8 @@
                         </th>
                       </tal:header>
 
-                      <th rowspan="" class="text-center"
-                          i18n:translate="listingheader_remove">
-                        Remove
+                      <th rowspan="" class="text-center">
+                        Disable
                       </th>
                     </tr>
 
@@ -185,6 +184,8 @@
                               (<tal:id tal:replace="group_info/groupid" />)
                             </div>
                           </div>
+                          <input type="hidden" name="groups.id:records"
+                                 tal:attributes="value group_info/groupid" />
                         </td>
 
                         <td class="listingCheckbox text-center align-middle"
@@ -215,10 +216,10 @@
                         <td class="listingCheckbox text-center align-middle">
                           <input type="checkbox"
                                  class="noborder notify"
-                                 name="delete:list"
-                                 value="value"
+                                 name="groups.disabled:records"
+                                 value=""
                                  tal:attributes="value group_info/groupid;
-                                       disabled python:default if group_info['can_delete'] else 'disabled'"
+                                       checked python:view.is_group_disabled(group_info['groupid']) and 'checked' or nothing"
                           />
                         </td>
                       </tr>

@@ -27,7 +27,7 @@
   <browser:page
       name="usergroup-groupmembership"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class="Products.CMFPlone.controlpanel.browser.usergroups_groupmembership.GroupMembershipControlPanel"
+      class=".usergroups_groupmembership.GroupMembershipControlPanel"
       permission="plone.app.controlpanel.UsersAndGroups"
       template="templates/usergroups_groupmembership.pt"
       layer="senaite.core.interfaces.ISenaiteCore"
@@ -47,7 +47,7 @@
   <browser:page
       name="usergroup-usermembership"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class="Products.CMFPlone.controlpanel.browser.usergroups_usermembership.UserMembershipControlPanel"
+      class=".usergroups_usermembership.UserMembershipControlPanel"
       permission="plone.app.controlpanel.UsersAndGroups"
       template="templates/usergroups_usermembership.pt"
       layer="senaite.core.interfaces.ISenaiteCore"
