@@ -32,3 +32,15 @@ PloneMessageFactory = zope.i18nmessageid.MessageFactory('plone')
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
     logger.info("*** Initializing SENAITE.CORE ***")
+
+
+# 中文注释：让被禁用的用户组在权限求值时失效（过滤 PAS 组查询结果）。
+# 该补丁只影响授权计算，不拦截认证链，用户账号与其它组不受影响。
+# 模块名刻意避开 patches/ 包（senaite.core 已存在按库组织的补丁包）。
+try:
+    from senaite.core.patches_groups import patch_disabled_groups  # noqa: E402
+
+    patch_disabled_groups()
+except Exception as exc:
+    logger.warn(
+        "Could not enable disabled-group permission filtering: %s" % exc)
