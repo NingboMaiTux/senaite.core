@@ -35,6 +35,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.api import dtime
 from senaite.core.catalog import AUDITLOG_CATALOG
 from senaite.core.content.base import Container
+from senaite.core.i18n import translate
 from senaite.core.interfaces import IHideActionsMenu
 from senaite.core.interfaces import ISetup
 from senaite.core.schema import DurationField
@@ -292,7 +293,7 @@ class ISetupSchema(model.Schema):
     directives.widget("site_logo", NamedFileFieldWidget)
     site_logo = schema.Bytes(
         title=_(u"Site Logo"),
-        description=_(u"This shows a custom logo on your SENAITE site."),
+        description=_(u"This logo appears on your MaiLIMS site."),
         required=False,
     )
 
@@ -1354,6 +1355,14 @@ class Setup(Container):
     """SENAITE Setup Folder
     """
     security = ClassSecurityInfo()
+
+    @security.protected(permissions.View)
+    def getDisplayTitle(self):
+        """Return the localized default title or the configured setup name."""
+        title = self.Title()
+        if title == u"SENAITE Setup":
+            return translate(_(u"MaiLIMS Setup"), to_utf8=False)
+        return title
 
     @security.protected(permissions.View)
     def getEmailFromSamplePublication(self):

@@ -4882,12 +4882,12 @@ msgstr "MAITUX LIMS站点首页"
 #: senaite/core/profiles/default/controlpanel.xml
 #: senaite/core/registry/controlpanel.py:81
 msgid "SENAITE Registry"
-msgstr "站点注册表"
+msgstr "MaiLIMS 注册表"
 
 #: senaite/core/browser/setup/edit.py:38
 #: senaite/core/profiles/default/types/Setup.xml
 msgid "SENAITE Setup"
-msgstr "站点设置"
+msgstr "MaiLIMS 设置"
 
 #: senaite/core/browser/frontpage/configure.zcml:23
 msgid "SENAITE front-page"

@@ -5,7 +5,7 @@
 
   <!-- SENAITE Registry -->
   <configlet
-      title="SENAITE Registry"
+      title="MaiLIMS Registry"
       action_id="senaite.core.registry"
       appId="senaite.core"
       category="Products"

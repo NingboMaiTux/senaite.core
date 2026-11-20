@@ -5,7 +5,7 @@
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Title and Description -->
-  <property name="title" i18n:translate="">SENAITE Setup</property>
+  <property name="title" i18n:translate="">MaiLIMS Setup</property>
   <property name="description"></property>
 
   <!-- content-type icon -->

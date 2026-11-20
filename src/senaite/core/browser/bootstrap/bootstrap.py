@@ -125,7 +125,9 @@ class BootstrapView(BrowserView):
         icon = fti and fti.getIcon()  # handle non-type fti for bbb
         if not icon:
             return ""
-        title = api.get_title(brain_or_object)
+        title = kw.pop("icon_title", None)
+        if title is None:
+            title = api.get_title(brain_or_object)
         # Always try to get the SVG icon for high-res displays
         icon_basename = os.path.basename(icon)
         # XXX use senaite_theme view to fetch the icon from the icons() dict

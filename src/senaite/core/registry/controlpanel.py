@@ -78,7 +78,7 @@ class ContextProxy(object):
 
 class SenaiteRegistryControlPanelForm(RegistryEditForm):
     schema = ISenaiteRegistry
-    label = _("SENAITE Registry")
+    label = _("MaiLIMS Registry")
 
     def getContent(self):
         interfaces = [self.schema]

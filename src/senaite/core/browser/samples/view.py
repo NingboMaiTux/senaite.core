@@ -412,8 +412,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "assigned",
-                "title": get_image("assigned.png",
-                                   title=t(_(u"Assigned"))),
+                "title": t(_(u"Assigned"), to_utf8=False),
                 "contentFilter": {
                     "assigned_state": "assigned",
                     "review_state": ("sample_received",),
@@ -424,7 +423,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "unassigned",
-                "title": get_image("unassigned.png", title=t(unassigned_title)),
+                "title": t(unassigned_title, to_utf8=False),
                 "contentFilter": {
                     "assigned_state": "unassigned",
                     "review_state": (
@@ -437,8 +436,7 @@ class SamplesView(ListingView):
                 "columns": self.columns.keys(),
             }, {
                 "id": "late",
-                "title": get_image("late.png",
-                                   title=t(_(u"Late"))),
+                "title": t(_(u"Late"), to_utf8=False),
                 "contentFilter": {
                     # Query only for unpublished ARs that are late
                     "review_state": (
