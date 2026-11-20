@@ -1,10 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import importlib.util
 import os
 import sys
 import types
 import unittest
+
+
+def _load_module(name, path):
+    """加载模块：py3 用 importlib，py2.7 回退 imp"""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(name, path)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+        return module
+    except (ImportError, AttributeError):
+        import imp
+        return imp.load_source(name, path)
+
+
+def _func_of(method):
+    """返回方法/函数的底层函数对象（兼容 py2 unbound method）"""
+    return getattr(method, "im_func", getattr(method, "__func__", method))
 
 
 class DummyLogger(object):
@@ -107,11 +125,7 @@ class TestDisabledGroupsPatch(unittest.TestCase):
         self._added_modules[module_name] = sys.modules.get(module_name)
         module_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), "..", "patches_groups.py"))
-        spec = importlib.util.spec_from_file_location(module_name, module_path)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module
-        spec.loader.exec_module(module)
-        return module
+        return _load_module(module_name, module_path)
 
     def _get_plugin_class(self):
         return sys.modules[
@@ -159,11 +173,14 @@ class TestDisabledGroupsPatch(unittest.TestCase):
     def test_patch_is_idempotent(self):
         """重复调用 patch_disabled_groups 不应重复包装"""
         self.module.patch_disabled_groups()
-        first = self._get_plugin_class().getGroupsForPrincipal
+        first = _func_of(self._get_plugin_class().getGroupsForPrincipal)
 
         self.module.patch_disabled_groups()
+        second = _func_of(self._get_plugin_class().getGroupsForPrincipal)
 
-        self.assertIs(first, self._get_plugin_class().getGroupsForPrincipal)
+        # 中文注释：Python 2 的 unbound method 每次访问都是新包装对象，
+        # 这里比较其底层函数，避免版本差异导致的误判。
+        self.assertIs(first, second)
 
     def test_patch_wraps_remove_group(self):
         """删除组时应调用原始实现并清理禁用标记"""

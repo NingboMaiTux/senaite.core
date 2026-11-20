@@ -1,10 +1,30 @@
 # -*- coding: utf-8 -*-
 
-import importlib.util
 import os
 import sys
 import types
 import unittest
+
+
+def _load_module(name, path):
+    """加载模块：py3 用 importlib，py2.7 回退 imp"""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(name, path)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+        return module
+    except (ImportError, AttributeError):
+        import imp
+        return imp.load_source(name, path)
+
+
+class _Namespace(object):
+    """py2/py3 兼容的简单命名空间（py2.7 无 types.SimpleNamespace）"""
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 
 class DummyLogger(object):
@@ -45,7 +65,7 @@ class TestGroupDisableSync(unittest.TestCase):
         sys.modules[name] = module
 
     def _load_module_under_test(self):
-        fake_api = types.SimpleNamespace(
+        fake_api = _Namespace(
             get_tool=lambda name: self.tool
             if name == "portal_groupdata" else None)
 
@@ -69,11 +89,7 @@ class TestGroupDisableSync(unittest.TestCase):
         module_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__),
             "..", "browser", "usergroup", "group_status.py"))
-        spec = importlib.util.spec_from_file_location(module_name, module_path)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module
-        spec.loader.exec_module(module)
-        return module
+        return _load_module(module_name, module_path)
 
     def test_set_group_disabled_persists_flag(self):
         """禁用组时应把组 id 持久化到 groupdata 工具"""

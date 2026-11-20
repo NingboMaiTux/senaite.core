@@ -1,10 +1,30 @@
 # -*- coding: utf-8 -*-
 
-import importlib.util
 import os
 import sys
 import types
 import unittest
+
+
+def _load_module(name, path):
+    """加载模块：py3 用 importlib，py2.7 回退 imp"""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(name, path)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+        return module
+    except (ImportError, AttributeError):
+        import imp
+        return imp.load_source(name, path)
+
+
+class _Namespace(object):
+    """py2/py3 兼容的简单命名空间（py2.7 无 types.SimpleNamespace）"""
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 
 class DummyPloneUtils(object):
@@ -137,11 +157,7 @@ class TestGroupMembershipDisable(unittest.TestCase):
 
         def load(name, filename):
             path = os.path.join(base_path, filename)
-            spec = importlib.util.spec_from_file_location(name, path)
-            module = importlib.util.module_from_spec(spec)
-            sys.modules[name] = module
-            spec.loader.exec_module(module)
-            return module
+            return _load_module(name, path)
 
         user_mod = load("usermembership_under_test",
                         "usergroups_usermembership.py")
@@ -150,7 +166,7 @@ class TestGroupMembershipDisable(unittest.TestCase):
         return user_mod, group_mod
 
     def _group(self, group_id):
-        return types.SimpleNamespace(getId=lambda: group_id)
+        return _Namespace(getId=lambda: group_id)
 
     def test_potential_groups_filters_disabled(self):
         """可分配组候选中不显示被禁用的组"""
