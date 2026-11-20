@@ -28,6 +28,7 @@ from bika.lims import api
 from bika.lims import senaiteMessageFactory as _
 from bika.lims.utils import getUsers
 from bika.lims.utils import get_display_list
+from senaite.core.browser.worksheets.utility import worksheet_template_title
 from bika.lims.utils import get_link
 from bika.lims.utils import get_progress_bar_html
 from senaite.core.catalog import SETUP_CATALOG
@@ -430,7 +431,7 @@ class WorksheetsView(ListingView):
         :rtype: DisplayList
         """
         brains = self._get_worksheet_templates_brains()
-        return get_display_list(brains)
+        return get_display_list(brains, title_getter=worksheet_template_title)
 
     def getInstruments(self):
         """Returns a DisplayList with all active Instruments

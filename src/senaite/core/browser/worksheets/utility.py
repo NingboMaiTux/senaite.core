@@ -20,7 +20,10 @@
 
 from zope.interface import implements
 
+from bika.lims import api
+from bika.lims import senaiteMessageFactory as _
 from senaite.core.config.worksheet import WORKSHEET_LAYOUT_OPTIONS
+from senaite.core.i18n import translate
 from senaite.core.interfaces import IWorksheetLayouts
 
 
@@ -31,3 +34,12 @@ class DefaultWorksheetLayouts(object):
 
     def getResultLayouts(self):
         return WORKSHEET_LAYOUT_OPTIONS
+
+
+def worksheet_template_title(template):
+    """Display the standard Hardness template in the current language."""
+    title = api.safe_unicode(api.get_title(template))
+    if title == u"Hardness" and api.get_id(template) == "worksheettemplate-1":
+        return translate(_(u"worksheet_template_hardness", default=u"Hardness"),
+                         to_utf8=False)
+    return title

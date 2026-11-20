@@ -1084,6 +1084,8 @@ class ISetupSchema(model.Schema):
     )
 
     # Sticker
+    directives.widget("auto_print_stickers", noValueMessage=_(
+        u"label_sticker_print_unset", default=u"Not configured"))
     auto_print_stickers = schema.Choice(
         title=_(u"Automatic Sticker Printing"),
         description=_(
@@ -1096,7 +1098,8 @@ class ISetupSchema(model.Schema):
             u"</li></ul>"
         ),
         vocabulary=schema.vocabulary.SimpleVocabulary([
-            schema.vocabulary.SimpleTerm("None", "None", _(u"None")),
+            schema.vocabulary.SimpleTerm("None", "None", _(
+                u"label_sticker_print_disabled", default=u"Disable automatic printing")),
             schema.vocabulary.SimpleTerm("register", "register",
                                           _(u"Register")),
             schema.vocabulary.SimpleTerm("receive", "receive", _(u"Receive")),

@@ -46,8 +46,8 @@ class ClientAttachmentsView(ListingView):
         self.show_select_column = True
         self.pagesize = 25
         self.form_id = "client_attachments"
-        self.title = "Attachments"
-        self.description = "Client attachments and files"
+        self.title = self.context.translate(_(u"Attachments"))
+        self.description = u""
 
         # Build workflow action delete URL
         view_url = "{}/{}".format(api.get_url(context), self.__name__)

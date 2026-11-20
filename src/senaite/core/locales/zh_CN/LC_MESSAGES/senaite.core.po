@@ -253,7 +253,7 @@ msgstr "启用"
 #: senaite/core/browser/controlpanel/departments/view.py:88
 #: senaite/core/browser/controlpanel/labels/view.py:70
 msgid "Active"
-msgstr "活跃的"
+msgstr "启用"
 
 #: senaite/core/content/resultsreport.py:51
 msgid "Actor"
@@ -299,7 +299,7 @@ msgstr "添加备注字段到所有检验项目"
 
 #: senaite/core/content/senaitesetup.py:320
 msgid "Add custom CSS rules for the Logo, e.g. height:15px; width:150px;"
-msgstr "为Logo添加自定义的CSS规则，例如，高度：15px；宽度：150px"
+msgstr "可为标志设置 CSS 样式，例如 height:15px; width:150px;。"
 
 #: senaite/core/browser/controlpanel/labels/view.py:52
 msgid "Add default selectable labels"
@@ -369,7 +369,7 @@ msgstr "代理机构"
 #: senaite/core/browser/clients/client/contacts/view.py:95
 #: senaite/core/browser/controlpanel/departments/view.py:98
 msgid "All"
-msgstr "所有的"
+msgstr "全部"
 
 #: bika/lims/browser/accreditation.py:75
 msgid "All Accredited analysis services are listed here."
@@ -389,7 +389,7 @@ msgstr "允许手动输入检测限"
 
 #: bika/lims/browser/fields/interimfieldsfield.py:57
 msgid "Allow empty"
-msgstr "允许空字段"
+msgstr "允许留空"
 
 #: bika/lims/content/abstractbaseanalysis.py:685
 msgid "Allow manual uncertainty value input"
@@ -397,11 +397,11 @@ msgstr "允许手动输入不确定度"
 
 #: senaite/core/vocabularies/setup.py:175
 msgid "Allow same user to verify multiple times"
-msgstr "允许用户进行多次自我复核"
+msgstr "允许同一人员多次复核"
 
 #: senaite/core/vocabularies/setup.py:177
 msgid "Allow same user to verify multiple times, but not consecutively"
-msgstr "允许用户非连续性的多次自我复核"
+msgstr "允许同一人员多次复核，但不得连续复核"
 
 #: bika/lims/content/bikasetup.py:492
 msgid "Allow self-verification of results"
@@ -431,6 +431,10 @@ msgstr "允许的检验状态：{allowed_states}，"
 msgid "Allowed sample states: {allowed_states}, "
 msgstr "允许的样品状态：{allowed_states}，"
 
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:83
+msgid "Always show standard fields"
+msgstr "默认展开标准字段"
+
 #: senaite/core/browser/worksheets/worksheet/templates/print/sample_by_column.pt:60
 #: senaite/core/browser/worksheets/worksheet/templates/print/sample_by_row.pt:60
 msgid "Analysed by"
@@ -450,7 +454,7 @@ msgstr "请检项目"
 #: senaite/core/browser/viewlets/templates/worksheet_attachments.pt:40
 #: senaite/core/browser/worksheets/worksheet/analyses_listing.py:78
 msgid "Analysis"
-msgstr "检验项目"
+msgstr "分析"
 
 #: senaite/core/exportimport/instruments/importer.py:657
 msgid "Analysis '{keyword}' of sample '{sid}' has the result '{result}' set, which is kept due to the selected override option"
@@ -463,7 +467,7 @@ msgstr "检验项目关键词"
 #: bika/lims/browser/analysisrequest/templates/invoice_content.pt:93
 #: bika/lims/profiles/default/types/Client.xml
 msgid "Analysis Profiles"
-msgstr "检验项目配置文件"
+msgstr "检验项目套餐"
 
 #: bika/lims/browser/templates/analysisreport_info.pt:22
 msgid "Analysis Report"
@@ -482,13 +486,13 @@ msgstr "{}的检验结果"
 #: bika/lims/browser/fields/resultrangefield.py:33
 #: bika/lims/browser/referencesample.py:222
 msgid "Analysis Service"
-msgstr "检验项目服务"
+msgstr "检验项目"
 
 #: bika/lims/config.py:61
 #: bika/lims/controlpanel/bika_analysisservices.py:149
 #: bika/lims/profiles/default/types/AnalysisServices.xml
 msgid "Analysis Services"
-msgstr "检验项目服务"
+msgstr "检验项目"
 
 #: bika/lims/controlpanel/bika_analysisspecs.py:76
 #: bika/lims/profiles/default/types/AnalysisSpec.xml
@@ -531,7 +535,7 @@ msgstr "分析类别"
 
 #: senaite/core/profiles/default/types/AnalysisProfile.xml
 msgid "AnalysisProfile"
-msgstr "分析简况"
+msgstr "检验项目套餐"
 
 #: senaite/core/profiles/default/types/AnalysisProfiles.xml
 msgid "AnalysisProfiles"
@@ -554,7 +558,8 @@ msgstr "任何"
 msgid "Appearance"
 msgstr "外观"
 
-#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:217
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:129
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:222
 msgid "Apply"
 msgstr "应用"
 
@@ -564,7 +569,7 @@ msgstr "应用模板"
 
 #: bika/lims/browser/fields/interimfieldsfield.py:61
 msgid "Apply wide"
-msgstr "广泛应用"
+msgstr "整表应用"
 
 #: bika/lims/content/instrument.py:308
 msgid "Asset Number"
@@ -757,7 +762,6 @@ msgstr "基本配置"
 msgid "Basis"
 msgstr "依据/基本"
 
-#: bika/lims/browser/publish/reports_listing.py:76
 #: bika/lims/profiles/default/types/Batch.xml
 #: bika/lims/vocabularies/__init__.py:128
 msgid "Batch"
@@ -777,13 +781,13 @@ msgstr "批次标签"
 
 #: senaite/core/profiles/default/types/BatchLabels.xml
 msgid "Batch Labels"
-msgstr "批标签"
+msgstr "批次标签"
 
 #: bika/lims/browser/batchfolder.py:49
 #: bika/lims/profiles/default/types/BatchFolder.xml
 #: bika/lims/profiles/default/types/Client.xml
 msgid "Batches"
-msgstr "多批"
+msgstr "批次"
 
 #: bika/lims/browser/viewlets/templates/dynamic_specs_viewlet.pt:19
 msgid "Be aware that the ranges provided in the spreadsheet file from the dynamic specification might override the ranges defined in the Specifications list below."
@@ -862,7 +866,7 @@ msgstr "抄送联系人"
 #: bika/lims/content/analysisrequest.py:236
 #: bika/lims/content/client.py:162
 msgid "CC Emails"
-msgstr "抄送多个邮件"
+msgstr "抄送邮箱"
 
 #: bika/lims/content/abstractbaseanalysis.py:663
 msgid "Calculate Precision from Uncertainties"
@@ -870,7 +874,7 @@ msgstr "从不确定性进行精密度计算"
 
 #: senaite/core/profiles/default/types/Calculation.xml
 msgid "Calculation"
-msgstr "计算"
+msgstr "计算公式"
 
 #: senaite/core/browser/form/adapters/method.py:100
 msgid "Calculation '{}' is used by service '{}'"
@@ -970,7 +974,7 @@ msgstr "容量"
 
 #: senaite/core/browser/worksheets/worksheet/analyses_listing.py:112
 msgid "Captured"
-msgstr "已捕获"
+msgstr "录入时间"
 
 #: bika/lims/browser/templates/instrument_referenceanalyses.pt:45
 #: bika/lims/browser/templates/referencesample_analyses.pt:43
@@ -1057,11 +1061,11 @@ msgstr "勾选框"
 #: bika/lims/browser/fields/interimfieldsfield.py:55
 #: bika/lims/content/analysisservice.py:223
 msgid "Choices"
-msgstr "选项"
+msgstr "可选值"
 
 #: senaite/core/content/senaitesetup.py:1151
 msgid "Choose the default template for 'large' stickers. Note: Sample-specific 'large' stickers are configured based on their sample type."
-msgstr "选择 '大' 标签的默认模板。注意：样品专用的 '大' 标签基于其样品类型配置。"
+msgstr "默认大标签模板可由样品类型单独指定。"
 
 #: bika/lims/content/bikasetup.py:1037
 msgid "Choose the default template for 'large' stickers.<br/><strong>Note:</strong> Sample-specific 'large' stickers are configured based on their sample type."
@@ -1069,7 +1073,7 @@ msgstr "选择 '大' 标签的默认模板。<br/><strong>注意：</strong>样�
 
 #: senaite/core/content/senaitesetup.py:1139
 msgid "Choose the default template for 'small' stickers. Note: Sample-specific 'small' stickers are configured based on their sample type."
-msgstr "选择 '小' 标签的默认模板。注意：样品专用的 '小' 标签基于其样品类型配置。"
+msgstr "默认小标签模板可由样品类型单独指定。"
 
 #: bika/lims/content/bikasetup.py:1018
 msgid "Choose the default template for 'small' stickers.<br/><strong>Note:</strong> Sample-specific 'small' stickers are configured based on their sample type."
@@ -1085,7 +1089,7 @@ msgstr "选择标签应自动打印的时机：<br/><ul><li><strong>注册：</s
 
 #: senaite/core/content/senaitesetup.py:1108
 msgid "Choose when stickers should be automatically printed:<br/><ul><li><strong>Register:</strong> Stickers are printed automatically when new samples are created.</li><li><strong>Receive:</strong> Stickers are printed automatically when samples are received.</li><li><strong>None:</strong> Disables automatic sticker printing.</li></ul>"
-msgstr "选择标签应自动打印的时机：<br/><ul><li><strong>注册：</strong>创建新样品时自动打印标签。</li><li><strong>接收：</strong>接收样品时自动打印标签。</li><li><strong>无：</strong>禁用自动打印标签。</li></ul>"
+msgstr "登记时：新建样品后打印。接收时：接收样品后打印。关闭自动打印：不自动打印标签。"
 
 #: senaite/core/skins/senaite_templates/senaite_widgets/addresswidget.pt:113
 #: senaite/core/z3cform/widgets/address.py:225
@@ -1170,7 +1174,7 @@ msgstr "客户共享行为"
 
 #: senaite/core/behaviors/clientshareable.py:58
 msgid "Clients"
-msgstr "多个客户"
+msgstr "客户"
 
 #: senaite/core/behaviors/clientshareable.py:59
 msgid "Clients with whom this content will be shared across. This content will become available on searches to users that belong to any of the selected clients thanks to the role 'ClientGuest'"
@@ -1231,7 +1235,7 @@ msgstr "缺少列“ {}”"
 
 #: senaite/core/vocabularies/setup.py:114
 msgid "Comma (,)"
-msgstr "逗号 (,)"
+msgstr "逗号（,）"
 
 #: bika/lims/content/analysiscategory.py:51
 msgid "Comments"
@@ -1322,7 +1326,7 @@ msgstr "包含样品"
 
 #: senaite/core/browser/samples/templates/partition_magic.pt:175
 msgid "Container"
-msgstr "取样容器"
+msgstr "容器"
 
 #: senaite/core/content/samplecontainer.py:70
 #: senaite/core/profiles/default/types/ContainerType.xml
@@ -1522,7 +1526,7 @@ msgstr "日期"
 
 #: bika/lims/browser/analyses/view.py:126
 msgid "Date Created"
-msgstr "创建日期"
+msgstr "创建时间"
 
 #: bika/lims/content/referencesample.py:204
 msgid "Date Disposed"
@@ -1632,7 +1636,7 @@ msgstr "日期和时间"
 
 #: bika/lims/browser/fields/durationfield.py:36
 msgid "Days"
-msgstr "天数"
+msgstr "天"
 
 #: bika/lims/content/instrument.py:186
 msgid "De-activate until next calibration test"
@@ -1739,7 +1743,7 @@ msgstr "在结果输入时显示的默认结果"
 
 #: senaite/core/content/senaitesetup.py:1050
 msgid "Default sample retention period"
-msgstr "默认样品保留效期"
+msgstr "默认留样期限"
 
 #: bika/lims/content/bikasetup.py:325
 msgid "Default scientific notation format for reports"
@@ -1759,7 +1763,7 @@ msgstr "默认时区"
 
 #: senaite/core/content/senaitesetup.py:1037
 msgid "Default turnaround time for analyses."
-msgstr "默认检验周期。"
+msgstr "检验项目默认周转时间"
 
 #: bika/lims/browser/fields/interimfieldsfield.py:54
 #: bika/lims/content/analysisservice.py:224
@@ -1792,7 +1796,7 @@ msgstr "定义应该在预定日期进行采样的采样人"
 
 #: senaite/core/content/senaitesetup.py:1089
 msgid "Define the template for the email body that will be automatically sent to primary contacts and laboratory managers when a sample is invalidated. The following placeholders are supported: $sample_id, $retest_id, $retest_link, $reason, $lab_address."
-msgstr "定义样品作废时自动发送给主要联系人和实验室负责人的邮件正文模板。支持以下占位符：$sample_id、$retest_id、$retest_link、$reason、$lab_address。"
+msgstr "样品作废后，系统会将邮件发送给主要联系人和实验室经理。可用变量为 $sample_id、$retest_id、$retest_link、$reason、$lab_address。"
 
 #: bika/lims/content/sampletype.py:232
 msgid "Defines the stickers to use for this sample type."
@@ -1879,7 +1883,7 @@ msgstr "禁用自动获取转换功能"
 
 #: senaite/core/vocabularies/setup.py:180
 msgid "Disable multi-verification for the same user"
-msgstr "禁用同一用户的多重验证"
+msgstr "同一人员只能复核一次"
 
 #: bika/lims/browser/analysisrequest/templates/ar_add2.pt:663
 #: bika/lims/browser/analysisrequest/templates/invoice_content.pt:207
@@ -1980,7 +1984,7 @@ msgstr "完成"
 
 #: senaite/core/vocabularies/setup.py:113
 msgid "Dot (.)"
-msgstr "点 (.)"
+msgstr "点（.）"
 
 #: bika/lims/browser/instrument.py:87
 msgid "Down from"
@@ -1994,9 +1998,12 @@ msgstr "下至"
 msgid "Download"
 msgstr "下载"
 
-#: bika/lims/browser/publish/reports_listing.py:80
 msgid "Download PDF"
 msgstr "下载PDF"
+
+#: bika/lims/browser/publish/reports_listing.py:80
+msgid "Download report"
+msgstr "下载报告"
 
 #: bika/lims/browser/publish/reports_listing.py:145
 msgid "Download selected reports"
@@ -2009,7 +2016,7 @@ msgstr "截止"
 #: senaite/core/browser/samples/view.py:164
 #: senaite/core/browser/worksheets/worksheet/analyses_listing.py:120
 msgid "Due Date"
-msgstr "截止期"
+msgstr "截止日期"
 
 #: bika/lims/controlpanel/bika_analysisservices.py:199
 msgid "Dup Var"
@@ -2084,7 +2091,7 @@ msgstr "评估"
 #: senaite/core/config/widgets.py:55
 #: senaite/core/content/contact.py:72
 msgid "Email"
-msgstr "电子邮件"
+msgstr "邮箱"
 
 #: senaite/core/browser/clients/client/contacts/view.py:76
 #: senaite/core/browser/controlpanel/contacts/view.py:64
@@ -2122,11 +2129,11 @@ msgstr "邮件主题"
 
 #: senaite/core/content/senaitesetup.py:1088
 msgid "Email body for Sample Invalidation notifications"
-msgstr "样品失效通知的电子邮件正文"
+msgstr "样品作废通知邮件正文"
 
 #: senaite/core/content/senaitesetup.py:1072
 msgid "Email body for Sample Rejection notifications"
-msgstr "拒收样品通知的电子邮件正文"
+msgstr "样品拒收通知邮件正文"
 
 #: bika/lims/browser/publish/emailview.py:158
 msgid "Email cancelled"
@@ -2139,7 +2146,7 @@ msgstr "电子邮件通知"
 
 #: senaite/core/content/senaitesetup.py:1062
 msgid "Email notification on Sample rejection"
-msgstr "关于样品拒绝的电子邮件通"
+msgstr "拒收样品时发送邮件通知"
 
 #: senaite/core/content/resultsreport.py:257
 msgid "Email send log"
@@ -2147,7 +2154,7 @@ msgstr "邮件发送日志"
 
 #: bika/lims/browser/publish/reports_listing.py:88
 msgid "Email sent"
-msgstr "电子邮件已发送"
+msgstr "邮件已发送"
 
 #: bika/lims/validators.py:456
 msgid "Empty keys are not supported"
@@ -2159,7 +2166,7 @@ msgstr "在工作表中启用多次使用仪器。"
 
 #: senaite/core/content/senaitesetup.py:1017
 msgid "Enable Sample Preservation"
-msgstr "启用样品保存"
+msgstr "启用样品保存步骤"
 
 #: bika/lims/content/bikasetup.py:410
 msgid "Enable Sample Specifications"
@@ -2167,11 +2174,11 @@ msgstr "启用样品检验标准"
 
 #: senaite/core/content/senaitesetup.py:989
 msgid "Enable Sampling"
-msgstr "启用取样"
+msgstr "启用采样工作流"
 
 #: senaite/core/content/senaitesetup.py:997
 msgid "Enable Sampling Scheduling"
-msgstr "启用取样计划"
+msgstr "启用采样排程"
 
 #: bika/lims/content/bikasetup.py:223
 msgid "Enable global Audit Log"
@@ -2187,7 +2194,7 @@ msgstr "为创建的样品启用采样工作流程"
 
 #: senaite/core/content/senaitesetup.py:979
 msgid "Enable the Results Report Printing workflow"
-msgstr "启用结果报告打印工作流程"
+msgstr "启用结果报告打印流程"
 
 #: bika/lims/browser/pricelist.py:68
 msgid "End Date"
@@ -2446,7 +2453,7 @@ msgstr "格式"
 
 #: senaite/core/content/senaitesetup.py:1180
 msgid "Formatting Configuration"
-msgstr "格式化配置"
+msgstr "编号格式配置"
 
 #: bika/lims/browser/templates/analysisservice_info.pt:183
 #: bika/lims/controlpanel/bika_calculations.py:79
@@ -2496,7 +2503,7 @@ msgstr "使用ID服务器生成ID"
 
 #: senaite/core/registry/schema.py:241
 msgid "Generic Setup"
-msgstr "通用设置a"
+msgstr "通用设置"
 
 #: senaite/core/browser/viewlets/templates/auditlog_disabled.pt:11
 msgid "Global Audit Log is disabled"
@@ -2525,7 +2532,7 @@ msgstr "HTML"
 #: bika/lims/content/referencesample.py:105
 #: bika/lims/content/sampletype.py:127
 msgid "Hazardous"
-msgstr "危险物品"
+msgstr "危险品"
 
 #: bika/lims/browser/analyses/view.py:203
 #: bika/lims/browser/analysisrequest/manage_analyses.py:81
@@ -2568,7 +2575,7 @@ msgstr "ID"
 
 #: senaite/core/content/senaitesetup.py:1380
 msgid "ID Server"
-msgstr "ID 服务器"
+msgstr "编号服务"
 
 #: senaite/core/browser/idserver/templates/numbergenerator.pt:17
 msgid "ID Server Settings"
@@ -2576,7 +2583,7 @@ msgstr "ID 服务器设置"
 
 #: bika/lims/content/bikasetup.py:1188
 msgid "ID Server Values"
-msgstr "ID服务器值"
+msgstr "编号计数器"
 
 #: senaite/core/browser/idserver/templates/numbergenerator.pt:113
 msgid "ID Template <span class=\"sort-indicator\" />"
@@ -2652,7 +2659,7 @@ msgstr "如果您的公式需要外部Python库中的特殊函数，您可以在
 
 #: senaite/core/content/senaitesetup.py:328
 msgid "Immediate results entry"
-msgstr "立即输入结果"
+msgstr "创建样品后直接录入结果"
 
 #: senaite/core/exportimport/import.pt:14
 #: senaite/core/profiles/default/actions.xml
@@ -2683,7 +2690,7 @@ msgstr "实验室内部校准操作方法"
 #: senaite/core/browser/controlpanel/departments/view.py:93
 #: senaite/core/browser/controlpanel/labels/view.py:75
 msgid "Inactive"
-msgstr "未激活的"
+msgstr "停用"
 
 #: bika/lims/content/bikasetup.py:240
 msgid "Include and display pricing information"
@@ -2897,7 +2904,7 @@ msgstr "解释模板"
 
 #: senaite/core/profiles/default/types/InterpretationTemplates.xml
 msgid "Interpretation Templates"
-msgstr "解释模板"
+msgstr "结果说明模板"
 
 #: bika/lims/content/instrumentcertification.py:110
 msgid "Interval"
@@ -2954,7 +2961,7 @@ msgstr "票据数据"
 
 #: bika/lims/content/analysisrequest.py:973
 msgid "Invoice Exclude"
-msgstr "发票不包括"
+msgstr "不计入发票"
 
 #: bika/lims/browser/analysisrequest/templates/invoice_content.pt:44
 msgid "Invoice ID"
@@ -3048,7 +3055,7 @@ msgstr "实验室联系人"
 
 #: senaite/core/browser/controlpanel/departments/view.py:57
 msgid "Lab Departments"
-msgstr "科系/部门"
+msgstr "部门"
 
 #: bika/lims/config.py:57
 msgid "Lab Preservation"
@@ -3060,7 +3067,7 @@ msgstr "实验室产品"
 
 #: senaite/core/profiles/default/types/LabProducts.xml
 msgid "Lab Products"
-msgstr "实验物品"
+msgstr "实验室产品"
 
 #: bika/lims/content/laboratory.py:64
 msgid "Lab URL"
@@ -3220,7 +3227,7 @@ msgstr "位置"
 
 #: bika/lims/content/storagelocation.py:58
 msgid "Location Code"
-msgstr "地点代码"
+msgstr "位置编号"
 
 #: bika/lims/content/storagelocation.py:63
 msgid "Location Description"
@@ -3228,7 +3235,7 @@ msgstr "地点描述"
 
 #: bika/lims/content/storagelocation.py:53
 msgid "Location Title"
-msgstr "地点名称"
+msgstr "位置名称"
 
 #: bika/lims/content/storagelocation.py:68
 msgid "Location Type"
@@ -3505,7 +3512,7 @@ msgstr "最少5个字符。"
 
 #: bika/lims/content/sampletype.py:165
 msgid "Minimum Volume"
-msgstr "最小体积"
+msgstr "最小样品量"
 
 #: bika/lims/content/bikasetup.py:339
 msgid "Minimum number of results for QC stats calculations"
@@ -3532,7 +3539,7 @@ msgstr "型号"
 
 #: bika/lims/content/calculation.py:100
 msgid "Module"
-msgstr "模块/组件"
+msgstr "模块"
 
 #: senaite/core/vocabularies/setup.py:156
 msgid "Monday"
@@ -3793,7 +3800,7 @@ msgstr "该样品没有明显的分析结果"
 #: senaite/core/browser/modals/analysis/vocabularies.py:53
 #: senaite/core/content/senaitesetup.py:1118
 msgid "None"
-msgstr "没有"
+msgstr "无"
 
 #: bika/lims/browser/publish/emailview.py:216
 msgid "Not all contacts are equal for the selected Reports. Please manually select recipients for this email."
@@ -3803,7 +3810,11 @@ msgstr "所选报告的所有联系人并非是相同的，请手动选择此电
 msgid "Not allowed to update conditions: {}"
 msgstr "不允许更新条件：{}"
 
-#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:86
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:72
+msgid "No instrument selected"
+msgstr "未选择仪器"
+
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:91
 msgid "Not defined"
 msgstr "未定义"
 
@@ -3826,7 +3837,7 @@ msgstr "注意：这些设置适用于所有样品新增表单；无法取消选
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:19
 msgid "Note: The settings are global and apply to all sample views."
-msgstr "注意:设置是全局的，适用于所有示例视图。"
+msgstr "这些设置对所有样品详情页生效。"
 
 #: senaite/core/browser/viewlets/templates/attachments.pt:168
 msgid "Note: You can also drag and drop the attachment rows to change the order they appear in the report."
@@ -3857,8 +3868,9 @@ msgid "Number of copies"
 msgstr "复印数量"
 
 #: senaite/core/registry/schema.py:195
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:49
 msgid "Number of prominent columns"
-msgstr "突出列数"
+msgstr "置顶字段列数"
 
 #: bika/lims/content/abstractbaseanalysis.py:836
 #: bika/lims/content/bikasetup.py:512
@@ -3874,8 +3886,9 @@ msgid "Number of required verifications from different users with enough privile
 msgstr "在将此检验项目的给定结果视为“已复核”之前，来自具有足够权限的不同用户所需的验证数。此处设置的选项优先于Bika Setup中设置的选项"
 
 #: senaite/core/registry/schema.py:204
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:66
 msgid "Number of standard columns"
-msgstr "标准数列"
+msgstr "标准字段列数"
 
 #: senaite/core/config/vocabularies.py:54
 msgid "Numeric"
@@ -3899,7 +3912,7 @@ msgstr "只有配置了导入接口的仪器才会显示"
 
 #: senaite/core/content/senaitesetup.py:1024
 msgid "Only laboratory workdays are considered for the analysis turnaround time calculation."
-msgstr "分析周转时间计算仅考虑实验室工作日。"
+msgstr "检验项目周转时间仅计入实验室工作日。"
 
 #: bika/lims/content/bikasetup.py:753
 msgid "Only laboratory workdays are considered for the analysis turnaround time calculation. "
@@ -4123,7 +4136,7 @@ msgstr "捕获点"
 
 #: senaite/core/content/senaitesetup.py:206
 msgid "Portal Type"
-msgstr "门户类型"
+msgstr "内容类型"
 
 #: bika/lims/content/identifiertype.py:39
 msgid "Portal Types"
@@ -4146,7 +4159,7 @@ msgstr "邮编"
 
 #: senaite/core/content/samplecontainer.py:85
 msgid "Pre-preserved"
-msgstr "已预留"
+msgstr "已预加保存剂"
 
 #: senaite/core/content/samplecontainer.py:100
 msgid "Pre-preserved containers must have a preservation selected"
@@ -4316,7 +4329,7 @@ msgstr "优先级"
 
 #: senaite/core/browser/samples/view.py:226
 msgid "Profile"
-msgstr "配置文件"
+msgstr "检验项目套餐"
 
 #: bika/lims/content/analysisprofile.py:64
 msgid "Profile Analyses"
@@ -4324,7 +4337,7 @@ msgstr "配置文件检验项目"
 
 #: bika/lims/content/analysisrequest.py:432
 msgid "Profile Key"
-msgstr "配置文件关键词"
+msgstr "套餐标识"
 
 #: bika/lims/content/analysisprofile.py:51
 msgid "Profile Keyword"
@@ -4336,7 +4349,7 @@ msgstr "配置文件名称"
 
 #: senaite/core/content/analysisprofile.py:216
 msgid "Profile keyword must be unique"
-msgstr "配置文件关键字必须是唯一的"
+msgstr "套餐标识必须唯一。"
 
 #: senaite/core/browser/samples/view.py:122
 msgid "Progress"
@@ -4345,7 +4358,7 @@ msgstr "进度"
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:103
 #: senaite/core/registry/schema.py:213
 msgid "Prominent fields"
-msgstr "突出的领域"
+msgstr "置顶字段"
 
 #: bika/lims/content/abstractbaseanalysis.py:865
 msgid "Protocol ID"
@@ -4484,7 +4497,7 @@ msgstr "参考定义"
 #: bika/lims/controlpanel/bika_referencedefinitions.py:63
 #: bika/lims/profiles/default/types/ReferenceDefinitions.xml
 msgid "Reference Definitions"
-msgstr "参考多项定义"
+msgstr "标准物质定义"
 
 #: bika/lims/content/referencesample.py:64
 msgid "Reference ID"
@@ -4511,7 +4524,7 @@ msgstr "样品参考值为0或'空白'"
 
 #: senaite/core/content/senaitesetup.py:1120
 msgid "Register"
-msgstr "注册"
+msgstr "登记"
 
 #: senaite/core/browser/dashboard/dashboard.py:121
 #: senaite/core/profiles/default/workflows/senaite_analysis_workflow/definition.xml
@@ -4692,6 +4705,11 @@ msgstr "需要"
 msgid "Required Volume"
 msgstr "需求体积"
 
+#. Default: "Reset"
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:201
+msgid "sample_fields_reset"
+msgstr "恢复默认设置"
+
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:198
 msgid "Reset"
 msgstr "重新设置"
@@ -4795,7 +4813,7 @@ msgstr "结果待定"
 #: bika/lims/content/preservation.py:52
 #: bika/lims/content/sampletype.py:116
 msgid "Retention Period"
-msgstr "保存时间"
+msgstr "留样期限"
 
 #: senaite/core/profiles/default/workflows/senaite_analysis_workflow/definition.xml
 msgid "Retest"
@@ -4913,11 +4931,11 @@ msgstr "样品 ${sample_id} 已成功作废，并已向以下收件人发送通�
 
 #: senaite/core/profiles/default/types/SampleCondition.xml
 msgid "Sample Condition"
-msgstr "样品状态"
+msgstr "样品状况"
 
 #: senaite/core/profiles/default/types/SampleConditions.xml
 msgid "Sample Conditions"
-msgstr "样品状态"
+msgstr "样品状况"
 
 #: senaite/core/profiles/default/types/SampleContainer.xml
 msgid "Sample Container"
@@ -4956,11 +4974,11 @@ msgstr "样品分装"
 #: senaite/core/browser/worksheets/worksheet/analyses_listing.py:579
 #: senaite/core/profiles/default/types/SamplePoint.xml
 msgid "Sample Point"
-msgstr "样品点"
+msgstr "采样点"
 
 #: senaite/core/profiles/default/types/SamplePoints.xml
 msgid "Sample Points"
-msgstr "样品点"
+msgstr "采样点"
 
 #: senaite/core/profiles/default/types/SamplePreservation.xml
 msgid "Sample Preservation"
@@ -4968,7 +4986,7 @@ msgstr "样品保存方式"
 
 #: senaite/core/profiles/default/types/SamplePreservations.xml
 msgid "Sample Preservations"
-msgstr "样本保存"
+msgstr "样品保存方式"
 
 #: bika/lims/content/analysisrequest.py:671
 msgid "Sample Rejection"
@@ -4976,7 +4994,7 @@ msgstr "样品拒收"
 
 #: bika/lims/profiles/default/types/Client.xml
 msgid "Sample Templates"
-msgstr "样品模板集"
+msgstr "样品模板"
 
 #: senaite/core/browser/samples/templates/partition_magic.pt:155
 #: senaite/core/browser/samples/view.py:201
@@ -5165,7 +5183,7 @@ msgstr "封条完整Y/N"
 
 #: senaite/core/content/samplecontainer.py:122
 msgid "Security seal intact"
-msgstr "安全密封完好"
+msgstr "封签完好"
 
 #: bika/lims/content/analysisservice.py:261
 msgid "Select"
@@ -5263,7 +5281,7 @@ msgstr "选择默认登录页面。当客户端用户登录系统时，或从客
 
 #: senaite/core/content/senaitesetup.py:1129
 msgid "Select the default sticker template used for automatic printing."
-msgstr "选择用于自动打印的默认标签模板。"
+msgstr "自动打印标签时使用的默认模板。"
 
 #: bika/lims/content/bikasetup.py:1000
 msgid "Select the default sticker template used for automatic printing.<br/>"
@@ -5275,7 +5293,7 @@ msgstr "选择此ID用于标识的类型。"
 
 #: senaite/core/content/senaitesetup.py:1063
 msgid "Select this to activate automatic notifications via email to the Client when a Sample is rejected."
-msgstr "选择此选项可在拒绝样品时通过电子邮件激活自动通知客户。"
+msgstr "拒收样品时，向该样品的客户联系人发送邮件。"
 
 #: bika/lims/content/bikasetup.py:592
 msgid "Select this to activate the dashboard as a default front page."
@@ -5283,19 +5301,19 @@ msgstr "选择此选项可将仪表板激活为默认首页。"
 
 #: senaite/core/content/senaitesetup.py:990
 msgid "Select this to activate the sample collection workflow steps."
-msgstr "选此激活取样作流程."
+msgstr "开启后，样品进入采样工作流。"
 
 #: senaite/core/content/senaitesetup.py:998
 msgid "Select this to allow a Sampling Coordinator to schedule a sampling. This functionality only takes effect when 'Sampling workflow' is active"
-msgstr "选择此项以允许取样协调员安排采样。此功能仅在“取样工作流程”处于活动状态时生效"
+msgstr "允许采样协调员安排采样，仅在采样工作流启用时生效。"
 
 #: senaite/core/content/senaitesetup.py:980
 msgid "Select this to allow the user to set an additional 'Printed' status to those Analysis Requests that have been Published. Disabled by default."
-msgstr "选择此项，可允许用户为已发布的分析请求设置额外的 “已打印” 状态。此功能默认禁用。"
+msgstr "允许将已发布的样品标记为「已打印」。默认关闭。"
 
 #: senaite/core/content/senaitesetup.py:1008
 msgid "Select to receive the samples automatically when created by lab personnel and sampling workflow is disabled. Samples created by client contacts won't be received automatically"
-msgstr "选择此选项可在实验室人员创建且采样工作流程被禁用时自动接收样品。客户联系人创建的样本将不会被自动接收"
+msgstr "关闭采样工作流时，实验室人员新建的样品自动接收。客户联系人新建的样品仍需接收。"
 
 #: bika/lims/content/bikasetup.py:722
 msgid "Select to show sample partitions to client contacts. If deactivated, partitions won't be included in listings and no info message with links to the primary sample will be displayed to client contacts."
@@ -5391,7 +5409,7 @@ msgstr "设置维护任务为关闭状态."
 
 #: senaite/core/content/senaitesetup.py:1073
 msgid "Set the text for the body of the email to be sent to the Sample's client contact if the option 'Email notification on Sample rejection' is enabled. You can use reserved keywords: $sample_id, $sample_link, $reasons, $lab_address"
-msgstr "如果启用了“关于样品拒绝的电子邮件通知”选项，则设置电子邮件发送到样品的客户端联系人。你可以使用保留关键字:$sample_id, $sample_link, $reasons, $lab_address"
+msgstr "启用拒收邮件通知后，此正文会发送给样品的客户联系人。可用变量为 $sample_id、$sample_link、$reasons、$lab_address。"
 
 #: senaite/core/registry/schema.py:40
 msgid "Settings for Clients"
@@ -5403,7 +5421,7 @@ msgstr "配置"
 
 #: bika/lims/content/storagelocation.py:78
 msgid "Shelf Code"
-msgstr "货架号"
+msgstr "货架编号"
 
 #: bika/lims/content/storagelocation.py:83
 msgid "Shelf Description"
@@ -5475,7 +5493,7 @@ msgstr "简单图片"
 
 #: bika/lims/content/storagelocation.py:43
 msgid "Site Code"
-msgstr "站点编码"
+msgstr "场所编号"
 
 #: bika/lims/content/storagelocation.py:48
 msgid "Site Description"
@@ -5483,15 +5501,15 @@ msgstr "站点描述"
 
 #: senaite/core/content/senaitesetup.py:313
 msgid "Site Logo"
-msgstr "网站Logo"
+msgstr "站点标志"
 
 #: senaite/core/content/senaitesetup.py:319
 msgid "Site Logo CSS"
-msgstr "网站logo CSS"
+msgstr "站点标志 CSS"
 
 #: bika/lims/content/storagelocation.py:38
 msgid "Site Title"
-msgstr "站点标题"
+msgstr "场所名称"
 
 #: senaite/core/browser/clients/client/attachments/view.py:67
 #: senaite/core/browser/viewlets/templates/attachments.pt:65
@@ -5522,7 +5540,7 @@ msgstr "一些分析使用过时或未校准的仪器。结果发布不允许"
 #: bika/lims/content/analysiscategory.py:82
 #: bika/lims/content/subgroup.py:38
 msgid "Sort Key"
-msgstr "排序关键字"
+msgstr "排序键"
 
 #: bika/lims/browser/analyses/qc.py:59
 msgid "Source"
@@ -5550,7 +5568,7 @@ msgstr "检验标准"
 
 #: senaite/core/content/senaitesetup.py:1163
 msgid "Specify how many copies of each sticker should be printed by default."
-msgstr "指定默认情况下每种标签应打印的份数。"
+msgstr "每种标签默认打印的份数。"
 
 #: bika/lims/content/worksheettemplate.py:63
 msgid "Specify the size of the Worksheet, e.g. corresponding to a specific instrument's tray size. Then select an Analysis 'type' per Worksheet position.Where QC samples are selected, also select which Reference Sample should be used.If a duplicate analysis is selected, indicate which sample position it should be a duplicate of"
@@ -5558,7 +5576,7 @@ msgstr "指定工作表的大小，例如对应于特定仪器的托盘尺寸。
 
 #: senaite/core/content/senaitesetup.py:245
 msgid "Split Length"
-msgstr "分段长度"
+msgstr "前缀拆分长度"
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:149
 #: senaite/core/registry/schema.py:220
@@ -5573,13 +5591,19 @@ msgstr "开始日期"
 msgid "Start date must be before End Date"
 msgstr "开始日期必须早于结束日期"
 
-#: senaite/core/browser/samples/view.py:246
-#: senaite/core/browser/worksheets/worksheet/analyses_listing.py:123
 #: senaite/core/skins/senaite_templates/senaite_widgets/addresswidget.pt:67
+#: senaite/core/z3cform/widgets/address.py:223
+#: senaite/core/z3cform/widgets/address.py:238
 msgid "State"
 msgstr "州/省"
 
 #: bika/lims/browser/analyses/view.py:200
+#: bika/lims/browser/batch/batchbook.py:89
+#: bika/lims/browser/batchfolder.py:87
+#: bika/lims/browser/referencesample.py:371
+#: bika/lims/browser/worksheet/views/analyses.py:122
+#: senaite/core/browser/samples/view.py:246
+#: senaite/core/browser/worksheets/worksheet/analyses_listing.py:123
 msgid "Status"
 msgstr "状态"
 
@@ -5611,7 +5635,7 @@ msgstr "小组"
 
 #: senaite/core/profiles/default/types/SubGroups.xml
 msgid "SubGroups"
-msgstr "所有小组"
+msgstr "子分组"
 
 #: bika/lims/content/subgroup.py:39
 msgid "Subgroups are sorted with this key in group views"
@@ -5630,7 +5654,7 @@ msgstr "提交"
 
 #: senaite/core/exportimport/import.pt:114
 msgid "Submit a valid Open XML (.XLSX) file containing setup records to continue."
-msgstr "提交包含安装记录的有效Open XML（.XLSX）文件以继续."
+msgstr "请上传包含配置记录的 Excel 文件（.xlsx）。"
 
 #: bika/lims/browser/analyses/view.py:1564
 msgid "Submitted and verified by the same user: {}"
@@ -5724,7 +5748,7 @@ msgstr "测试结果"
 
 #: senaite/core/config/vocabularies.py:56
 msgid "Text"
-msgstr "文本"
+msgstr "正文"
 
 #: senaite/core/browser/setup/templates/email_body_sample_publication.pt:5
 msgid "Thank you for your analysis request."
@@ -5812,11 +5836,11 @@ msgstr "取样过程中的环境条件"
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:104
 msgid "The fields are always listed on top and can not be faded out. You can drag and drop any fields to the lower list to change thier visibility."
-msgstr "字段总是列在最上面，不能淡出。您可以将任何字段拖放到下面的列表中，以更改它们的可见性。"
+msgstr "置顶字段显示在页面顶部，折叠标准字段时仍然可见。将字段拖到下方列表，可将其改为标准字段。"
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:150
 msgid "The fields are listed below the promient fields and can be faded out. You can drag and drop any fields to the upper list to change their visibility."
-msgstr "字段列在突出字段的下面，可以淡出。您可以将任何字段拖放到上面的列表中，以更改它们的可见性。"
+msgstr "标准字段显示在置顶字段下方，可以折叠。将字段拖到上方列表，可将其改为置顶字段。"
 
 #: bika/lims/browser/viewlets/templates/primary_ar_viewlet.pt:20
 msgid "The following partitions have been created from this Sample:"
@@ -5828,7 +5852,7 @@ msgstr "将分发以下样品"
 
 #: senaite/core/content/senaitesetup.py:298
 msgid "The global Auditlog shows all modifications of the system. When enabled, all entities will be indexed in a separate catalog. This will increase the time when objects are created or modified."
-msgstr "全局审计日志显示系统的所有修改。当启用时，所有的实体将被索引在一个单独的目录中。这将增加对象被创建或修改的时间。"
+msgstr "全局审计日志记录系统变更。启用后会为所有对象建立独立索引，创建或修改对象可能需要更长时间。"
 
 #: bika/lims/content/samplepoint.py:75
 msgid "The height or depth at which the sample has to be taken"
@@ -5877,7 +5901,7 @@ msgstr "编号生成器存储为空。每个前缀在首次生成 ID 时会初�
 
 #: senaite/core/content/senaitesetup.py:1051
 msgid "The number of days before a sample expires and cannot be analysed any more. This setting can be overwritten per individual sample type in the sample types setup"
-msgstr "样品有效天数, 过期的样品将不能分析. 该设置可以在样品类型设置中为具体样品类型重置"
+msgstr "样品过期前允许保存的天数。样品类型可单独设置期限。"
 
 #: bika/lims/content/bikasetup.py:162
 msgid "The number of minutes before a user is automatically logged off. 0 disables automatic log-off"
@@ -6005,7 +6029,7 @@ msgstr "这是进行检验所允许的默认最长时间。它仅用于分析服
 
 #: senaite/core/content/senaitesetup.py:1038
 msgid "This is the default maximum time allowed for performing analyses. It is only used for analyses where the analysis service does not specify a turnaround time. Only laboratory workdays are considered."
-msgstr "这是执行检验允许的默认最长时间。仅在检验服务未指定周转时间时使用。仅考虑实验室工作日。"
+msgstr "未为检验项目指定周转时间时使用此上限，仅计实验室工作日。"
 
 #: senaite/core/browser/worksheets/worksheet/analyses_listing.py:134
 msgid "This operation can not be undone. Are you sure you want to reject the selected analyses?"
@@ -6033,7 +6057,7 @@ msgstr "为防止分析操作超出规定的分析保存时间，无法选择此
 
 #: senaite/core/content/senaitesetup.py:314
 msgid "This shows a custom logo on your SENAITE site."
-msgstr "这显示了您的MAITUX网站上的一个定制Logo"
+msgstr "在站点上显示自定义标志。"
 
 #: senaite/core/browser/install/templates/senaite-overview.pt:57
 msgid "This site configuration is outdated and needs to be upgraded:"
@@ -6061,7 +6085,7 @@ msgstr "时间"
 
 #: senaite/core/exportimport/import.pt:129
 msgid "Tip. Attached documents will not be loaded unless they are present in the instance."
-msgstr "提示：附加文件将不会加载除非他们在样本呈现。"
+msgstr "只能导入本站已有的附件文件。"
 
 #: senaite/core/browser/controlpanel/labels/view.py:59
 #: senaite/core/browser/label/labeled_objects.py:58
@@ -6537,12 +6561,12 @@ msgstr "验证失败：当选项的控制类型为“Select”时，需要选项
 #: senaite/core/content/analysiscategory.py:122
 #: senaite/core/content/subgroup.py:82
 msgid "Validation failed: value must be between 0 and 1000"
-msgstr "验证失败：值必须介于0到1000之间"
+msgstr "请输入 0 至 1000 之间的数值。"
 
 #: senaite/core/content/analysiscategory.py:118
 #: senaite/core/content/subgroup.py:78
 msgid "Validation failed: value must be float"
-msgstr "验证失败：值必须为浮点数"
+msgstr "请输入数值，可含小数。"
 
 #: bika/lims/content/instrumentvalidation.py:51
 msgid "Validation report date"
@@ -6605,7 +6629,7 @@ msgstr "版本"
 
 #: senaite/core/profiles/default/types/Laboratory.xml
 msgid "View"
-msgstr "示图"
+msgstr "查看"
 
 #: senaite/core/browser/install/templates/senaite-overview.pt:52
 msgid "View your SENAITE site"
@@ -6743,7 +6767,7 @@ msgstr "您可以添加另一个MAITUX网站:"
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:109
 msgid "You can change the visibility of a field by selecting or unselecting the checkbox."
-msgstr "你可以通过选择或不选择复选框来改变一个字段的可见性。"
+msgstr "勾选字段即可显示，取消勾选即可隐藏。"
 
 #: senaite/core/browser/viewlets/templates/auditlog_disabled.pt:17
 msgid "You can enable the global Audit Log again in the <a href=\"${DYNAMIC_CONTENT}\">Setup</a>"
@@ -7025,41 +7049,41 @@ msgstr "分析单位选择"
 #: senaite/core/content/analysiscategory.py:64
 #, fuzzy
 msgid "description_analysiscategory_comments"
-msgstr "分析结果评价"
+msgstr "显示在结果报告的对应分析类别下方。"
 
 #. Default: "Select the responsible department"
 #: senaite/core/content/analysiscategory.py:85
 msgid "description_analysiscategory_department"
-msgstr "分析情况"
+msgstr "选择负责此类别的部门。"
 
 #. Duplicate values are ordered alphabetically."
 #. Default: "Float value from 0.0 - 1000.0 indicating the sort order. Duplicate values are ordered alphabetically."
 #: senaite/core/content/analysiscategory.py:99
 #, fuzzy
 msgid "description_analysiscategory_sort_key"
-msgstr "分析类别排序"
+msgstr "输入 0 至 1000 之间的排序值，可含小数。数值相同时按名称排序。"
 
 #. Default: "Commercial ID used for accounting"
 #: senaite/core/content/analysisprofile.py:125
 msgid "description_analysisprofile_commercial_id"
-msgstr "市场分析数据"
+msgstr "用于计费的商业编号。"
 
 #. Default: "Please provide a unique profile keyword"
 #: senaite/core/content/analysisprofile.py:94
 msgid "description_analysisprofile_profile_key"
-msgstr "分析概要关键信息"
+msgstr "输入唯一的套餐标识。"
 
 #. Default: "Please provide the price excluding VAT"
 #: senaite/core/content/analysisprofile.py:149
 msgid "description_analysisprofile_profile_price"
-msgstr "成本价格分析概要"
+msgstr "输入不含增值税的价格。"
 
 #. price"
 #. Default: "Please provide the VAT in percent that is added to the profile price"
 #: senaite/core/content/analysisprofile.py:161
 #, fuzzy
 msgid "description_analysisprofile_profile_vat"
-msgstr "增值税"
+msgstr "输入按套餐价格计取的增值税百分比。"
 
 #. profile won't be available for selection in sample creation and edit forms
 #. unless the selected sample type is one of these. If no sample type is set
@@ -7069,17 +7093,17 @@ msgstr "增值税"
 #: senaite/core/content/analysisprofile.py:184
 #, fuzzy
 msgid "description_analysisprofile_sampletypes"
-msgstr "样品类型分析概要"
+msgstr "登记或编辑样品时，只有选中适用的样品类型，才能选择此套餐。"
 
 #. Default: "Select the included analyses for this profile"
 #: senaite/core/content/analysisprofile.py:110
 msgid "description_analysisprofile_services"
-msgstr "服务相关内容分析概要"
+msgstr "选择此套餐包含的检验项目。"
 
 #. Default: "Use profile price instead of single analyses prices"
 #: senaite/core/content/analysisprofile.py:137
 msgid "description_analysisprofile_use_profile_price"
-msgstr "公司效益分析数据概要"
+msgstr "计价时使用套餐价。"
 
 #. Default: "Number of samples to create with the information provided"
 #: bika/lims/content/analysisrequest.py:1441
@@ -7164,19 +7188,19 @@ msgstr "批量处理客户端描述"
 #: bika/lims/content/bikasetup.py:396
 #, fuzzy
 msgid "description_bikasetup_allow_manual_result_capture_date"
-msgstr "允许手动捕获结果日期"
+msgstr "允许手动填写检验项目的结果录入日期。"
 
 #. departments will receive publication emails."
 #. Default: "When selected, the responsible persons of all involved lab departments will receive publication emails."
 #: bika/lims/content/bikasetup.py:853
 #, fuzzy
 msgid "description_bikasetup_always_cc_responsibles_in_report_emails"
-msgstr "总是在报告邮件中抄送负责人"
+msgstr "发布报告时，向所有涉及部门的负责人发送邮件。"
 
 #. Default: "Group analyses by category for samples"
 #: bika/lims/content/bikasetup.py:368
 msgid "description_bikasetup_categorizesampleanalyses"
-msgstr "说明 bika 设置分类样本分析"
+msgstr "在样品页按类别显示检验项目。"
 
 #. creation. This functionality only takes effect when 'Sampling workflow' is
 #. not active"
@@ -7184,7 +7208,7 @@ msgstr "说明 bika 设置分类样本分析"
 #: bika/lims/content/bikasetup.py:689
 #, fuzzy
 msgid "description_bikasetup_date_sampled_required"
-msgstr "系统中关于样品采集时间的描述"
+msgstr "仅在停用采样工作流时生效。开启后，创建样品必须填写实际采样日期。"
 
 #. result reports to the selected recipients. You can use reserved keywords:
 #. $client_name, $recipients, $lab_name, $lab_address"
@@ -7192,7 +7216,7 @@ msgstr "系统中关于样品采集时间的描述"
 #: bika/lims/content/bikasetup.py:829
 #, fuzzy
 msgid "description_bikasetup_email_body_sample_publication"
-msgstr "说明 bika设置电子邮件正文样本发布"
+msgstr "发布报告时发给所选收件人的默认邮件正文。可用变量为 $client_name、$recipients、$lab_name、$lab_address。"
 
 #. publishing results reports. This address overrides the value set at
 #. portal's 'Mail settings'."
@@ -7200,7 +7224,7 @@ msgstr "说明 bika设置电子邮件正文样本发布"
 #: bika/lims/content/bikasetup.py:805
 #, fuzzy
 msgid "description_bikasetup_email_from_sample_publication"
-msgstr "Bika 设置说明 - 样品管理员邮箱"
+msgstr "发布报告的发件邮箱，优先于站点邮件设置。"
 
 #. e.g. to enter field results immediately, or lab results, when the automatic
 #. sample reception is activated."
@@ -7208,7 +7232,7 @@ msgstr "Bika 设置说明 - 样品管理员邮箱"
 #: bika/lims/content/bikasetup.py:443
 #, fuzzy
 msgid "description_bikasetup_immediateresultsentry"
-msgstr "描述 bika 设置立即输入结果"
+msgstr "创建样品后即可录入现场结果。启用自动接收时，也可直接录入实验室结果。"
 
 #. sent to primary contacts and laboratory managers when a sample is
 #. invalidated. The following placeholders are supported: <code title='The ID
@@ -7227,12 +7251,12 @@ msgstr "定义样品作废时自动发送给主要联系人和实验室负责人
 #. Default: "Specify whether providing a reason is mandatory when invalidating a sample. If enabled, the '$reason' placeholder in the sample invalidation notification email body will be replaced with the entered reason."
 #: bika/lims/content/bikasetup.py:913
 msgid "description_bikasetup_invalidation_reason_required"
-msgstr "指定作废样品时是否必须提供原因。若启用，样品作废通知邮件正文中的 '$reason' 占位符将替换为输入的原因。"
+msgstr "开启后，作废样品必须填写原因。通知邮件中的 $reason 将替换为所填原因。"
 
 #. Default: "Analyses are required for sample registration"
 #: bika/lims/content/bikasetup.py:382
 msgid "description_bikasetup_sampleanalysesrequired"
-msgstr "样品登记时必须选择检验项目"
+msgstr "登记样品时必须选择检验项目。"
 
 #. Default: "Dependent services of this calculation"
 #: bika/lims/content/calculation.py:84
@@ -7249,7 +7273,7 @@ msgstr "此计算依赖的服务"
 #. Default: "<p>The formula you type here will be dynamically calculated be dynamically calculated when an analysis using this calculation is displayed.</p><p>To enter a Calculation, use standard maths operators, + - * / ( ), and all keywords available, both from other Analysis Services and the Interim Fields specified here, as variables. Enclose them in square brackets [ ].</p><p>E.g, the calculation for Total Hardness, the total of Calcium (ppm) and Magnesium (ppm) ions in water, is entered as [Ca] + [Mg], where Ca and Mg are the keywords for those two Analysis Services.</p>"
 #: senaite/core/content/calculation.py:291
 msgid "description_calculation_formula"
-msgstr "输入的公式会在显示使用该计算的检验时动态计算。请输入标准数学运算符 + - * / ( )，并使用其他分析服务关键字及此处定义的中间字段作为变量，变量需用方括号 [ ] 包裹。例如总硬度可写为 [Ca] + [Mg]。"
+msgstr "<p>显示使用此公式的检验项目时，系统会计算结果。可使用 +、-、*、/、括号，以及其他检验项目或中间字段的关键词。变量用方括号括起。</p><p>例如，钙、镁项目的关键词为 Ca 和 Mg 时，[Ca] + [Mg] 表示两项结果之和。</p>"
 
 #. should your calculation require them. The field title specified here will
 #. be used as column headers and field descriptors where the interim fields
@@ -7259,20 +7283,20 @@ msgstr "输入的公式会在显示使用该计算的检验时动态计算。请
 #. Default: "Define interim fields such as vessel mass, dilution factors, should your calculation require them. The field title specified here will be used as column headers and field descriptors where the interim fields are displayed. If 'Apply wide' is enabled the field will be shown in a selection box on the top of the worksheet, allowing to apply a specific value to all the corresponding fields on the sheet."
 #: senaite/core/content/calculation.py:245
 msgid "description_calculation_imports"
-msgstr "定义中间字段，例如容器质量、稀释倍数等，以供计算使用。此处设置的字段标题将作为列标题和字段说明显示。若启用“整体应用”，该字段会显示在工作表顶部的选择框中，可一次性应用到整张工作表的对应字段。"
+msgstr "可导入外部 Python 库的函数。例如模块填 math、函数填 floor，公式中即可使用 floor([Ca] + [Mg])。"
 
 #. parameters.  This includes Interim fields defined above, as well as any
 #. services that this calculation depends on to calculate results."
 #. Default: "To test the calculation, enter values here for all calculation parameters.  This includes Interim fields defined above, as well as any services that this calculation depends on to calculate results."
 #: senaite/core/content/calculation.py:321
 msgid "description_calculation_test_params"
-msgstr "要测试该计算，请在此输入所有计算参数的值，其中包括上方定义的中间字段，以及该计算依赖的所有服务值。"
+msgstr "输入所有中间字段及公式引用的检验项目的测试值。"
 
 #. values."
 #. Default: "The result after the calculation has taken place with test values."
 #: senaite/core/content/calculation.py:345
 msgid "description_calculation_test_result"
-msgstr "使用测试值进行计算后的结果。"
+msgstr "用上述测试值计算得到的结果。"
 
 #. Default: "Select the responsible department"
 #: bika/lims/content/analysiscategory.py:62
@@ -7297,7 +7321,7 @@ msgstr "该值会显示在所有已发布结果的底部。"
 #. Default: "Contacts in CC for new samples"
 #: senaite/core/content/contact.py:80
 msgid "description_contact_cccontact"
-msgstr "新样品的抄送联系人"
+msgstr "新建样品时抄送的联系人。"
 
 #. could be selected here."
 #. Default: "If this container is pre-preserved, then the preservation method could be selected here."
@@ -7754,19 +7778,19 @@ msgstr "该请检中在样本模板设置的预设值"
 #. Default: "Check this box if the samples taken at this point are 'composite' and put together from more than one sub sample, e.g. several surface samples from a dam mixed together to be a representative sample for the dam. The default, unchecked, indicates 'grab' samples"
 #: senaite/core/content/samplepoint.py:147
 msgid "description_samplepoint_composite"
-msgstr "如果在该采样点采集的样品属于“混合样”，即由多个子样组成，例如将水坝多个表面样品混合为一个代表性样品，请勾选此项。默认不勾选时表示“瞬时样”。"
+msgstr "勾选表示样品由多个子样混合而成，例如将同一水库多个表层采样点的样品混合。"
 
 #. Default: "The height or depth at which the sample has to be taken"
 #: senaite/core/content/samplepoint.py:91
 msgid "description_samplepoint_elevation"
-msgstr "采样所需的高度或深度"
+msgstr "采样位置的高度或深度。"
 
 #. further analysis. It plays a pivotal role in research as it can
 #. significantly influence the results and conclusions drawn from the study."
 #. Default: "The geographical point or area from which samples are taken for further analysis. It plays a pivotal role in research as it can significantly influence the results and conclusions drawn from the study."
 #: senaite/core/content/samplepoint.py:76
 msgid "description_samplepoint_location"
-msgstr "用于进一步分析的样品采集地理点或区域。它在研究中起关键作用，因为会显著影响研究结果和结论。"
+msgstr "采样地点或区域。"
 
 #. point. The field for the selection of a sample point in sample creation and
 #. edit forms will be filtered in accordance. Still, sample points that do not
@@ -7781,7 +7805,7 @@ msgstr "可在该采样点采集的样品类型列表。样品新增和编辑表
 #. Default: "If a sample is taken periodically at this sample point, enter frequency here, e.g. weekly"
 #: senaite/core/content/samplepoint.py:103
 msgid "description_samplepoint_sampling_frequency"
-msgstr "如果该采样点需要定期采样，请在此输入频率，例如每周。"
+msgstr "定期采样时填写频率，例如每周一次。"
 
 #. point. The field for the selection of a sample point in sample creation and
 #. edit forms will be filtered in accordance. Still, sample points that do not
@@ -7790,95 +7814,95 @@ msgstr "如果该采样点需要定期采样，请在此输入频率，例如每
 #. Default: "The list of sample types that can be collected at this sample point. The field for the selection of a sample point in sample creation and edit forms will be filtered in accordance. Still, sample points that do not have any sample type assigned will always be available for selection, regardless of the type."
 #: senaite/core/content/samplepoint.py:126
 msgid "description_samplepoint_sampling_sample_types"
-msgstr "可在该采样点采集的样品类型列表。样品新增和编辑表单中采样点选择字段将据此过滤。未分配任何样品类型的采样点始终可选。"
+msgstr "选择此采样点适用的样品类型。登记或编辑样品时会按所选类型筛选采样点。"
 
 #. sample is received"
 #. Default: "Automatically redirect the user to the partitions view when the sample is received"
 #: senaite/core/content/sampletemplate.py:258
 msgid "description_sampletemplate_auto_partition"
-msgstr "样品接收后自动跳转到分样视图"
+msgstr "接收样品后自动打开分装页面。"
 
 #. Default: "Select if the sample is a mix of sub samples"
 #: senaite/core/content/sampletemplate.py:219
 msgid "description_sampletemplate_composite"
-msgstr "选择该样品是否由多个子样混合而成"
+msgstr "勾选表示该样品由多个子样混合而成。"
 
 #. ID'"
 #. Default: "Each line defines a new partition identified by the 'Partition ID'"
 #: senaite/core/content/sampletemplate.py:245
 msgid "description_sampletemplate_partitions"
-msgstr "每一行定义一个新的分样，并以“分样 ID”标识。"
+msgstr "每行定义一个分装样品，以分装编号区分。"
 
 #. Default: "Select the sample point for this template"
 #: senaite/core/content/sampletemplate.py:187
 msgid "description_sampletemplate_samplepoint"
-msgstr "为此模板选择采样点"
+msgstr "选择此模板使用的采样点。"
 
 #. Default: "Select the sample type for this template"
 #: senaite/core/content/sampletemplate.py:209
 msgid "description_sampletemplate_sampletype"
-msgstr "为此模板选择样品类型"
+msgstr "选择此模板适用的样品类型。"
 
 #. Default: "Enable sampling workflow for the created samples"
 #: senaite/core/content/sampletemplate.py:228
 msgid "description_sampletemplate_sampling_required"
-msgstr "为创建的样品启用采样工作流"
+msgstr "为使用此模板新建的样品启用采样工作流。"
 
 #. Default: "Select the services for this template"
 #: senaite/core/content/sampletemplate.py:273
 msgid "description_sampletemplate_services"
-msgstr "为此模板选择服务项目"
+msgstr "选择此模板包含的检验项目。"
 
 #. Default: "Defines the stickers to use for this sample type."
 #: senaite/core/content/sampletype.py:281
 msgid "description_sampletype_admitted_stickers_templates"
-msgstr "定义此样品类型可使用的标签模板。"
+msgstr "此样品类型可使用的标签模板。"
 
 #. automatically assigned a container of this type, unless it has been
 #. specified in more details per analysis service"
 #. Default: "The default container type. New sample partitions are automatically assigned a container of this type, unless it has been specified in more details per analysis service"
 #: senaite/core/content/sampletype.py:258
 msgid "description_sampletype_containertype"
-msgstr "默认容器类型。除非在具体分析服务中另有指定，新样品分样会自动分配此类型的容器。"
+msgstr "新分装样品默认使用此类容器，检验项目有单独配置时优先使用项目配置。"
 
 #. before they expire and cannot be analysed any further"
 #. Default: "The period for which unpreserved samples of this type can be kept before they expire and cannot be analysed any further"
 #: senaite/core/content/sampletype.py:155
 msgid "description_sampletype_duration_period"
-msgstr "此类型未保存样品在失效、无法继续分析前可保存的时长。"
+msgstr "此类型的未保存处理样品在过期前可存放的时长。"
 
 #. display the appropriate pictograms in reports and lists."
 #. Default: "Hazard categories that apply to samples of this type. Used to display the appropriate pictograms in reports and lists."
 #: senaite/core/content/sampletype.py:180
 msgid "description_sampletype_hazard_categories"
-msgstr "适用于此类型样品的危险类别，用于在报告和列表中显示相应图标。"
+msgstr "用于在报告和列表中显示相应的危险标识。"
 
 #. Default: "Samples of this type should be treated as hazardous"
 #: senaite/core/content/sampletype.py:168
 msgid "description_sampletype_hazardous"
-msgstr "此类型样品应按危险品处理"
+msgstr "将此类型的样品按危险品处理。"
 
 #. kg'."
 #. Default: "The minimum sample volume required for analysis eg. '10 ml' or '1 kg'."
 #: senaite/core/content/sampletype.py:235
 msgid "description_sampletype_min_volume"
-msgstr "分析所需的最小样品量，例如 10 ml 或 1 kg。"
+msgstr "完成检验所需的最少样品量，例如 10 mL 或 1 kg。"
 
 #. Default: "Only ASCII characters without whitespaces are allowed."
 #: senaite/core/content/sampletype.py:222
 msgid "description_sampletype_prefix"
-msgstr "仅允许不含空格的 ASCII 字符。"
+msgstr "只允许 ASCII 字符，不可含空格。"
 
 #. Default: "Select the sample matrix for this sample type"
 #: senaite/core/content/sampletype.py:208
 msgid "description_sampletype_samplematrix"
-msgstr "为此样品类型选择样品基质"
+msgstr "选择此样品类型的基质。"
 
 #. entered manually for analyses"
 #. Default: "If this option is activated, the result capture date can be entered manually for analyses"
 #: senaite/core/content/senaitesetup.py:361
 msgid "description_senaitesetup_allow_manual_result_capture_date"
-msgstr "如果启用此选项，检验的结果录入日期可以手动输入。"
+msgstr "允许手动填写检验项目的结果录入日期。"
 
 #. to them or for unassigned analyses. When disabled, users can only submit
 #. results for analyses assigned to themselves. This setting does not apply to
@@ -7886,101 +7910,101 @@ msgstr "如果启用此选项，检验的结果录入日期可以手动输入。
 #. Default: "When enabled, users can submit results for analyses not assigned to them or for unassigned analyses. When disabled, users can only submit results for analyses assigned to themselves. This setting does not apply to users with role Lab Manager."
 #: senaite/core/content/senaitesetup.py:455
 msgid "description_senaitesetup_allow_to_submit_not_assigned"
-msgstr "启用后，用户可提交未分配给自己的检验结果或未分派检验的结果；禁用后，用户只能提交分配给自己的检验结果。此设置不适用于实验室经理角色。"
+msgstr "开启后可提交尚未分派或分派给其他人的项目结果；关闭后只能提交本人负责的项目结果。此限制不适用于实验室经理。"
 
 #. departments will receive publication emails."
 #. Default: "When selected, the responsible persons of all involved lab departments will receive publication emails."
 #: senaite/core/content/senaitesetup.py:288
 msgid "description_senaitesetup_always_cc_responsibles_in_report_emails"
-msgstr "选中后，所有相关实验室部门的负责人都会收到结果发布邮件。"
+msgstr "发布报告时，向所有涉及部门的负责人发送邮件。"
 
 #. 0 disables automatic log-off"
 #. Default: "The number of minutes before a user is automatically logged off. 0 disables automatic log-off"
 #: senaite/core/content/senaitesetup.py:427
 msgid "description_senaitesetup_auto_log_off"
-msgstr "用户自动注销前的分钟数。设置为 0 表示禁用自动注销。"
+msgstr "无操作超过设定分钟数后自动退出。填 0 可关闭自动注销。"
 
 #. results are verified. Otherwise, users with enough privileges have to
 #. manually verify the sample afterwards. Default: enabled"
 #. Default: "When enabled, the sample is automatically verified as soon as all results are verified. Otherwise, users with enough privileges have to manually verify the sample afterwards. Default: enabled"
 #: senaite/core/content/senaitesetup.py:654
 msgid "description_senaitesetup_auto_verify_samples"
-msgstr "启用后，一旦所有结果均已验证，样品会自动验证。否则，需要由具有足够权限的用户手动验证。默认启用。"
+msgstr "全部项目结果复核完成后自动复核样品。关闭后须由有权限的人员手动复核。默认开启。"
 
 #. when the list is long"
 #. Default: "Group analysis services by category in the LIMS tables, helpful when the list is long"
 #: senaite/core/content/senaitesetup.py:599
 msgid "description_senaitesetup_categorise_analysis_services"
-msgstr "在 LIMS 表格中按类别对分析服务进行分组，当列表较长时很有帮助。"
+msgstr "在列表中按类别显示检验项目。"
 
 #. Default: "Group analyses by category for samples"
 #: senaite/core/content/senaitesetup.py:340
 msgid "description_senaitesetup_categorizesampleanalyses"
-msgstr "描述Maitux设置分类样本分析"
+msgstr "在样品页按类别显示检验项目。"
 
 #. Default: "Select the currency the site will use to display prices."
 #: senaite/core/content/senaitesetup.py:496
 msgid "description_senaitesetup_currency"
-msgstr "选择站点显示价格时使用的货币。"
+msgstr "用于显示价格的币种。"
 
 #. Default: "Select this to activate the dashboard as a default front page."
 #: senaite/core/content/senaitesetup.py:861
 msgid "description_senaitesetup_dashboard_by_default"
-msgstr "选择此项以启用the 仪表盘 as a 默认 首页."
+msgstr "将仪表盘设为默认首页。"
 
 #. creation. This functionality only takes effect when 'Sampling workflow' is
 #. not active"
 #. Default: "Select this to make DateSampled field required on sample creation. This functionality only takes effect when 'Sampling workflow' is not active"
 #: senaite/core/content/senaitesetup.py:386
 msgid "description_senaitesetup_date_sampled_required"
-msgstr "选择此项使Date样品d field 必填 on 样品 creation. This functionality only takes effect when 'Sampling 工作流' is not active"
+msgstr "仅在停用采样工作流时生效。开启后，创建样品必须填写实际采样日期。"
 
 #. Default: "Preferred decimal mark for reports."
 #: senaite/core/content/senaitesetup.py:557
 msgid "description_senaitesetup_decimal_mark"
-msgstr "Preferred 小数点符号 for reports."
+msgstr "报告中使用的小数点符号。"
 
 #. Default: "Select the country the site will show by default"
 #: senaite/core/content/senaitesetup.py:510
 msgid "description_senaitesetup_default_country"
-msgstr "选择国家 the site will show by 默认"
+msgstr "新建记录时默认选中的国家或地区。"
 
 #. to create new Samples"
 #. Default: "Default value of the 'Sample count' when users click 'ADD' button to create new Samples"
 #: senaite/core/content/senaitesetup.py:744
 msgid "description_senaitesetup_default_number_of_ars_to_add"
-msgstr "'样品 count' when users click 'ADD' button to create new 样品s"
+msgstr "在样品登记页点击「添加」时预填的样品数量。"
 
 #. publishing results reports. This address overrides the value set at
 #. portal's 'Mail settings'."
 #. Default: "E-mail to use as the 'From' address for outgoing e-mails when publishing results reports. This address overrides the value set at portal's 'Mail settings'."
 #: senaite/core/content/senaitesetup.py:260
 msgid "description_senaitesetup_email_from_sample_publication"
-msgstr "发布结果报告时，发送邮件所使用的'发件人'地址。该设置会覆盖门户'邮件设置'中配置的地址。"
+msgstr "发布报告的发件邮箱，优先于站点邮件设置。"
 
 #. analysis in results entry view"
 #. Default: "If enabled, a free text field will be displayed close to each analysis in results entry view"
 #: senaite/core/content/senaitesetup.py:641
 msgid "description_senaitesetup_enable_analysis_remarks"
-msgstr "如果启用，a free text field will be displayed close to each 检验 in 结果 entry view"
+msgstr "在结果录入页为每个检验项目显示备注栏。"
 
 #. Default: "Analysis specifications which are edited directly on the Sample."
 #: senaite/core/content/senaitesetup.py:612
 msgid "description_senaitesetup_enable_ar_specs"
-msgstr "可直接在样品上编辑的分析规格。"
+msgstr "允许直接在样品上编辑检验标准。"
 
 #. 'Reject' option will be displayed in the actions menu."
 #. Default: "Select this to activate the rejection workflow for Samples. A 'Reject' option will be displayed in the actions menu."
 #: senaite/core/content/senaitesetup.py:758
 msgid "description_senaitesetup_enable_rejection_workflow"
-msgstr "选择此项以启用the rejection 工作流 for 样品s. A 'Reject' option will be displayed in the actions menu."
+msgstr "开启后，样品操作菜单中会出现「拒收」。"
 
 #. displayed in scientific notation using the letter 'e' to indicate the
 #. exponent. The precision can be configured in individual Analysis Services."
 #. Default: "Result values with at least this number of significant digits are displayed in scientific notation using the letter 'e' to indicate the exponent. The precision can be configured in individual Analysis Services."
 #: senaite/core/content/senaitesetup.py:625
 msgid "description_senaitesetup_exponential_format_threshold"
-msgstr "有效数字位数达到或超过该值的结果，将以科学计数法显示（用字母 e 表示指数）。精度可在各检验项目服务中单独配置。"
+msgstr "结果的有效数字达到此位数时，按所选格式以科学计数法显示。"
 
 #. e.g. to enter field results immediately, or lab results, when the automatic
 #. sample reception is activated."
@@ -7988,49 +8012,49 @@ msgstr "有效数字位数达到或超过该值的结果，将以科学计数法
 #: senaite/core/content/senaitesetup.py:329
 #, fuzzy
 msgid "description_senaitesetup_immediateresultsentry"
-msgstr "描述 Maitux设置立即输入结果"
+msgstr "创建样品后即可录入现场结果。启用自动接收时，也可直接录入实验室结果。"
 
 #. a sample. If enabled, the '$reason' placeholder in the sample invalidation
 #. notification email body will be replaced with the entered reason."
 #. Default: "Specify whether providing a reason is mandatory when invalidating a sample. If enabled, the '$reason' placeholder in the sample invalidation notification email body will be replaced with the entered reason."
 #: senaite/core/content/senaitesetup.py:411
 msgid "description_senaitesetup_invalidation_reason_required"
-msgstr "指定作废样品时是否必须填写原因。启用后，样品作废通知邮件正文中的 '$reason' 占位符将被替换为所填写的原因。"
+msgstr "开启后，作废样品必须填写原因。通知邮件中的 $reason 将替换为所填原因。"
 
 #. Dashboard is not selected as the default front page. If no landing page is
 #. selected, the default frontpage is displayed."
 #. Default: "The landing page is shown for non-authenticated users if the Dashboard is not selected as the default front page. If no landing page is selected, the default frontpage is displayed."
 #: senaite/core/content/senaitesetup.py:874
 msgid "description_senaitesetup_landing_page"
-msgstr "当未将仪表盘设为默认首页时，系统会向未登录用户显示该着陆页。如果未选择着陆页，则显示默认首页。"
+msgstr "未将仪表盘设为默认首页时，未登录用户会看到此页面。留空则显示默认首页。"
 
 #. the value set for the field 'Number of samples' on the sample registration
 #. form"
 #. Default: "Maximum number of samples that can be created in accordance with the value set for the field 'Number of samples' on the sample registration form"
 #: senaite/core/content/senaitesetup.py:373
 msgid "description_senaitesetup_maxnumberofsamplesadd"
-msgstr "样品登记表单中'样品数量'字段可设置的最大样品数"
+msgstr "样品登记表单一次允许创建的最大样品数。"
 
 #. for clients flagged as 'members', normally co-operative members or
 #. associates deserving of this discount"
 #. Default: "The discount percentage entered here, is applied to the prices for clients flagged as 'members', normally co-operative members or associates deserving of this discount"
 #: senaite/core/content/senaitesetup.py:524
 msgid "description_senaitesetup_member_discount"
-msgstr "此处填写的折扣百分比，将应用于被标记为'会员'的客户（通常是享有此折扣的合作社成员或联营方）的价格"
+msgstr "此折扣适用于标记为会员的客户，按百分比输入。"
 
 #. acceptable minimum number of results before QC statistics will be
 #. calculated and plotted"
 #. Default: "Using too few data points does not make statistical sense. Set an acceptable minimum number of results before QC statistics will be calculated and plotted"
 #: senaite/core/content/senaitesetup.py:583
 msgid "description_senaitesetup_minimum_results"
-msgstr "Using too few data points does not make statistical sense. 设置一个acceptable minimum 结果 before QC statistics will be calculated and plotted"
+msgstr "至少达到此结果数后才计算质控统计值并绘图。"
 
 #. considered as 'verified'. This setting can be overrided for any Analysis in
 #. Analysis Service edit view. By default, 1"
 #. Default: "Number of required verifications before a given result being considered as 'verified'. This setting can be overrided for any Analysis in Analysis Service edit view. By default, 1"
 #: senaite/core/content/senaitesetup.py:687
 msgid "description_senaitesetup_number_of_required_verifications"
-msgstr "Number of 必填 verifications before a given 结果 being considered as 'verified'. This setting can be overrided for any 检验 in 分析服务 edit view. By 默认, 1"
+msgstr "每个结果被标记为「已复核」前须完成的复核次数。检验项目可单独设置，默认为 1 次。"
 
 #. result reports to the selected recipients. You can use reserved keywords:
 #. $client_name, $recipients, $lab_name, $lab_address"
@@ -8038,13 +8062,13 @@ msgstr "Number of 必填 verifications before a given 结果 being considered as
 #: senaite/core/content/senaitesetup.py:274
 #, fuzzy
 msgid "description_senaitesetup_publication_email_text"
-msgstr "说明 Maitux设置发布电子邮件文本"
+msgstr "发布报告时发给所选收件人的默认邮件正文。可用变量为 $client_name、$recipients、$lab_name、$lab_address。"
 
 #. rejecting a sample."
 #. Default: "Enter the predefined rejection reasons that users can select when rejecting a sample."
 #: senaite/core/content/senaitesetup.py:773
 msgid "description_senaitesetup_rejection_reasons"
-msgstr "输入预设的拒收原因，供用户在拒收样品时选择。"
+msgstr "拒收样品时可选择的预设原因。"
 
 #. When disabled, analysts and lab clerks can also manage worksheets. Note:
 #. This setting is automatically enabled and locked when worksheet access is
@@ -8052,47 +8076,47 @@ msgstr "输入预设的拒收原因，供用户在拒收样品时选择。"
 #. Default: "When enabled, only lab managers can create and manage worksheets. When disabled, analysts and lab clerks can also manage worksheets. Note: This setting is automatically enabled and locked when worksheet access is restricted to assigned analysts."
 #: senaite/core/content/senaitesetup.py:471
 msgid "description_senaitesetup_restrict_worksheet_management"
-msgstr "启用后，只有实验室经理可以创建和管理工作表；禁用后，检验人员和实验室文员也可以管理工作表。注意：当'仅允许已分配的检验人员访问工作表'启用时，该设置会被自动启用并锁定。"
+msgstr "开启后仅实验室经理可创建和管理工作表；关闭后检验人员和实验室文员也可管理。若限制检验人员只能访问分派给自己的工作表，此设置会自动开启并锁定。"
 
 #. are assigned. When disabled, analysts have access to all worksheets."
 #. Default: "When enabled, analysts can only access worksheets to which they are assigned. When disabled, analysts have access to all worksheets."
 #: senaite/core/content/senaitesetup.py:441
 msgid "description_senaitesetup_restrict_worksheet_users_access"
-msgstr "启用后，检验人员只能访问被分配给自己的工作表；禁用后，检验人员可以访问所有工作表。"
+msgstr "开启后，检验人员只能访问分派给自己的工作表。关闭后可访问所有工作表。"
 
 #. Default: "Preferred decimal mark for results"
 #: senaite/core/content/senaitesetup.py:718
 msgid "description_senaitesetup_results_decimal_mark"
-msgstr "Preferred 小数点符号 for 结果"
+msgstr "结果录入与显示使用的小数点符号。"
 
 #. sample directly from an existing one via the 'Duplicate' action in the
 #. samples listing. Enabled by default."
 #. Default: "If enabled, users with sufficient privileges can create a sibling sample directly from an existing one via the 'Duplicate' action in the samples listing. Enabled by default."
 #: senaite/core/content/senaitesetup.py:968
 msgid "description_senaitesetup_sample_duplicate_enabled"
-msgstr "启用后，具有相应权限的用户可以在样品列表中通过'复制样品'操作，基于已有样品直接创建一个同级新样品。默认启用。"
+msgstr "有权限的人员可通过样品列表的「复制」操作创建同级样品。默认开启。"
 
 #. Default: "Analyses are required for sample registration"
 #: senaite/core/content/senaitesetup.py:350
 msgid "description_senaitesetup_sampleanalysesrequired"
-msgstr "Analyses are 必填 for 样品 registration"
+msgstr "登记样品时必须选择检验项目。"
 
 #. order of selection determines the display order. Unselected columns are
 #. hidden. Leave empty to show all columns in default order."
 #. Default: "Select which columns to display in sample analysis listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in default order."
 #: senaite/core/content/senaitesetup.py:804
 msgid "description_senaitesetup_sampleview_columns_order"
-msgstr "选择要在样品分析列表中显示的列。选择的先后顺序即为显示顺序，未选中的列将被隐藏。留空则按默认顺序显示所有列。"
+msgstr "按所选顺序显示样品检验项目列表的列，未选列隐藏。留空时按默认顺序显示全部列。"
 
 #. Default: "Preferred scientific notation format for reports"
 #: senaite/core/content/senaitesetup.py:570
 msgid "description_senaitesetup_scientific_notation_report"
-msgstr "Preferred scientific notation format for reports"
+msgstr "报告中使用的科学计数法格式。"
 
 #. Default: "Preferred scientific notation format for results"
 #: senaite/core/content/senaitesetup.py:731
 msgid "description_senaitesetup_scientific_notation_results"
-msgstr "Preferred scientific notation format for 结果"
+msgstr "结果显示使用的科学计数法格式。"
 
 #. verify it. This setting only take effect for those users with a role
 #. assigned that allows them to verify results (by default, managers,
@@ -8101,20 +8125,20 @@ msgstr "Preferred scientific notation format for 结果"
 #. Default: "If enabled, a user who submitted a result will also be able to verify it. This setting only take effect for those users with a role assigned that allows them to verify results (by default, managers, labmanagers and verifiers). This setting can be overrided for a given Analysis in Analysis Service edit view. By default, disabled."
 #: senaite/core/content/senaitesetup.py:669
 msgid "description_senaitesetup_self_verification_enabled"
-msgstr "启用后，提交结果的用户也可以对该结果进行复核。此设置仅对具有结果复核权限角色的用户生效（默认包括管理员、实验室经理和复核人员）。该设置可以在检验项目服务的编辑视图中针对具体检验项进行覆盖。默认禁用。"
+msgstr "允许有复核权限的人员复核自己提交的结果。检验项目可单独设置，默认关闭。"
 
 #. page, above the access credentials."
 #. Default: "When selected, the laboratory name will be displayedin the login page, above the access credentials."
 #: senaite/core/content/senaitesetup.py:399
 msgid "description_senaitesetup_show_lab_name_in_login"
-msgstr "选中后，将在登录页面的账号密码输入框上方显示实验室名称。"
+msgstr "在登录表单上方显示实验室名称。"
 
 #. deactivated, partitions won't be included in listings and no info message
 #. with links to the primary sample will be displayed to client contacts."
 #. Default: "Select to show sample partitions to client contacts. If deactivated, partitions won't be included in listings and no info message with links to the primary sample will be displayed to client contacts."
 #: senaite/core/content/senaitesetup.py:898
 msgid "description_senaitesetup_show_partitions"
-msgstr "选中后，客户联系人可以看到样品分装。若禁用，分装样品将不会出现在列表中，客户联系人也不会看到指向原始样品的提示信息及链接。"
+msgstr "向客户联系人显示分装样品及其主样品链接。关闭后，客户列表隐藏分装样品和相应提示。"
 
 #. navigation. The order of selection determines the display order in the
 #. sidebar. If none are selected, all folders will be shown in the default
@@ -8122,32 +8146,32 @@ msgstr "选中后，客户联系人可以看到样品分装。若禁用，分装
 #. Default: "Select which top-level folders should be displayed in the sidebar navigation. The order of selection determines the display order in the sidebar. If none are selected, all folders will be shown in the default order."
 #: senaite/core/content/senaitesetup.py:913
 msgid "description_senaitesetup_sidebar_folders"
-msgstr "选择要在侧边栏导航中显示的顶级文件夹。选择的先后顺序即为侧边栏中的显示顺序。如果未选择任何文件夹，则按默认顺序显示全部文件夹。"
+msgstr "按所选顺序显示侧栏一级目录。留空时按默认顺序显示全部目录。"
 
 #. top-level folders, level 2 includes their children, and so on."
 #. Default: "Maximum depth of the sidebar navigation tree. Level 1 shows only top-level folders, level 2 includes their children, and so on."
 #: senaite/core/content/senaitesetup.py:932
 msgid "description_senaitesetup_sidebar_navigation_depth"
-msgstr "Maximum depth of the sidebar navigation tree. Level 1 shows only top-level 文件夹s, level 2 includes their children, and so on."
+msgstr "1 级仅显示一级目录，2 级同时显示子目录，依此类推。"
 
 #. navigation. If none are selected, all content types will be shown."
 #. Default: "Select which content types should be excluded from the sidebar navigation. If none are selected, all content types will be shown."
 #: senaite/core/content/senaitesetup.py:949
 msgid "description_senaitesetup_sidebar_skip_types"
-msgstr "选择要从侧边栏导航中排除的内容类型。如果未选择任何类型，则显示全部内容类型。"
+msgstr "选择侧栏要隐藏的内容类型。留空时显示全部类型。"
 
 #. setting can enable/disable verifying/consecutively verifying more than once
 #. for the same user."
 #. Default: "Choose type of multiple verification for the same user. This setting can enable/disable verifying/consecutively verifying more than once for the same user."
 #: senaite/core/content/senaitesetup.py:703
 msgid "description_senaitesetup_type_of_multi_verification"
-msgstr "Choose type of multiple verification for the same user. This setting can enable/disable verifying/consecutively verifying more than once for the same user."
+msgstr "设置同一人员能否多次复核同一结果，以及能否连续复核。"
 
 #. system wide but can be overwritten on individual items"
 #. Default: "Enter percentage value eg. 14.0. This percentage is applied system wide but can be overwritten on individual items"
 #: senaite/core/content/senaitesetup.py:541
 msgid "description_senaitesetup_vat"
-msgstr "Enter percentage 值 eg. 14.0. This percentage is applied system wide but can be overwritten on individual items"
+msgstr "按百分比输入，例如 14.0。此税率适用于整个站点，各项目可单独设置。"
 
 #. view. Classic layout displays the Samples in rows and the analyses in
 #. columns. Transposed layout displays the Samples in columns and the analyses
@@ -8155,14 +8179,14 @@ msgstr "Enter percentage 值 eg. 14.0. This percentage is applied system wide bu
 #. Default: "Preferred layout of the results entry table in the Worksheet view. Classic layout displays the Samples in rows and the analyses in columns. Transposed layout displays the Samples in columns and the analyses in rows."
 #: senaite/core/content/senaitesetup.py:845
 msgid "description_senaitesetup_worksheet_layout"
-msgstr "工作表视图中结果录入表格的首选布局。经典布局将样品显示为行、检验项显示为列；转置布局将样品显示为列、检验项显示为行。"
+msgstr "经典布局按行显示样品、按列显示检验项目；转置布局交换行列。"
 
 #. The order of selection determines the display order. Unselected columns are
 #. hidden. Leave empty to show all columns in default order."
 #. Default: "Select which columns to display in worksheet analysis listings. The order of selection determines the display order. Unselected columns are hidden. Leave empty to show all columns in default order."
 #: senaite/core/content/senaitesetup.py:824
 msgid "description_senaitesetup_wsview_columns_order"
-msgstr "选择要在工作表分析列表中显示的列。选择的先后顺序即为显示顺序，未选中的列将被隐藏。留空则按默认顺序显示所有列。"
+msgstr "按所选顺序显示工作表检验项目列表的列，未选列隐藏。留空时按默认顺序显示全部列。"
 
 #. Dashboard is not selected as the default front page. If no landing page is
 #. selected, the default frontpage is displayed."
@@ -8230,12 +8254,12 @@ msgstr "0.0 到 1000.0 之间的浮点数，用于指定排序顺序。数值相
 #. Default: "International Bank Account Number"
 #: senaite/core/content/supplier.py:100
 msgid "description_supplier_iban"
-msgstr "International Bank Account Number"
+msgstr "国际银行账户号码"
 
 #. Default: "National Identification Bank Account Number"
 #: senaite/core/content/supplier.py:88
 msgid "description_supplier_nib"
-msgstr "National Identification Bank Account Number"
+msgstr "国内银行账户号码"
 
 #. contact profile."
 #. Default: "User is linked to a contact. Please change your settings in the contact profile."
@@ -8246,19 +8270,19 @@ msgstr "User is linked to a 联系人. Please change your settings in the 联系
 #. Default: "Select the preferred instrument"
 #: senaite/core/content/worksheettemplate.py:266
 msgid "description_worksheettemplate_instrument"
-msgstr "选择preferred 仪器"
+msgstr "选择首选仪器。"
 
 #. with the selected method.<br/>In order to apply this change to the services
 #. list, you should save the change first."
 #. Default: "Restrict the available analysis services and instruments to those with the selected method.<br/>In order to apply this change to the services list, you should save the change first."
 #: senaite/core/content/worksheettemplate.py:240
 msgid "description_worksheettemplate_restrict_to_method"
-msgstr "将可用的检验项目服务和仪器限制为使用所选方法的项目。<br/>若要将此更改应用到服务列表，请先保存该更改。"
+msgstr "仅列出支持所选方法的检验项目和仪器。保存后项目列表才会更新。"
 
 #. Default: "Select which Analyses should be included on the Worksheet"
 #: senaite/core/content/worksheettemplate.py:350
 msgid "description_worksheettemplate_services"
-msgstr "选择which Analyses should be included on the 工作表"
+msgstr "选择此工作表包含的检验项目。"
 
 #. specific instrument's tray size. Then select an Analysis 'type' per
 #. Worksheet position. Where QC samples are selected, also select which
@@ -8267,7 +8291,7 @@ msgstr "选择which Analyses should be included on the 工作表"
 #. Default: "Specify the size of the Worksheet, e.g. corresponding to a specific instrument's tray size. Then select an Analysis 'type' per Worksheet position. Where QC samples are selected, also select which Reference Sample should be used. If a duplicate analysis is selected, indicate which sample position it should be a duplicate of"
 #: senaite/core/content/worksheettemplate.py:315
 msgid "description_worksheettemplate_template_layout"
-msgstr "指定工作表的大小，例如与特定仪器的样品盘容量相对应。然后为工作表的每个位置选择检验项'类型'。选择质控样品时，还需选择要使用的参考样品。如果选择的是重复检验，请指明该检验对应重复的是哪个样品位置。"
+msgstr "按仪器托盘等实际容量设置工作表位置数，再为各位置选择项目类型。质控位置须选参考样品，平行检验须指定原样品位置。"
 
 #. Default: "Not found Analysis position for duplicate."
 #: senaite/core/browser/form/adapters/worksheettemplate.py:114
@@ -8354,17 +8378,17 @@ msgstr "复杂度规则"
 #. Default: "Location"
 #: senaite/core/content/samplepoint.py:48
 msgid "fieldset_samplepoint_location"
-msgstr "Location"
+msgstr "位置"
 
 #. Default: "Analyses"
 #: senaite/core/content/sampletemplate.py:152
 msgid "fieldset_sampletemplate_analyses"
-msgstr "Analyses"
+msgstr "检验项目"
 
 #. Default: "Partitions"
 #: senaite/core/content/sampletemplate.py:141
 msgid "fieldset_sampletemplate_partitions"
-msgstr "Partitions"
+msgstr "分装"
 
 #. Default: "Validation chain internal error: ${error}"
 #: senaite/core/validators/formula.py:121
@@ -8569,7 +8593,7 @@ msgstr "Hazardous"
 #. Default: "Legacy Setup"
 #: senaite/core/skins/senaite_templates/bikasetup_edit.pt:16
 msgid "heading_legacy_setup"
-msgstr "Legacy Setup"
+msgstr "旧版设置"
 
 #. Default: "Re-enter the password. Make sure the passwords are identical."
 #: senaite/core/browser/user/passwordpanel.py:44
@@ -8579,7 +8603,7 @@ msgstr "Re-enter the password. Make sure the passwords are identical."
 #. Default: "Enter full name, e.g. John Smith."
 #: senaite/core/browser/user/userdatapanel.py:65
 msgid "help_full_name_creation"
-msgstr "Enter full name, 例如 John Smith."
+msgstr "请输入姓名。"
 
 #. Default: "Enter your new password."
 #: senaite/core/browser/user/passwordpanel.py:37
@@ -8624,7 +8648,7 @@ msgstr "密码必须至少包含 1 个大写字母。"
 #. Default: "Your time zone"
 #: senaite/core/browser/user/personalpreferences.py:39
 msgid "help_timezone"
-msgstr "Your time zone"
+msgstr "用于显示日期和时间的时区。"
 
 #: bika/lims/controlpanel/bika_analysisservices.py:285
 msgid "hours"
@@ -8687,7 +8711,7 @@ msgstr "增加标签到组"
 #. Default: "Address"
 #: senaite/core/content/person.py:197
 msgid "label_address"
-msgstr "Address"
+msgstr "地址"
 
 #. Default: "Analysis Category"
 #: bika/lims/content/abstractbaseanalysis.py:530
@@ -8784,7 +8808,7 @@ msgstr "Upper Limit Of Quantification (ULOQ)"
 #. Default: "Sample types"
 #: senaite/core/content/analysisprofile.py:180
 msgid "label_analysisprofile_sampletypes"
-msgstr "样品类型s"
+msgstr "样品类型"
 
 #. Default: "Number of samples"
 #: bika/lims/content/analysisrequest.py:1437
@@ -8854,22 +8878,22 @@ msgstr "客户"
 #. Default: "Allow to set the result capture date"
 #: bika/lims/content/bikasetup.py:394
 msgid "label_bikasetup_allow_manual_result_capture_date"
-msgstr "允许to set the 结果 capture 日期"
+msgstr "允许手动设置结果录入日期"
 
 #. Default: "Always send publication email to responsibles"
 #: bika/lims/content/bikasetup.py:850
 msgid "label_bikasetup_always_cc_responsibles_in_report_emails"
-msgstr "Always send publication 邮件 to 负责s"
+msgstr "发布报告时抄送部门负责人"
 
 #. Default: "Categorize sample analyses"
 #: bika/lims/content/bikasetup.py:366
 msgid "label_bikasetup_categorizesampleanalyses"
-msgstr "标签bika设置分类和样本分析"
+msgstr "样品页按类别显示检验项目"
 
 #. Default: "Date sampled required"
 #: bika/lims/content/bikasetup.py:685
 msgid "label_bikasetup_date_sampled_required"
-msgstr "Date 样品d 必填"
+msgstr "实际采样日期必填"
 
 #. Default: "Email body for Sample publication notifications"
 #: bika/lims/content/bikasetup.py:826
@@ -8879,32 +8903,32 @@ msgstr "标签 bika 设置电子邮件正文模板发布"
 #. Default: "Publication 'From' address"
 #: bika/lims/content/bikasetup.py:801
 msgid "label_bikasetup_email_from_sample_publication"
-msgstr "Publication 'From' address"
+msgstr "报告发布发件邮箱"
 
 #. Default: "Immediate results entry"
 #: bika/lims/content/bikasetup.py:441
 msgid "label_bikasetup_immediateresultsentry"
-msgstr "标签 bika 设置立即结果条目"
+msgstr "创建样品后直接录入结果"
 
 #. Default: "Email body for Sample Invalidation notifications"
 #: bika/lims/content/bikasetup.py:942
 msgid "label_bikasetup_invalidation_email_body"
-msgstr "Email body for 样品 Invalidation notifications"
+msgstr "样品作废通知邮件正文"
 
 #. Default: "Invalidation reason required"
 #: bika/lims/content/bikasetup.py:909
 msgid "label_bikasetup_invalidation_reason_required"
-msgstr "Invalidation reason 必填"
+msgstr "作废原因必填"
 
 #. Default: "Require sample analyses"
 #: bika/lims/content/bikasetup.py:380
 msgid "label_bikasetup_sampleanalysesrequired"
-msgstr "Require 样品 analyses"
+msgstr "登记样品时必须选择检验项目"
 
 #. Default: "DependentServices"
 #: senaite/core/content/calculation.py:352
 msgid "label_calculation_dependent_services"
-msgstr "DependentServices"
+msgstr "依赖的检验项目"
 
 #. Default: "Dependent services"
 #: bika/lims/content/calculation.py:81
@@ -8914,52 +8938,52 @@ msgstr "Dependent services"
 #. Default: "Calculation Formula"
 #: senaite/core/content/calculation.py:287
 msgid "label_calculation_formula"
-msgstr "Calculation Formula"
+msgstr "计算公式"
 
 #. Default: "Function"
 #: senaite/core/content/calculation.py:185
 msgid "label_calculation_import_function_name"
-msgstr "Function"
+msgstr "函数"
 
 #. Default: "Module"
 #: senaite/core/content/calculation.py:179
 msgid "label_calculation_import_module_name"
-msgstr "Module"
+msgstr "模块"
 
 #. Default: "Additional Python Libraries"
 #: senaite/core/content/calculation.py:266
 msgid "label_calculation_imports"
-msgstr "Additional Python Libraries"
+msgstr "附加 Python 库"
 
 #. Default: "Calculation Interim Fields"
 #: senaite/core/content/calculation.py:243
 msgid "label_calculation_interims"
-msgstr "Calculation Interim Fields"
+msgstr "计算中间字段"
 
 #. Default: "Raw Test Result"
 #: senaite/core/content/calculation.py:336
 msgid "label_calculation_raw_test_keywords"
-msgstr "Raw Test 结果"
+msgstr "原始测试结果"
 
 #. Default: "Keyword"
 #: senaite/core/content/calculation.py:198
 msgid "label_calculation_test_param_keyword"
-msgstr "Keyword"
+msgstr "关键词"
 
 #. Default: "Value"
 #: senaite/core/content/calculation.py:207
 msgid "label_calculation_test_param_value"
-msgstr "Value"
+msgstr "值"
 
 #. Default: "Test Parameters"
 #: senaite/core/content/calculation.py:317
 msgid "label_calculation_test_params"
-msgstr "Test Parameters"
+msgstr "测试参数"
 
 #. Default: "Test Result"
 #: senaite/core/content/calculation.py:343
 msgid "label_calculation_test_result"
-msgstr "Test 结果"
+msgstr "测试结果"
 
 #. Default: "Department"
 #: bika/lims/content/analysiscategory.py:59
@@ -8984,12 +9008,12 @@ msgstr "Confirm password"
 #. Default: "Contacts to CC"
 #: senaite/core/content/contact.py:76
 msgid "label_contact_cccontact"
-msgstr "联系人s to CC"
+msgstr "抄送联系人"
 
 #. Default: "Email Telephone Fax"
 #: senaite/core/content/person.py:137
 msgid "label_contact_information"
-msgstr "Email Telephone Fax"
+msgstr "联系方式"
 
 #. Default: "Preservation"
 #: bika/lims/content/container.py:97
@@ -9020,22 +9044,22 @@ msgstr "go here"
 #. Default: "Bank Details"
 #: senaite/core/content/supplier.py:72
 msgid "label_fieldset_supplier_bank_details"
-msgstr "Bank Details"
+msgstr "银行信息"
 
 #. Default: "Analyses"
 #: senaite/core/content/worksheettemplate.py:332
 msgid "label_fieldset_worksheettemplate_analyses"
-msgstr "Analyses"
+msgstr "检验项目"
 
 #. Default: "Layout"
 #: senaite/core/content/worksheettemplate.py:275
 msgid "label_fieldset_worksheettemplate_layout"
-msgstr "Layout"
+msgstr "布局"
 
 #. Default: "Include client contacts"
 #: senaite/core/browser/controlpanel/contacts/templates/contacts_filter.pt:10
 msgid "label_include_client_contacts"
-msgstr "Include 客户 联系人"
+msgstr "包含客户联系人"
 
 #. Default: "Location"
 #: bika/lims/content/instrument.py:319
@@ -9090,17 +9114,17 @@ msgstr "Performed by"
 #. Default: "Allow empty"
 #: senaite/core/schema/interimfields.py:87
 msgid "label_interim_allow_empty"
-msgstr "允许empty"
+msgstr "允许留空"
 
 #. Default: "Apply wide"
 #: senaite/core/schema/interimfields.py:127
 msgid "label_interim_apply_wide"
-msgstr "Apply wide"
+msgstr "整表应用"
 
 #. Default: "Choices"
 #: senaite/core/schema/interimfields.py:67
 msgid "label_interim_choices"
-msgstr "Choices"
+msgstr "可选值"
 
 #. Default: "Default value"
 #: senaite/core/schema/interimfields.py:57
@@ -9110,32 +9134,32 @@ msgstr "默认值"
 #. Default: "Hidden"
 #: senaite/core/schema/interimfields.py:117
 msgid "label_interim_hidden"
-msgstr "Hidden"
+msgstr "隐藏"
 
 #. Default: "Keyword"
 #: senaite/core/schema/interimfields.py:37
 msgid "label_interim_keyword"
-msgstr "Keyword"
+msgstr "关键词"
 
 #. Default: "Report"
 #: senaite/core/schema/interimfields.py:107
 msgid "label_interim_report"
-msgstr "Report"
+msgstr "报告"
 
 #. Default: "Result type"
 #: senaite/core/schema/interimfields.py:76
 msgid "label_interim_result_type"
-msgstr "结果 type"
+msgstr "结果类型"
 
 #. Default: "Field title"
 #: senaite/core/schema/interimfields.py:47
 msgid "label_interim_title"
-msgstr "Field title"
+msgstr "字段名称"
 
 #. Default: "Unit"
 #: senaite/core/schema/interimfields.py:97
 msgid "label_interim_unit"
-msgstr "Unit"
+msgstr "单位"
 
 #. Default: "Default Department"
 #: bika/lims/content/labcontact.py:86
@@ -9310,7 +9334,7 @@ msgstr "标签由plone赞助"
 #. Default: "Publication preference"
 #: senaite/core/content/contact.py:56
 msgid "label_publication_preference"
-msgstr "Publication preference"
+msgstr "报告发送偏好"
 
 #. Default: "Blank"
 #: bika/lims/content/referencedefinition.py:75
@@ -9360,12 +9384,12 @@ msgstr "Portal type"
 #. Default: "Catalogs"
 #: senaite/core/registry/schema.py:308
 msgid "label_registry_catalog_mappings_value"
-msgstr "Catalogs"
+msgstr "目录"
 
 #. Default: "Catalogs"
 #: senaite/core/registry/schema.py:280
 msgid "label_registry_catalogs_fieldset"
-msgstr "Catalogs"
+msgstr "目录"
 
 #. Default: "Client landing page"
 #: senaite/core/registry/schema.py:62
@@ -9380,7 +9404,7 @@ msgstr "Portal types to skip on content structure export"
 #. Default: "Import"
 #: senaite/core/registry/schema.py:443
 msgid "label_registry_import"
-msgstr "Import"
+msgstr "导入"
 
 #. Default: "Attach import file to Analyses"
 #: senaite/core/registry/schema.py:454
@@ -9405,7 +9429,7 @@ msgstr "Commit each 样品 in its own transaction"
 #. Default: "Copy sample structure with partitions"
 #: senaite/core/registry/schema.py:339
 msgid "label_registry_sample_add_copy_partitions"
-msgstr "Copy 样品 structure with partitions"
+msgstr "复制样品及其分装结构"
 
 #. Default: "Skip analyses workflow states on copy"
 #: senaite/core/registry/schema.py:370
@@ -9420,7 +9444,7 @@ msgstr "Skip partition analyses on copy"
 #. Default: "Samples"
 #: senaite/core/registry/schema.py:324
 msgid "label_registry_samples"
-msgstr "样品s"
+msgstr "样品"
 
 #. Default: "Trigger events on sample creation"
 #: senaite/core/registry/schema.py:421
@@ -9443,6 +9467,7 @@ msgid "label_resultsreport_sample"
 msgstr "Primary 样品"
 
 #. Default: "Batch"
+#: bika/lims/browser/publish/reports_listing.py:76
 #: bika/lims/content/analysisrequest.py:328
 msgid "label_sample_batch"
 msgstr "批次"
@@ -9520,7 +9545,7 @@ msgstr "Retest from 样品"
 #. Default: "Sample Condition"
 #: bika/lims/content/analysisrequest.py:897
 msgid "label_sample_samplecondition"
-msgstr "样本状态"
+msgstr "样品状况"
 
 #. Default: "Sample Point"
 #: bika/lims/content/analysisrequest.py:767
@@ -9530,7 +9555,7 @@ msgstr "采样点"
 #. Default: "Sample Type"
 #: bika/lims/content/analysisrequest.py:538
 msgid "label_sample_sampletype"
-msgstr "样本类型"
+msgstr "样品类型"
 
 #. Default: "Expected Sampling Date"
 #: bika/lims/content/analysisrequest.py:512
@@ -9540,7 +9565,7 @@ msgstr "采样日期"
 #. Default: "Sampling Deviation"
 #: bika/lims/content/analysisrequest.py:869
 msgid "label_sample_samplingdeviation"
-msgstr "取样差异"
+msgstr "取样偏差"
 
 #. Default: "Analysis Specification"
 #: bika/lims/content/analysisrequest.py:690
@@ -9575,77 +9600,77 @@ msgstr "Category"
 #. Default: "Container"
 #: senaite/core/content/sampletemplate.py:81
 msgid "label_sampletemplate_partition_container"
-msgstr "Container"
+msgstr "容器"
 
 #. Default: "Partition ID"
 #: senaite/core/content/sampletemplate.py:60
 msgid "label_sampletemplate_partition_part_id"
-msgstr "Partition ID"
+msgstr "分装编号"
 
 #. Default: "Preservation"
 #: senaite/core/content/sampletemplate.py:103
 msgid "label_sampletemplate_partition_preservation"
-msgstr "Preservation"
+msgstr "保存方法"
 
 #. Default: "Sample Type"
 #: senaite/core/content/sampletemplate.py:125
 msgid "label_sampletemplate_partition_sampletype"
-msgstr "样品 Type"
+msgstr "样品类型"
 
 #. Default: "Partitions"
 #: senaite/core/content/sampletemplate.py:243
 msgid "label_sampletemplate_partitions"
-msgstr "Partitions"
+msgstr "分装"
 
 #. Default: "Sample Point"
 #: senaite/core/content/sampletemplate.py:185
 msgid "label_sampletemplate_samplepoint"
-msgstr "样品 Point"
+msgstr "采样点"
 
 #. Default: "Sample Type"
 #: senaite/core/content/sampletemplate.py:207
 msgid "label_sampletemplate_sampletype"
-msgstr "样品 Type"
+msgstr "样品类型"
 
 #. Default: "Admitted stickers for the sample type"
 #: senaite/core/content/sampletype.py:100
 msgid "label_sampletype_admitted"
-msgstr "Admitted stickers for the 样品类型"
+msgstr "此样品类型可用的标签"
 
 #. Default: "Admitted sticker templates"
 #: senaite/core/content/sampletype.py:279
 msgid "label_sampletype_admitted_stickers_templates"
-msgstr "Admitted sticker 模板s"
+msgstr "可用标签模板"
 
 #. Default: "Default Container Type"
 #: senaite/core/content/sampletype.py:254
 msgid "label_sampletype_containertype"
-msgstr "默认Container Type"
+msgstr "默认容器类型"
 
 #. Default: "Description"
 #: senaite/core/content/sampletype.py:142
 msgid "label_sampletype_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Default large sticker"
 #: senaite/core/content/sampletype.py:120
 msgid "label_sampletype_large_default"
-msgstr "默认large sticker"
+msgstr "默认大标签"
 
 #. Default: "Sample Matrix"
 #: senaite/core/content/sampletype.py:204
 msgid "label_sampletype_samplematrix"
-msgstr "样品 Matrix"
+msgstr "样品基质"
 
 #. Default: "Default small sticker"
 #: senaite/core/content/sampletype.py:111
 msgid "label_sampletype_small_default"
-msgstr "默认small sticker"
+msgstr "默认小标签"
 
 #. Default: "Name"
 #: senaite/core/content/sampletype.py:134
 msgid "label_sampletype_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Save"
 #: senaite/core/browser/viewlets/templates/sampleheader.pt:186
@@ -9660,7 +9685,7 @@ msgstr "标签_senalte"
 #. Default: "Maximum value for 'Number of samples' field on registration"
 #: senaite/core/content/senaitesetup.py:368
 msgid "label_senaitesetup_maxnumberofsamplesadd"
-msgstr "Maximum 值 for 'Number of 样品' field on registration"
+msgstr "单次登记样品数上限"
 
 #. Default: "Landing Page"
 #: bika/lims/content/bikasetup.py:613
@@ -9670,12 +9695,12 @@ msgstr "Landing Page"
 #. Default: "Item"
 #: senaite/core/browser/controlpanel/templates/setupview.pt:78
 msgid "label_setupview_item"
-msgstr "Item"
+msgstr "项"
 
 #. Default: "Items"
 #: senaite/core/browser/controlpanel/templates/setupview.pt:81
 msgid "label_setupview_items"
-msgstr "Items"
+msgstr "项"
 
 #. Default: "Out of range comment"
 #: bika/lims/browser/fields/resultrangefield.py:42
@@ -9686,7 +9711,7 @@ msgstr "Out of range comment"
 #. Default: "Time zone"
 #: senaite/core/browser/user/personalpreferences.py:38
 msgid "label_timezone"
-msgstr "Time zone"
+msgstr "时区"
 
 #. Default: "Title"
 #: senaite/core/browser/install/templates/senaite-addsite.pt:62
@@ -9716,12 +9741,12 @@ msgstr "Full Name"
 #. Default: "Preferred instrument"
 #: senaite/core/content/worksheettemplate.py:262
 msgid "label_worksheettemplate_instrument"
-msgstr "Preferred 仪器"
+msgstr "首选仪器"
 
 #. Default: "Restrict to Method"
 #: senaite/core/content/worksheettemplate.py:236
 msgid "label_worksheettemplate_restrict_to_method"
-msgstr "Restrict to Method"
+msgstr "按方法筛选"
 
 #. Default: "Category"
 #: senaite/core/browser/worksheets/worksheet/add_analyses.py:119
@@ -9821,7 +9846,7 @@ msgstr "Position"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:50
 msgid "listing_analysiscategories_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Department"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:80
@@ -9831,32 +9856,32 @@ msgstr "部门"
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:72
 msgid "listing_analysiscategories_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sort Key"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:87
 msgid "listing_analysiscategories_column_sort_key"
-msgstr "Sort Key"
+msgstr "排序键"
 
 #. Default: "Category"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:66
 msgid "listing_analysiscategories_column_title"
-msgstr "Category"
+msgstr "类别"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:98
 msgid "listing_analysiscategories_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:114
 msgid "listing_analysiscategories_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:106
 msgid "listing_analysiscategories_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Analysis Categories"
 #: senaite/core/browser/controlpanel/analysiscategories/view.py:57
@@ -9866,292 +9891,297 @@ msgstr "分析类别"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:54
 msgid "listing_analysisprofiles_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:76
 msgid "listing_analysisprofiles_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Profile Key"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:83
 msgid "listing_analysisprofiles_column_profilekey"
-msgstr "Pro文件 Key"
+msgstr "套餐标识"
 
 #. Default: "Sample Types"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:91
 msgid "listing_analysisprofiles_column_sampletypes"
-msgstr "样品 Types"
+msgstr "样品类型"
 
 #. Default: "Profile"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:69
 msgid "listing_analysisprofiles_column_title"
-msgstr "Pro文件"
+msgstr "检验项目套餐"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:103
 msgid "listing_analysisprofiles_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:119
 msgid "listing_analysisprofiles_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:111
 msgid "listing_analysisprofiles_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Analysis Profiles"
 #: senaite/core/browser/controlpanel/analysisprofiles/view.py:61
 msgid "listing_analysisprofiles_title"
-msgstr "检验 Pro文件s"
+msgstr "检验项目套餐"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:50
 msgid "listing_attachmenttypes_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:73
 msgid "listing_attachmenttypes_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:67
 msgid "listing_attachmenttypes_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:83
 msgid "listing_attachmenttypes_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:99
 msgid "listing_attachmenttypes_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:91
 msgid "listing_attachmenttypes_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Attachment Types"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:57
 msgid "listing_attachmenttypes_title"
-msgstr "附件 Types"
+msgstr "附件类型"
+
+#. Default: "Open"
+#: bika/lims/browser/batchfolder.py:99
+msgid "listing_batches_state_open"
+msgstr "进行中"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:50
 msgid "listing_batchlabels_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:67
 msgid "listing_batchlabels_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:77
 msgid "listing_batchlabels_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:93
 msgid "listing_batchlabels_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:85
 msgid "listing_batchlabels_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Batch Labels"
 #: senaite/core/browser/controlpanel/batchlabels/view.py:57
 msgid "listing_batchlabels_title"
-msgstr "Batch Labels"
+msgstr "批次标签"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/calculations/view.py:51
 msgid "listing_calculation_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/calculations/view.py:75
 msgid "listing_calculation_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Formula"
 #: senaite/core/browser/controlpanel/calculations/view.py:82
 msgid "listing_calculation_formula"
-msgstr "Formula"
+msgstr "公式"
 
 #. Default: "Calculation"
 #: senaite/core/browser/controlpanel/calculations/view.py:68
 msgid "listing_calculation_title"
-msgstr "Calculation"
+msgstr "计算公式"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/calculations/view.py:93
 msgid "listing_calculations_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/calculations/view.py:111
 msgid "listing_calculations_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/calculations/view.py:102
 msgid "listing_calculations_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Calculations"
 #: senaite/core/browser/controlpanel/calculations/view.py:58
 msgid "listing_calculations_title"
-msgstr "Calculations"
+msgstr "计算公式"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/containertypes/view.py:51
 msgid "listing_containertypes_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/containertypes/view.py:72
 msgid "listing_containertypes_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/containertypes/view.py:66
 msgid "listing_containertypes_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/containertypes/view.py:82
 msgid "listing_containertypes_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/containertypes/view.py:98
 msgid "listing_containertypes_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/containertypes/view.py:90
 msgid "listing_containertypes_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Container Types"
 #: senaite/core/browser/controlpanel/containertypes/view.py:58
 msgid "listing_containertypes_title"
-msgstr "Container Types"
+msgstr "容器类型"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:52
 msgid "listing_dynamic_analysisspec_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/dynamicanalysisspec.py:61
 msgid "listing_dynamic_analysisspec_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:76
 msgid "listing_dynamic_analysisspecs_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:70
 msgid "listing_dynamic_analysisspecs_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:86
 msgid "listing_dynamic_analysisspecs_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:102
 msgid "listing_dynamic_analysisspecs_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:94
 msgid "listing_dynamic_analysisspecs_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Dynamic Analysis Specifications"
 #: senaite/core/browser/controlpanel/dynamicanalysisspecs/view.py:61
 msgid "listing_dynamic_analysisspecs_title"
-msgstr "Dynamic 检验 Specifications"
+msgstr "动态检验标准"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:52
 msgid "listing_instrumentlocations_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:74
 msgid "listing_instrumentlocations_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Location"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:67
 msgid "listing_instrumentlocations_column_title"
-msgstr "Location"
+msgstr "位置"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:94
 msgid "listing_instrumentlocations_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:86
 msgid "listing_instrumentlocations_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:102
 msgid "listing_instrumentlocations_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Instrument Locations"
 #: senaite/core/browser/controlpanel/instrumentlocations/view.py:58
 msgid "listing_instrumentlocations_title"
-msgstr "仪器 Locations"
+msgstr "仪器位置"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:49
 msgid "listing_instrumenttypes_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:72
 msgid "listing_instrumenttypes_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:65
 msgid "listing_instrumenttypes_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:83
 msgid "listing_instrumenttypes_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:101
 msgid "listing_instrumenttypes_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:92
 msgid "listing_instrumenttypes_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Instrument Types"
 #: senaite/core/browser/controlpanel/instrumenttypes/view.py:56
@@ -10161,137 +10191,137 @@ msgstr "仪器类型"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:52
 msgid "listing_interpretationtemplates_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:75
 msgid "listing_interpretationtemplates_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Types"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:81
 msgid "listing_interpretationtemplates_column_sampletypes"
-msgstr "样品 Types"
+msgstr "样品类型"
 
 #. Default: "Text"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:88
 msgid "listing_interpretationtemplates_column_text"
-msgstr "Text"
+msgstr "正文"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:68
 msgid "listing_interpretationtemplates_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:99
 msgid "listing_interpretationtemplates_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:115
 msgid "listing_interpretationtemplates_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:107
 msgid "listing_interpretationtemplates_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Interpretation Templates"
 #: senaite/core/browser/controlpanel/interpretationtemplates/view.py:58
 msgid "listing_interpretationtemplates_title"
-msgstr "Interpretation 模板s"
+msgstr "结果说明模板"
 
 #. Default: "Add"
 #: view.py:49
 msgid "listing_labproduct_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Price"
 #: view.py:87
 msgid "listing_labproducts_column_price"
-msgstr "Price"
+msgstr "价格"
 
 #. Default: "Product"
 #: view.py:66
 msgid "listing_labproducts_column_title"
-msgstr "Product"
+msgstr "产品"
 
 #. Default: "Total Price"
 #: view.py:102
 msgid "listing_labproducts_column_total_price"
-msgstr "Total Price"
+msgstr "总价"
 
 #. Default: "Unit"
 #: view.py:80
 msgid "listing_labproducts_column_unit"
-msgstr "Unit"
+msgstr "单位"
 
 #. Default: "VAT Amount"
 #: view.py:95
 msgid "listing_labproducts_column_vatamount"
-msgstr "增值税 Amount"
+msgstr "增值税额"
 
 #. Default: "Volume"
 #: view.py:73
 msgid "listing_labproducts_column_volume"
-msgstr "Volume"
+msgstr "体积"
 
 #. Default: "Active"
 #: view.py:114
 msgid "listing_labproducts_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: view.py:132
 msgid "listing_labproducts_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: view.py:123
 msgid "listing_labproducts_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Lab Products"
 #: view.py:56
 msgid "listing_labproducts_title"
-msgstr "Lab Products"
+msgstr "实验室产品"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:51
 msgid "listing_manufacturers_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:80
 msgid "listing_manufacturers_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:74
 msgid "listing_manufacturers_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:91
 msgid "listing_manufacturers_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:107
 msgid "listing_manufacturers_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:99
 msgid "listing_manufacturers_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Manufacturers"
 #: senaite/core/browser/controlpanel/manufacturers/view.py:58
 msgid "listing_manufacturers_title"
-msgstr "Manufacturers"
+msgstr "制造商"
 
 #. Default: "Position"
 #: senaite/core/browser/worksheets/worksheet/referencesamples.py:87
@@ -10321,302 +10351,312 @@ msgstr "Add Control Reference"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/suppliers/referencesamples.py:36
 msgid "listing_referencesamples_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:51
 msgid "listing_sampleconatiners_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Capacity"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:86
 msgid "listing_sampleconatiners_column_capacity"
-msgstr "Capacity"
+msgstr "容量"
 
 #. Default: "Container Type"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:79
 msgid "listing_sampleconatiners_column_containertype"
-msgstr "Container Type"
+msgstr "容器类型"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:72
 msgid "listing_sampleconatiners_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Pre-preserved"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:93
 msgid "listing_sampleconatiners_column_pre_preserved"
-msgstr "Pre-preserved"
+msgstr "已预加保存剂"
 
 #. Default: "Security seal intact"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:100
 msgid "listing_sampleconatiners_column_security_seal_intact"
-msgstr "Security seal intact"
+msgstr "封签完好"
 
 #. Default: "Container"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:65
 msgid "listing_sampleconatiners_column_title"
-msgstr "Container"
+msgstr "容器"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:111
 msgid "listing_sampleconatiners_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:127
 msgid "listing_sampleconatiners_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:119
 msgid "listing_sampleconatiners_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Containers"
 #: senaite/core/browser/controlpanel/samplecontainers/view.py:56
 msgid "listing_sampleconatiners_title"
-msgstr "样品 Containers"
+msgstr "样品容器"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:47
 msgid "listing_sampleconditions_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:68
 msgid "listing_sampleconditions_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Condition"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:62
 msgid "listing_sampleconditions_column_title"
-msgstr "样品 Condition"
+msgstr "样品状况"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:78
 msgid "listing_sampleconditions_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:96
 msgid "listing_sampleconditions_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:87
 msgid "listing_sampleconditions_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Conditions"
 #: senaite/core/browser/controlpanel/sampleconditions/view.py:54
 msgid "listing_sampleconditions_title"
-msgstr "样品 Conditions"
+msgstr "样品状况"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:47
 msgid "listing_samplematrices_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:68
 msgid "listing_samplematrices_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Matrix"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:62
 msgid "listing_samplematrices_column_title"
-msgstr "样品 Matrix"
+msgstr "样品基质"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:78
 msgid "listing_samplematrices_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:94
 msgid "listing_samplematrices_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:86
 msgid "listing_samplematrices_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Matrices"
 #: senaite/core/browser/controlpanel/samplematrices/view.py:54
 msgid "listing_samplematrices_title"
-msgstr "样品 Matrices"
+msgstr "样品基质"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:51
 msgid "listing_samplepoints_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:73
 msgid "listing_samplepoints_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Types"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:80
 msgid "listing_samplepoints_column_sampletypes"
-msgstr "样品 Types"
+msgstr "样品类型"
 
 #. Default: "Sample Point"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:66
 msgid "listing_samplepoints_column_title"
-msgstr "样品 Point"
+msgstr "采样点"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:92
 msgid "listing_samplepoints_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:108
 msgid "listing_samplepoints_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:100
 msgid "listing_samplepoints_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Points"
 #: senaite/core/browser/controlpanel/samplepoints/view.py:58
 msgid "listing_samplepoints_title"
-msgstr "样品 Points"
+msgstr "采样点"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:47
 msgid "listing_samplepreservations_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:68
 msgid "listing_samplepreservations_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Preservation"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:62
 msgid "listing_samplepreservations_column_title"
-msgstr "样品 Preservation"
+msgstr "样品保存方式"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:78
 msgid "listing_samplepreservations_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:96
 msgid "listing_samplepreservations_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:87
 msgid "listing_samplepreservations_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Preservations"
 #: senaite/core/browser/controlpanel/samplepreservations/view.py:54
 msgid "listing_samplepreservations_title"
-msgstr "样品 Preservations"
+msgstr "样品保存方式"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:52
 msgid "listing_sampletemplates_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:73
 msgid "listing_sampletemplates_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample Template"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:67
 msgid "listing_sampletemplates_column_title"
-msgstr "样品 模板"
+msgstr "样品模板"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:83
 msgid "listing_sampletemplates_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:99
 msgid "listing_sampletemplates_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:91
 msgid "listing_sampletemplates_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Templates"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:59
 msgid "listing_sampletemplates_title"
-msgstr "样品 模板s"
+msgstr "样品模板"
+
+#. Default: "Received"
+#: senaite/core/browser/samples/view.py:484
+msgid "listing_samples_state_received"
+msgstr "已接收"
+
+#. Default: "Unassigned"
+#: senaite/core/browser/samples/view.py:258
+msgid "listing_samples_state_unassigned"
+msgstr "未分派"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:52
 msgid "listing_sampletypes_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Default Container"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:109
 msgid "listing_sampletypes_column_default_container"
-msgstr "默认Container"
+msgstr "默认容器"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:72
 msgid "listing_sampletypes_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Hazardous"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:79
 msgid "listing_sampletypes_column_hazardous"
-msgstr "Hazardous"
+msgstr "危险品"
 
 #. Default: "Minimum Volume"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:91
 msgid "listing_sampletypes_column_min_vol"
-msgstr "Minimum Volume"
+msgstr "最小样品量"
 
 #. Default: "Prefix"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:85
 msgid "listing_sampletypes_column_prefix"
-msgstr "Prefix"
+msgstr "前缀"
 
 #. Default: "Retention Period"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:97
 msgid "listing_sampletypes_column_retention_period"
-msgstr "Retention Period"
+msgstr "留样期限"
 
 #. Default: "SampleMatrix"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:103
 msgid "listing_sampletypes_column_sample_matrix"
-msgstr "样品Matrix"
+msgstr "样品基质"
 
 #. Default: "Sample Type"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:66
 msgid "listing_sampletypes_column_title"
-msgstr "样品 Type"
+msgstr "样品类型"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:119
 msgid "listing_sampletypes_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:135
 msgid "listing_sampletypes_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:127
 msgid "listing_sampletypes_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sample Types"
 #: senaite/core/browser/controlpanel/sampletypes/view.py:58
@@ -10626,275 +10666,275 @@ msgstr "样品类型"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:49
 msgid "listing_samplingdeviations_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:72
 msgid "listing_samplingdeviations_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sampling Deviation"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:65
 msgid "listing_samplingdeviations_column_title"
-msgstr "Sampling Deviation"
+msgstr "取样偏差"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:92
 msgid "listing_samplingdeviations_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:84
 msgid "listing_samplingdeviations_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:100
 msgid "listing_samplingdeviations_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sampling Deviations"
 #: senaite/core/browser/controlpanel/samplingdeviations/view.py:56
 msgid "listing_samplingdeviations_title"
-msgstr "Sampling Deviations"
+msgstr "取样偏差"
 
 #. Default: "Calculation"
 #: senaite/core/browser/widgets/worksheettemplate_services_widget.py:70
 msgid "listing_services_column_calculation"
-msgstr "Calculation"
+msgstr "计算公式"
 
 #. Default: "Hidden"
 #: senaite/core/browser/widgets/services_widget.py:112
 msgid "listing_services_column_hidden"
-msgstr "Hidden"
+msgstr "隐藏"
 
 #. Default: "Keyword"
 #: senaite/core/browser/widgets/services_widget.py:84
 #: senaite/core/browser/widgets/worksheettemplate_services_widget.py:56
 msgid "listing_services_column_keyword"
-msgstr "Keyword"
+msgstr "关键词"
 
 #. Default: "Methods"
 #: senaite/core/browser/widgets/services_widget.py:91
 #: senaite/core/browser/widgets/worksheettemplate_services_widget.py:63
 msgid "listing_services_column_methods"
-msgstr "Methods"
+msgstr "方法"
 
 #. Default: "Partition"
 #: senaite/core/browser/widgets/sampletemplate_services_widget.py:51
 msgid "listing_services_column_partition"
-msgstr "Partition"
+msgstr "分装"
 
 #. Default: "Price"
 #: senaite/core/browser/widgets/services_widget.py:105
 msgid "listing_services_column_price"
-msgstr "Price"
+msgstr "价格"
 
 #. Default: "Service"
 #: senaite/core/browser/widgets/services_widget.py:76
 #: senaite/core/browser/widgets/worksheettemplate_services_widget.py:48
 msgid "listing_services_column_title"
-msgstr "Service"
+msgstr "检验项目"
 
 #. Default: "Unit"
 #: senaite/core/browser/widgets/services_widget.py:98
 msgid "listing_services_column_unit"
-msgstr "Unit"
+msgstr "单位"
 
 #. Default: "All"
 #: senaite/core/browser/widgets/services_widget.py:127
 msgid "listing_services_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:49
 msgid "listing_storagelocations_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:75
 msgid "listing_storagelocations_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Location Code"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:104
 msgid "listing_storagelocations_column_location_code"
-msgstr "Location Code"
+msgstr "位置编号"
 
 #. Default: "Location Title"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:97
 msgid "listing_storagelocations_column_location_title"
-msgstr "Location Title"
+msgstr "位置名称"
 
 #. Default: "Shelf Code"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:118
 msgid "listing_storagelocations_column_shelf_code"
-msgstr "Shelf Code"
+msgstr "货架编号"
 
 #. Default: "Shelf Title"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:111
 msgid "listing_storagelocations_column_shelf_title"
-msgstr "Shelf Title"
+msgstr "货架名称"
 
 #. Default: "Site Code"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:90
 msgid "listing_storagelocations_column_site_code"
-msgstr "Site Code"
+msgstr "场所编号"
 
 #. Default: "Site Title"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:83
 msgid "listing_storagelocations_column_site_title"
-msgstr "Site Title"
+msgstr "场所名称"
 
 #. Default: "Storage Location"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:68
 msgid "listing_storagelocations_column_title"
-msgstr "Storage Location"
+msgstr "存储位置"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:129
 msgid "listing_storagelocations_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:147
 msgid "listing_storagelocations_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:138
 msgid "listing_storagelocations_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Storage Locations"
 #: senaite/core/browser/controlpanel/storagelocations/view.py:55
 msgid "listing_storagelocations_title"
-msgstr "Storage Locations"
+msgstr "存储位置"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/subgroups/view.py:51
 msgid "listing_subgroup_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/subgroups/view.py:73
 msgid "listing_subgroups_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sort Key"
 #: senaite/core/browser/controlpanel/subgroups/view.py:80
 msgid "listing_subgroups_column_sortkey"
-msgstr "Sort Key"
+msgstr "排序键"
 
 #. Default: "Title"
 #: senaite/core/browser/controlpanel/subgroups/view.py:67
 msgid "listing_subgroups_column_title"
-msgstr "Title"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/subgroups/view.py:91
 msgid "listing_subgroups_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/subgroups/view.py:109
 msgid "listing_subgroups_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/subgroups/view.py:100
 msgid "listing_subgroups_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Sub-Groups"
 #: senaite/core/browser/controlpanel/subgroups/view.py:58
 msgid "listing_subgroups_title"
-msgstr "Sub-Groups"
+msgstr "子分组"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:51
 msgid "listing_suppliercontacts_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Business Phone"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:79
 msgid "listing_suppliercontacts_column_businessphone"
-msgstr "Business Phone"
+msgstr "办公电话"
 
 #. Default: "Email Address"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:73
 msgid "listing_suppliercontacts_column_emailaddress"
-msgstr "Email Address"
+msgstr "邮箱"
 
 #. Default: "Fax"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:91
 msgid "listing_suppliercontacts_column_fax"
-msgstr "Fax"
+msgstr "传真"
 
 #. Default: "FullName"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:67
 msgid "listing_suppliercontacts_column_fullname"
-msgstr "FullName"
+msgstr "姓名"
 
 #. Default: "Mobile Phone"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:85
 msgid "listing_suppliercontacts_column_mobilephone"
-msgstr "Mobile Phone"
+msgstr "手机"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:101
 msgid "listing_suppliercontacts_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Contacts"
 #: senaite/core/browser/controlpanel/suppliers/contacts.py:58
 msgid "listing_suppliercontacts_title"
-msgstr "联系人s"
+msgstr "联系人"
 
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/suppliers/view.py:54
 msgid "listing_suppliers_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Email"
 #: senaite/core/browser/controlpanel/suppliers/view.py:77
 msgid "listing_suppliers_column_email"
-msgstr "Email"
+msgstr "邮箱"
 
 #. Default: "Fax"
 #: senaite/core/browser/controlpanel/suppliers/view.py:91
 msgid "listing_suppliers_column_fax"
-msgstr "Fax"
+msgstr "传真"
 
 #. Default: "Name"
 #: senaite/core/browser/controlpanel/suppliers/view.py:70
 msgid "listing_suppliers_column_name"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Phone"
 #: senaite/core/browser/controlpanel/suppliers/view.py:84
 msgid "listing_suppliers_column_phone"
-msgstr "Phone"
+msgstr "电话"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/suppliers/view.py:102
 msgid "listing_suppliers_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/suppliers/view.py:118
 msgid "listing_suppliers_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/suppliers/view.py:110
 msgid "listing_suppliers_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Suppliers"
 #: senaite/core/browser/controlpanel/suppliers/view.py:61
 msgid "listing_suppliers_title"
-msgstr "Suppliers"
+msgstr "供应商"
 
 #. Default: "Add"
 #: senaite/core/browser/worksheets/view.py:63
@@ -10904,7 +10944,7 @@ msgstr "Add"
 #. Default: "Analyst"
 #: senaite/core/browser/worksheets/view.py:114
 msgid "listing_worksheets_column_analyst"
-msgstr "Analyst"
+msgstr "检验人员"
 
 #. Default: "Created"
 #: senaite/core/browser/worksheets/view.py:146
@@ -10969,7 +11009,7 @@ msgstr "Open"
 #. Default: "To be verified"
 #: senaite/core/browser/worksheets/view.py:195
 msgid "listing_worksheets_state_to_be_verified"
-msgstr "To be verified"
+msgstr "待复核"
 
 #. Default: "Verified"
 #: senaite/core/browser/worksheets/view.py:209
@@ -10984,12 +11024,12 @@ msgstr "工作表s"
 #. Default: "Add"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:54
 msgid "listing_worksheettemplates_action_add"
-msgstr "Add"
+msgstr "添加"
 
 #. Default: "Description"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:77
 msgid "listing_worksheettemplates_column_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Instrument"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:91
@@ -10999,32 +11039,32 @@ msgstr "仪器"
 #. Default: "Method"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:84
 msgid "listing_worksheettemplates_column_method"
-msgstr "Method"
+msgstr "方法"
 
 #. Default: "Name"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:70
 msgid "listing_worksheettemplates_column_name"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Active"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:103
 msgid "listing_worksheettemplates_state_active"
-msgstr "Active"
+msgstr "启用"
 
 #. Default: "All"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:119
 msgid "listing_worksheettemplates_state_all"
-msgstr "All"
+msgstr "全部"
 
 #. Default: "Inactive"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:111
 msgid "listing_worksheettemplates_state_inactive"
-msgstr "Inactive"
+msgstr "停用"
 
 #. Default: "Worksheet Templates"
 #: senaite/core/browser/controlpanel/worksheettemplates/view.py:61
 msgid "listing_worksheettemplates_title"
-msgstr "工作表 模板s"
+msgstr "工作表模板"
 
 #: bika/lims/controlpanel/bika_analysisservices.py:285
 msgid "minutes"
@@ -11123,12 +11163,12 @@ msgstr "Lab Preservation"
 #. Default: "Only ASCII characters in prefix allowed"
 #: senaite/core/content/sampletype.py:88
 msgid "sampletype_prefix_ascii_validator_message"
-msgstr "Only ASCII characters in prefix allowed"
+msgstr "前缀只能包含 ASCII 字符。"
 
 #. Default: "No whitespaces in prefix allowed"
 #: senaite/core/content/sampletype.py:81
 msgid "sampletype_prefix_no_whitespace_validator_message"
-msgstr "No whitespaces in prefix allowed"
+msgstr "前缀不可包含空格。"
 
 #. Default: "You must select an instrument"
 #: senaite/core/browser/worksheets/worksheet/export.py:37
@@ -11210,12 +11250,12 @@ msgstr "Accreditation Reference"
 #: senaite/core/content/laboratory.py:88
 #: senaite/core/content/organization.py:82
 msgid "title_addresses_tab"
-msgstr "Address"
+msgstr "地址"
 
 #. Default: "Comments"
 #: senaite/core/content/analysiscategory.py:60
 msgid "title_analysiscategory_comments"
-msgstr "Comments"
+msgstr "备注"
 
 #. Default: "Department"
 #: senaite/core/content/analysiscategory.py:81
@@ -11225,57 +11265,57 @@ msgstr "部门"
 #. Default: "Description"
 #: senaite/core/content/analysiscategory.py:52
 msgid "title_analysiscategory_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sort Key"
 #: senaite/core/content/analysiscategory.py:95
 msgid "title_analysiscategory_sort_key"
-msgstr "Sort Key"
+msgstr "排序键"
 
 #. Default: "Name"
 #: senaite/core/content/analysiscategory.py:44
 msgid "title_analysiscategory_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Commercial ID"
 #: senaite/core/content/analysisprofile.py:121
 msgid "title_analysisprofile_commercial_id"
-msgstr "Commercial ID"
+msgstr "商业编号"
 
 #. Default: "Description"
 #: senaite/core/content/analysisprofile.py:82
 msgid "title_analysisprofile_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Profile Keyword"
 #: senaite/core/content/analysisprofile.py:90
 msgid "title_analysisprofile_profile_key"
-msgstr "Pro文件 Keyword"
+msgstr "套餐标识"
 
 #. Default: "Price (excluding VAT)"
 #: senaite/core/content/analysisprofile.py:145
 msgid "title_analysisprofile_profile_price"
-msgstr "Price (excluding 增值税)"
+msgstr "不含税价格"
 
 #. Default: "VAT %"
 #: senaite/core/content/analysisprofile.py:157
 msgid "title_analysisprofile_profile_vat"
-msgstr "增值税 %"
+msgstr "增值税率（%）"
 
 #. Default: "Profile Analyses"
 #: senaite/core/content/analysisprofile.py:106
 msgid "title_analysisprofile_services"
-msgstr "Pro文件 Analyses"
+msgstr "套餐内检验项目"
 
 #. Default: "Name"
 #: senaite/core/content/analysisprofile.py:74
 msgid "title_analysisprofile_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Use analysis profile price"
 #: senaite/core/content/analysisprofile.py:133
 msgid "title_analysisprofile_use_profile_price"
-msgstr "Use 分析配置文件 price"
+msgstr "使用套餐价"
 
 #. Default: "Analyst"
 #: senaite/core/permissions/localroles.py:30
@@ -11295,7 +11335,7 @@ msgstr "Name"
 #. Default: "Bank Details"
 #: senaite/core/content/organization.py:110
 msgid "title_bank_details_tab"
-msgstr "Bank Details"
+msgstr "银行信息"
 
 #. Default: "Name"
 #: senaite/core/content/batchlabel.py:36
@@ -11310,12 +11350,12 @@ msgstr "与plone建立标题"
 #. Default: "Description"
 #: senaite/core/content/calculation.py:228
 msgid "title_calculation_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Name"
 #: senaite/core/content/calculation.py:220
 msgid "title_calculation_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Confidence Level %"
 #: senaite/core/content/laboratory.py:123
@@ -11460,37 +11500,37 @@ msgstr "Volume"
 #. Default: "Blank Reference"
 #: senaite/core/content/worksheettemplate.py:132
 msgid "title_layout_record_blank_ref"
-msgstr "Blank Reference"
+msgstr "空白参考样品"
 
 #. Default: "Control Reference"
 #: senaite/core/content/worksheettemplate.py:158
 msgid "title_layout_record_control_ref"
-msgstr "Control Reference"
+msgstr "质控参考样品"
 
 #. Default: "Duplicate Of"
 #: senaite/core/content/worksheettemplate.py:191
 msgid "title_layout_record_dup"
-msgstr "Duplicate Of"
+msgstr "平行样原样品"
 
 #. Default: "Duplicate Of"
 #: senaite/core/content/worksheettemplate.py:180
 msgid "title_layout_record_dup_proxy"
-msgstr "Duplicate Of"
+msgstr "平行样原样品"
 
 #. Default: "Position"
 #: senaite/core/content/worksheettemplate.py:96
 msgid "title_layout_record_pos"
-msgstr "Position"
+msgstr "位置"
 
 #. Default: "Reference"
 #: senaite/core/content/worksheettemplate.py:169
 msgid "title_layout_record_reference_proxy"
-msgstr "Reference"
+msgstr "参考样品"
 
 #. Default: "Analysis Type"
 #: senaite/core/content/worksheettemplate.py:106
 msgid "title_layout_record_type"
-msgstr "检验 Type"
+msgstr "项目类型"
 
 #. Default: "Manager"
 #: senaite/core/permissions/localroles.py:86
@@ -11627,37 +11667,37 @@ msgstr "附件"
 #. Default: "Composite"
 #: senaite/core/content/samplepoint.py:143
 msgid "title_samplepoint_composite"
-msgstr "Composite"
+msgstr "混合样"
 
 #. Default: "Description"
 #: senaite/core/content/samplepoint.py:64
 msgid "title_samplepoint_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Elevation"
 #: senaite/core/content/samplepoint.py:87
 msgid "title_samplepoint_elevation"
-msgstr "Elevation"
+msgstr "高度或深度"
 
 #. Default: "Location"
 #: senaite/core/content/samplepoint.py:72
 msgid "title_samplepoint_location"
-msgstr "Location"
+msgstr "位置"
 
 #. Default: "Sampling Frequency"
 #: senaite/core/content/samplepoint.py:99
 msgid "title_samplepoint_sampling_frequency"
-msgstr "Sampling Frequency"
+msgstr "采样频率"
 
 #. Default: "Sample Types"
 #: senaite/core/content/samplepoint.py:122
 msgid "title_samplepoint_sampling_sample_types"
-msgstr "样品 Types"
+msgstr "样品类型"
 
 #. Default: "Name"
 #: senaite/core/content/samplepoint.py:56
 msgid "title_samplepoint_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Description"
 #: senaite/core/content/samplepreservation.py:47
@@ -11677,57 +11717,57 @@ msgstr "样品r"
 #. Default: "Auto-partition on sample reception"
 #: senaite/core/content/sampletemplate.py:256
 msgid "title_sampletemplate_auto_partition"
-msgstr "Auto-partition on 样品 reception"
+msgstr "接收样品后自动分装"
 
 #. Default: "Composite"
 #: senaite/core/content/sampletemplate.py:217
 msgid "title_sampletemplate_composite"
-msgstr "Composite"
+msgstr "混合样"
 
 #. Default: "Description"
 #: senaite/core/content/sampletemplate.py:167
 msgid "title_sampletemplate_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Sample collected by the laboratory"
 #: senaite/core/content/sampletemplate.py:226
 msgid "title_sampletemplate_sampling_required"
-msgstr "样品 collected by the 实验室"
+msgstr "由实验室采样"
 
 #. Default: "Services"
 #: senaite/core/content/sampletemplate.py:269
 msgid "title_sampletemplate_services"
-msgstr "Services"
+msgstr "检验项目"
 
 #. Default: "Name"
 #: senaite/core/content/sampletemplate.py:161
 msgid "title_sampletemplate_title"
-msgstr "Name"
+msgstr "名称"
 
 #. Default: "Retention Period"
 #: senaite/core/content/sampletype.py:151
 msgid "title_sampletype_duration_period"
-msgstr "Retention Period"
+msgstr "留样期限"
 
 #. Default: "Hazard categories"
 #: senaite/core/content/sampletype.py:178
 msgid "title_sampletype_hazard_categories"
-msgstr "Hazard categories"
+msgstr "危险类别"
 
 #. Default: "Hazardous"
 #: senaite/core/content/sampletype.py:166
 msgid "title_sampletype_hazardous"
-msgstr "Hazardous"
+msgstr "危险品"
 
 #. Default: "Minimum Volume"
 #: senaite/core/content/sampletype.py:231
 msgid "title_sampletype_min_volume"
-msgstr "Minimum Volume"
+msgstr "最小样品量"
 
 #. Default: "Sample Type Prefix"
 #: senaite/core/content/sampletype.py:218
 msgid "title_sampletype_prefix"
-msgstr "样品 Type Prefix"
+msgstr "样品类型前缀"
 
 #. Default: "Description"
 #: senaite/core/content/samplingdeviation.py:44
@@ -11742,52 +11782,52 @@ msgstr "Name"
 #. Default: "Allow to set the result capture date"
 #: senaite/core/content/senaitesetup.py:359
 msgid "title_senaitesetup_allow_manual_result_capture_date"
-msgstr "允许to set the 结果 capture 日期"
+msgstr "允许手动设置结果录入日期"
 
 #. Default: "Allow submission of results for unassigned analyses"
 #: senaite/core/content/senaitesetup.py:451
 msgid "title_senaitesetup_allow_to_submit_not_assigned"
-msgstr "允许submission of 结果 for unassigned analyses"
+msgstr "允许提交未分派给本人的项目结果"
 
 #. Default: "Always send publication email to responsibles"
 #: senaite/core/content/senaitesetup.py:285
 msgid "title_senaitesetup_always_cc_responsibles_in_report_emails"
-msgstr "Always send publication 邮件 to 负责s"
+msgstr "发布报告时抄送部门负责人"
 
 #. Default: "Automatic log-off"
 #: senaite/core/content/senaitesetup.py:423
 msgid "title_senaitesetup_auto_log_off"
-msgstr "Automatic log-off"
+msgstr "自动注销"
 
 #. Default: "Automatic verification of samples"
 #: senaite/core/content/senaitesetup.py:650
 msgid "title_senaitesetup_auto_verify_samples"
-msgstr "Automatic verification of 样品"
+msgstr "自动复核样品"
 
 #. Default: "Categorise analysis services"
 #: senaite/core/content/senaitesetup.py:595
 msgid "title_senaitesetup_categorise_analysis_services"
-msgstr "Categorise 分析服务"
+msgstr "按类别显示检验项目"
 
 #. Default: "Categorize sample analyses"
 #: senaite/core/content/senaitesetup.py:338
 msgid "title_senaitesetup_categorizesampleanalyses"
-msgstr "标题Maitux设置分类 样本分析"
+msgstr "样品页按类别显示检验项目"
 
 #. Default: "Currency"
 #: senaite/core/content/senaitesetup.py:492
 msgid "title_senaitesetup_currency"
-msgstr "Currency"
+msgstr "币种"
 
 #. Default: "Use Dashboard as default front page"
 #: senaite/core/content/senaitesetup.py:857
 msgid "title_senaitesetup_dashboard_by_default"
-msgstr "Use 仪表盘 as 默认 首页"
+msgstr "使用仪表盘作为默认首页"
 
 #. Default: "Date sampled required"
 #: senaite/core/content/senaitesetup.py:383
 msgid "title_senaitesetup_date_sampled_required"
-msgstr "Date 样品d 必填"
+msgstr "实际采样日期必填"
 
 #. Default: "Default decimal mark"
 #: senaite/core/content/senaitesetup.py:553
@@ -11797,82 +11837,82 @@ msgstr "默认小数点符号"
 #. Default: "Country"
 #: senaite/core/content/senaitesetup.py:506
 msgid "title_senaitesetup_default_country"
-msgstr "Country"
+msgstr "国家或地区"
 
 #. Default: "Default count of Sample to add."
 #: senaite/core/content/senaitesetup.py:740
 msgid "title_senaitesetup_default_number_of_ars_to_add"
-msgstr "默认count of 样品 to add."
+msgstr "默认登记样品数"
 
 #. Default: "Publication 'From' address"
 #: senaite/core/content/senaitesetup.py:256
 msgid "title_senaitesetup_email_from_sample_publication"
-msgstr "Publication 'From' address"
+msgstr "报告发布发件邮箱"
 
 #. Default: "Add a remarks field to all analyses"
 #: senaite/core/content/senaitesetup.py:637
 msgid "title_senaitesetup_enable_analysis_remarks"
-msgstr "Add a remarks field to all analyses"
+msgstr "为每个检验项目添加备注栏"
 
 #. Default: "Enable Sample Specifications"
 #: senaite/core/content/senaitesetup.py:608
 msgid "title_senaitesetup_enable_ar_specs"
-msgstr "启用样品 Specifications"
+msgstr "启用样品检验标准"
 
 #. Default: "Enable the rejection workflow"
 #: senaite/core/content/senaitesetup.py:754
 msgid "title_senaitesetup_enable_rejection_workflow"
-msgstr "启用the rejection 工作流"
+msgstr "启用样品拒收流程"
 
 #. Default: "Exponential format threshold"
 #: senaite/core/content/senaitesetup.py:621
 msgid "title_senaitesetup_exponential_format_threshold"
-msgstr "Exponential format threshold"
+msgstr "科学计数法显示阈值"
 
 #. Default: "Invalidation reason required"
 #: senaite/core/content/senaitesetup.py:408
 msgid "title_senaitesetup_invalidation_reason_required"
-msgstr "Invalidation reason 必填"
+msgstr "作废原因必填"
 
 #. Default: "Landing Page"
 #: senaite/core/content/senaitesetup.py:870
 msgid "title_senaitesetup_landing_page"
-msgstr "Landing Page"
+msgstr "未登录用户首页"
 
 #. Default: "Member discount %"
 #: senaite/core/content/senaitesetup.py:520
 msgid "title_senaitesetup_member_discount"
-msgstr "Member discount %"
+msgstr "会员折扣（%）"
 
 #. Default: "Minimum number of results for QC stats calculations"
 #: senaite/core/content/senaitesetup.py:579
 msgid "title_senaitesetup_minimum_results"
-msgstr "Minimum 结果 for QC stats calculations"
+msgstr "质控统计所需的最少结果数"
 
 #. Default: "Number of required verifications"
 #: senaite/core/content/senaitesetup.py:683
 msgid "title_senaitesetup_number_of_required_verifications"
-msgstr "Number of 必填 verifications"
+msgstr "所需复核次数"
 
 #. Default: "Publication Email Text"
 #: senaite/core/content/senaitesetup.py:272
 msgid "title_senaitesetup_publication_email_text"
-msgstr "标题Maitux设置发布电子邮件文本"
+msgstr "报告发布邮件正文"
 
 #. Default: "Rejection reasons"
 #: senaite/core/content/senaitesetup.py:769
 msgid "title_senaitesetup_rejection_reasons"
-msgstr "Rejection reasons"
+msgstr "拒收原因"
 
 #. Default: "Restrict worksheet management to lab managers"
 #: senaite/core/content/senaitesetup.py:467
 msgid "title_senaitesetup_restrict_worksheet_management"
-msgstr "Restrict 工作表 management to 实验室经理"
+msgstr "仅允许实验室经理管理工作表"
 
 #. Default: "Restrict worksheet access to assigned analysts"
 #: senaite/core/content/senaitesetup.py:437
 msgid "title_senaitesetup_restrict_worksheet_users_access"
-msgstr "Restrict 工作表 access to assigned analysts"
+msgstr "仅允许检验人员访问分派给自己的工作表"
 
 #. Default: "Default decimal mark"
 #: senaite/core/content/senaitesetup.py:714
@@ -11882,147 +11922,147 @@ msgstr "默认小数点符号"
 #. Default: "Allow sample duplication"
 #: senaite/core/content/senaitesetup.py:964
 msgid "title_senaitesetup_sample_duplicate_enabled"
-msgstr "允许样品 duplication"
+msgstr "允许复制样品"
 
 #. Default: "Require sample analyses"
 #: senaite/core/content/senaitesetup.py:348
 msgid "title_senaitesetup_sampleanalysesrequired"
-msgstr "Require 样品 analyses"
+msgstr "登记样品时必须选择检验项目"
 
 #. Default: "Sample view analysis columns"
 #: senaite/core/content/senaitesetup.py:800
 msgid "title_senaitesetup_sampleview_columns_order"
-msgstr "样品 view 检验 columns"
+msgstr "样品结果表显示列"
 
 #. Default: "Default scientific notation format for reports"
 #: senaite/core/content/senaitesetup.py:566
 msgid "title_senaitesetup_scientific_notation_report"
-msgstr "默认scientific notation format for reports"
+msgstr "报告默认科学计数法格式"
 
 #. Default: "Default scientific notation format for results"
 #: senaite/core/content/senaitesetup.py:727
 msgid "title_senaitesetup_scientific_notation_results"
-msgstr "默认scientific notation format for 结果"
+msgstr "结果默认科学计数法格式"
 
 #. Default: "Allow self-verification of results"
 #: senaite/core/content/senaitesetup.py:665
 msgid "title_senaitesetup_self_verification_enabled"
-msgstr "允许self-verification of 结果"
+msgstr "允许复核本人提交的结果"
 
 #. Default: "Display laboratory name in the login page"
 #: senaite/core/content/senaitesetup.py:396
 msgid "title_senaitesetup_show_lab_name_in_login"
-msgstr "Display 实验室 name in the login page"
+msgstr "在登录页显示实验室名称"
 
 #. Default: "Display sample partitions to clients"
 #: senaite/core/content/senaitesetup.py:894
 msgid "title_senaitesetup_show_partitions"
-msgstr "Display 样品 partitions to 客户"
+msgstr "向客户显示分装样品"
 
 #. Default: "Include and display pricing information"
 #: senaite/core/content/senaitesetup.py:484
 msgid "title_senaitesetup_show_prices"
-msgstr "Include and display pricing information"
+msgstr "显示价格信息"
 
 #. Default: "Sidebar navigation folders"
 #: senaite/core/content/senaitesetup.py:909
 msgid "title_senaitesetup_sidebar_folders"
-msgstr "Sidebar navigation 文件夹s"
+msgstr "侧栏导航目录"
 
 #. Default: "Sidebar navigation depth"
 #: senaite/core/content/senaitesetup.py:928
 msgid "title_senaitesetup_sidebar_navigation_depth"
-msgstr "Sidebar navigation depth"
+msgstr "侧栏导航层级"
 
 #. Default: "Sidebar skipped portal types"
 #: senaite/core/content/senaitesetup.py:945
 msgid "title_senaitesetup_sidebar_skip_types"
-msgstr "Sidebar skipped portal types"
+msgstr "侧栏隐藏的内容类型"
 
 #. Default: "Multi Verification type"
 #: senaite/core/content/senaitesetup.py:699
 msgid "title_senaitesetup_type_of_multi_verification"
-msgstr "Multi Verification type"
+msgstr "多次复核方式"
 
 #. Default: "VAT %"
 #: senaite/core/content/senaitesetup.py:537
 msgid "title_senaitesetup_vat"
-msgstr "增值税 %"
+msgstr "增值税率（%）"
 
 #. Default: "Default layout in worksheet view"
 #: senaite/core/content/senaitesetup.py:841
 msgid "title_senaitesetup_worksheet_layout"
-msgstr "默认layout in 工作表 view"
+msgstr "工作表默认布局"
 
 #. Default: "Worksheet view analysis columns"
 #: senaite/core/content/senaitesetup.py:820
 msgid "title_senaitesetup_wsview_columns_order"
-msgstr "工作表 view 检验 columns"
+msgstr "工作表结果表显示列"
 
 #. Default: "Service UID"
 #: senaite/core/content/worksheettemplate.py:86
 msgid "title_service_uid"
-msgstr "Service UID"
+msgstr "项目唯一标识"
 
 #. Default: "Description"
 #: senaite/core/content/storagelocation.py:46
 msgid "title_storagelocation_description"
-msgstr "Description"
+msgstr "描述"
 
 #. Default: "Location Code"
 #: senaite/core/content/storagelocation.py:102
 msgid "title_storagelocation_location_code"
-msgstr "Location Code"
+msgstr "位置编号"
 
 #. Default: "Location Description"
 #: senaite/core/content/storagelocation.py:114
 msgid "title_storagelocation_location_description"
-msgstr "Location Description"
+msgstr "位置描述"
 
 #. Default: "Location Title"
 #: senaite/core/content/storagelocation.py:90
 msgid "title_storagelocation_location_title"
-msgstr "Location Title"
+msgstr "位置名称"
 
 #. Default: "Location Type"
 #: senaite/core/content/storagelocation.py:126
 msgid "title_storagelocation_location_type"
-msgstr "Location Type"
+msgstr "位置类型"
 
 #. Default: "Shelf Code"
 #: senaite/core/content/storagelocation.py:150
 msgid "title_storagelocation_shelf_code"
-msgstr "Shelf Code"
+msgstr "货架编号"
 
 #. Default: "Shelf Description"
 #: senaite/core/content/storagelocation.py:162
 msgid "title_storagelocation_shelf_description"
-msgstr "Shelf Description"
+msgstr "货架描述"
 
 #. Default: "Shelf Title"
 #: senaite/core/content/storagelocation.py:138
 msgid "title_storagelocation_shelf_title"
-msgstr "Shelf Title"
+msgstr "货架名称"
 
 #. Default: "Site Code"
 #: senaite/core/content/storagelocation.py:66
 msgid "title_storagelocation_site_code"
-msgstr "Site Code"
+msgstr "场所编号"
 
 #. Default: "Site Description"
 #: senaite/core/content/storagelocation.py:78
 msgid "title_storagelocation_site_description"
-msgstr "Site Description"
+msgstr "场所描述"
 
 #. Default: "Site Title"
 #: senaite/core/content/storagelocation.py:54
 msgid "title_storagelocation_site_title"
-msgstr "Site Title"
+msgstr "场所名称"
 
 #. Default: "Address"
 #: senaite/core/content/storagelocation.py:38
 msgid "title_storagelocation_title"
-msgstr "Address"
+msgstr "地址"
 
 #. Default: "Description"
 #: senaite/core/content/subgroup.py:48
@@ -12047,7 +12087,7 @@ msgstr "IBAN"
 #. Default: "Lab Account Number"
 #: senaite/core/content/supplier.py:47
 msgid "title_supplier_lab_contact_number"
-msgstr "Lab Account Number"
+msgstr "实验室账号"
 
 #. Default: "NIB"
 #: senaite/core/content/supplier.py:84
@@ -12057,17 +12097,17 @@ msgstr "NIB"
 #. Default: "Remarks"
 #: senaite/core/content/supplier.py:55
 msgid "title_supplier_remarks"
-msgstr "Remarks"
+msgstr "备注"
 
 #. Default: "SWIFT code"
 #: senaite/core/content/supplier.py:108
 msgid "title_supplier_swift_code"
-msgstr "SWIFT code"
+msgstr "SWIFT 代码"
 
 #. Default: "Website"
 #: senaite/core/content/supplier.py:63
 msgid "title_supplier_website"
-msgstr "Website"
+msgstr "网站"
 
 #. Default: "Verifier"
 #: senaite/core/permissions/localroles.py:72
@@ -12147,27 +12187,27 @@ msgstr "工作表 模板"
 #. Default: "Description"
 #: senaite/core/content/worksheettemplate.py:213
 msgid "title_worksheettemplate_description"
-msgstr "工作模板标题说明"
+msgstr "描述"
 
 #. Default: "Number of Positions"
 #: senaite/core/content/worksheettemplate.py:290
 msgid "title_worksheettemplate_num_of_positions"
-msgstr "职位数量模板标题"
+msgstr "位置数"
 
 #. Default: "Analysis Services"
 #: senaite/core/content/worksheettemplate.py:346
 msgid "title_worksheettemplate_services"
-msgstr "服务记录模板标题"
+msgstr "检验项目"
 
 #. Default: "Worksheet Layout"
 #: senaite/core/content/worksheettemplate.py:311
 msgid "title_worksheettemplate_template_layout"
-msgstr "工作模板布局"
+msgstr "工作表布局"
 
 #. Default: "Name"
 #: senaite/core/content/worksheettemplate.py:205
 msgid "title_worksheettemplate_title"
-msgstr "工作模板标题"
+msgstr "名称"
 
 #: bika/lims/content/instrumentscheduledtask.py:140
 msgid "until"
@@ -12228,6 +12268,40 @@ msgstr "Created 工作表 ${ws_id}"
 msgid "worksheet_not_created"
 msgstr "工作表 not created."
 
+#: senaite/core/browser/dashboard/dashboard.py
+msgid "Open worksheets"
+msgstr "进行中的工作表"
+
+#: senaite/core/browser/dashboard/dashboard.py
+msgid "Sample trend"
+msgstr "样品趋势"
+
+#: senaite/core/browser/viewlets/templates/sidebar.pt
+msgid "Expand sidebar (Ctrl/Cmd+B)"
+msgstr "展开侧栏（Ctrl/Cmd+B）"
+
+#: senaite/core/browser/viewlets/templates/sidebar.pt
+msgid "Collapse sidebar (Ctrl/Cmd+B)"
+msgstr "收起侧栏（Ctrl/Cmd+B）"
+
+#: senaite/core/browser/clients/client/attachments/view.py
+msgid "Client attachments and files"
+msgstr "该客户的附件和文件"
+
+#: senaite/core/browser/viewlets/resultsinterpretation.py
+msgid "Analytical Chemistry"
+msgstr "分析化学"
+
+#. Default: "Hardness"
+#: senaite/core/browser/worksheets/utility.py
+msgid "worksheet_template_hardness"
+msgstr "硬度"
+
+#. Default: "To be verified"
+#: bika/lims/browser/analyses/view.py:271
+msgid "worksheet_result_state_to_be_verified"
+msgstr "待复核"
+
 #: bika/lims/content/instrumentcertification.py:255
 msgid "yearly"
 msgstr "每年"
@@ -12279,3 +12353,168 @@ msgstr "由于长时间无操作，您将在 ${seconds} 秒后被自动注销。
 #: webpack/app/session-timeout.js
 msgid "Your session expired after a period of inactivity. Please log in again."
 msgstr "由于长时间无操作，您的会话已过期，请重新登录。"
+
+msgid "0 = does not take part in acquisition; >=1 ties the fields of one weighing together"
+msgstr "0 表示不参与采集，同一次称量的字段使用相同的正整数分组号。"
+
+msgid "<p>The ID Server provides unique sequential IDs for objects such as Samples and Worksheets etc, based on a format specified for each content type.</p><p>The format is constructed similarly to the Python format syntax, using predefined variables per content type, and advancing the IDs through a sequence number, 'seq' and its padding as a number of digits, e.g. '03d' for a sequence of IDs from 001 to 999.</p><p>Alphanumeric prefixes for IDs are included as is in the formats, e.g. WS for Worksheet in WS-{seq:03d} produces sequential Worksheet IDs: WS-001, WS-002, WS-003 etc.</p><p>For dynamic generation of alphanumeric and sequential IDs, the wildcard {alpha} can be used. E.g WS-{alpha:2a3d} produces WS-AA001, WS-AA002, WS-AB034, etc.</p><p>Variables that can be used include:<table><tr><th style='width:150px'>Content Type</th><th>Variables</th></tr><tr><td>Client ID</td><td>{clientId}</td></tr><tr><td>Year</td><td>{year}</td></tr><tr><td>Sample ID</td><td>{sampleId}</td></tr><tr><td>Sample Type</td><td>{sampleType}</td></tr><tr><td>Sampling Date</td><td>{samplingDate}</td></tr><tr><td>Date Sampled</td><td>{dateSampled}</td></tr></table></p><p>Configuration Settings:<ul><li>format:<ul><li>a python format string constructed from predefined variables like sampleId, clientId, sampleType.</li><li>special variable 'seq' must be positioned last in the format string</li></ul></li><li>sequence type: [generated|counter]</li><li>context: if type counter, provides context the counting function</li><li>counter type: [backreference|contained]</li><li>counter reference: a parameter to the counting function</li><li>prefix: default prefix if none provided in format string</li><li>split length: the number of parts to be included in the prefix</li></ul></p>"
+msgstr "<p>编号服务按内容类型的格式生成唯一流水号，例如样品编号和工作表编号。</p><p>格式遵循 Python 格式字符串语法。用 {seq:03d} 表示三位流水号，从 001 开始。固定前缀按原样输出，例如 WS-{seq:03d} 生成 WS-001、WS-002。字母数字混合序列可用 {alpha}，例如 WS-{alpha:2a3d} 可生成 WS-AA001、WS-AA002 等编号。</p><table><thead><tr><th>内容</th><th>变量</th></tr></thead><tbody><tr><td>客户编号</td><td>{clientId}</td></tr><tr><td>年份</td><td>{year}</td></tr><tr><td>样品编号</td><td>{sampleId}</td></tr><tr><td>样品类型</td><td>{sampleType}</td></tr><tr><td>计划采样日期</td><td>{samplingDate}</td></tr><tr><td>实际采样日期</td><td>{dateSampled}</td></tr></tbody></table><p>配置项</p><ul><li>格式（format）可引用预定义变量，流水号 seq 必须放在末尾。</li><li>序列类型可选 generated 或 counter。</li><li>使用 counter 时，上下文指定计数范围，计数器类型可选 backreference 或 contained，计数器引用用于向计数函数传参。</li><li>格式中未指定前缀时使用默认前缀。拆分长度指定前缀包含的段数。</li></ul>"
+
+msgid "Additional Values"
+msgstr "附加值"
+
+msgid "Analysis Categories"
+msgstr "分析类别"
+
+msgid "Analysis Category"
+msgstr "分析类别"
+
+msgid "Analysis Profile"
+msgstr "检验项目套餐"
+
+msgid "Bank Details"
+msgstr "银行信息"
+
+msgid "Catalogs"
+msgstr "目录"
+
+msgid "Cross-ref"
+msgstr "交叉引用"
+
+msgid "Cross-referenceable"
+msgstr "允许交叉引用"
+
+msgid "Current ID server counter values"
+msgstr "当前编号计数器值"
+
+msgid "Days Hours Minutes"
+msgstr "天 小时 分钟"
+
+msgid "Field title"
+msgstr "字段名称"
+
+msgid "Id server"
+msgstr "编号服务"
+
+msgid "Include Client Contacts"
+msgstr "包含客户联系人"
+
+msgid "Include client contacts"
+msgstr "包含客户联系人"
+
+msgid "Instrument Types"
+msgstr "仪器类型"
+
+msgid "Legacy Setup"
+msgstr "旧版设置"
+
+msgid "Listing"
+msgstr "列表"
+
+msgid "Listings"
+msgstr "列表"
+
+msgid "Locked"
+msgstr "锁定"
+
+msgid "Product"
+msgstr "产品"
+
+msgid "Publication preference"
+msgstr "报告发送偏好"
+
+msgid "Results reports"
+msgstr "结果报告"
+
+msgid "Sample Template"
+msgstr "样品模板"
+
+msgid "Sample Types"
+msgstr "样品类型"
+
+msgid "SampleMatrix"
+msgstr "样品基质"
+
+msgid "Sub-Groups"
+msgstr "子分组"
+
+msgid "Sub-formula using [keyword] references"
+msgstr "在子公式中用 [keyword] 引用字段。"
+
+msgid "Telephone"
+msgstr "电话"
+
+msgid "Total Price"
+msgstr "总价"
+
+msgid "VAT Amount"
+msgstr "增值税额"
+
+msgid "Value cannot be changed from the results entry form (for instrument-acquired data)"
+msgstr "结果录入页中不可修改此值，适用于仪器采集的数据。"
+
+msgid "ax10^b / ax10^-b (with superscript)"
+msgstr "a×10^b / a×10^-b（指数以上标显示）"
+
+msgid "a·10^b / a·10^-b (with superscript)"
+msgstr "a·10^b / a·10^-b（指数以上标显示）"
+
+msgid "description_calculation_interims"
+msgstr "按需定义容器质量、稀释倍数等中间字段。字段名称用作列头或标签。启用「整表应用」后，可在工作表顶部一次为同一字段赋值。"
+
+msgid "description_import_unmatched_record"
+msgstr "找不到匹配的样品、参考样品检验记录或平行样记录时，系统将用导入记录的标识查找参考样品编号。匹配成功后会创建校准检验记录，并关联所选仪器。"
+
+msgid "label_registry_listings_fieldset"
+msgstr "列表"
+
+msgid "label_result_analysis_service"
+msgstr "检验项目"
+
+msgid "label_sticker_print_disabled"
+msgstr "关闭自动打印"
+
+msgid "label_sticker_print_unset"
+msgstr "未设置"
+
+msgid "name = the substance-name box, weight = the weight receiver; empty = does not take part in acquisition"
+msgstr "name 对应物质名称字段，weight 接收称量值。留空表示不参与采集。"
+
+msgid "duration_widget_label_days"
+msgstr "天"
+
+msgid "duration_widget_label_hours"
+msgstr "小时"
+
+msgid "duration_widget_label_minutes"
+msgstr "分钟"
+
+msgid "duration_widget_label_seconds"
+msgstr "秒"
+
+msgid "label_schema_Accounting"
+msgstr "会计"
+
+msgid "label_schema_Analyses"
+msgstr "检验项目"
+
+msgid "label_schema_Appearance"
+msgstr "外观"
+
+msgid "label_schema_ID Server"
+msgstr "编号服务"
+
+msgid "label_schema_Notifications"
+msgstr "通知"
+
+msgid "label_schema_Results Reports"
+msgstr "结果报告"
+
+msgid "label_schema_Sampling"
+msgstr "采样"
+
+msgid "label_schema_Security"
+msgstr "安全"
+
+msgid "label_schema_Sticker"
+msgstr "标签"

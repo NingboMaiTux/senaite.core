@@ -894,23 +894,23 @@ def is_bika_installed():
     return qi.isProductInstalled("bika.lims")
 
 
-def get_display_list(brains_or_objects=None, none_item=False):
+def get_display_list(brains_or_objects=None, none_item=False, title_getter=None):
     """
     Returns a DisplayList with the items sorted by Title
     :param brains_or_objects: list of brains or objects
     :param none_item: adds an item with empty uid and text "Select.." in pos 0
+    :param title_getter: returns the label for a brain or object
     :return: DisplayList (uid, title) sorted by title ascending
     :rtype: DisplayList
     """
-    if brains_or_objects is None:
-        return get_display_list(list(), none_item)
-
+    if title_getter is None:
+        title_getter = api.get_title
     items = list()
-    for brain in brains_or_objects:
+    for brain in brains_or_objects or ():
         uid = api.get_uid(brain)
         if not uid:
             continue
-        title = api.get_title(brain)
+        title = title_getter(brain)
         items.append((uid, title))
 
     # Sort items by title ascending

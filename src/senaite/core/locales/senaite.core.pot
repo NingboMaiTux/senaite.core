@@ -417,6 +417,10 @@ msgstr ""
 msgid "Allowed sample states: {allowed_states}, "
 msgstr ""
 
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:83
+msgid "Always show standard fields"
+msgstr ""
+
 #: senaite/core/browser/worksheets/worksheet/templates/print/sample_by_column.pt:60
 #: senaite/core/browser/worksheets/worksheet/templates/print/sample_by_row.pt:60
 msgid "Analysed by"
@@ -540,7 +544,8 @@ msgstr ""
 msgid "Appearance"
 msgstr ""
 
-#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:217
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:129
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:222
 msgid "Apply"
 msgstr ""
 
@@ -743,7 +748,6 @@ msgstr ""
 msgid "Basis"
 msgstr ""
 
-#: bika/lims/browser/publish/reports_listing.py:76
 #: bika/lims/profiles/default/types/Batch.xml
 #: bika/lims/vocabularies/__init__.py:128
 msgid "Batch"
@@ -1980,8 +1984,11 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: bika/lims/browser/publish/reports_listing.py:80
 msgid "Download PDF"
+msgstr ""
+
+#: bika/lims/browser/publish/reports_listing.py:80
+msgid "Download report"
 msgstr ""
 
 #: bika/lims/browser/publish/reports_listing.py:145
@@ -3789,7 +3796,11 @@ msgstr ""
 msgid "Not allowed to update conditions: {}"
 msgstr ""
 
-#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:86
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:72
+msgid "No instrument selected"
+msgstr ""
+
+#: senaite/core/browser/worksheets/worksheet/templates/manage_results.pt:91
 msgid "Not defined"
 msgstr ""
 
@@ -3843,6 +3854,7 @@ msgid "Number of copies"
 msgstr ""
 
 #: senaite/core/registry/schema.py:195
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:49
 msgid "Number of prominent columns"
 msgstr ""
 
@@ -3860,6 +3872,7 @@ msgid "Number of required verifications from different users with enough privile
 msgstr ""
 
 #: senaite/core/registry/schema.py:204
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:66
 msgid "Number of standard columns"
 msgstr ""
 
@@ -4671,6 +4684,11 @@ msgstr ""
 
 #: bika/lims/browser/fields/partitionsetupfield.py:118
 msgid "Required Volume"
+msgstr ""
+
+#. Default: "Reset"
+#: senaite/core/browser/samples/templates/manage_sample_fields.pt:201
+msgid "sample_fields_reset"
 msgstr ""
 
 #: senaite/core/browser/samples/templates/manage_sample_fields.pt:198
@@ -9016,6 +9034,7 @@ msgid "label_resultsreport_sample"
 msgstr ""
 
 #. Default: "Batch"
+#: bika/lims/browser/publish/reports_listing.py:76
 #: bika/lims/content/analysisrequest.py:328
 msgid "label_sample_batch"
 msgstr ""
@@ -9514,6 +9533,11 @@ msgstr ""
 #. Default: "Attachment Types"
 #: senaite/core/browser/controlpanel/attachmenttypes/view.py:57
 msgid "listing_attachmenttypes_title"
+msgstr ""
+
+#. Default: "Open"
+#: bika/lims/browser/batchfolder.py:99
+msgid "listing_batches_state_open"
 msgstr ""
 
 #. Default: "Add"
@@ -10129,6 +10153,16 @@ msgstr ""
 #. Default: "Sample Templates"
 #: senaite/core/browser/controlpanel/sampletemplates/view.py:59
 msgid "listing_sampletemplates_title"
+msgstr ""
+
+#. Default: "Received"
+#: senaite/core/browser/samples/view.py:484
+msgid "listing_samples_state_received"
+msgstr ""
+
+#. Default: "Unassigned"
+#: senaite/core/browser/samples/view.py:258
+msgid "listing_samples_state_unassigned"
 msgstr ""
 
 #. Default: "Add"
@@ -11789,6 +11823,40 @@ msgstr ""
 msgid "worksheet_not_created"
 msgstr ""
 
+#: senaite/core/browser/dashboard/dashboard.py
+msgid "Open worksheets"
+msgstr ""
+
+#: senaite/core/browser/dashboard/dashboard.py
+msgid "Sample trend"
+msgstr ""
+
+#: senaite/core/browser/viewlets/templates/sidebar.pt
+msgid "Expand sidebar (Ctrl/Cmd+B)"
+msgstr ""
+
+#: senaite/core/browser/viewlets/templates/sidebar.pt
+msgid "Collapse sidebar (Ctrl/Cmd+B)"
+msgstr ""
+
+#: senaite/core/browser/clients/client/attachments/view.py
+msgid "Client attachments and files"
+msgstr ""
+
+#: senaite/core/browser/viewlets/resultsinterpretation.py
+msgid "Analytical Chemistry"
+msgstr ""
+
+#. Default: "Hardness"
+#: senaite/core/browser/worksheets/utility.py
+msgid "worksheet_template_hardness"
+msgstr ""
+
+#. Default: "To be verified"
+#: bika/lims/browser/analyses/view.py:271
+msgid "worksheet_result_state_to_be_verified"
+msgstr ""
+
 #: bika/lims/content/instrumentcertification.py:255
 msgid "yearly"
 msgstr ""
@@ -11819,4 +11887,28 @@ msgstr ""
 
 #: bika/lims/controlpanel/bika_instruments.py:173
 msgid "{} weeks and {} day(s)"
+msgstr ""
+
+#. Default: "Analysis"
+msgid "label_result_analysis_service"
+msgstr ""
+
+#. Default: "Not configured"
+msgid "label_sticker_print_unset"
+msgstr ""
+
+#. Default: "Disable automatic printing"
+msgid "label_sticker_print_disabled"
+msgstr ""
+
+#. Default: "If the system doesn't find any match (Sample, Reference Analysis or Duplicate), it will use the record's identifier to find matches for Reference Sample IDs. If a Reference Sample ID is found, the system will automatically create a Calibration Test (Reference Analysis) and will link it to the selected Instrument."
+msgid "description_import_unmatched_record"
+msgstr ""
+
+#. Default: "ax10^b / ax10^-b (with superscript)"
+msgid "ax10^b / ax10^-b (with superscript)"
+msgstr ""
+
+#. Default: "a·10^b / a·10^-b (with superscript)"
+msgid "a·10^b / a·10^-b (with superscript)"
 msgstr ""

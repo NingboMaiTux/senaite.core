@@ -126,7 +126,7 @@ class AnalysesView(ListingView):
                 "title": _("Date Created"),
                 "toggle": False}),
             ("Service", {
-                "title": _("Analysis"),
+                "title": _("label_result_analysis_service", default="Analysis"),
                 "attr": "Title",
                 "index": "sortable_title",
                 "sortable": False}),
@@ -261,6 +261,16 @@ class AnalysesView(ListingView):
         self.append_partition_filters()
         if self.analysis_categories_enabled():
             self.show_categories = True
+
+    @viewcache.memoize
+    def translate_review_state(self, state, portal_type):
+        title = super(AnalysesView, self).translate_review_state(
+            state, portal_type)
+        if (state == "to_be_verified" and
+                getattr(self.context, "portal_type", None) == "Worksheet"):
+            label = _(u"worksheet_result_state_to_be_verified", default=title)
+            return t(label, to_utf8=False)
+        return title
 
     def before_render(self):
         """Before render hook

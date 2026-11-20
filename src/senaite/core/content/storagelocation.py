@@ -55,10 +55,6 @@ class IStorageLocationSchema(model.Schema):
             "title_storagelocation_site_title",
             default="Site Title"
         ),
-        description=_(
-            "description_storagelocation_site_title",
-            default="Title of the site",
-        ),
         required=False,
     )
 
@@ -66,10 +62,6 @@ class IStorageLocationSchema(model.Schema):
         title=_(
             "title_storagelocation_site_code",
             default="Site Code",
-        ),
-        description=_(
-            "description_storagelocation_site_code",
-            default="Code for the site",
         ),
         required=False,
     )
@@ -79,10 +71,6 @@ class IStorageLocationSchema(model.Schema):
             "title_storagelocation_site_description",
             default="Site Description",
         ),
-        description=_(
-            "description_storagelocation_site_description",
-            default="Description of the site",
-        ),
         required=False,
     )
 
@@ -90,10 +78,6 @@ class IStorageLocationSchema(model.Schema):
         title=_(
             "title_storagelocation_location_title",
             default="Location Title",
-        ),
-        description=_(
-            "description_storagelocation_location_title",
-            default="Title of location",
         ),
         required=False,
     )
@@ -103,10 +87,6 @@ class IStorageLocationSchema(model.Schema):
             "title_storagelocation_location_code",
             default="Location Code",
         ),
-        description=_(
-            "description_storagelocation_location_code",
-            default="Code for the location",
-        ),
         required=False,
     )
 
@@ -114,10 +94,6 @@ class IStorageLocationSchema(model.Schema):
         title=_(
             "title_storagelocation_location_description",
             default="Location Description",
-        ),
-        description=_(
-            "description_storagelocation_location_description",
-            default="Description of the location",
         ),
         required=False,
     )
@@ -127,10 +103,6 @@ class IStorageLocationSchema(model.Schema):
             "title_storagelocation_location_type",
             default="Location Type",
         ),
-        description=_(
-            "description_storagelocation_location_type",
-            default="Type of location",
-        ),
         required=False,
     )
 
@@ -138,10 +110,6 @@ class IStorageLocationSchema(model.Schema):
         title=_(
             "title_storagelocation_shelf_title",
             default="Shelf Title",
-        ),
-        description=_(
-            "description_storagelocation_shelf_title",
-            default="Title of the shelf",
         ),
         required=False,
     )
@@ -151,10 +119,6 @@ class IStorageLocationSchema(model.Schema):
             "title_storagelocation_shelf_code",
             default="Shelf Code",
         ),
-        description=_(
-            "description_storagelocation_shelf_code",
-            default="Code the the shelf",
-        ),
         required=False,
     )
 
@@ -162,10 +126,6 @@ class IStorageLocationSchema(model.Schema):
         title=_(
             "title_storagelocation_shelf_description",
             default="Shelf Description",
-        ),
-        description=_(
-            "description_storagelocation_shelf_description",
-            default="Description of the shelf",
         ),
         required=False,
     )

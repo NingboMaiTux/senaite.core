@@ -119,7 +119,7 @@ class AnalysesView(BaseView):
                 "title": _("Due Date")}),
             ("state_title", {
                 "sortable": False,
-                "title": _("State")}),
+                "title": _("Status")}),
         ))
 
         self.review_states = [

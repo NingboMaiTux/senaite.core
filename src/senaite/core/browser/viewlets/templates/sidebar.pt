@@ -1,5 +1,8 @@
 <!-- Sidebar container - React component renders here -->
 <div id="sidebar"
+     data-expand-label="Expand sidebar (Ctrl/Cmd+B)"
+     data-collapse-label="Collapse sidebar (Ctrl/Cmd+B)"
+     i18n:attributes="data-expand-label; data-collapse-label"
      tal:condition="python:view.available()"
      i18n:domain="senaite.core">
 </div>
