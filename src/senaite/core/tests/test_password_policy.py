@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""用户密码规则更新包回归测试
+r"""用户密码规则更新包回归测试
 
 对应 `E:\更新包\用户密码规则更新包`（2026-06-12）落库到 core 的功能：
 管理员可在控制面板配置最短密码长度与必需的字符类别，改密与新建用户时生效。
@@ -175,7 +175,6 @@ class FakeTranslator(object):
                  target_language=None, default=None, **kw):
         self.calls.append(unicode(msgid))
         if isinstance(msgid, DummyMessage):
-            domain = msgid.domain
             default = msgid.default
             mapping = msgid.mapping
         text = self.catalog.get(unicode(msgid))
