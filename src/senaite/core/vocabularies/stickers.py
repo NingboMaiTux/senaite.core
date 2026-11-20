@@ -23,6 +23,7 @@ import os
 
 from pkg_resources import resource_filename
 from plone.resource.utils import iterDirectoriesOfType
+from senaite.core.i18n import translate
 from senaite.core.schema.vocabulary import to_simple_vocabulary
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
@@ -108,6 +109,8 @@ def get_sticker_templates(filter_by_type=None):
         title = template[:-3]
         title = title.replace("_", " ")
         title = title.replace(":", ": ")
+        if template == "senaite.storage:StorageLocation_50x30mm.pt":
+            title = translate(u"Storage location label (50 × 30 mm)", to_utf8=False)
         out.append({"id": template,
                     "title": title})
 

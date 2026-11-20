@@ -18,7 +18,6 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
-from bika.lims import senaiteMessageFactory as _
 from plone.dexterity.browser.edit import DefaultEditView
 
 
@@ -33,6 +32,5 @@ class SetupEditView(DefaultEditView):
 
     @property
     def label(self):
-        """Override to show 'SENAITE Setup' instead of 'Edit SENAITE Setup'
-        """
-        return _(u"SENAITE Setup")
+        """Show the setup name as the form heading."""
+        return self.context.getDisplayTitle()
