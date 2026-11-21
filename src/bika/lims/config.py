@@ -48,7 +48,7 @@ POINTS_OF_CAPTURE = DisplayList((
 ))
 
 SERVICE_POINT_OF_CAPTURE = DisplayList((
-    ('field', _('Field')),
+    ('field', _('label_capture_in_field', default=u'Field')),
     ('lab', _('Lab')),
 ))
 

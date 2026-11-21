@@ -449,8 +449,12 @@ class DashboardView(BrowserView):
         return api.get_user_fullname(user)
 
     def get_current_date(self):
-        return datetime.datetime.now().strftime(
-            "%A, %d %B %Y")
+        now = datetime.datetime.now()
+        language = self.request.locale.id.language
+        if language == "zh":
+            return u"{}年{}月{}日 星期{}".format(
+                now.year, now.month, now.day, u"一二三四五六日"[now.weekday()])
+        return now.strftime("%A, %d %B %Y")
 
     def get_current_time(self):
         return datetime.datetime.now().strftime("%H:%M")
