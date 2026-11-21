@@ -263,8 +263,6 @@ class IWorksheetTemplateSchema(model.Schema):
             u"label_worksheettemplate_instrument",
             default=u"Preferred instrument"
         ),
-        description=_(u"description_worksheettemplate_instrument",
-                      default=u"Select the preferred instrument"),
         allowed_types=("Instrument",),
         multi_valued=False,
         required=False,

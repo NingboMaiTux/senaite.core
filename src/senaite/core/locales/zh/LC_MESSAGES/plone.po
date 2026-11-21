@@ -450,7 +450,7 @@ msgstr "进入控制管理"
 #. Default: "Add ${itemtype}"
 #: senaite/core/skins/senaite_templates/edit_macros.pt:24
 msgid "heading_add_item"
-msgstr "条目 添加项目"
+msgstr "添加${itemtype}"
 
 #. Default: "Assign to groups"
 #: senaite/core/browser/usergroup/templates/usergroups_usermembership.pt:111
@@ -1037,3 +1037,81 @@ msgstr "没有分派"
 #: senaite/core/browser/usergroup/templates/usergroups_usersoverview.pt:52
 msgid "user_roles_note"
 msgstr "用户角色注意"
+
+msgid "label_schema_Description"
+msgstr "基本信息"
+
+msgid "label_schema_Analysis"
+msgstr "检验参数"
+
+msgid "label_schema_Limits"
+msgstr "限值"
+
+msgid "label_schema_Method"
+msgstr "方法"
+
+msgid "label_schema_Uncertainties"
+msgstr "不确定度"
+
+msgid "label_schema_Result Options"
+msgstr "结果选项"
+
+msgid "label_schema_Advanced"
+msgstr "高级"
+
+msgid "label_schema_Address"
+msgstr "地址"
+
+msgid "label_schema_Bank details"
+msgstr "银行信息"
+
+msgid "label_schema_Preferences"
+msgstr "偏好设置"
+
+msgid "label_schema_Procedures"
+msgstr "操作规程"
+
+msgid "label_schema_Additional info."
+msgstr "补充信息"
+
+msgid "label_schema_Email Telephone Fax"
+msgstr "联系方式"
+
+msgid "label_schema_Reference Values"
+msgstr "参考值"
+
+msgid "Full Name"
+msgstr "姓名"
+
+msgid "Email"
+msgstr "电子邮箱"
+
+msgid "Enabled markdown extensions"
+msgstr "启用的 Markdown 扩展"
+
+msgid "Email character set"
+msgstr "邮件字符集"
+
+msgid "label_full_name"
+msgstr "姓名"
+
+msgid "label_email"
+msgstr "电子邮箱"
+
+msgid "E-mail characterset"
+msgstr "邮件字符集"
+
+msgid "Info"
+msgstr "提示"
+
+msgid "Batch"
+msgstr "批次"
+
+msgid "SubGroup"
+msgstr "子分组"
+
+msgid "Reference Definition"
+msgstr "标准物质定义"
+
+msgid "Interpretation Template"
+msgstr "结果说明模板"

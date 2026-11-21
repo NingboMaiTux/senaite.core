@@ -24,6 +24,7 @@ from bika.lims import api
 from bika.lims import logger
 from Products.Archetypes.Registry import registerWidget
 from senaite.core.browser.widgets.referencewidget import ReferenceWidget
+from senaite.core.i18n import translate
 
 
 class MultiUploadWidget(ReferenceWidget):
@@ -86,6 +87,11 @@ class MultiUploadWidget(ReferenceWidget):
         attributes = {
             "id": widget_id,
             "data-fieldname": field.getName(),
+            "data-labels": json.dumps({
+                "drag": translate(u"Drop files here...", to_utf8=False),
+                "select": translate(u"Drag & drop files here, or click to select files", to_utf8=False),
+                "limit": translate(u"Maximum file size", to_utf8=False),
+            }),
             "data-endpoint": endpoint,
             "data-portal_url": portal_url,
             "data-context_url": context_url,
