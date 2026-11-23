@@ -198,6 +198,9 @@ class BatchFolderContentsView(ListingView):
         item["Progress"] = progress
         item["replace"]["Progress"] = get_progress_bar_html(progress)
 
+        if api.get_review_status(obj) == "open":
+            item["state_title"] = self.context.translate(
+                _("listing_batches_state_open", default=u"Open"))
         item["BatchID"] = bid
         item["ClientBatchID"] = cbid
         item["replace"]["BatchID"] = get_link(url, bid)

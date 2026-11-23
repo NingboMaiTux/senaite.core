@@ -18,10 +18,13 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+from xml.sax.saxutils import quoteattr
+
 from bika.lims.api.security import check_permission
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFPlone.utils import safe_unicode
 from senaite.app.listing import ListingView as BaseListingView
+from senaite.core.i18n import translate
 
 
 class ListingView(BaseListingView):
@@ -71,11 +74,13 @@ class ListingView(BaseListingView):
         edit_url = u"{}/{}".format(url, edit_view).rstrip(u"/") if edit_view \
             else url
         icon = (
-            u'<a href="{url}" class="iframe-edit-link iframe-edit-icon"'
-            u' data-title="{title}" data-edit-view="{edit_view}" title="Edit">'
+            u'<a href={url} class="iframe-edit-link iframe-edit-icon"'
+            u' data-title={title} data-edit-view={edit_view} title={edit}>'
             u'<i class="fa fa-pencil"></i>'
             u'</a>'
-        ).format(url=edit_url, title=title, edit_view=edit_view)
+        ).format(url=quoteattr(edit_url), title=quoteattr(title),
+                 edit_view=quoteattr(edit_view),
+                 edit=quoteattr(translate(u"Edit", to_utf8=False)))
         # Prepend to any existing "after" content (e.g. accredited icons).
         # Wrap with safe_unicode to normalize any legacy byte strings that may
         # still come from downstream helpers before concatenating unicode HTML.

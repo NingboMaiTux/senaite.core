@@ -21,6 +21,7 @@ class MultiUploadWidgetController extends React.Component {
     // Data keys located at the root element
     const data_keys = [
       "fieldname",
+      "labels",
       "portal_url",
       "context_url",
       "endpoint",
@@ -286,11 +287,11 @@ class MultiUploadWidgetController extends React.Component {
                 </span>
                 <p className="mt-2 mb-0">
                   {isDragActive
-                    ? "Drop files here..."
-                    : "Drag & drop files here, or click to select files"}
+                    ? this.state.labels.drag
+                    : this.state.labels.select}
                 </p>
                 <p className="small text-muted mt-1">
-                  Maximum file size: {this.formatFileSize(maxSize)}
+                  {this.state.labels.limit}: {this.formatFileSize(maxSize)}
                 </p>
               </div>
             </div>

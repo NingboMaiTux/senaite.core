@@ -21,13 +21,14 @@
 """Hazard pictogram helpers (GHS + ISO 7010)."""
 
 from bika.lims import senaiteMessageFactory as _
-from bika.lims.utils import render_html_attributes
+from Products.CMFPlone.utils import safe_unicode
 from senaite.core.api import get_attr
 from senaite.core.api import get_portal_url
 from senaite.core.catalog import SETUP_CATALOG
 from senaite.core.i18n import translate
 from senaite.core.vocabularies.hazard_categories import format_title
 from senaite.core.vocabularies.hazard_categories import get_category
+from xml.sax.saxutils import quoteattr
 
 PICTOGRAM_PATH = (
     "/++plone++senaite.core.static/images/{pictogram}")
@@ -199,9 +200,8 @@ def render_pictogram_img(picto, css_class=DEFAULT_PICTOGRAM_CLASS):
               insertion into a listing column
     :rtype: unicode
     """
-    attrs = render_html_attributes(
-        src=picto["url"],
-        alt=picto["alt"],
-        title=picto["title"],
-        **{"class": css_class})
-    return "<img " + attrs + " />"
+    return u"<img src={src} alt={alt} title={title} class={css} />".format(
+        src=quoteattr(safe_unicode(picto["url"])),
+        alt=quoteattr(safe_unicode(picto["alt"])),
+        title=quoteattr(safe_unicode(picto["title"])),
+        css=quoteattr(safe_unicode(css_class)))
