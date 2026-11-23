@@ -35,6 +35,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.api import dtime
 from senaite.core.catalog import AUDITLOG_CATALOG
 from senaite.core.content.base import Container
+from senaite.core.i18n import translate
 from senaite.core.interfaces import IHideActionsMenu
 from senaite.core.interfaces import ISetup
 from senaite.core.schema import DurationField
@@ -73,6 +74,39 @@ def default_email_from_sample_publication(context):
     """
     portal_email = api.get_registry_record("plone.email_from_address")
     return portal_email
+
+
+SAMPLE_REJECTION_BODY = _(
+    u"email_body_sample_rejection_default",
+    default=(u"The sample $sample_link has been rejected because of the "
+             u"following reasons:<br/><br/>$reasons<br/><br/>For further "
+             u"information, please contact us under the following address."
+             u"<br/><br/>$lab_address"))
+
+SAMPLE_INVALIDATION_BODY = _(
+    u"email_body_sample_invalidation_default",
+    default=(u"Some non-conformities have been detected in the results "
+             u"report published for Sample $sample_link.<br/><br/>A new "
+             u"Sample $retest_link has been created automatically, and the "
+             u"previous request has been invalidated.<br/><br/>The root "
+             u"cause is under investigation and corrective action has been "
+             u"initiated.<br/><br/>$lab_address"))
+
+
+class NotificationBodyField(RichTextField):
+    """Localize the shipped default, including its original stored value."""
+
+    def __init__(self, body_message, **kw):
+        self.body_message = body_message
+        super(NotificationBodyField, self).__init__(
+            default=body_message.default, **kw)
+
+    def get(self, context):
+        value = super(NotificationBodyField, self).get(context)
+        if getattr(value, "raw", value) != self.body_message.default:
+            return value
+        translated = translate(self.body_message, to_utf8=False)
+        return self.fromUnicode(translated) if IRichTextValue.providedBy(value) else translated
 
 
 DEFAULT_ID_FORMATTING = [
@@ -292,7 +326,7 @@ class ISetupSchema(model.Schema):
     directives.widget("site_logo", NamedFileFieldWidget)
     site_logo = schema.Bytes(
         title=_(u"Site Logo"),
-        description=_(u"This shows a custom logo on your SENAITE site."),
+        description=_(u"This logo appears on your MaiLIMS site."),
         required=False,
     )
 
@@ -328,10 +362,6 @@ class ISetupSchema(model.Schema):
     sample_analyses_required = schema.Bool(
         title=_("title_senaitesetup_sampleanalysesrequired",
                 default=u"Require sample analyses"),
-        description=_(
-            "description_senaitesetup_sampleanalysesrequired",
-            default=u"Analyses are required for sample registration"
-        ),
         default=True,
     )
 
@@ -839,11 +869,6 @@ class ISetupSchema(model.Schema):
             u"title_senaitesetup_dashboard_by_default",
             default=u"Use Dashboard as default front page"
         ),
-        description=_(
-            u"description_senaitesetup_dashboard_by_default",
-            default=u"Select this to activate the dashboard as a default front "
-                    u"page."
-        ),
         default=True,
     )
 
@@ -1049,7 +1074,7 @@ class ISetupSchema(model.Schema):
     )
 
     directives.widget("email_body_sample_rejection", RichTextFieldWidget)
-    email_body_sample_rejection = RichTextField(
+    email_body_sample_rejection = NotificationBodyField(
         title=_(u"Email body for Sample Rejection notifications"),
         description=_(
             u"Set the text for the body of the email to be sent to the "
@@ -1057,15 +1082,12 @@ class ISetupSchema(model.Schema):
             u"Sample rejection' is enabled. You can use reserved keywords: "
             u"$sample_id, $sample_link, $reasons, $lab_address"
         ),
-        default=u"The sample $sample_link has been rejected because of the "
-                u"following reasons:<br/><br/>$reasons<br/><br/>For further "
-                u"information, please contact us under the following address."
-                u"<br/><br/>$lab_address",
+        body_message=SAMPLE_REJECTION_BODY,
         required=False,
     )
 
     directives.widget("email_body_sample_invalidation", RichTextFieldWidget)
-    email_body_sample_invalidation = RichTextField(
+    email_body_sample_invalidation = NotificationBodyField(
         title=_(u"Email body for Sample Invalidation notifications"),
         description=_(
             u"Define the template for the email body that will be "
@@ -1074,12 +1096,7 @@ class ISetupSchema(model.Schema):
             u"supported: $sample_id, $retest_id, $retest_link, $reason, "
             u"$lab_address."
         ),
-        default=u"Some non-conformities have been detected in the results "
-                u"report published for Sample $sample_link.<br/><br/>A new "
-                u"Sample $retest_link has been created automatically, and the "
-                u"previous request has been invalidated.<br/><br/>The root "
-                u"cause is under investigation and corrective action has been "
-                u"initiated.<br/><br/>$lab_address",
+        body_message=SAMPLE_INVALIDATION_BODY,
         required=False,
     )
 
@@ -1354,6 +1371,14 @@ class Setup(Container):
     """SENAITE Setup Folder
     """
     security = ClassSecurityInfo()
+
+    @security.protected(permissions.View)
+    def getDisplayTitle(self):
+        """Return the localized default title or the configured setup name."""
+        title = self.Title()
+        if title == u"SENAITE Setup":
+            return translate(_(u"MaiLIMS Setup"), to_utf8=False)
+        return title
 
     @security.protected(permissions.View)
     def getEmailFromSamplePublication(self):

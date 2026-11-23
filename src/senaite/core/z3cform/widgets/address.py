@@ -220,7 +220,7 @@ class AddressWidget(HTMLFormElement, Widget):
         labels = {country: {} for country in countries}
         labels.update({
             "country": translate(_("Country")),
-            "subdivision1": translate(_("State")),
+            "subdivision1": translate(_("address_region", default=u"State")),
             "subdivision2": translate(_("District")),
             "city": translate(_("City")),
             "zip": translate(_("Postal code")),
@@ -235,7 +235,7 @@ class AddressWidget(HTMLFormElement, Widget):
                 subdivisions = geo.get_subdivisions(country, [])
                 sub1[country] = map(lambda sub: sub.name, subdivisions)
 
-                label = _("State")
+                label = _("address_region", default=u"State")
                 if subdivisions:
                     label = _(subdivisions[0].type)
                 labels[country]["subdivision1"] = translate(label)

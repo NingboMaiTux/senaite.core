@@ -164,16 +164,26 @@ listing call sites stay consistent on attributes and escaping:
 
     >>> picto = hazard_api.get_pictogram("GHS01")
     >>> html = hazard_api.render_pictogram_img(picto)
-    >>> isinstance(html, bytes)
+    >>> from six import text_type
+    >>> isinstance(html, text_type)
     True
 
-    >>> b'src="' in html and b'GHS01.svg' in html
+    >>> u'src="' in html and u'GHS01.svg' in html
     True
 
-    >>> b'class="hazard-pictogram-mini"' in html
+    >>> u'class="hazard-pictogram-mini"' in html
     True
 
 The CSS class can be overridden by the caller:
 
-    >>> b'class="big"' in hazard_api.render_pictogram_img(picto, "big")
+    >>> u'class="big"' in hazard_api.render_pictogram_img(picto, "big")
+    True
+
+Translated titles survive rendering and are escaped as HTML attribute values:
+
+    >>> from lxml.html import fromstring
+    >>> title = u'\u6613\u71c3 & "GHS"'
+    >>> localized = dict(picto, alt=title, title=title)
+    >>> image = fromstring(hazard_api.render_pictogram_img(localized))
+    >>> image.get('alt') == image.get('title') == title
     True

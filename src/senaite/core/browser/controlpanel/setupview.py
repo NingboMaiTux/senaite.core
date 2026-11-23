@@ -71,6 +71,13 @@ class SetupView(BrowserView):
         """
         return api.get_bika_setup()
 
+    def get_setup_icon(self, setup, title):
+        if setup.Title() == u"SENAITE Setup":
+            icon = self.get_icon_for(setup, css_class="icon",
+                                     icon_title=api.to_utf8(title))
+            return api.safe_unicode(icon)
+        return self.get_icon_for(setup, css_class="icon")
+
     @memoize_contextless
     def get_icon_for(self, brain, **kw):
         """Returns the icon URL for the given catalog brain

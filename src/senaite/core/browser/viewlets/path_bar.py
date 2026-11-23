@@ -18,6 +18,7 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+from Acquisition import aq_base
 from bika.lims import api
 from bika.lims import senaiteMessageFactory as _
 from bika.lims.api.security import check_permission
@@ -57,7 +58,12 @@ class PathBarViewlet(Base):
         """Converts the object to a breadcrumb for the template consumption
         """
         title = self.get_obj_title(obj)
-        return {"Title": _(api.safe_unicode(title)),
+        if title == u"SENAITE Setup":
+            if aq_base(obj) is aq_base(api.get_senaite_setup()):
+                title = obj.getDisplayTitle()
+        else:
+            title = _(api.safe_unicode(title))
+        return {"Title": title,
                 "absolute_url": self.get_obj_url(obj)}
 
     def get_obj_title(self, obj):
