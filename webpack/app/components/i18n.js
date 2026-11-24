@@ -13,6 +13,7 @@ import $ from "jquery";
 var I18N = function() {
   var self = this;
   self.baseUrl = $('body').attr('data-i18ncatalogurl');
+  self.version = $('body').attr('data-i18n-version');
   self.currentLanguage = $('html').attr('lang') || 'en';
 
   // Fix for country specific languages
@@ -52,31 +53,38 @@ var I18N = function() {
     }
   };
 
+  self._cacheKey = function (domain, language) {
+    return 'i18n:' + self.baseUrl + ':' + domain + ':' + language;
+  };
+
   self._storeCatalog = function (domain, language, catalog) {
-    var key = domain + '-' + language;
-    if (self.storage !== null && catalog !== null) {
-      self.storage.setItem(key, JSON.stringify(catalog));
-      self.storage.setItem(key + '-updated', Date.now());
-    }
+    if (!self.storage || !self.version || catalog === null) return;
+    try {
+      self.storage.setItem(self._cacheKey(domain, language), JSON.stringify({
+        version: self.version, updated: Date.now(), catalog: catalog
+      }));
+    } catch (e) { /* Storage may be full or disabled. */ }
   };
 
   self.getUrl = function(domain, language) {
-    return self.baseUrl + '?domain=' + domain + '&language=' + language;
+    return self.baseUrl + '?domain=' + encodeURIComponent(domain) +
+      '&language=' + encodeURIComponent(language) +
+      (self.version ? '&v=' + encodeURIComponent(self.version) : '');
   };
 
   self.loadCatalog = function (domain, language) {
     if (language === undefined) {
       language = self.currentLanguage;
     }
-    if (self.storage !== null) {
-      var key = domain + '-' + language;
-      if (key in self.storage) {
-        if ((Date.now() - parseInt(self.storage.getItem(key + '-updated'), 10)) < self.ttl) {
-          var catalog = JSON.parse(self.storage.getItem(key));
-          self._setCatalog(domain, language, catalog);
+    if (self.storage && self.version) {
+      try {
+        var cached = JSON.parse(self.storage.getItem(self._cacheKey(domain, language)));
+        if (cached && cached.version === self.version && cached.catalog &&
+            Date.now() - cached.updated < self.ttl) {
+          self._setCatalog(domain, language, cached.catalog);
           return;
         }
-      }
+      } catch (e) { /* An unreadable entry is replaced after the fetch. */ }
     }
     if (!self.baseUrl) {
       return;

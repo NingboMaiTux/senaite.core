@@ -156,7 +156,7 @@
                         </th>
                       </tal:header>
 
-                      <th rowspan="" class="text-center">
+                      <th rowspan="" class="text-center" i18n:translate="">
                         Disable
                       </th>
                     </tr>
