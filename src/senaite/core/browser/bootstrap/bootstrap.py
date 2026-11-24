@@ -18,6 +18,7 @@
 # Copyright 2018-2025 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+import hashlib
 import os
 
 from bika.lims import api
@@ -25,10 +26,31 @@ from plone.memoize.ram import cache
 from plone.memoize.view import memoize
 from Products.Five import BrowserView
 from zope.component import getMultiAdapter
+from zope.component import queryUtility
+from zope.i18n.interfaces import ITranslationDomain
 from zope.interface import Interface
 from zope.interface import implementer
 
 SVG_ICON_BASE_URL = "++plone++senaite.core.static/assets/icons"
+
+
+@cache(lambda func, language: language)
+def catalog_version(language):
+    """Fingerprint the installed browser dictionaries once per language."""
+    language = language.replace("-", "_").split("_", 1)
+    locales = [language[0]]
+    if len(language) == 2:
+        locales.insert(0, "%s_%s" % (language[0], language[1].upper()))
+    digest = hashlib.sha256()
+    for domain in ("senaite.core", "plone"):
+        utility = queryUtility(ITranslationDomain, name=domain)
+        catalogs = getattr(utility, "getCatalogsInfo", lambda: {})()
+        for locale in locales + ["en"]:
+            for filename in catalogs.get(locale, ()):
+                if os.path.isfile(filename):
+                    with open(filename, "rb") as catalog:
+                        digest.update(catalog.read())
+    return digest.hexdigest()
 
 
 class IBootstrapView(Interface):
@@ -157,6 +179,7 @@ class BootstrapView(BrowserView):
             "data-review-state": self.context_state.workflow_state(),
             "data-portal-url": portal_url,
             "data-i18ncatalogurl": portal_url + "/plonejsi18n",
+            "data-i18n-version": catalog_version(self.portal_state.language()),
             "data-auto-logoff": setup.getAutoLogOff(),
             "data-portal-type": self.get_portal_type(),
         }

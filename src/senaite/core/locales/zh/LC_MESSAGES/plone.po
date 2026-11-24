@@ -1115,3 +1115,63 @@ msgstr "标准物质定义"
 
 msgid "Interpretation Template"
 msgstr "结果说明模板"
+
+msgid "Analyst"
+msgstr "检验员"
+
+msgid "BusinessSystemAdministrator"
+msgstr "业务系统管理员"
+
+msgid "Client"
+msgstr "客户"
+
+msgid "Disable"
+msgstr "禁用"
+
+msgid "ITSystemEngineer"
+msgstr "IT 系统工程师"
+
+msgid "InstrumentAdministrator"
+msgstr "仪器管理员"
+
+msgid "InventoryAdministrator"
+msgstr "库存管理员"
+
+msgid "LabClerk"
+msgstr "实验室文员"
+
+msgid "LabManager"
+msgstr "实验室主管"
+
+msgid "MethodAdministrator"
+msgstr "方法管理员"
+
+msgid "Preserver"
+msgstr "样品保存员"
+
+msgid "Publisher"
+msgstr "报告发布员"
+
+msgid "RegulatoryInspector"
+msgstr "监管检查员"
+
+msgid "Sampler"
+msgstr "采样员"
+
+msgid "SamplingCoordinator"
+msgstr "采样协调员"
+
+msgid "StabilityAdministrator"
+msgstr "稳定性管理员"
+
+msgid "StabilityInventoryAdministrator"
+msgstr "稳定性库存管理员"
+
+msgid "StorageAssistant"
+msgstr "库房助理"
+
+msgid "StorageManager"
+msgstr "库房主管"
+
+msgid "Verifier"
+msgstr "复核员"
