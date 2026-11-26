@@ -1,8 +1,10 @@
-<div class="create-worksheet-modal modal-dialog modal-dialog-centered">
+<div class="create-worksheet-modal modal-dialog modal-dialog-centered"
+     i18n:domain="senaite.core">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" i18n:translate="">Create worksheet</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+              i18n:attributes="aria-label">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -17,12 +19,15 @@
         <div class="form-group form-group-sm mb-3">
           <label i18n:translate=""
                  class="mr-2"
-                 for="analysis-categories-select">
+                 for="analyst-select">
             Select analyst
           </label>
           <select id="analyst-select"
                   class="selectpicker show-tick"
                   name="analyst"
+                  data-none-selected-text="Select analyst"
+                  data-none-results-text="No results matched {0}"
+                  i18n:attributes="data-none-selected-text; data-none-results-text"
                   tal:define="analysts view/get_analysts">
             <tal:options repeat="analyst analysts">
               <option tal:define="username python:analyst.get('username');
@@ -49,6 +54,12 @@
           <select multiple
                   id="analysis-categories-select"
                   name="categories"
+                  data-none-selected-text="Select category"
+                  data-none-results-text="No results matched {0}"
+                  data-select-all-text="Select all"
+                  data-deselect-all-text="Deselect all"
+                  i18n:attributes="data-none-selected-text; data-none-results-text;
+                                   data-select-all-text; data-deselect-all-text"
                   tal:define="categories view/get_analysis_categories">
             <tal:options repeat="category categories">
               <option tal:attributes="value python:category.get('uid')"
@@ -66,12 +77,15 @@
         <div class="form-group form-group-sm mb-3">
           <label i18n:translate=""
                  class="mr-2"
-                 for="worksheet-templates-select">
+                 for="worksheet-template-select">
             Select worksheet template
           </label>
           <select id="worksheet-template-select"
                   class="selectpicker show-tick"
                   name="template"
+                  data-none-selected-text="Select template"
+                  data-none-results-text="No results matched {0}"
+                  i18n:attributes="data-none-selected-text; data-none-results-text"
                   tal:define="templates view/get_worksheet_templates">
             <tal:options repeat="template templates">
               <option tal:define="uid python:template.get('uid');
@@ -80,12 +94,11 @@
                       tal:content="python:title"/>
             </tal:options>
           </select>
-          <small id="analyst-help"
-                 i18n:translate=""
-                 class="form-text text-muted">
-            The worksheet includes all unassigned analyses specified in the chosen template
+          <small id="worksheet-template-help" class="form-text text-muted">
+            <span i18n:translate="">The worksheet includes all unassigned analyses specified in the chosen template</span>
             <br/>
-            <i class="fa-solid fa-circle-info"></i> Analyses from the selected categories will also be added.
+            <i class="fa-solid fa-circle-info"></i>
+            <span i18n:translate="">Analyses from the selected categories will also be added.</span>
           </small>
         </div>
 
@@ -113,18 +126,13 @@
      // https://developer.snapappointments.com/bootstrap-select/options
      $("select#analysis-categories-select").selectpicker({
        actionsBox: true,
-       liveSearch: true,
-       noneSelectedText: _t("Select category"),
-       selectAllText: _t("Select all"),
-       deselectAllText: _t("Deselect all")
+       liveSearch: true
      });
      $("select#analyst-select").selectpicker({
-       liveSearch: true,
-       noneSelectedText: _t("Select analyst"),
+       liveSearch: true
      });
      $("select#worksheet-template-select").selectpicker({
-       liveSearch: true,
-       noneSelectedText: _t("Select template"),
+       liveSearch: true
      });
    });
   </script>
