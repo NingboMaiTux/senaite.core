@@ -12591,3 +12591,39 @@ msgstr "已作废"
 
 msgid "title_department_manager"
 msgstr "部门负责人"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Create worksheet"
+msgstr "创建工作表"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "The analyst responsible for completing the analyses in this worksheet"
+msgstr "负责完成本工作表检验项目的人员。"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Select analysis categories"
+msgstr "选择分析分类"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Select category"
+msgstr "选择分类"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Categories used to filter which analyses from the selected samples will be included in the worksheet"
+msgstr "按分类筛选所选样品中要加入工作表的检验项目。"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Select worksheet template"
+msgstr "选择工作表模板"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "The worksheet includes all unassigned analyses specified in the chosen template"
+msgstr "工作表将包含模板中尚未分配的所有检验项目。"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "Analyses from the selected categories will also be added."
+msgstr "所选分类的检验项目也会加入工作表。"
+
+#: senaite/core/browser/modals/templates/create_worksheet.pt
+msgid "No results matched {0}"
+msgstr "未找到与 {0} 匹配的结果"
